@@ -9,9 +9,18 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* Variables */
+:root {
+  --primary-color: #2a3647;
+  --secondary-color: #29abe2;
+  --background-color: #ffffff;
+  --text-color: #2a3647;
+  --hover-color: #a8a8a8;
+}
+
 .splashScreen {
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--background-color);
 }
 
 .splashLogo {
@@ -48,25 +57,10 @@ body {
   }
 }
 
-.header {
-  width: 100vw;
-  height: 96px;
-  background: rgb(255, 255, 255);
-
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
 .sidebar {
   width: 300px;
   height: 100vh;
-  background: rgba(42, 54, 71, 1);
+  background: var(--primary-color);
 
   position: fixed;
   top: 0;
@@ -112,13 +106,13 @@ body {
 }
 
 .sidebar_footer_link {
-  color: #a8a8a8;
+  color: var(--hover-color);
   text-decoration: none;
   font-size: 16px;
 }
 
 .sidebar_footer_link:hover {
-    color: #29abe2;
+    color: var(--secondary-color);
 }
 
 .sidebar_link_active .icon_hover {
@@ -128,7 +122,7 @@ body {
 .header_main {
   width: 100vw;
   height: 96px;
-  background: rgb(255, 255, 255);
+  background: var(--background-color);
 
   display: flex;
   align-items: center;
@@ -159,7 +153,7 @@ body {
 
 .header_main_help_link {
   font-size: 20px;
-  color: #2a3647;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
 }
@@ -167,10 +161,10 @@ body {
 .header_main_user_button {
   width: 56px;
   height: 56px;
-  border: 2px solid #2a3647;
+  border: 2px solid var(--text-color);
   border-radius: 50%;
   background-color: white;
-  color: #29abe2;
+  color: var(--secondary-color);
   font-weight: bold;
   cursor: pointer;
 }
