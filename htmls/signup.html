@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join – Sign up</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body class="logIn">
+
+    <header class="logInHeader fadeHeader">
+        <img class="logInLogo" src="/assets/img/logoDark.png" alt="Join Logo">
+
+    </header>
+
+    <main class="logInMain fadeMain">
+        <div class="logInBox">
+
+            <h2>Sign up</h2>
+
+            <form action="#">
+
+                <div class="inputField">
+                    <input
+                        id="signupName"
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        required
+                    >
+                    <img class="inputIcon" src="/assets/icons/person.png" alt="">
+                </div>
+
+                <div class="inputField">
+                    <input
+                        id="signupEmail"
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                    >
+                    <img class="inputIcon" src="/assets/icons/mail.png" alt="">
+                </div>
+
+                <div class="inputField">
+                    <input
+                        id="signupPassword"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                    >
+                    <img class="inputIcon" src="/assets/icons/lock.png" alt="">
+                </div>
+
+                <div class="inputField">
+                    <input
+                        id="signupConfirmPassword"
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        required
+                    >
+                    <img class="inputIcon" src="/assets/icons/lock.png" alt="">
+                </div>
+
+                <label class="signupCheckboxLabel">
+                    <input
+                        id="signupAccept"
+                        type="checkbox"
+                        onchange="toggleSignupBtn(this)"
+                    >
+                    I accept the <a href="/htmls/privacy_policy.html">Privacy Policy</a>
+                </label>
+
+                <div class="loginButtons signupButtons">
+                    <button id="signupBtn" class="logInBtn" type="submit" disabled>Sign up</button>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+    <footer class="logInFooter fadeFooter">
+        <a href="/htmls/privacy_policy.html">Privacy Policy</a>
+        <a href="/htmls/legal_notice.html">Legal Notice</a>
+    </footer>
+
+    <script>
+        function toggleSignupBtn(checkbox) {
+            document.getElementById('signupBtn').disabled = !checkbox.checked;
+        }
+    </script>
+
+</body>
+</html>

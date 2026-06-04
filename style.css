@@ -10,6 +10,29 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
+body.splash {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.splashLogo {
+    width: 120px;
+    height: auto;
+    animation: splashIn 1.4s ease-in-out forwards;
+}
+
+
+@keyframes splashIn {
+    0%   { opacity: 0; transform: scale(0.7); }
+    50%  { opacity: 1; transform: scale(1.08); }
+    75%  { transform: scale(0.97); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
 .header {
     width: 100vw;
     height: 96px;
