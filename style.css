@@ -11,7 +11,8 @@ body {
 }
 
 
-body.splash {
+.splashScreen {
+    min-height: 100vh;
     background-color: #ffffff;
     display: flex;
     align-items: center;
