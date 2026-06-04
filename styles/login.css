@@ -374,6 +374,14 @@
 }
 
 
+.msgBox {
+    font-size: 14px;
+    color: rgb(41, 171, 226);
+    font-weight: 600;
+    min-height: 20px;
+}
+
+
 #loginPassword {
     text-indent: 0 !important;
 }
