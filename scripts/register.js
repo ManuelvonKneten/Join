@@ -35,5 +35,9 @@ async function addUser() {
         body: JSON.stringify({ email, password })
     });
 
-    window.location.href = '/htmls/login.html?msg=Du hast dich erfolgreich registriert';
+    const toast = document.getElementById('signupToast');
+    toast.classList.add('show');
+    setTimeout(() => {
+        window.location.href = '/htmls/login.html?msg=registered';
+    }, 2500);
 }
