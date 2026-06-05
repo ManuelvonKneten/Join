@@ -11,6 +11,7 @@ async function includeHTML() {
   }
 
   setActiveSidebarLink();
+  setUserInitials();
 }
 
 
@@ -54,6 +55,16 @@ async function renderContent(url) {
   }
 
   document.title = doc.title;
+}
+
+
+function setUserInitials() {
+  const btn = document.getElementById('userInitialsBtn');
+  if (!btn) return;
+  const name = localStorage.getItem('currentUser') || '';
+  btn.textContent = name
+    ? name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('')
+    : '?';
 }
 
 
