@@ -1,0 +1,165 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Variables */
+:root {
+  --primary-color: #2a3647;
+  --secondary-color: #29abe2;
+  --background-color: #ffffff;
+  --text-color: #2a3647;
+  --hover-color: #a8a8a8;
+}
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  background: var(--primary-color);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.sidebarLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  margin-left: 300px;
+  padding: 120px 20px 20px 20px;
+}
+
+.sidebar_logo {
+  display: flex;
+  justify-content: center;
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.sidebar_logo img {
+  width: 100px;
+  height: auto;
+}
+
+.sidebar_nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebar_footer {
+  position: absolute;
+  bottom: 64px;
+  left: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar_footer_link {
+  color: var(--hover-color);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.sidebar_footer_link:hover {
+    color: var(--secondary-color);
+}
+
+.sidebar_link_active .icon_hover {
+  opacity: 1;
+}
+
+.header_main {
+  width: 100vw;
+  height: 96px;
+  background: var(--background-color);
+
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  left: 300px;
+  width: calc(100vw - 300px);
+  z-index: 5;
+  justify-content: space-between;
+  padding-right: 40px;
+}
+
+.header_main_title {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.header_main_user_area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header_main_help_link {
+  font-size: 20px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header_main_user_button {
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--text-color);
+  border-radius: 50%;
+  background-color: white;
+  color: var(--secondary-color);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 56px;
+}
+
+.nav_item img {
+  width: 100%;
+  height: auto;
+}
+
+.icon_hover {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.icon_default {
+  transition: opacity 0.2s ease;
+}
+
+.nav_item:hover .icon_default,
+.sidebar_link_active .icon_default {
+  opacity: 0;
+}
+
+.nav_item:hover .icon_hover,
+.sidebar_link_active .icon_hover {
+  opacity: 1;
+}
