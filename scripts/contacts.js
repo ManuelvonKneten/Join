@@ -201,7 +201,7 @@ function renderContacts() {
  */
 function contactItemHTML(contact) {
     return `
-        <div class="contact_item">
+        <div class="contact_item" onclick="showContactDetail(${JSON.stringify(contact).replace(/"/g, '&quot;')})">
             <div class="contact_avatar" style="background-color:${avatarColor(contact.name)}">
                 ${initials(contact.name)}
             </div>
@@ -211,6 +211,15 @@ function contactItemHTML(contact) {
             </div>
         </div>
     `;
+}
+
+
+function showContactDetail(contact) {
+    const panel = document.querySelector('.contacts_right_bottom');
+    document.querySelector('.crb_avatar').textContent        = initials(contact.name);
+    document.querySelector('.crb_avatar').style.backgroundColor = avatarColor(contact.name);
+    document.querySelector('.crb_name').textContent          = contact.name;
+    panel.classList.remove('hidden');
 }
 
 

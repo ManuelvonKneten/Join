@@ -1,7 +1,7 @@
 /* ── Page layout ── */
 .contacts_layout {
     display: flex;
-    min-height: calc(100vh - 140px);
+    height: calc(100vh - 140px);
 }
 
 
@@ -12,12 +12,142 @@
     gap: 24px;
     padding-right: 32px;
     border-right: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+
+.contact_list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.contact_list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.contact_list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.contact_list::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border-radius: 4px;
 }
 
 
 .contacts_right {
     width: 65%;
     padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.contacts_right_top {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.contacts_heading {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.contacts_divider_vertical {
+    width: 2px;
+    height: 48px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.contacts_subheading {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--primary-color);
+}
+
+.contacts_right_bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.crb_header {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.crb_avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+}
+
+.crb_name_actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.crb_name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.crb_actions {
+    display: flex;
+    gap: 16px;
+}
+
+.crb_btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+}
+
+.crb_btn:hover {
+    color: var(--secondary-color);
+}
+
+.crb_btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.crb_info {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.crb_info_heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
 }
 
 
@@ -77,6 +207,7 @@
     font-weight: 700;
     color: var(--primary-color);
     padding: 4px 0;
+    padding-left: 31px;
 }
 
 .contact_group_divider {
