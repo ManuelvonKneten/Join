@@ -12,6 +12,34 @@ async function includeHTML() {
 
   setActiveSidebarLink();
   setUserInitials();
+  initUserDropdown();
+}
+
+function initUserDropdown() {
+  document.onclick = closeUserDropdown;
+}
+
+function toggleUserDropdown(event) {
+  event.stopPropagation();
+
+  const dropdown = document.getElementById('user_dropdown');
+  const userButton = document.getElementById('userInitialsBtn');
+
+  if (!dropdown || !userButton) return;
+
+  const isOpen = !dropdown.classList.contains("d_none");
+  dropdown.classList.toggle("d_none");
+  userButton.setAttribute("aria-expanded", isOpen ? "false" : "true");
+}
+
+function closeUserDropdown() {
+  const dropdown = document.getElementById('user_dropdown');
+  const userButton = document.getElementById('userInitialsBtn');
+
+  if (!dropdown || !userButton) return;
+
+  dropdown.classList.add("d_none");
+  userButton.setAttribute("aria-expanded", "false");
 }
 
 

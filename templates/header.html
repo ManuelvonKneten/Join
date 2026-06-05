@@ -4,7 +4,18 @@
   <div class="header_main_user_area">
     <a class="header_main_help_link" href="#" aria-label="Help">?</a>
 
-    <button id="userInitialsBtn" class="header_main_user_button" type="button" aria-label="User menu">
+    <button
+      id="userInitialsBtn"
+      class="header_main_user_button"
+      type="button"
+      aria-label="User menu"
+      aria-expanded="false"
+      onclick="toggleUserDropdown(event)">
     </button>
+    <div id="user_dropdown" class="user_dropdown d_none" onclick="event.stopPropagation()">
+      <a href="../htmls/legal_notice.html">Legal Notice</a>
+      <a href="../htmls/privacy_policy.html">Privacy Policy</a>
+      <a href="../index.html">Log out</a>
+    </div>
   </div>
 </header>
