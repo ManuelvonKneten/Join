@@ -4,9 +4,22 @@ const signupBtn      = document.getElementById('signupBtn');
 const signupForm     = document.querySelector('form');
 const emailInput     = document.getElementById('signupEmail');
 const passInput      = document.getElementById('signupPassword');
+const confirmInput   = document.getElementById('signupConfirmPassword');
+const mismatchMsg    = document.getElementById('passwordMismatch');
 const urlParams      = new URLSearchParams(window.location.search);
 const msgBox         = document.getElementById('msgBox');
 
+
+function validatePasswords() {
+    const match = passInput.value === confirmInput.value;
+    confirmInput.setCustomValidity(match ? '' : 'Passwords do not match.');
+    mismatchMsg.classList.toggle('visible', !match && confirmInput.value.length > 0);
+}
+
+if (confirmInput) {
+    confirmInput.addEventListener('input', validatePasswords);
+    passInput.addEventListener('input', validatePasswords);
+}
 
 if (acceptCheckbox) {
     acceptCheckbox.addEventListener('change', function () {

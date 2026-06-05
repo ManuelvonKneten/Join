@@ -374,6 +374,19 @@
 }
 
 
+.passwordMismatch {
+    display: none;
+    font-size: 12px;
+    color: rgb(255, 129, 144);
+    text-align: left;
+    margin-top: -12px;
+}
+
+.passwordMismatch.visible {
+    display: block;
+}
+
+
 .msgBox {
     font-size: 14px;
     color: rgb(41, 171, 226);
