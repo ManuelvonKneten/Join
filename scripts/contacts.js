@@ -8,6 +8,7 @@ const AVATAR_COLORS = [
 ];
 
 let allContacts = [];
+let activeContact = null;
 
 
 /* ── Init ── */
@@ -201,7 +202,7 @@ function renderContacts() {
  */
 function contactItemHTML(contact) {
     return `
-        <div class="contact_item">
+        <div class="contact_item" data-id="${contact.id}" onclick="showContactDetail(${JSON.stringify(contact).replace(/"/g, '&quot;')})">
             <div class="contact_avatar" style="background-color:${avatarColor(contact.name)}">
                 ${initials(contact.name)}
             </div>
@@ -211,6 +212,23 @@ function contactItemHTML(contact) {
             </div>
         </div>
     `;
+}
+
+
+function showContactDetail(contact) {
+    activeContact = contact;
+    document.querySelectorAll('.contact_item').forEach(el => el.classList.remove('active'));
+    const activeEl = document.querySelector(`.contact_item[data-id="${contact.id}"]`);
+    if (activeEl) activeEl.classList.add('active');
+    const panel = document.querySelector('.contacts_right_bottom');
+    document.querySelector('.crb_avatar').textContent            = initials(contact.name);
+    document.querySelector('.crb_avatar').style.backgroundColor  = avatarColor(contact.name);
+    document.querySelector('.crb_name').textContent              = contact.name;
+    const emailEl = document.getElementById('detailEmail');
+    emailEl.textContent = contact.email || '—';
+    emailEl.href        = contact.email ? `mailto:${contact.email}` : '#';
+    document.getElementById('detailPhone').textContent = contact.phone || '—';
+    panel.classList.remove('hidden');
 }
 
 
@@ -264,6 +282,78 @@ function closeAddContact() {
 function overlayClose(event) {
     if (event.target === document.getElementById('addContactOverlay')) {
         closeAddContact();
+    }
+}
+
+
+/* ── Edit Modal ── */
+function openEditContact(contact) {
+    document.getElementById('editContactName').value  = contact.name  || '';
+    document.getElementById('editContactEmail').value = contact.email || '';
+    document.getElementById('editContactPhone').value = contact.phone || '';
+    document.getElementById('editContactOverlay').classList.remove('hidden');
+}
+
+function closeEditContact() {
+    document.getElementById('editContactOverlay').classList.add('hidden');
+}
+
+function overlayEditClose(event) {
+    if (event.target === document.getElementById('editContactOverlay')) {
+        closeEditContact();
+    }
+}
+
+async function saveContact(event) {
+    event.preventDefault();
+    if (!activeContact) return;
+
+    const updated = {
+        name:  document.getElementById('editContactName').value.trim(),
+        email: document.getElementById('editContactEmail').value.trim(),
+        phone: document.getElementById('editContactPhone').value.trim(),
+    };
+
+    try {
+        const res = await fetch(`${DB_URL}/contacts/${activeContact.id}.json`, {
+            method:  'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(updated),
+        });
+        if (!res.ok) throw new Error();
+
+        Object.assign(activeContact, updated);
+        const idx = allContacts.findIndex(c => c.id === activeContact.id);
+        if (idx !== -1) allContacts[idx] = { ...activeContact };
+
+        renderContacts();
+        showContactDetail(activeContact);
+        closeEditContact();
+        showContactToast('Contact updated');
+    } catch {
+        showContactToast('Could not save contact.', true);
+    }
+}
+
+async function deleteContact() {
+    if (!activeContact) return;
+
+    try {
+        const res = await fetch(`${DB_URL}/contacts/${activeContact.id}.json`, {
+            method: 'DELETE',
+        });
+        if (!res.ok) throw new Error();
+
+        allContacts = allContacts.filter(c => c.id !== activeContact.id);
+        activeContact = null;
+
+        document.querySelectorAll('.contact_item').forEach(el => el.classList.remove('active'));
+        renderContacts();
+        document.querySelector('.contacts_right_bottom').classList.add('hidden');
+        closeEditContact();
+        showContactToast('Contact deleted');
+    } catch {
+        showContactToast('Could not delete contact.', true);
     }
 }
 
