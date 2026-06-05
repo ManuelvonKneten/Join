@@ -7,6 +7,7 @@ const passInput   = document.getElementById('loginPassword');
 
 
 guestBtn.addEventListener('click', () => {
+    localStorage.setItem('currentUser', 'Guest');
     window.location.href = '/htmls/summary.html';
 });
 
@@ -22,6 +23,7 @@ loginForm.addEventListener('submit', async function (e) {
     const found = users.find(u => u.email === email && u.password === password);
 
     if (found) {
+        localStorage.setItem('currentUser', found.name || found.email);
         window.location.href = '/htmls/summary.html';
     } else {
         alertBox.style.display = 'block';

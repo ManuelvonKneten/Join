@@ -2,6 +2,7 @@ const DB_URL         = 'https://join-project-e7af3-default-rtdb.europe-west1.fir
 const acceptCheckbox = document.getElementById('signupAccept');
 const signupBtn      = document.getElementById('signupBtn');
 const signupForm     = document.querySelector('form');
+const nameInput      = document.getElementById('signupName');
 const emailInput     = document.getElementById('signupEmail');
 const passInput      = document.getElementById('signupPassword');
 const confirmInput   = document.getElementById('signupConfirmPassword');
@@ -40,12 +41,14 @@ if (msgBox && urlParams.get('msg')) {
 
 
 async function addUser() {
-    const email    = emailInput.value;
+    const name     = nameInput.value.trim();
+    const email    = emailInput.value.trim();
     const password = passInput.value;
 
     await fetch(`${DB_URL}/users.json`, {
         method: 'POST',
-        body: JSON.stringify({ email, password })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
     });
 
     const toast = document.getElementById('signupToast');

@@ -6,16 +6,83 @@
     <title>Contacts</title>
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/png" />
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="stylesheet" href="../styles/contacts.css" />
   </head>
   <body>
     <div data-include="../templates/sidebar.html"></div>
     <div data-include="../templates/header.html"></div>
 
     <main class="content">
-      <!-- Seiteninhalt -->
+      <div class="contacts_layout">
+
+        <div class="contacts_left">
+          <button class="btn_add_contact" onclick="openAddContact()">
+            Add new contact
+            <img src="/assets/icons/person.png" alt="" />
+          </button>
+          <div id="contactList" class="contact_list"></div>
+        </div>
+
+        <div class="contacts_right">
+        </div>
+
+      </div>
     </main>
 
+    <div id="addContactOverlay" class="add_contact_overlay hidden" onclick="overlayClose(event)">
+      <div class="add_contact_modal">
+
+        <div class="modal_left">
+          <img class="modal_logo" src="/assets/img/logo.png" alt="Join Logo" />
+          <h2 class="modal_heading">Add contact</h2>
+          <p class="modal_sub">Tasks are better with a team!</p>
+          <div class="modal_divider"></div>
+        </div>
+
+        <div class="modal_right">
+          <button class="modal_close_btn" onclick="closeAddContact()">&#x2715;</button>
+
+          <div class="modal_body">
+
+            <div class="modal_avatar_col">
+              <div class="modal_avatar">
+                <img src="/assets/icons/person.png" alt="" />
+              </div>
+            </div>
+
+            <form class="modal_form_col" onsubmit="createContact(event)">
+              <div class="inputField">
+                <input id="contactName" type="text" placeholder="Name" required />
+                <img class="inputIcon" src="/assets/icons/person.png" alt="" />
+              </div>
+              <div class="inputField">
+                <input id="contactEmail" type="email" placeholder="Email" required />
+                <img class="inputIcon" src="/assets/icons/mail.png" alt="" />
+              </div>
+              <div class="inputField">
+                <input id="contactPhone" type="tel" placeholder="Phone" />
+              </div>
+
+              <div class="modal_actions">
+                <button type="button" class="btn_modal_cancel" onclick="closeAddContact()">
+                  Cancel <span>&#x2715;</span>
+                </button>
+                <button type="submit" class="btn_modal_create">
+                  Create contact <span>&#x2713;</span>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="contactToast" class="contactToast"></div>
+
     <script src="../templates/include_html.js"></script>
-    <script src="../scripts/summary.js"></script>
+    <script src="../scripts/contacts.js"></script>
   </body>
 </html>
