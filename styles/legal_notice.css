@@ -1,0 +1,14 @@
+.content h1 {
+  margin-bottom: 32px;
+}
+
+.content h2 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.content p,
+.content address {
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
