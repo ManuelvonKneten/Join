@@ -41,10 +41,10 @@
               <div class="crb_name_actions">
                 <h3 class="crb_name">Full Name</h3>
                 <div class="crb_actions">
-                  <button class="crb_btn">
+                  <button class="crb_btn" onclick="openEditContact(activeContact)">
                     <img src="/assets/icons/edit.png" alt="" /> Edit
                   </button>
-                  <button class="crb_btn">
+                  <button class="crb_btn" onclick="deleteContact()">
                     <img src="/assets/icons/delete.png" alt="" /> Delete
                   </button>
                 </div>
@@ -53,6 +53,14 @@
 
             <div class="crb_info">
               <h4 class="crb_info_heading">Contact Information</h4>
+              <div class="crb_info_row">
+                <span class="crb_info_label">Email</span>
+                <a class="crb_info_email" id="detailEmail" href="#"></a>
+              </div>
+              <div class="crb_info_row">
+                <span class="crb_info_label">Phone</span>
+                <span class="crb_info_value" id="detailPhone"></span>
+              </div>
             </div>
 
           </div>
@@ -104,6 +112,57 @@
                 </button>
                 <button type="submit" class="btn_modal_create">
                   Create contact <span>&#x2713;</span>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="editContactOverlay" class="add_contact_overlay hidden" onclick="overlayEditClose(event)">
+      <div class="add_contact_modal">
+
+        <div class="modal_left">
+          <img class="modal_logo" src="/assets/img/logo.png" alt="Join Logo" />
+          <h2 class="modal_heading">Edit contact</h2>
+          <p class="modal_sub">Tasks are better with a team!</p>
+          <div class="modal_divider"></div>
+        </div>
+
+        <div class="modal_right">
+          <button class="modal_close_btn" onclick="closeEditContact()">&#x2715;</button>
+
+          <div class="modal_body">
+
+            <div class="modal_avatar_col">
+              <div class="modal_avatar">
+                <img src="/assets/icons/person.png" alt="" />
+              </div>
+            </div>
+
+            <form class="modal_form_col" onsubmit="saveContact(event)">
+              <div class="inputField">
+                <input id="editContactName" type="text" placeholder="Name" required />
+                <img class="inputIcon" src="/assets/icons/person.png" alt="" />
+              </div>
+              <div class="inputField">
+                <input id="editContactEmail" type="email" placeholder="Email" required />
+                <img class="inputIcon" src="/assets/icons/mail.png" alt="" />
+              </div>
+              <div class="inputField">
+                <input id="editContactPhone" type="tel" placeholder="Phone" />
+                <img class="inputIcon" src="/assets/icons/phone.png" alt="phone" />
+              </div>
+
+              <div class="modal_actions">
+                <button type="button" class="btn_modal_cancel" onclick="deleteContact()">
+                  Delete <span>&#x2715;</span>
+                </button>
+                <button type="submit" class="btn_modal_create">
+                  Save <span>&#x2713;</span>
                 </button>
               </div>
             </form>
