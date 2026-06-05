@@ -58,13 +58,16 @@ async function renderContent(url) {
 }
 
 
+function initials(name) {
+  return name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('');
+}
+
+
 function setUserInitials() {
   const btn = document.getElementById('userInitialsBtn');
   if (!btn) return;
   const name = localStorage.getItem('currentUser') || '';
-  btn.textContent = name
-    ? name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('')
-    : '?';
+  btn.textContent = name ? initials(name) : '?';
 }
 
 
