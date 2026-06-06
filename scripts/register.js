@@ -1,4 +1,3 @@
-const DB_URL         = 'https://join-project-e7af3-default-rtdb.europe-west1.firebasedatabase.app';
 const acceptCheckbox = document.getElementById('signupAccept');
 const signupBtn      = document.getElementById('signupBtn');
 const signupForm     = document.querySelector('form');
@@ -45,11 +44,7 @@ async function addUser() {
     const email    = emailInput.value.trim();
     const password = passInput.value;
 
-    await fetch(`${DB_URL}/users.json`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
-    });
+    await postToDB('users', { name, email, password });
 
     const toast = document.getElementById('signupToast');
     toast.classList.add('show');

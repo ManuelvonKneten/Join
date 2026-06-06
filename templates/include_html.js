@@ -86,11 +86,6 @@ async function renderContent(url) {
 }
 
 
-function initials(name) {
-  return name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('');
-}
-
-
 function setUserInitials() {
   const btn = document.getElementById('userInitialsBtn');
   if (!btn) return;
