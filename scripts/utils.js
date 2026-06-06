@@ -5,12 +5,25 @@ const AVATAR_COLORS = [
     '#FF4646', '#FFBB2B', '#C3FF2B'
 ];
 
+/**
+ * Gibt die Initialen eines Namens zurück (z.B. "Max Mustermann" → "MM").
+ *
+ * @param {string} name
+ * @returns {string}
+ */
 function initials(name) {
-    return name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('');
+    return name.trim().split(/\s+/).map(word => word[0].toUpperCase()).join('');
 }
 
+/**
+ * Gibt eine konsistente Avatar-Farbe für einen Namen zurück.
+ * Der gleiche Name liefert immer die gleiche Farbe.
+ *
+ * @param {string} name
+ * @returns {string} Hex-Farbwert
+ */
 function avatarColor(name) {
     let hash = 0;
-    for (const ch of name) hash += ch.charCodeAt(0);
+    for (const character of name) hash += character.charCodeAt(0);
     return AVATAR_COLORS[hash % AVATAR_COLORS.length];
 }
