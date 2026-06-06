@@ -98,5 +98,4 @@ function setUserInitials() {
   btn.textContent = name ? initials(name) : '?';
 }
 
-
 includeHTML();
