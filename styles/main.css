@@ -19,7 +19,22 @@ body {
   --background-color: #ffffff;
   --text-color: #2a3647;
   --hover-color: #a8a8a8;
+
+  /* Global */
+  --color-primary: #cdcdcd;
+  --color-secondary: #29abe2;
+
+  /* Layout backgrounds */
+  --sidebar-background: #2a3647;
+  --sidebar-current-background: #091931;
+  --main-background: #ffffff;
+  --content-background: #f6f7f8;
+
+  /* Sidebar text/icon */
+  --sidebar-link-color: #cdcdcd;
+  --sidebar-current-color: #ffffff;
 }
+
 /* Fonts */
 @font-face {
   font-family: "Inter";
