@@ -35,7 +35,7 @@ if (signupForm) {
 }
 
 if (msgBox && urlParams.get('msg')) {
-    msgBox.innerHTML = urlParams.get('msg');
+    msgBox.textContent = urlParams.get('msg');
 }
 
 
