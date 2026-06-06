@@ -12,6 +12,34 @@ async function includeHTML() {
 
   setActiveSidebarLink();
   setUserInitials();
+  initUserDropdown();
+}
+
+function initUserDropdown() {
+  document.onclick = closeUserDropdown;
+}
+
+function toggleUserDropdown(event) {
+  event.stopPropagation();
+
+  const dropdown = document.getElementById('user_dropdown');
+  const userButton = document.getElementById('userInitialsBtn');
+
+  if (!dropdown || !userButton) return;
+
+  const isOpen = !dropdown.classList.contains("d_none");
+  dropdown.classList.toggle("d_none");
+  userButton.setAttribute("aria-expanded", isOpen ? "false" : "true");
+}
+
+function closeUserDropdown() {
+  const dropdown = document.getElementById('user_dropdown');
+  const userButton = document.getElementById('userInitialsBtn');
+
+  if (!dropdown || !userButton) return;
+
+  dropdown.classList.add("d_none");
+  userButton.setAttribute("aria-expanded", "false");
 }
 
 
@@ -58,13 +86,16 @@ async function renderContent(url) {
 }
 
 
+function initials(name) {
+  return name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('');
+}
+
+
 function setUserInitials() {
   const btn = document.getElementById('userInitialsBtn');
   if (!btn) return;
   const name = localStorage.getItem('currentUser') || '';
-  btn.textContent = name
-    ? name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('')
-    : '?';
+  btn.textContent = name ? initials(name) : '?';
 }
 
 
