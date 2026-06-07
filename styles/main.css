@@ -181,6 +181,12 @@ body {
   border-radius: 50%;
 }
 
+.header_main_help_link:hover {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transition: opacity 0.2s ease;
+}
+
 .header_main_user_button {
   font-size: 24px;
   width: 56px;
