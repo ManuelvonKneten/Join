@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', loadContacts);
  */
 async function loadContacts() {
     try {
-        const data = await getFromDB('contacts');
-        allContacts = data
-            ? Object.entries(data).map(([id, c]) => ({ id, ...c }))
+        const rawContactsData = await getFromDB('contacts');
+        allContacts = rawContactsData
+            ? Object.entries(rawContactsData).map(([id, contactData]) => ({ id, ...contactData }))
             : [];
         renderContacts();
     } catch {
@@ -37,7 +37,7 @@ async function createContact(event) {
     event.preventDefault();
 
     const formData = getContactFormData();
-    const createBtn = setCreateButtonLoading(event.target, true);
+    setCreateButtonLoading(event.target, true);
 
     try {
         const newId = await postContact(formData);
@@ -64,32 +64,30 @@ function getContactFormData() {
 /**
  * @param {HTMLFormElement} form
  * @param {boolean} isLoading
- * @returns {HTMLButtonElement}
  */
 function setCreateButtonLoading(form, isLoading) {
-    const btn = form.querySelector('.btn_modal_create');
-    btn.disabled = isLoading;
-    btn.textContent = isLoading ? 'Saving…' : 'Create contact ✓';
-    return btn;
+    const createButton = form.querySelector('.btn_modal_create');
+    createButton.disabled = isLoading;
+    createButton.textContent = isLoading ? 'Saving…' : 'Create contact ✓';
 }
 
 /**
  * @async
- * @param {{ name: string, email: string, phone: string }} data
+ * @param {{ name: string, email: string, phone: string }} contactData
  * @returns {Promise<string>} Firebase-generierte ID
  * @throws {Error} Bei fehlgeschlagenem Request
  */
-async function postContact(data) {
-    const result = await postToDB('contacts', data);
-    return result.name; // Firebase ID
+async function postContact(contactData) {
+    const firebaseResponse = await postToDB('contacts', contactData);
+    return firebaseResponse.name; // Firebase ID
 }
 
 /**
  * @param {string} id
- * @param {{ name: string, email: string, phone: string }} data
+ * @param {{ name: string, email: string, phone: string }} contactData
  */
-function addContactToState(id, data) {
-    allContacts.push({ id, ...data });
+function addContactToState(id, contactData) {
+    allContacts.push({ id, ...contactData });
 }
 
 function onContactCreated() {
@@ -109,18 +107,18 @@ async function saveContact(event) {
     event.preventDefault();
     if (!activeContact) return;
 
-    const updated = {
+    const updatedContactData = {
         name:  document.getElementById('editContactName').value.trim(),
         email: document.getElementById('editContactEmail').value.trim(),
         phone: document.getElementById('editContactPhone').value.trim(),
     };
 
     try {
-        await patchToDB(`contacts/${activeContact.id}`, updated);
+        await patchToDB(`contacts/${activeContact.id}`, updatedContactData);
 
-        Object.assign(activeContact, updated);
-        const idx = allContacts.findIndex(c => c.id === activeContact.id);
-        if (idx !== -1) allContacts[idx] = { ...activeContact };
+        Object.assign(activeContact, updatedContactData);
+        const activeContactIndex = allContacts.findIndex(contact => contact.id === activeContact.id);
+        if (activeContactIndex !== -1) allContacts[activeContactIndex] = { ...activeContact };
 
         renderContacts();
         showContactDetail(activeContact);
@@ -143,10 +141,9 @@ async function deleteContact() {
     try {
         await deleteFromDB(`contacts/${activeContact.id}`);
 
-        allContacts = allContacts.filter(c => c.id !== activeContact.id);
+        allContacts = allContacts.filter(contact => contact.id !== activeContact.id);
         activeContact = null;
 
-        document.querySelectorAll('.contact_item').forEach(el => el.classList.remove('active'));
         renderContacts();
         document.querySelector('.contacts_right_bottom').classList.add('hidden');
         closeEditContact();
@@ -165,26 +162,27 @@ async function deleteContact() {
  * @returns {void}
  */
 function renderContacts() {
-    const list = document.getElementById('contactList');
+    const contactListElement = document.getElementById('contactList');
 
     if (!allContacts.length) {
-        list.innerHTML = '<p class="no_contacts">No contacts yet.</p>';
+        contactListElement.innerHTML = '<p class="no_contacts">No contacts yet.</p>';
         return;
     }
 
-    const sorted = [...allContacts].sort((a, b) => a.name.localeCompare(b.name));
+    const sortedContacts = [...allContacts].sort((contactA, contactB) => contactA.name.localeCompare(contactB.name));
 
-    const groups = sorted.reduce((acc, contact) => {
+    const contactGroups = sortedContacts.reduce((letterGroups, contact) => {
         const letter = contact.name[0].toUpperCase();
-        (acc[letter] ??= []).push(contact);
-        return acc;
+        if (!letterGroups[letter]) letterGroups[letter] = [];
+        letterGroups[letter].push(contact);
+        return letterGroups;
     }, {});
 
-    list.innerHTML = Object.keys(groups).sort().map(letter => `
+    contactListElement.innerHTML = Object.keys(contactGroups).sort().map(letter => `
         <div class="contact_group">
             <span class="contact_group_letter">${letter}</span>
             <div class="contact_group_divider"></div>
-            ${groups[letter].map(contactItemHTML).join('')}
+            ${contactGroups[letter].map(contactItemHTML).join('')}
         </div>
     `).join('');
 }
@@ -217,17 +215,18 @@ function contactItemHTML(contact) {
 function showContactDetail(contact) {
     activeContact = contact;
 
-    document.querySelectorAll('.contact_item').forEach(el => el.classList.remove('active'));
-    const activeEl = document.querySelector(`.contact_item[data-id="${contact.id}"]`);
-    if (activeEl) activeEl.classList.add('active');
+    document.querySelectorAll('.contact_item').forEach(contactItem => contactItem.classList.remove('active'));
+    const activeContactElement = document.querySelector(`.contact_item[data-id="${contact.id}"]`);
+    if (activeContactElement) activeContactElement.classList.add('active');
 
-    document.querySelector('.crb_avatar').textContent           = initials(contact.name);
-    document.querySelector('.crb_avatar').style.backgroundColor = avatarColor(contact.name);
+    const avatarElement = document.querySelector('.crb_avatar');
+    avatarElement.textContent = initials(contact.name);
+    avatarElement.style.backgroundColor = avatarColor(contact.name);
     document.querySelector('.crb_name').textContent             = contact.name;
 
-    const emailEl = document.getElementById('detailEmail');
-    emailEl.textContent = contact.email || '—';
-    emailEl.href        = contact.email ? `mailto:${contact.email}` : '#';
+    const emailLinkElement = document.getElementById('detailEmail');
+    emailLinkElement.textContent = contact.email || '—';
+    emailLinkElement.href        = contact.email ? `mailto:${contact.email}` : '#';
 
     document.getElementById('detailPhone').textContent = contact.phone || '—';
     document.querySelector('.contacts_right_bottom').classList.remove('hidden');
