@@ -76,6 +76,7 @@
 .task_steps{
     display: flex;
     justify-content: space-between;
+    gap: 24px;
 }
 
 .to_do, .in_progress, .await_feedback, .done {
@@ -109,11 +110,13 @@
 .task_field{
  min-height: 700px;
  min-width: 250px;
+ display: flex;
+ flex-direction: column;
+ gap: 32px;
  
 }
 /* Card */
 .card{
-    background-color: var( --main-background);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -124,7 +127,6 @@
 }
 
 .card button{
-    background-color: var(--color-secondary);
     color: white;
     border: none;
     border-radius: 8px;
@@ -139,3 +141,10 @@
    color: var(--color-tertiary); 
 }
 
+.user_story{
+    background-color: var(--color-quinary);
+}
+
+.technical {
+    background-color: var(--color-quaternary);
+}

@@ -25,6 +25,8 @@ body {
   --color-primary: #cdcdcd;
   --color-secondary: #29abe2;
   --color-tertiary: #2A3647;
+  --color-quaternary:#1FD7C1; 
+  --color-quinary:#0038FF; 
 
   /* Layout backgrounds */
   --sidebar-background: #2a3647;
