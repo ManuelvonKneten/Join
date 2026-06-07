@@ -6,11 +6,17 @@
 
     <nav class="sidebar_nav" aria-label="Main navigation">
       <a class="nav_item sidebar_link" href="../htmls/summary.html">
-        <span class="sidebar_icon sidebar_icon_summary" aria-hidden="true"></span>
+        <span
+          class="sidebar_icon sidebar_icon_summary"
+          aria-hidden="true"
+        ></span>
         <span class="sidebar_text">Summary</span>
       </a>
       <a class="nav_item sidebar_link" href="../htmls/add_task.html">
-        <span class="sidebar_icon sidebar_icon_add_task" aria-hidden="true"></span>
+        <span
+          class="sidebar_icon sidebar_icon_add_task"
+          aria-hidden="true"
+        ></span>
         <span class="sidebar_text">Add Task</span>
       </a>
       <a class="nav_item sidebar_link" href="../htmls/board.html">
@@ -18,14 +24,33 @@
         <span class="sidebar_text">Board</span>
       </a>
       <a class="nav_item sidebar_link" href="../htmls/contacts.html">
-        <span class="sidebar_icon sidebar_icon_contacts" aria-hidden="true"></span>
+        <span
+          class="sidebar_icon sidebar_icon_contacts"
+          aria-hidden="true"
+        ></span>
         <span class="sidebar_text">Contacts</span>
       </a>
     </nav>
 
     <div class="sidebar_footer">
-      <a class="sidebar_footer_link" href="#" onclick="renderContent('./privacy_policy.html'); return false;">Privacy Policy</a>
-      <a class="sidebar_footer_link" href="#" onclick="renderContent('./legal_notice.html'); return false;">Legal notice</a>
+      <a
+        class="sidebar_footer_link"
+        href="../htmls/privacy_policy.html"
+        onclick="
+          openFooterContent('./privacy_policy.html', this);
+          return false;
+        "
+        >Privacy Policy</a
+      >
+      <a
+        class="sidebar_footer_link"
+        href="../htmls/legal_notice.html"
+        onclick="
+          openFooterContent('./legal_notice.html', this);
+          return false;
+        "
+        >Legal notice</a
+      >
     </div>
   </aside>
 </div>

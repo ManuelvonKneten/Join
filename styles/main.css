@@ -127,13 +127,23 @@ body {
 }
 
 .sidebar_footer_link {
-  color: var(--hover-color);
+  color: var(--sidebar-link-color);
   text-decoration: none;
   font-size: 16px;
+  transition: color 0.2s ease;
 }
 
 .sidebar_footer_link:hover {
-  color: var(--secondary-color);
+  color: var(--color-secondary);
+}
+
+.sidebar_footer_link_active {
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+.sidebar_footer_link_active:hover {
+  color: var(--color-secondary);
 }
 
 .sidebar_link_active .icon_hover {
