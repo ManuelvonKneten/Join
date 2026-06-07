@@ -74,7 +74,7 @@
               <label class="add_task_label" for="subtaskInput">Subtasks</label>
               <div class="inputField">
                 <input id="subtaskInput" type="text" placeholder="Add new subtask" />
-                <img class="inputIcon" src="/assets/icons/add_plus_black.svg" alt="add" />
+                <img id="addSubtaskIcon" class="inputIcon" src="/assets/icons/add_plus_black.svg" alt="add" />
               </div>
               <ul id="subtaskList" class="add_task_subtask_list"></ul>
             </div>
@@ -90,7 +90,11 @@
       </div>
     </main>
 
+    <div id="addTaskToast" class="add_task_toast"></div>
+
+    <script src="../scripts/firebase.js"></script>
     <script src="../scripts/utils.js"></script>
     <script src="../templates/include_html.js"></script>
+    <script src="../scripts/add_task.js"></script>
   </body>
 </html>

@@ -83,7 +83,7 @@
     padding: 10px;
     border: 2px solid var(--primary-color);
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--primary-color);
     background: white;
@@ -124,12 +124,58 @@
     gap: 4px;
 }
 
-.add_task_subtask_list li {
+.add_task_subtask_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 16px;
     color: var(--primary-color);
     padding: 6px 10px;
     border-radius: 6px;
     background-color: #f0f4ff;
+}
+
+.add_task_subtask_remove {
+    background: none;
+    border: none;
+    color: var(--hover-color);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 2px;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.add_task_subtask_remove:hover {
+    color: var(--primary-color);
+}
+
+/* ── Toast ── */
+.add_task_toast {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 12px 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    z-index: 200;
+}
+
+.add_task_toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.add_task_toast.toast_error {
+    background-color: rgb(255, 129, 144);
 }
 
 /* ── Actions ── */

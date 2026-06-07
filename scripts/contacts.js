@@ -108,7 +108,7 @@ async function saveContact(event) {
     if (!activeContact) return;
 
     const updatedContactData = {
-        name:  document.getElementById('editContactName').value.trim(),
+        name: document.getElementById('editContactName').value.trim(),
         email: document.getElementById('editContactEmail').value.trim(),
         phone: document.getElementById('editContactPhone').value.trim(),
     };
@@ -222,11 +222,11 @@ function showContactDetail(contact) {
     const avatarElement = document.querySelector('.crb_avatar');
     avatarElement.textContent = initials(contact.name);
     avatarElement.style.backgroundColor = avatarColor(contact.name);
-    document.querySelector('.crb_name').textContent             = contact.name;
+    document.querySelector('.crb_name').textContent = contact.name;
 
     const emailLinkElement = document.getElementById('detailEmail');
     emailLinkElement.textContent = contact.email || '—';
-    emailLinkElement.href        = contact.email ? `mailto:${contact.email}` : '#';
+    emailLinkElement.href = contact.email ? `mailto:${contact.email}` : '#';
 
     document.getElementById('detailPhone').textContent = contact.phone || '—';
     document.querySelector('.contacts_right_bottom').classList.remove('hidden');
@@ -248,7 +248,7 @@ function openAddContact() {
  */
 function closeAddContact() {
     document.getElementById('addContactOverlay').classList.add('hidden');
-    document.getElementById('contactName').value  = '';
+    document.getElementById('contactName').value = '';
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactPhone').value = '';
 }
@@ -268,7 +268,7 @@ function overlayClose(event) {
  * @param {{ name: string, email: string, phone: string }} contact
  */
 function openEditContact(contact) {
-    document.getElementById('editContactName').value  = contact.name  || '';
+    document.getElementById('editContactName').value = contact.name || '';
     document.getElementById('editContactEmail').value = contact.email || '';
     document.getElementById('editContactPhone').value = contact.phone || '';
     document.getElementById('editContactOverlay').classList.remove('hidden');
