@@ -7,18 +7,90 @@
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/png" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/summary.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="stylesheet" href="../styles/add_task.css" />
   </head>
   <body>
     <div data-include="../templates/sidebar.html"></div>
     <div data-include="../templates/header.html"></div>
 
     <main class="content">
-      <!-- Seiteninhalt -->
+      <div class="add_task_layout">
+
+        <h1 class="add_task_heading">Add Task</h1>
+
+        <form class="add_task_columns" onsubmit="createTask(event)">
+
+          <div class="add_task_left">
+            <div class="add_task_field">
+              <label class="add_task_label" for="taskTitle">Title</label>
+              <div class="inputField">
+                <input id="taskTitle" type="text" placeholder="Enter a title" required />
+              </div>
+            </div>
+
+            <div class="add_task_field">
+              <label class="add_task_label" for="taskDescription">Description</label>
+              <textarea id="taskDescription" class="add_task_textarea" placeholder="Enter a description"></textarea>
+            </div>
+
+            <div class="add_task_field">
+              <label class="add_task_label" for="taskDueDate">Due Date</label>
+              <div class="inputField">
+                <input id="taskDueDate" type="date" required />
+              </div>
+            </div>
+          </div>
+
+          <div class="add_task_divider"></div>
+
+          <div class="add_task_right">
+            <div class="add_task_field">
+              <label class="add_task_label">Priority</label>
+              <div class="add_task_prio_btns">
+                <button class="add_task_prio_btn" type="button">Urgent</button>
+                <button class="add_task_prio_btn" type="button">Medium</button>
+                <button class="add_task_prio_btn" type="button">Low</button>
+              </div>
+            </div>
+
+            <div class="add_task_field">
+              <label class="add_task_label" for="taskAssigned">Assigned to</label>
+              <select id="taskAssigned" class="add_task_select">
+                <option value="">Select contacts to assign</option>
+              </select>
+            </div>
+
+            <div class="add_task_field">
+              <label class="add_task_label" for="taskCategory">Category</label>
+              <select id="taskCategory" class="add_task_select">
+                <option value="">Select task category</option>
+                <option value="technical">Technical Task</option>
+                <option value="user_story">User Story</option>
+              </select>
+            </div>
+
+            <div class="add_task_field">
+              <label class="add_task_label" for="subtaskInput">Subtasks</label>
+              <div class="inputField">
+                <input id="subtaskInput" type="text" placeholder="Add new subtask" />
+                <img class="inputIcon" src="/assets/icons/add_plus_black.svg" alt="add" />
+              </div>
+              <ul id="subtaskList" class="add_task_subtask_list"></ul>
+            </div>
+
+            <div class="add_task_actions">
+              <button type="button" class="add_task_btn add_task_btn_clear">Clear <span>&#x2715;</span></button>
+              <button type="submit" class="add_task_btn add_task_btn_create">Create Task <span>&#x2713;</span></button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
     </main>
 
     <script src="../scripts/utils.js"></script>
     <script src="../templates/include_html.js"></script>
-    <script src="../scripts/summary.js"></script>
   </body>
 </html>

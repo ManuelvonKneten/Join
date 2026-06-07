@@ -10,6 +10,7 @@
 body {
   min-height: 100vh;
   font-family: "Inter", sans-serif;
+  font-size: 16px;
 }
 
 /* Variables */
@@ -100,7 +101,7 @@ body {
 }
 
 .sidebar_logo img {
-  width: 100px;
+  width: 100px;-
   height: auto;
 }
 
