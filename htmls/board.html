@@ -20,14 +20,19 @@
         <div class="titel_and_search">
           <h2>Board</h2>
           <div class="search">
-            
+            <div class="search_field">
               <input type="text" id="search" placeholder="Find Task">
-              <img src="../assets/icons/search.svg" alt=""> 
+              <div class="search_icon" id="search_icon">
+                <img src="../assets/icons/search.svg" alt=""> 
+              </div>
+            </div>
+              
             <button>
               Add task
               <img src="../assets/icons/add_plus.svg" alt="plus icos">
             </button>
           </div>
+
         </div>
 
         <div class="task_steps">
@@ -37,12 +42,18 @@
               <h3>To do</h3>
               <button><img src="../assets/icons/add_plus_black.svg" alt="plus icon" ></button>
             </div>
-            <div class="to_do_field">
+              <div class="task_field">
                   <div id="card" class="card">
                     <button>Platzhalter</button>
                     <h4>Platzhalter Titel</h4>
                     <p>Platzhalter text bla bananna <br> so banana awit</p>
-                  </div>
+                    <div class="progress_container">
+                      <div class="progress_bar">
+                        <div class="progress"></div>
+                      </div>
+                      <span>x/2 Subtasks</span>
+                    </div>
+                 </div>
             </div>
           </div>
 
@@ -51,7 +62,7 @@
               <h3>In progress</h3>
               <button><img src="../assets/icons/add_plus_black.svg" alt="plus icon" ></button>
             </div>
-            <div class="to_do_field"></div>
+            <div class="task_field"></div>
           </div>
 
           <div  id="awaitFeedback" class="await_feedback">
@@ -59,14 +70,14 @@
               <h3>Await feedback</h3>
               <button><img src="../assets/icons/add_plus_black.svg" alt="plus icon" ></button>
             </div>
-            <div class="to_do_field"></div>
+            <div class="task_field"></div>
           </div>
 
           <div  id="done" class="done">
             <div class="task_column">
               <h3>Done</h3>
             </div>
-            <div class="to_do_field"></div>
+            <div class="task_field"></div>
           </div>
 
         </div>  
