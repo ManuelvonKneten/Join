@@ -14,37 +14,39 @@
     <div data-include="../templates/header.html"></div>
 
     <main class="content">
-      <section class="summary">
-        <div class="summary_left">
-          <div class="summary_headline">
-            <h1>Join 360</h1>
-            <p>Key Metrics at a Glance</p>
-          </div>
+      <section class="summary_page">
+        <div class="summary_headline">
+          <h1>Join 360</h1>
+          <p>Key Metrics at a Glance</p>
+        </div>
 
+        <div class="summary_body">
           <div class="summary_overview">
-            <article class="summary_card flex_row">
-              <img src="../assets/icons/pencil.svg" alt="" />
-              <div class="flex_column">
-                <span id="summary_done_amount" class="summary_number">0</span>
-                <span class="summary_label">To-Do</span>
+            <article class="summary_card summary_card_top">
+              <div class="summary_card_content">
+                <img src="../assets/icons/pencil.svg" alt="" />
+                <div class="summary_card_text">
+                  <span id="summary_todo_amount" class="summary_number">0</span>
+                  <span class="summary_label">To-Do</span>
+                </div>
               </div>
             </article>
 
-            <article class="summary_card flex_row">
-              <img src="../assets/icons/check.svg" alt="" />
-              <div class="flex_column">
-                <span id="summary_todo_amount" class="summary_number">0</span>
-                <span class="summary_label">Done</span>
+            <article class="summary_card summary_card_top">
+              <div class="summary_card_content">
+                <img src="../assets/icons/check.svg" alt="" />
+                <div class="summary_card_text">
+                  <span id="summary_done_amount" class="summary_number">0</span>
+                  <span class="summary_label">Done</span>
+                </div>
               </div>
             </article>
 
             <article class="summary_card summary_card_urgent">
-              <div class="flex_row">
+              <div class="summary_card_content">
                 <img src="../assets/icons/urgency.svg" alt="" />
-                <div class="flex_column">
-                  <span id="summary_urgent_amount" class="summary_number"
-                    >0</span
-                  >
+                <div class="summary_card_text">
+                  <span id="summary_urgent_amount" class="summary_number">0</span>
                   <span class="summary_label">Urgent</span>
                 </div>
               </div>
@@ -70,6 +72,11 @@
               <span class="summary_label">Awaiting Feedback</span>
             </article>
           </div>
+
+          <aside class="summary_greeting_box">
+            <h2 id="summary_greeting">Good morning,</h2>
+            <p id="summary_user_name">Guest</p>
+          </aside>
         </div>
       </section>
     </main>
