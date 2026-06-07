@@ -23,6 +23,7 @@ body {
   /* Global */
   --color-primary: #cdcdcd;
   --color-secondary: #29abe2;
+  --color-tertiary: #2A3647;
 
   /* Layout backgrounds */
   --sidebar-background: #2a3647;
@@ -277,7 +278,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
-  
+
   padding-left: 56px;
   color: var(--sidebar-link-color);
   text-decoration: none;
