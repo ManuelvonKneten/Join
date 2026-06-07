@@ -1,0 +1,106 @@
+
+.board {
+    display: flex;
+    flex-direction: column;
+    padding:60px 80px 0 50px;
+}
+
+.titel_and_search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.board h2 {
+    font-size: 64px;
+    font-weight: 700;
+}
+
+.search {
+    display: flex;
+    gap: 16px;
+}
+.search input {
+    height: 48px;
+    width: 312px;
+    border-radius: 8px;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.search button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.task_steps{
+    display: flex;
+    gap: 24px;
+}
+ /* min oder? */
+.to_do, .in_progress, .await_feedback, .done {
+    min-width: 250px; 
+    display: flex;
+    flex-direction: column;
+    gap: 32px; 
+}
+
+.task_column {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.task_column h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.task_column button{
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+}
+
+.task_column img {
+    width: 22px;
+    padding: 3px;   
+}
+
+.to_do_field{
+ height: 700px;
+}
+
+.card{
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.card button{
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.card p {
+   color: var(--text-color); 
+}
