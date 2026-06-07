@@ -22,8 +22,8 @@ function initUserDropdown() {
 function toggleUserDropdown(event) {
   event.stopPropagation();
 
-  const dropdown = document.getElementById('user_dropdown');
-  const userButton = document.getElementById('userInitialsBtn');
+  const dropdown = document.getElementById("user_dropdown");
+  const userButton = document.getElementById("userInitialsBtn");
 
   if (!dropdown || !userButton) return;
 
@@ -33,8 +33,8 @@ function toggleUserDropdown(event) {
 }
 
 function closeUserDropdown() {
-  const dropdown = document.getElementById('user_dropdown');
-  const userButton = document.getElementById('userInitialsBtn');
+  const dropdown = document.getElementById("user_dropdown");
+  const userButton = document.getElementById("userInitialsBtn");
 
   if (!dropdown || !userButton) return;
 
@@ -42,8 +42,10 @@ function closeUserDropdown() {
   userButton.setAttribute("aria-expanded", "false");
 }
 
-
 function setActiveSidebarLink() {
+  clearSidebarActiveLinks();
+  clearFooterActiveLinks();
+
   const currentPage = window.location.pathname.split("/").pop();
   const sidebarLinks = document.querySelectorAll(".sidebar_link");
 
@@ -55,8 +57,6 @@ function setActiveSidebarLink() {
     }
   });
 }
-
-
 
 // Render Function, damit nur der Content in der Mitte neu geladen wird.
 
@@ -85,12 +85,30 @@ async function renderContent(url) {
   document.title = doc.title;
 }
 
+async function openFooterContent(url, clickedLink) {
+  await renderContent(url);
+  clearSidebarActiveLinks();
+  clearFooterActiveLinks();
+  clickedLink.classList.add("sidebar_footer_link_active");
+}
+
+function clearSidebarActiveLinks() {
+  const sidebarLinks = document.querySelectorAll(".sidebar_link");
+  sidebarLinks.forEach((link) => link.classList.remove("sidebar_link_active"));
+}
+
+function clearFooterActiveLinks() {
+  const footerLinks = document.querySelectorAll(".sidebar_footer_link");
+  footerLinks.forEach((link) =>
+    link.classList.remove("sidebar_footer_link_active")
+  );
+}
 
 function setUserInitials() {
-  const btn = document.getElementById('userInitialsBtn');
+  const btn = document.getElementById("userInitialsBtn");
   if (!btn) return;
-  const name = localStorage.getItem('currentUser') || '';
-  btn.textContent = name ? initials(name) : '?';
+  const name = localStorage.getItem("currentUser") || "";
+  btn.textContent = name ? initials(name) : "?";
 }
 
 includeHTML();

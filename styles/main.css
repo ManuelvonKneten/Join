@@ -103,7 +103,7 @@ body {
 }
 
 .sidebar_logo img {
-  width: 100px;-
+  width: 100px;
   height: auto;
 }
 
@@ -129,13 +129,23 @@ body {
 }
 
 .sidebar_footer_link {
-  color: var(--hover-color);
+  color: var(--sidebar-link-color);
   text-decoration: none;
   font-size: 16px;
+  transition: color 0.2s ease;
 }
 
 .sidebar_footer_link:hover {
-  color: var(--secondary-color);
+  color: var(--color-secondary);
+}
+
+.sidebar_footer_link_active {
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+.sidebar_footer_link_active:hover {
+  color: var(--color-secondary);
 }
 
 .sidebar_link_active .icon_hover {
@@ -182,6 +192,12 @@ body {
   padding: 2px 6px;
   border: 2px solid var(--hover-color);
   border-radius: 50%;
+}
+
+.header_main_help_link:hover {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transition: opacity 0.2s ease;
 }
 
 .header_main_user_button {
