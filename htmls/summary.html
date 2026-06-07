@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Summary</title>
+    <title>JOIN - Summary</title>
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/png" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/main.css" />
@@ -14,7 +14,64 @@
     <div data-include="../templates/header.html"></div>
 
     <main class="content">
-      <!-- Seiteninhalt -->
+      <section class="summary">
+        <div class="summary_left">
+          <div class="summary_headline">
+            <h1>Join 360</h1>
+            <p>Key Metrics at a Glance</p>
+          </div>
+
+          <div class="summary_overview">
+            <article class="summary_card flex_row">
+              <img src="../assets/icons/pencil.svg" alt="" />
+              <div class="flex_column">
+                <span id="summary_done_amount" class="summary_number">0</span>
+                <span class="summary_label">To-Do</span>
+              </div>
+            </article>
+
+            <article class="summary_card flex_row">
+              <img src="../assets/icons/check.svg" alt="" />
+              <div class="flex_column">
+                <span id="summary_todo_amount" class="summary_number">0</span>
+                <span class="summary_label">Done</span>
+              </div>
+            </article>
+
+            <article class="summary_card summary_card_urgent">
+              <div class="flex_row">
+                <img src="../assets/icons/urgency.svg" alt="" />
+                <div class="flex_column">
+                  <span id="summary_urgent_amount" class="summary_number"
+                    >0</span
+                  >
+                  <span class="summary_label">Urgent</span>
+                </div>
+              </div>
+
+              <div class="summary_deadline_box">
+                <strong id="summary_deadline"></strong>
+                <span>Upcoming Deadline</span>
+              </div>
+            </article>
+
+            <article class="summary_card">
+              <span id="summary_board_amount" class="summary_number">0</span>
+              <span class="summary_label">Tasks in Board</span>
+            </article>
+
+            <article class="summary_card">
+              <span id="summary_progress_amount" class="summary_number">0</span>
+              <span class="summary_label">Tasks in Progress</span>
+            </article>
+
+            <article class="summary_card">
+              <span id="summary_feedback_amount" class="summary_number">0</span>
+              <span class="summary_label">Awaiting Feedback</span>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script src="../scripts/utils.js"></script>

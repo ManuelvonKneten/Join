@@ -1,0 +1,126 @@
+.content {
+    position: fixed;
+    top: 96px;
+
+    width: calc(100vw - 300px);
+    height: calc(100vh - 96px);
+
+    padding: 40px;
+    overflow: auto;
+    background-color: var(--content-background);
+}
+
+.summary {
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: minmax(500px, 650px) 1fr;
+    gap: 48px;
+    align-items: center;
+}
+.summary_left {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.summary_headline {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.summary_headline h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.summary_headline p {
+    font-size: 24px;
+    margin: 0;
+    color: var(--color-tertiary);
+}
+
+.summary_overview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.summary_card {
+    min-height: 120px;
+    border-radius: 30px;
+    background-color: var(--main-background);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary_card_urgent {
+    grid-column: span 2;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.summary_number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.summary_label {
+    font-size: 20px;
+    text-align: center;
+    color: var(--color-tertiary);
+}
+
+.summary_deadline_box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summary_deadline_box strong {
+    font-size: 20px;
+    color: var(--color-tertiary);
+}
+
+.summary_deadline_box span {
+    font-size: 16px;
+    color: var(--color-tertiary);
+}
+
+.summary_greeting_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.summary_greeting_box h2 {
+    font-size: 48px;
+    margin: 0;
+    color: #000000;
+}
+
+.summary_greeting_box p {
+    font-size: 56px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-secondary);
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
