@@ -89,7 +89,7 @@ async function openFooterContent(url, clickedLink) {
   await renderContent(url);
   clearSidebarActiveLinks();
   clearFooterActiveLinks();
-  clickedLink.classList.add("sidebar_link_active");
+  clickedLink.classList.add("sidebar_footer_link_active");
 }
 
 function clearSidebarActiveLinks() {
