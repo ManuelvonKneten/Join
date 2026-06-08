@@ -1,5 +1,6 @@
 /* ── State ── */
 let availableContacts = [];
+let selectedContacts = [];
 let selectedPriority = '';
 let taskSubtasks = [];
 
@@ -20,12 +21,13 @@ async function initAddTask() {
     setupPriorityButtons();
     setupSubtaskInput();
     setupClearButton();
+    setupAssignedDropdown();
 }
 
 
 /* ── Contacts ── */
 /**
- * Lädt alle Kontakte aus Firebase und befüllt das Assigned-to-Dropdown.
+ * Lädt alle Kontakte aus Firebase und rendert das Assigned-Dropdown.
  *
  * @async
  * @returns {Promise<void>}
@@ -33,13 +35,10 @@ async function initAddTask() {
 async function loadAvailableContacts() {
     try {
         const rawContactData = await getFromDB('contacts');
-        availableContacts = [];
-        if (rawContactData) {
-            for (const [id, contact] of Object.entries(rawContactData)) {
-                availableContacts.push({ id, ...contact });
-            }
-        }
-        renderAssignedDropdown();
+        availableContacts = rawContactData
+            ? Object.entries(rawContactData).map(([id, contact]) => ({ id, ...contact }))
+            : [];
+        renderAssignedOptions();
     } catch (error) {
         console.error('Contacts could not be loaded:', error);
         showTaskToast('Contacts could not be loaded.', true);
@@ -47,18 +46,103 @@ async function loadAvailableContacts() {
 }
 
 /**
- * Rendert alle Kontakte als Optionen in das Assigned-to-Dropdown.
+ * Richtet den Outside-Click-Listener zum Schließen des Dropdowns ein.
  *
  * @returns {void}
  */
-function renderAssignedDropdown() {
-    const assignedSelectElement = document.getElementById('taskAssigned');
-    availableContacts.forEach(contact => {
-        const optionElement = document.createElement('option');
-        optionElement.value = contact.id;
-        optionElement.textContent = contact.name;
-        assignedSelectElement.appendChild(optionElement);
+function setupAssignedDropdown() {
+    document.addEventListener('click', (event) => {
+        if (!document.getElementById('assignedDropdown').contains(event.target)) {
+            closeAssignedDropdown();
+        }
     });
+}
+
+/**
+ * Öffnet oder schließt das Assigned-Dropdown.
+ *
+ * @returns {void}
+ */
+function toggleAssignedDropdown() {
+    const options = document.getElementById('assignedOptions');
+    options.classList.contains('hidden') ? openAssignedDropdown() : closeAssignedDropdown();
+}
+
+/** @returns {void} */
+function openAssignedDropdown() {
+    document.getElementById('assignedOptions').classList.remove('hidden');
+    document.getElementById('assignedArrow').classList.add('rotated');
+}
+
+/** @returns {void} */
+function closeAssignedDropdown() {
+    document.getElementById('assignedOptions').classList.add('hidden');
+    document.getElementById('assignedArrow').classList.remove('rotated');
+}
+
+/**
+ * Fügt einen Kontakt zur Auswahl hinzu oder entfernt ihn daraus.
+ *
+ * @param {string} contactId
+ * @returns {void}
+ */
+function toggleContactSelection(event, contactId) {
+    event.stopPropagation();
+
+    const contact = availableContacts.find(c => c.id === contactId);
+    if (!contact) return;
+
+    const index = selectedContacts.findIndex(c => c.id === contactId);
+    if (index === -1) {
+        selectedContacts.push(contact);
+    } else {
+        selectedContacts.splice(index, 1);
+    }
+    renderAssignedOptions();
+    renderSelectedAvatars();
+}
+
+/**
+ * Rendert alle Kontakte als auswählbare Listeneinträge im Dropdown.
+ *
+ * @returns {void}
+ */
+function renderAssignedOptions() {
+    document.getElementById('assignedOptions').innerHTML =
+        availableContacts.map(contact => assignedOptionHTML(contact)).join('');
+}
+
+/**
+ * @param {{ id: string, name: string }} contact
+ * @returns {string}
+ */
+function assignedOptionHTML(contact) {
+    const isSelected = selectedContacts.some(c => c.id === contact.id);
+    return `
+        <li class="assigned_option ${isSelected ? 'assigned_option_active' : ''}"
+            onclick="toggleContactSelection(event, '${contact.id}')">
+            <div class="assigned_option_avatar" style="background-color: ${avatarColor(contact.name)}">
+                ${initials(contact.name)}
+            </div>
+            <span class="assigned_option_name">${contact.name}</span>
+            <input type="checkbox" class="assigned_option_checkbox" ${isSelected ? 'checked' : ''} tabindex="-1">
+        </li>
+    `;
+}
+
+/**
+ * Rendert die Initialen-Avatare der ausgewählten Kontakte unterhalb des Dropdowns.
+ *
+ * @returns {void}
+ */
+function renderSelectedAvatars() {
+    document.getElementById('assignedAvatars').innerHTML = selectedContacts
+        .map(contact => `
+            <div class="assigned_selected_avatar" style="background-color: ${avatarColor(contact.name)}">
+                ${initials(contact.name)}
+            </div>
+        `)
+        .join('');
 }
 
 
@@ -69,23 +153,21 @@ function renderAssignedDropdown() {
  * @returns {void}
  */
 function setupPriorityButtons() {
-    const priorityButtons = document.querySelectorAll('.add_task_prio_btn');
-    priorityButtons.forEach(button => {
-        button.addEventListener('click', () => onPriorityButtonClick(button));
+    document.querySelectorAll('.add_task_prio_btn').forEach(button => {
+        button.addEventListener('click', onPriorityButtonClick);
     });
 }
 
 /**
  * Setzt den aktiven Priority-Button und speichert die gewählte Priorität.
  *
- * @param {HTMLButtonElement} clickedButton
+ * @param {MouseEvent} event
  * @returns {void}
  */
-function onPriorityButtonClick(clickedButton) {
-    const priorityButtons = document.querySelectorAll('.add_task_prio_btn');
-    priorityButtons.forEach(button => button.classList.remove('active'));
-    clickedButton.classList.add('active');
-    selectedPriority = clickedButton.dataset.priority;
+function onPriorityButtonClick(event) {
+    document.querySelectorAll('.add_task_prio_btn').forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    selectedPriority = event.currentTarget.dataset.priority;
 }
 
 
@@ -98,10 +180,7 @@ function onPriorityButtonClick(clickedButton) {
  */
 function setupSubtaskInput() {
     const subtaskInputElement = document.getElementById('subtaskInput');
-    const addSubtaskIcon = document.getElementById('addSubtaskIcon');
-
-    addSubtaskIcon.style.cursor = 'pointer';
-    addSubtaskIcon.addEventListener('click', addSubtask);
+    document.getElementById('addSubtaskIcon').addEventListener('click', addSubtask);
 
     subtaskInputElement.addEventListener('keydown', (keyEvent) => {
         if (keyEvent.key === 'Enter') {
@@ -143,12 +222,8 @@ function removeSubtask(subtaskIndex) {
  * @returns {void}
  */
 function renderSubtaskList() {
-    const taskSubtasksElement = document.getElementById('subtaskList');
-    let html = '';
-    for (let i = 0; i < taskSubtasks.length; i++) {
-        html += subtaskItemHTML(taskSubtasks[i], i);
-    }
-    taskSubtasksElement.innerHTML = html;
+    document.getElementById('subtaskList').innerHTML =
+        taskSubtasks.map((subtask, i) => subtaskItemHTML(subtask, i)).join('');
 }
 
 /**
@@ -201,19 +276,12 @@ async function createTask(submitEvent) {
  * @returns {{ title: string, description: string, dueDate: string, priority: string, assignedTo: string, category: string, subtasks: Array, status: string }}
  */
 function getTaskFormData() {
-    const assignedSelectElement = document.getElementById('taskAssigned');
-    let assignedContactName = '';
-    if (assignedSelectElement.value) {
-        const selectedOption = assignedSelectElement.options[assignedSelectElement.selectedIndex];
-        assignedContactName = selectedOption.textContent;
-    }
-
     return {
         title: document.getElementById('taskTitle').value.trim(),
         description: document.getElementById('taskDescription').value.trim(),
         dueDate: document.getElementById('taskDueDate').value,
         priority: selectedPriority,
-        assignedTo: assignedContactName,
+        assignedTo: selectedContacts.map(c => c.name),
         category: document.getElementById('taskCategory').value,
         subtasks: taskSubtasks,
         status: 'todo'
@@ -265,18 +333,14 @@ function setupClearButton() {
  * @returns {void}
  */
 function clearTaskForm() {
-    document.getElementById('taskTitle').value = '';
-    document.getElementById('taskDescription').value = '';
-    document.getElementById('taskDueDate').value = '';
-    document.getElementById('taskAssigned').value = '';
-    document.getElementById('taskCategory').value = '';
-    document.getElementById('subtaskInput').value = '';
+    document.querySelector('.add_task_columns').reset();
 
     taskSubtasks = [];
     selectedPriority = '';
+    selectedContacts = [];
 
     renderSubtaskList();
-
-    const priorityButtons = document.querySelectorAll('.add_task_prio_btn');
-    priorityButtons.forEach(button => button.classList.remove('active'));
+    renderAssignedOptions();
+    renderSelectedAvatars();
+    document.querySelectorAll('.add_task_prio_btn').forEach(btn => btn.classList.remove('active'));
 }

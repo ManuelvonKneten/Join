@@ -98,13 +98,11 @@
 .prio_icon {
     width: 18px;
     height: 18px;
-    object-fit: contain;
     flex-shrink: 0;
 }
 
-/* Low icon has white paths — invert to dark so it's visible on white bg */
-.add_task_prio_btn[data-priority="low"] .prio_icon {
-    filter: invert(1);
+.prio_icon path {
+    transition: fill 0.2s ease;
 }
 
 /* Urgent — active/hover: red */
@@ -115,7 +113,7 @@
     color: white;
 }
 
-/* Medium — active/hover: orange; also make icon white */
+/* Medium — active/hover: orange */
 .add_task_prio_btn[data-priority="medium"]:hover,
 .add_task_prio_btn[data-priority="medium"].active {
     background-color: #FFA800;
@@ -123,12 +121,7 @@
     color: white;
 }
 
-.add_task_prio_btn[data-priority="medium"]:hover .prio_icon,
-.add_task_prio_btn[data-priority="medium"].active .prio_icon {
-    filter: brightness(0) invert(1);
-}
-
-/* Low — active/hover: green; restore white icon (svg paths are white) */
+/* Low — active/hover: green */
 .add_task_prio_btn[data-priority="low"]:hover,
 .add_task_prio_btn[data-priority="low"].active {
     background-color: #7AE229;
@@ -136,9 +129,10 @@
     color: white;
 }
 
-.add_task_prio_btn[data-priority="low"]:hover .prio_icon,
-.add_task_prio_btn[data-priority="low"].active .prio_icon {
-    filter: none;
+/* On hover/active: alle Icon-Pfade weiß */
+.add_task_prio_btn:hover .prio_icon path,
+.add_task_prio_btn.active .prio_icon path {
+    fill: white;
 }
 
 /* ── Dropdowns ── */
@@ -160,6 +154,137 @@
     outline: none;
 }
 
+/* ── Assigned Dropdown ── */
+.assigned_dropdown {
+    position: relative;
+}
+
+.assigned_trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.assigned_trigger:hover {
+    border-color: var(--primary-color);
+}
+
+.assigned_placeholder {
+    font-size: 16px;
+    color: #aaa;
+}
+
+.assigned_arrow {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.assigned_arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.assigned_options {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.assigned_options.hidden {
+    display: none;
+}
+
+.assigned_option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 2px 4px;
+    transition: background-color 0.15s ease;
+}
+
+.assigned_option:hover {
+    background-color: #f0f4ff;
+}
+
+.assigned_option_active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.assigned_option_active:hover {
+    background-color: var(--secondary-color, #3d5a80);
+}
+
+.assigned_option_avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.assigned_option_name {
+    flex: 1;
+    font-size: 16px;
+}
+
+.assigned_option_checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    pointer-events: none;
+    flex-shrink: 0;
+    accent-color: var(--primary-color);
+}
+
+.assigned_option_active .assigned_option_checkbox {
+    accent-color: white;
+}
+
+.assigned_avatars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+    min-height: 0;
+}
+
+.assigned_selected_avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    border: 2px solid white;
+}
+
 /* ── Subtasks ── */
 .add_task_subtask_list {
     list-style: none;
@@ -177,6 +302,10 @@
     padding: 6px 10px;
     border-radius: 6px;
     background-color: #f0f4ff;
+}
+
+#addSubtaskIcon {
+    cursor: pointer;
 }
 
 .add_task_subtask_remove {
