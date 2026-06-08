@@ -85,7 +85,7 @@ function onPriorityButtonClick(clickedButton) {
     const priorityButtons = document.querySelectorAll('.add_task_prio_btn');
     priorityButtons.forEach(button => button.classList.remove('active'));
     clickedButton.classList.add('active');
-    selectedPriority = clickedButton.textContent.trim().toLowerCase();
+    selectedPriority = clickedButton.dataset.priority;
 }
 
 

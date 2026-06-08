@@ -80,21 +80,65 @@
 
 .add_task_prio_btn {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     padding: 10px;
-    border: 2px solid var(--primary-color);
+    border: 2px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 700;
     color: var(--primary-color);
     background: white;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.add_task_prio_btn:hover,
-.add_task_prio_btn.active {
-    background-color: var(--primary-color);
+.prio_icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Low icon has white paths — invert to dark so it's visible on white bg */
+.add_task_prio_btn[data-priority="low"] .prio_icon {
+    filter: invert(1);
+}
+
+/* Urgent — active/hover: red */
+.add_task_prio_btn[data-priority="urgent"]:hover,
+.add_task_prio_btn[data-priority="urgent"].active {
+    background-color: #FF3D00;
+    border-color: #FF3D00;
     color: white;
+}
+
+/* Medium — active/hover: orange; also make icon white */
+.add_task_prio_btn[data-priority="medium"]:hover,
+.add_task_prio_btn[data-priority="medium"].active {
+    background-color: #FFA800;
+    border-color: #FFA800;
+    color: white;
+}
+
+.add_task_prio_btn[data-priority="medium"]:hover .prio_icon,
+.add_task_prio_btn[data-priority="medium"].active .prio_icon {
+    filter: brightness(0) invert(1);
+}
+
+/* Low — active/hover: green; restore white icon (svg paths are white) */
+.add_task_prio_btn[data-priority="low"]:hover,
+.add_task_prio_btn[data-priority="low"].active {
+    background-color: #7AE229;
+    border-color: #7AE229;
+    color: white;
+}
+
+.add_task_prio_btn[data-priority="low"]:hover .prio_icon,
+.add_task_prio_btn[data-priority="low"].active .prio_icon {
+    filter: none;
 }
 
 /* ── Dropdowns ── */
