@@ -1,7 +1,7 @@
 
 function getTaskTemplate(task) {
   return `
-     <div class="card">
+     <div draggable="true" ondragstart="startDragging('${task.id}')" class="card">
 
         <button class="${task.category}">
         ${formatCategory(task.category)}

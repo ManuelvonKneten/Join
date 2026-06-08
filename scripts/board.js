@@ -1,30 +1,33 @@
-// const TASKS = await getFromDB('tasks');
-
 let allTasks = [];
 
+let currentDraggedTask;
+
 document.addEventListener('DOMContentLoaded', initBoard);
+
 
 async function initBoard() {
     await loadTasks();
 }
 
+
 async function loadTasks() {
     try {
         const rawTasks = await getFromDB('tasks');
 
-        allTasks = rawTasks
-            ? Object.entries(rawTasks).map(([id, task]) => ({
-                id,
-                ...task
-            }))
-            : [];
-console.log(allTasks);
+        allTasks = [];
+
+        if (rawTasks) {
+            for (const [id, task] of Object.entries(rawTasks)){
+                allTasks.push({id, ...task});
+            }          
+        }
         renderBoard();
 
     } catch (error) {
         console.error('Tasks could not be loaded!', error);
     }
 }
+
 
 function renderBoard() {
      document.querySelector('#toDo .task_field').innerHTML = '';
@@ -36,6 +39,7 @@ function renderBoard() {
         renderTask(task);
      }
 }
+
 
 function renderTask(task) {
     let container;
@@ -63,6 +67,7 @@ function renderTask(task) {
     container.innerHTML += getTaskTemplate(task);
 }
 
+
 function formatCategory(category) {
 
     if (category === 'user_story') {
@@ -75,3 +80,11 @@ function formatCategory(category) {
     return category;
 }
 
+
+function startDragging(id){
+    currentDraggedTask = id;
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
