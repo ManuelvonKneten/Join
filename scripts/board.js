@@ -53,6 +53,7 @@ async function loadTasks() {
 /**
  * Leert alle Board-Spalten und rendert anschließend alle Tasks neu.
  *
+ * @param {Array<Object>} [tasks=allTasks] - Die darzustellenden Tasks.
  * @returns {void}
  */
 function renderBoard(tasks = allTasks) {
@@ -155,14 +156,18 @@ function allowDrop(ev) {
  * @returns {Promise<void>}
  */
 async function moveTo(event) {
-   
+
+    const dropField = event.currentTarget;
+
+    dropField.classList.remove('task_field_highlight');
     const newStatus = event.currentTarget.dataset.status;
 
     await patchToDB(`tasks/${currentDraggedTask}`, { status: newStatus
 
     });
-  
+    
     await loadTasks();
+   
 }
 
 
@@ -176,6 +181,14 @@ async function moveTo(event) {
 document.getElementById('search').addEventListener('input', searchTask)
 document.getElementById('search_icon').addEventListener('click', searchTask)
 
+
+/**
+ * Filtert die geladenen Tasks anhand des Suchbegriffs
+ * im Titel oder in der Beschreibung und rendert
+ * anschließend die gefilterte Liste.
+ *
+ * @returns {void}
+ */
 function searchTask() {
     let input = document.getElementById('search').value.toLowerCase();
     let filteredTasks = allTasks.filter(task => task.title.toLowerCase().includes(input) ||
@@ -184,6 +197,12 @@ function searchTask() {
  renderBoard(filteredTasks);
 }
 
+
+/**
+ * Zeigt für leere Board-Spalten eine Platzhalterkarte an.
+ *
+ * @returns {void}
+ */
 function renderEmptyCards() {
     const taskFields = document.querySelectorAll('.task_field');
 
@@ -196,4 +215,35 @@ function renderEmptyCards() {
 }
 
 
+/**
+ * Fügt einer Task-Spalte die Hervorhebungs-Klasse hinzu,
+ * wenn ein Task darüber gezogen wird.
+ *
+ * @param {string} id - Die ID der Zielspalte.
+ * @returns {void}
+ */
+function highlight(id) {
+    document.getElementById(id).classList.add('task_field_highlight');
+}
+ 
+
+/**
+ * Entfernt die Hervorhebungs-Klasse von einer Task-Spalte.
+ *
+ * @param {string} id - Die ID der Zielspalte.
+ * @returns {void}
+ */
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('task_field_highlight');
+}
     
+
+// function openTaskPopUp(task) {
+//     const container = document.getElementById('taskDialog');
+
+//     container.innerHTML = getTaskDetailsTemplate(task);
+
+//     const dialog = container.querySelector('dialog');
+//     dialog.showModal();
+    
+// }
