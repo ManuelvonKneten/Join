@@ -27,7 +27,7 @@
               </div>
             </div>
               
-            <button>
+            <button onclick="window.location.href='../htmls/add_task.html'">
               Add task
               <img src="../assets/icons/add_plus.svg" alt="plus icos">
             </button>
@@ -35,14 +35,14 @@
 
         </div>
 
-        <div class="task_steps">
+        <div id="taskContent" class="task_steps">
 
           <div  id="toDo" class="to_do">
             <div class="task_column">
               <h3>To do</h3>
               <button><img src="../assets/icons/add_plus_black.svg" alt="plus icon" ></button>
             </div>
-              <div ondrop="moveTo(event)" ondragover="allowDrop(event)" class="task_field"></div>
+              <div data-status="todo" ondrop="moveTo(event)" ondragover="allowDrop(event)" class="task_field"></div>
           </div>
 
           <div  id="InProgress" class="in_progress">
@@ -50,22 +50,22 @@
               <h3>In progress</h3>
               <button><img src="../assets/icons/add_plus_black.svg" alt="plus icon" ></button>
             </div>
-            <div ondrop="moveTo(event)" ondragover="allowDrop(event)"  class="task_field"></div>
+            <div data-status="inprogress" ondrop="moveTo(event)" ondragover="allowDrop(event)" class="task_field"></div>
           </div>
-           
+
           <div  id="awaitFeedback" class="await_feedback">
             <div class="task_column">
               <h3>Await feedback</h3>
               <button><img src="../assets/icons/add_plus_black.svg" alt="plus icon" ></button>
             </div>
-            <div  class="task_field"></div>
+            <div data-status="awaitfeedback" ondrop="moveTo(event)" ondragover="allowDrop(event)" class="task_field"></div>
           </div>
 
           <div  id="done" class="done">
             <div class="task_column">
               <h3>Done</h3>
             </div>
-            <div class="task_field"></div>
+            <div data-status="done" ondrop="moveTo(event)" ondragover="allowDrop(event)" class="task_field"></div>
           </div>
 
         </div>  

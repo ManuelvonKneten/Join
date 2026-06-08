@@ -12,3 +12,12 @@ function getTaskTemplate(task) {
     </div>
     `;
 }
+
+
+function getEmptyCardTemplate(fieldName) {
+  return `
+    <div class="empty_card">
+        <span>No tasks ${fieldName}</span>
+    </div>
+  `;
+}

@@ -148,3 +148,13 @@
 .technical {
     background-color: var(--color-quaternary);
 }
+
+.empty_card {
+    background-color: var(--color-primary) ;
+    color: var(--hover-color);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    border: 2px dashed var(--color-tertiary) ;
+    text-align: center;
+}
