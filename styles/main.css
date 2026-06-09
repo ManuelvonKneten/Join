@@ -1,4 +1,6 @@
-.hidden { display: none !important; }
+.hidden {
+  display: none !important;
+}
 
 /* Reset CSS */
 * {
@@ -24,9 +26,9 @@ body {
   /* Global */
   --color-primary: #cdcdcd;
   --color-secondary: #29abe2;
-  --color-tertiary: #2A3647;
-  --color-quaternary:#1FD7C1; 
-  --color-quinary:#0038FF; 
+  --color-tertiary: #2a3647;
+  --color-quaternary: #1fd7c1;
+  --color-quinary: #0038ff;
 
   /* Layout backgrounds */
   --sidebar-background: #2a3647;
@@ -34,7 +36,7 @@ body {
   --main-background: #ffffff;
   --content-background: #f6f7f8;
   --sidebar-hover-background: rgba(255, 255, 255, 0.08);
-  --backdrop:rgba(0,0,0,0.6);
+  --backdrop: rgba(0, 0, 0, 0.6);
 
   /* Layout */
   --header-height: 96px;
@@ -45,6 +47,11 @@ body {
   /* Sidebar text/icon */
   --sidebar-link-color: #cdcdcd;
   --sidebar-current-color: #ffffff;
+
+  /* obligatory font-sizes*/
+  --font-size-body: 16px;
+  --font-size-button: 16px;
+  --font-size-page-title: clamp(36px, 4vw, 48px);
 }
 
 /* Fonts */
@@ -69,8 +76,8 @@ body {
   font-style: normal;
 }
 
-body:has(dialog[open]){
-    overflow: hidden;
+body:has(dialog[open]) {
+  overflow: hidden;
 }
 
 /* Layout - Sidebar, Header & Content */
@@ -104,6 +111,25 @@ body:has(dialog[open]){
   margin-left: var(--sidebar-width);
   padding: var(--content-padding-y) var(--content-padding-x);
   background-color: var(--content-background);
+}
+
+.landscape_blocker {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: var(--content-padding-y) var(--content-padding-x);
+  background: var(--content-background);
+  color: var(--color-tertiary);
+  text-align: center;
+}
+
+.landscape_blocker p {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .sidebar_logo {
@@ -341,7 +367,9 @@ body:has(dialog[open]){
   font-size: 16px;
   font-weight: 400;
 
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .sidebar_link:hover {
@@ -434,5 +462,24 @@ body:has(dialog[open]){
     inset: 0;
     background: var(--backdrop);
     z-index: 25;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  .header_main,
+  .sidebar,
+  .content,
+  .logInHeader,
+  .logInMain,
+  .logInFooter {
+    display: none !important;
+  }
+
+  .landscape_blocker {
+    display: flex;
+  }
+
+  body {
+    overflow: hidden;
   }
 }
