@@ -68,17 +68,20 @@ function toggleAssignedDropdown() {
     options.classList.contains('hidden') ? openAssignedDropdown() : closeAssignedDropdown();
 }
 
-/** @returns {void} */
-function openAssignedDropdown() {
-    document.getElementById('assignedOptions').classList.remove('hidden');
-    document.getElementById('assignedArrow').classList.add('rotated');
+/**
+ * @param {boolean} isOpen
+ * @returns {void}
+ */
+function setAssignedDropdownOpen(isOpen) {
+    document.getElementById('assignedOptions').classList.toggle('hidden', !isOpen);
+    document.getElementById('assignedArrow').classList.toggle('rotated', isOpen);
 }
 
 /** @returns {void} */
-function closeAssignedDropdown() {
-    document.getElementById('assignedOptions').classList.add('hidden');
-    document.getElementById('assignedArrow').classList.remove('rotated');
-}
+function openAssignedDropdown()  { setAssignedDropdownOpen(true);  }
+
+/** @returns {void} */
+function closeAssignedDropdown() { setAssignedDropdownOpen(false); }
 
 /**
  * Fügt einen Kontakt zur Auswahl hinzu oder entfernt ihn daraus.
@@ -273,7 +276,7 @@ async function createTask(submitEvent) {
 /**
  * Liest alle Formularfelder aus und gibt ein Task-Objekt zurück.
  *
- * @returns {{ title: string, description: string, dueDate: string, priority: string, assignedTo: string, category: string, subtasks: Array, status: string }}
+ * @returns {{ title: string, description: string, dueDate: string, priority: string, assignedTo: string[], category: string, subtasks: Array, status: string }}
  */
 function getTaskFormData() {
     return {
