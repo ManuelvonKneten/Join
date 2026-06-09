@@ -13,6 +13,7 @@ async function includeHTML() {
   setActiveSidebarLink();
   setUserInitials();
   initUserDropdown();
+  initMobileNavigation();
 }
 
 function initUserDropdown() {
@@ -40,6 +41,43 @@ function closeUserDropdown() {
 
   dropdown.classList.add("d_none");
   userButton.setAttribute("aria-expanded", "false");
+  closeMobileNavigation();
+}
+
+function initMobileNavigation() {
+  const sidebar = document.querySelector(".sidebar");
+
+  if (!sidebar) return;
+
+  sidebar.addEventListener("click", (event) => {
+    if (event.target.closest("a")) closeMobileNavigation();
+  });
+}
+
+function toggleMobileNavigation(event) {
+  event.stopPropagation();
+
+  const isOpen = document.body.classList.toggle("mobile_navigation_open");
+  const menuButton = document.getElementById("mobileMenuBtn");
+
+  if (menuButton) {
+    menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    menuButton.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation"
+    );
+  }
+}
+
+function closeMobileNavigation() {
+  document.body.classList.remove("mobile_navigation_open");
+
+  const menuButton = document.getElementById("mobileMenuBtn");
+
+  if (menuButton) {
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Open navigation");
+  }
 }
 
 function setActiveSidebarLink() {
