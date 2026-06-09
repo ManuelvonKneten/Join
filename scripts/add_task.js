@@ -22,6 +22,7 @@ async function initAddTask() {
     setupSubtaskInput();
     setupClearButton();
     setupAssignedDropdown();
+    setupDueDateInput();
 }
 
 
@@ -278,11 +279,16 @@ async function createTask(submitEvent) {
  *
  * @returns {{ title: string, description: string, dueDate: string, priority: string, assignedTo: string[], category: string, subtasks: Array, status: string }}
  */
+function ddmmyyyyToISO(dateStr) {
+    const [day, month, year] = dateStr.split('/');
+    return `${year}-${month}-${day}`;
+}
+
 function getTaskFormData() {
     return {
         title: document.getElementById('taskTitle').value.trim(),
         description: document.getElementById('taskDescription').value.trim(),
-        dueDate: document.getElementById('taskDueDate').value,
+        dueDate: ddmmyyyyToISO(document.getElementById('taskDueDate').value),
         priority: selectedPriority,
         assignedTo: selectedContacts.map(c => c.name),
         category: document.getElementById('taskCategory').value,
@@ -316,6 +322,46 @@ function showTaskToast(message, isError = false) {
     toastElement.classList.toggle('toast_error', isError);
     toastElement.classList.add('show');
     setTimeout(() => toastElement.classList.remove('show'), 3000);
+}
+
+
+/* ── Due Date ── */
+/**
+ * Formatiert das Due-Date-Feld automatisch als DD/MM/YYYY während der Eingabe.
+ */
+function setupDueDateInput() {
+    const input  = document.getElementById('taskDueDate');
+    const picker = document.getElementById('taskDueDatePicker');
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+            const v = input.value;
+            if (v.endsWith('/')) input.value = v.slice(0, -1);
+        }
+    });
+
+    input.addEventListener('input', (e) => {
+        let digits = e.target.value.replace(/\D/g, '').slice(0, 8);
+        let formatted = digits;
+        if (digits.length >= 3) formatted = digits.slice(0, 2) + '/' + digits.slice(2);
+        if (digits.length >= 5) formatted = digits.slice(0, 2) + '/' + digits.slice(2, 4) + '/' + digits.slice(4);
+        e.target.value = formatted;
+    });
+
+    picker.addEventListener('change', (e) => {
+        if (!e.target.value) return;
+        const [year, month, day] = e.target.value.split('-');
+        input.value = `${day}/${month}/${year}`;
+    });
+}
+
+function openDueDatePicker() {
+    const picker = document.getElementById('taskDueDatePicker');
+    if (picker.showPicker) {
+        picker.showPicker();
+    } else {
+        picker.click();
+    }
 }
 
 
