@@ -163,11 +163,8 @@ async function moveTo(event) {
     const newStatus = event.currentTarget.dataset.status;
 
     await patchToDB(`tasks/${currentDraggedTask}`, { status: newStatus
-
     });
-    
-    await loadTasks();
-   
+    await loadTasks(); 
 }
 
 
@@ -236,14 +233,25 @@ function highlight(id) {
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('task_field_highlight');
 }
+
+
+function openTaskPopUp(taskId) {
+  
+    const task = allTasks.find(task => task.id === taskId);
     
+    const dialogTask = document.getElementById('dialogTask');
+    dialogTask.innerHTML = getTaskDetailsTemplate(task);
+    dialogTask.showModal(); 
+    dialogTask.focus();
+}
 
-// function openTaskPopUp(task) {
-//     const container = document.getElementById('taskDialog');
 
-//     container.innerHTML = getTaskDetailsTemplate(task);
+function closeTaskPopUp() {
+   document.getElementById('dialogTask').close();
+}
 
-//     const dialog = container.querySelector('dialog');
-//     dialog.showModal();
-    
-// }
+dialogTask.addEventListener('click', (event) => {
+    if (event.target === dialogTask) {
+        dialogTask.close();
+    }
+});

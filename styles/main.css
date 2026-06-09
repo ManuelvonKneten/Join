@@ -34,6 +34,7 @@ body {
   --main-background: #ffffff;
   --content-background: #f6f7f8;
   --sidebar-hover-background: rgba(255, 255, 255, 0.08);
+  --backdrop:rgba(0,0,0,0.6);
 
   /* Sidebar text/icon */
   --sidebar-link-color: #cdcdcd;
@@ -62,7 +63,9 @@ body {
   font-style: normal;
 }
 
-
+body:has(dialog[open]){
+    overflow: hidden;
+}
 
 /* Layout - Sidebar, Header & Content */
 .sidebar {

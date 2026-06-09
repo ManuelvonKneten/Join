@@ -72,6 +72,10 @@
     cursor: pointer;
 }
 
+.search button:hover{
+    background-color: var(--color-secondary);
+}
+
 /* Task Field */
 .task_steps{
     display: flex;
@@ -82,7 +86,7 @@
 .to_do, .in_progress, .await_feedback, .done {
     display: flex;
     flex-direction: column;
-    width: 550px;
+    /* width: 550px; */
 }
 
 .task_column {
@@ -98,9 +102,13 @@
 }
 
 .task_column button{
-    border: 1px solid var(--color-tertiary);
+    border: 0.5px solid var(--color-tertiary);
     border-radius: 8px;
     cursor: pointer;
+}
+
+.task_column button:hover{
+    background-color: var(--color-secondary);
 }
 
 .task_column img {
@@ -125,16 +133,16 @@
     border-radius: 10px;
     padding: 24px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }
 
-.card button{
+.card div {
     color: white;
     border: none;
     border-radius: 8px;
     padding: 4px 16px;
     font-size: 16px;
     font-weight: 400;
-    cursor: pointer;
     width: fit-content;
 }
 
@@ -166,47 +174,122 @@
 } 
 
 /* Dialog */
-.task_dialog {
-    max-width: 500px;
-    max-height: 930px;
+dialog{ 
+    /* min oder max???? */
+    width: 400px;
     background-color: var(--main-background);
+    border: none;
+    border-radius: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-    border: 3px solid black;
+body:has(dialog[open]){
+    overflow: hidden;
+}
 
+.dialog_content {
+    /* width: 90%; */
+    padding: 40px;
     display: flex;
     flex-direction: column;
-   
-    padding: 48px 40px;
-    gap: 16px;
+    gap: 20px;
 }
 
-.task_dialog button{
-    border: none;
-    background-color: var(--main-background);
-}
-
-/* .dialog_header{
+.dialog_header {
     display: flex;
-    justify-content: space-between;
-    justify-content:center;
-} */
+    justify-content: space-between; 
+} 
 
-
-.dialog_assigned{
-    font-size: 20px;
+.dialog_header div {
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    width: fit-content;
 }
+
+.dialog_content h2{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.dialog_content img {
+    height: 12px;
+}
+
+.description {
+    font-size: 16px;
+    font-weight: 400;
+}
+.dialog_content p, 
+.dialog_content span {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.dialog_header button {
+    border: none;
+    background: none;
+}
+.dialog_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.dialog_row span {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dialog_row p,
+.dialog_assigned p,
+.dialog_subtasks p {
+    color: var(--sidebar-background);
+    display: inline-block;
+    width: 120px;
+}
+
 
 .contact {
     padding-top: 12px;
     display: flex;
     flex-direction: row;
     gap: 16px;
+    align-items: center;
+}
+
+
+.contact_avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 1px;
 }
 
 .dialog_subtasks{
     display: flex;
     flex-direction: column;
     font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.dialog_subtasks{
+  display: flex;
+  gap: 8px;
 }
 
 .dialog_footer {
@@ -215,6 +298,10 @@
     gap: 10px;
 }
 
+.dialog_footer button {
+    border: none;
+    background: none;
+}
 .edit_icon{
     border-left: 1px solid var(--color-tertiary);
     opacity: 60%;
@@ -231,3 +318,4 @@
     cursor: pointer;
     gap: 8px;
 }
+
