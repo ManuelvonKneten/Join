@@ -465,7 +465,7 @@ body:has(dialog[open]) {
   }
 }
 
-@media (max-width: 1024px) and (orientation: landscape) {
+@media (max-width: 855px) and (orientation: landscape) {
   .header_main,
   .sidebar,
   .content,
