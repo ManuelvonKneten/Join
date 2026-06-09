@@ -1,3 +1,5 @@
+let color = avatarColor("Emmanuel Mauer");
+let shortName = initials("Emmanuel Mauer");
 /**
  * Enthält alle Tasks, die aus Firebase geladen wurden.
  * @type {Array<Object>}
@@ -255,3 +257,4 @@ dialogTask.addEventListener('click', (event) => {
         dialogTask.close();
     }
 });
+
