@@ -1,14 +1,25 @@
 
 function getTaskTemplate(task) {
+    console.log(task.priority);
   return `
-     <div draggable="true" ondragstart="startDragging('${task.id}')" class="card"
-     onclick="openTaskPopUp('${task.id}')">
+    <div draggable="true" ondragstart="startDragging('${task.id}')" class="card"
+    onclick="openTaskPopUp('${task.id}')">
+
         <div  class="${task.category}">
         ${formatCategory(task.category)}
         </div>
+        
         <h4>${task.title}</h4>
+        
         <p>${task.description}</p>
-        <span>${task.priority}</span>
+
+        <p>Subtasks</p>
+        
+        <div class="card_footer">
+          <div>${getAssingnedContacts(task.assignedTo, false)}</div>
+          <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
+        </div>
+        
     </div>
     `;
 }
@@ -38,7 +49,7 @@ function getTaskDetailsTemplate(task) {
   
         <h2>${task.title}</h2>
   
-        <div class="description">${task.description}</div>
+        <p>${task.description}</p>
   
         <div class="dialog_row">
           <p>Due date:</p>
@@ -48,29 +59,26 @@ function getTaskDetailsTemplate(task) {
         <div class="dialog_row">
           <p>Priority:</p>
           <span>
-            ${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-            <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}">
+            <div>${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}</div>
+            <img class= "priority" src="../assets/icons/${task.priority}.svg" alt="${task.priority}">
           </span>
         </div>
   
         <div class="dialog_assigned">
           <p>Assigned To:</p>
-          <div class="contact">
-            <div class="contact_avatar">EM</div>
-            <span>${task.assignedTo}</span>
-          </div>
+           ${getAssingnedContacts(task.assignedTo)}
         </div>  
 
         <div class="dialog_subtasks">
           <p>Subtasks</p>
           <label>
             <input type="checkbox" checked>
-            Implement Recipe Recommendation
+            <div>Implement Recipe Recommendation</div>
           </label>
   
           <label>
             <input type="checkbox">
-            Start Page Layout
+            <div>Start Page Layout</div>
           </label>
         </div>
   

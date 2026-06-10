@@ -1,5 +1,4 @@
-let color = avatarColor("Emmanuel Mauer");
-let shortName = initials("Emmanuel Mauer");
+
 /**
  * Enthält alle Tasks, die aus Firebase geladen wurden.
  * @type {Array<Object>}
@@ -258,3 +257,26 @@ dialogTask.addEventListener('click', (event) => {
     }
 });
 
+
+function getAssingnedContacts(contacts, showName = true) {
+
+    let html = '';
+
+    if (!Array.isArray(contacts)) {
+        contacts = [contacts];
+    }
+
+    for (const name of contacts) {  
+    
+        html += `
+            <div class="contact_task">
+                <div class="contact_avatar"
+                    style="background-color:${avatarColor(name)}">
+                    ${initials(name)}
+                </div>
+                ${showName ? `<span>${name}</span>` : ''} 
+            </div>
+        `;
+    }
+    return html;
+}

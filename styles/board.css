@@ -80,13 +80,13 @@
 .task_steps{
     display: flex;
     justify-content: space-between;
-    gap: 24px;
+    /* width: 100%; */
+    gap:24px;
 }
 
 .to_do, .in_progress, .await_feedback, .done {
     display: flex;
     flex-direction: column;
-    /* width: 550px; */
 }
 
 .task_column {
@@ -158,6 +158,18 @@
     background-color: var(--color-quaternary);
 }
 
+.card_footer{
+    display: flex;
+    align-items: center;
+    
+}
+
+.icons_in_card img {
+   height: 20px; 
+}
+
+
+
 .empty_card {
     background-color: var(--color-primary) ;
     color: var(--color-tertiary);
@@ -170,7 +182,7 @@
 }
 
 .task_field_highlight {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(14, 96, 48, 0.1);
 } 
 
 /* Dialog */
@@ -208,8 +220,6 @@ body:has(dialog[open]){
     border: none;
     border-radius: 8px;
     padding: 4px 16px;
-    font-size: 16px;
-    font-weight: 400;
     width: fit-content;
 }
 
@@ -220,16 +230,6 @@ body:has(dialog[open]){
 
 .dialog_content img {
     height: 12px;
-}
-
-.description {
-    font-size: 16px;
-    font-weight: 400;
-}
-.dialog_content p, 
-.dialog_content span {
-    font-size: 18px;
-    font-weight: 400;
 }
 
 .dialog_header button {
@@ -255,8 +255,10 @@ body:has(dialog[open]){
     width: 120px;
 }
 
-
-.contact {
+.priority {
+ padding-left: 8px;
+}
+.contact_task {
     padding-top: 12px;
     display: flex;
     flex-direction: row;
@@ -266,24 +268,23 @@ body:has(dialog[open]){
 
 
 .contact_avatar {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: var(--primary-color);
     color: white;
-    font-size: px;
-    font-weight: 700;
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    align-items: center;
     letter-spacing: 1px;
+    flex-shrink: 0;
+    padding: 5px;
 }
+
+
 
 .dialog_subtasks{
     display: flex;
     flex-direction: column;
-    font-size: 20px;
     margin-bottom: 16px;
 }
 
@@ -291,6 +292,12 @@ body:has(dialog[open]){
   display: flex;
   gap: 8px;
 }
+
+label {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+} 
 
 .dialog_footer {
     display: flex;
