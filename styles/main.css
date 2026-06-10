@@ -1,28 +1,5 @@
-.hidden {
-  display: none !important;
-}
-
-/* Reset CSS */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-}
-
 /* Variables */
 :root {
-  --primary-color: #2a3647;
-  --secondary-color: #29abe2;
-  --background-color: #ffffff;
-  --text-color: #2a3647;
-  --hover-color: #a8a8a8;
-
   /* Global */
   --color-primary: #cdcdcd;
   --color-secondary: #29abe2;
@@ -74,10 +51,6 @@ body {
   src: url("../assets/fonts/Inter_18pt-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
-}
-
-body:has(dialog[open]) {
-  overflow: hidden;
 }
 
 /* Layout - Sidebar, Header & Content */
@@ -249,17 +222,17 @@ body:has(dialog[open]) {
 
 .header_main_help_link {
   font-size: 16px;
-  color: var(--hover-color);
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: bold;
   padding: 2px 6px;
-  border: 2px solid var(--hover-color);
+  border: 2px solid var(--color-primary);
   border-radius: 50%;
 }
 
 .header_main_help_link:hover {
-  color: var(--secondary-color);
-  border-color: var(--secondary-color);
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
   transition: opacity 0.2s ease;
 }
 
@@ -267,10 +240,10 @@ body:has(dialog[open]) {
   font-size: 24px;
   width: 56px;
   height: 56px;
-  border: 2px solid var(--text-color);
+  border: 2px solid var(--color-tertiary);
   border-radius: 50%;
   background-color: white;
-  color: var(--secondary-color);
+  color: var(--color-secondary);
   font-weight: bold;
   cursor: pointer;
 }
@@ -287,7 +260,7 @@ body:has(dialog[open]) {
   width: 170px;
   padding: 12px 0;
 
-  background-color: var(--primary-color);
+  background-color: var(--color-tertiary);
   border-radius: 20px 0 20px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 
@@ -298,13 +271,13 @@ body:has(dialog[open]) {
 
 .user_dropdown a {
   padding: 12px 24px;
-  color: var(--hover-color);
+  color: var(--color-primary);
   text-decoration: none;
   font-size: 16px;
 }
 
 .user_dropdown a:hover {
-  color: var(--secondary-color);
+  color: var(--color-secondary);
   background-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -422,64 +395,4 @@ body:has(dialog[open]) {
 .sidebar_link_active:hover {
   background-color: var(--sidebar-current-background);
   color: var(--sidebar-current-color);
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --sidebar-width: 0px;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .header_main {
-    left: 0;
-    width: 100%;
-  }
-
-  .content {
-    margin-left: 0;
-  }
-
-  .header_mobile_menu_button {
-    display: flex;
-  }
-
-  body.mobile_navigation_open {
-    overflow: hidden;
-  }
-
-  body.mobile_navigation_open .sidebar {
-    display: block;
-    width: clamp(220px, 76vw, 300px);
-    z-index: 30;
-  }
-
-  body.mobile_navigation_open::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: var(--backdrop);
-    z-index: 25;
-  }
-}
-
-@media (max-width: 855px) and (orientation: landscape) {
-  .header_main,
-  .sidebar,
-  .content,
-  .logInHeader,
-  .logInMain,
-  .logInFooter {
-    display: none !important;
-  }
-
-  .landscape_blocker {
-    display: flex;
-  }
-
-  body {
-    overflow: hidden;
-  }
 }
