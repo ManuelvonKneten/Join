@@ -5,7 +5,7 @@ function getTaskTemplate(task) {
     <div draggable="true" ondragstart="startDragging('${task.id}')" class="card"
     onclick="openTaskPopUp('${task.id}')">
 
-        <div  class="${task.category}">
+        <div class="${task.category} card_header">
         ${formatCategory(task.category)}
         </div>
         
@@ -13,10 +13,10 @@ function getTaskTemplate(task) {
         
         <p>${task.description}</p>
 
-        <p>Subtasks</p>
+        <span>Subtasks</span>
         
         <div class="card_footer">
-          <div>${getAssingnedContacts(task.assignedTo, false)}</div>
+          <div  class="assigned_contacts">${getAssingnedContacts(task.assignedTo, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
         </div>
         
