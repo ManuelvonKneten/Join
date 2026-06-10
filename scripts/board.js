@@ -192,9 +192,20 @@ function searchTask() {
     let filteredTasks = allTasks.filter(task => task.title.toLowerCase().includes(input) ||
     task.description.toLowerCase().includes(input)
  );
+ showNoResultsAlert(filteredTasks);
  renderBoard(filteredTasks);
 }
 
+
+function showNoResultsAlert(tasks) {
+    const alertRef = document.getElementById('no_results_alert');  
+
+    if (tasks.length === 0) {
+        alertRef.innerHTML = 'No results found!';
+        return;
+    }
+    alertRef.innerHTML = '';
+}
 
 /**
  * Zeigt für leere Board-Spalten eine Platzhalterkarte an.
@@ -279,4 +290,18 @@ function getAssingnedContacts(contacts, showName = true) {
         `;
     }
     return html;
+}
+
+async function openAddTaskPopUp() {
+    const response = await fetch('./add_task.html');
+    const html = await response.text();
+
+    document.getElementById('dialog_add_task_board').innerHTML = html;
+    document.getElementById('dialog_add_task_board').
+    showModal().focus();  
+
+}
+
+function closeAddTaskPopUp() {
+    document.getElementById('dialog_add_task_board').close();
 }

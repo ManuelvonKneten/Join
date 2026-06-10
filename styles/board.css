@@ -1,3 +1,8 @@
+
+/* body:has(dialog[open]) {
+    overflow: hidden;
+} */
+
 .board {
     display: flex;
     flex-direction: column;  
@@ -74,6 +79,11 @@
 
 .search button:hover{
     background-color: var(--color-secondary);
+}
+
+#no_results_alert {
+    color: red;
+    font-weight: 700;
 }
 
 /* Task Field */
@@ -204,7 +214,7 @@
 } 
 
 
-/* Dialog */
+/* Dialog Card */
 dialog{ 
     /* min oder max???? */
     width: 400px;
@@ -343,3 +353,16 @@ label {
     gap: 8px;
 }
 
+/* Dialog Add-Task  */
+
+#dialog_add_task_board { 
+    width: 1400px;
+    height: 1000px;
+    background-color: var(--main-backgro);
+    border: none;
+    border-radius: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

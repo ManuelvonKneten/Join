@@ -19,6 +19,8 @@
 
       <dialog id="dialogTask"></dialog>
 
+      <dialog id="dialog_add_task_board"></dialog>
+
       <section id="board" class="board">
         <div class="titel_and_search">
           <h2>Board</h2>
@@ -29,8 +31,8 @@
                 <img src="../assets/icons/search.svg" alt="" />
               </div>
             </div>
-
-            <button>
+            <span id="no_results_alert"></span>
+            <button onclick="openAddTaskPopUp()">
               Add task
               <img src="../assets/icons/add_plus.svg" alt="plus icos" />
             </button>
