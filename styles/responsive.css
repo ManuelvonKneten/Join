@@ -1,0 +1,59 @@
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .header_main {
+    left: 0;
+    width: 100%;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .header_mobile_menu_button {
+    display: flex;
+  }
+
+  body.mobile_navigation_open {
+    overflow: hidden;
+  }
+
+  body.mobile_navigation_open .sidebar {
+    display: block;
+    width: clamp(220px, 76vw, 300px);
+    z-index: 30;
+  }
+
+  body.mobile_navigation_open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--backdrop);
+    z-index: 25;
+  }
+}
+
+@media (max-width: 855px) and (orientation: landscape) {
+  .header_main,
+  .sidebar,
+  .content,
+  .logInHeader,
+  .logInMain,
+  .logInFooter {
+    display: none !important;
+  }
+
+  .landscape_blocker {
+    display: flex;
+  }
+
+  body {
+    overflow: hidden;
+  }
+}

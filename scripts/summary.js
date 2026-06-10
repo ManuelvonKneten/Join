@@ -6,7 +6,7 @@ function getGreetingText() {
   }
 
   if (currentHour >= 12 && currentHour < 18) {
-    return "Good day,";
+    return "Good afternoon,";
   }
 
   if (currentHour >= 18 && currentHour < 20) {

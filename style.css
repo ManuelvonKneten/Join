@@ -47,3 +47,28 @@
   }
 }
 
+.hidden {
+  display: none !important;
+}
+
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+}
+
+/* Dialog */
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+
+
