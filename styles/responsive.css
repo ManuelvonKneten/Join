@@ -1,3 +1,9 @@
+/* header*/
+.header_mobile {
+  display: none;
+}
+
+/* Bottom navigation */
 .bottom_nav {
   display: none;
 }
@@ -142,6 +148,7 @@
 }
 
 @media (max-width: 767px) {
+  /* bottom navigation */
   .bottom_nav {
     position: fixed;
     left: 0;
@@ -153,9 +160,37 @@
     justify-content: space-around;
     align-items: center;
     background-color: var(--sidebar-background);
-  
+  }
+
+  /* header */
+  .header_main{
+    display: flex;
+    justify-content: space-between;
   }
   .header_mobile_menu_button {
     display: none;
+  }
+
+  .header_main_title {
+    display: none;
+  }
+
+  .header_main_help_link {
+    display: none;
+  }
+
+  .header_mobile {
+    display: block;
+    width: 32px;
+    height: 32px;
+   /* background-image: url("../assets/img/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; */
+  }
+
+  .header_mobile img {
+    height: 39px;
+    width: 32px;
   }
 }
