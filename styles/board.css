@@ -352,7 +352,7 @@ label {
  .popup_header {
     display: flex;
     justify-content: space-between;
-    padding-top: 40px;
+    padding-top: 30px;
  }
 
 .popup_header button {
@@ -361,11 +361,13 @@ label {
 }
 
 .add_task_layout_popup {
+    min-width: 1000px;
+    min-height: 600px;
+    /* overflow-y: auto; */
     background-color: var(--main-background);
     border-radius: 20px;
-    padding-bottom: 30px;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
 } 

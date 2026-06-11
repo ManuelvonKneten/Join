@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/add_task.css" />
+    <link rel="stylesheet" href="../styles/responsive_add_task.css" />
     <link rel="stylesheet" href="../styles/summary.css" />
     <link rel="stylesheet" href="../styles/responsive.css" />
   </head>
@@ -44,7 +45,7 @@
           <div id="toDo" class="to_do">
             <div class="task_column">
               <h3>To do</h3>
-              <button>
+              <button onclick="openAddTaskPopUp()">
                 <img src="../assets/icons/add_plus_black.svg" alt="plus icon" />
               </button>
             </div>
@@ -64,7 +65,7 @@
           <div id="InProgress" class="in_progress">
             <div class="task_column">
               <h3>In progress</h3>
-              <button>
+              <button onclick="openAddTaskPopUp()">
                 <img src="../assets/icons/add_plus_black.svg" alt="plus icon" />
               </button>
             </div>
@@ -84,7 +85,7 @@
           <div id="awaitFeedback" class="await_feedback">
             <div class="task_column">
               <h3>Await feedback</h3>
-              <button>
+              <button onclick="openAddTaskPopUp()">
                 <img src="../assets/icons/add_plus_black.svg" alt="plus icon" />
               </button>
             </div>
