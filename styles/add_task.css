@@ -138,39 +138,6 @@
 }
 
 /* ── Dropdowns ── */
-.category_select_wrapper {
-    position: relative;
-}
-
-.category_arrow {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    flex-shrink: 0;
-    transition: transform 0.2s ease;
-}
-
-.add_task_select {
-    width: 100%;
-    height: 48px;
-    padding: 0 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: "Inter", sans-serif;
-    color: var(--color-tertiary);
-    background: white;
-    cursor: pointer;
-    appearance: none;
-}
-
-.add_task_select:hover,
-.add_task_select:focus {
-    border-color: var(--color-tertiary);
-    outline: none;
-}
 
 /* ── Assigned Dropdown ── */
 .assigned_dropdown {
@@ -242,7 +209,7 @@
 }
 
 .assigned_option:hover {
-    background-color: #f0f4ff;
+    background-color: var(--color-primary);
 }
 
 .assigned_option_active {
@@ -352,11 +319,7 @@
 
 .due_date_trigger:hover svg rect,
 .due_date_trigger:hover svg path {
-    stroke: var(--color-tertiary);
-}
-
-#addSubtaskIcon {
-    cursor: pointer;
+    stroke: var(--c
     pointer-events: auto;
 }
 
@@ -410,7 +373,6 @@
 
 .required_note {
     font-size: 14px;
-    color: var(--hover-color);
     margin-top: auto;
 }
 

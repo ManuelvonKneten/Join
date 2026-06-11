@@ -64,6 +64,22 @@ function setupAssignedDropdown() {
  *
  * @returns {void}
  */
+function toggleCategoryDropdown() {
+    const options = document.getElementById('categoryOptions');
+    const isHidden = options.classList.contains('hidden');
+    options.classList.toggle('hidden', !isHidden);
+    document.getElementById('categoryArrow').classList.toggle('rotated', isHidden);
+}
+
+function selectCategory(value, label, el) {
+    document.getElementById('taskCategory').value = value;
+    document.getElementById('categoryPlaceholder').textContent = label;
+    document.querySelectorAll('#categoryOptions .assigned_option').forEach(opt => opt.classList.remove('assigned_option_active'));
+    el.classList.add('assigned_option_active');
+    document.getElementById('categoryOptions').classList.add('hidden');
+    document.getElementById('categoryArrow').classList.remove('rotated');
+}
+
 function toggleAssignedDropdown() {
     const options = document.getElementById('assignedOptions');
     options.classList.contains('hidden') ? openAssignedDropdown() : closeAssignedDropdown();
@@ -147,6 +163,9 @@ function renderSelectedAvatars() {
             </div>
         `)
         .join('');
+
+    const placeholder = document.querySelector('.assigned_placeholder');
+    if (placeholder) placeholder.style.display = selectedContacts.length > 0 ? 'none' : '';
 }
 
 

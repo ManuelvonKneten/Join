@@ -100,16 +100,19 @@
             </div>
 
             <div class="add_task_field add_task_field--category">
-              <label class="add_task_label" for="taskCategory">Category <span class="required_star">*</span></label>
-              <div class="category_select_wrapper">
-                <select id="taskCategory" class="add_task_select">
-                  <option value="" disabled hidden>Select task category</option>
-                  <option value="technical">Technical Task</option>
-                  <option value="user_story">User Story</option>
-                </select>
-                <svg class="category_arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 1L6 7L11 1" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <label class="add_task_label">Category <span class="required_star">*</span></label>
+              <input type="hidden" id="taskCategory">
+              <div class="assigned_dropdown" id="categoryDropdown">
+                <div class="assigned_trigger" onclick="toggleCategoryDropdown()">
+                  <span class="assigned_placeholder" id="categoryPlaceholder">Select task category</span>
+                  <svg class="assigned_arrow" id="categoryArrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L6 7L11 1" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <ul class="assigned_options hidden" id="categoryOptions">
+                  <li class="assigned_option" onclick="selectCategory('technical', 'Technical Task', this)">Technical Task</li>
+                  <li class="assigned_option" onclick="selectCategory('user_story', 'User Story', this)">User Story</li>
+                </ul>
               </div>
             </div>
 
