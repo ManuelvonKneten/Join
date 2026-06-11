@@ -11,7 +11,7 @@
 .add_task_heading {
     font-size: 48px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--color-tertiary);
     margin: 0;
 }
 
@@ -55,7 +55,7 @@
 .add_task_label {
     font-size: 16px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--color-tertiary);
 }
 
 .add_task_textarea {
@@ -70,7 +70,7 @@
 }
 
 .add_task_textarea:focus {
-    border-color: var(--primary-color);
+    border-color: var(--color-tertiary);
     outline: none;
 }
 
@@ -91,7 +91,7 @@
     border-radius: 8px;
     font-size: 16px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--color-tertiary);
     background: white;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -138,23 +138,6 @@
 }
 
 /* ── Dropdowns ── */
-.add_task_select {
-    width: 100%;
-    height: 48px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: "Inter", sans-serif;
-    color: var(--primary-color);
-    background: white;
-    cursor: pointer;
-}
-
-.add_task_select:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
 
 /* ── Assigned Dropdown ── */
 .assigned_dropdown {
@@ -169,18 +152,21 @@
     padding: 0 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    color: var(--color-tertiary);
     background: white;
     cursor: pointer;
     user-select: none;
 }
 
 .assigned_trigger:hover {
-    border-color: var(--primary-color);
+    border-color: var(--color-tertiary);
 }
 
 .assigned_placeholder {
     font-size: 16px;
-    color: #aaa;
+    color: var(--color-tertiary);
 }
 
 .assigned_arrow {
@@ -223,16 +209,16 @@
 }
 
 .assigned_option:hover {
-    background-color: #f0f4ff;
+    background-color: var(--color-primary);
 }
 
 .assigned_option_active {
-    background-color: var(--primary-color);
+    background-color: var(--color-tertiary);
     color: white;
 }
 
 .assigned_option_active:hover {
-    background-color: var(--secondary-color, #3d5a80);
+    background-color: var(--color-secondary);
 }
 
 .assigned_option_avatar {
@@ -259,7 +245,7 @@
     cursor: pointer;
     pointer-events: none;
     flex-shrink: 0;
-    accent-color: var(--primary-color);
+    accent-color: var(--color-tertiary);
 }
 
 .assigned_option_active .assigned_option_checkbox {
@@ -300,7 +286,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 16px;
-    color: var(--primary-color);
+    color: var(--color-tertiary);
     padding: 6px 10px;
     border-radius: 6px;
     background-color: #f0f4ff;
@@ -333,11 +319,12 @@
 
 .due_date_trigger:hover svg rect,
 .due_date_trigger:hover svg path {
-    stroke: var(--primary-color);
+    stroke: var(--color-tertiary);
 }
 
 #addSubtaskIcon {
     cursor: pointer;
+    pointer-events: auto;
 }
 
 .add_task_subtask_remove {
@@ -352,7 +339,7 @@
 }
 
 .add_task_subtask_remove:hover {
-    color: var(--primary-color);
+    color: var(--color-tertiary);
 }
 
 /* ── Toast ── */
@@ -360,7 +347,7 @@
     position: fixed;
     bottom: 40px;
     right: 40px;
-    background-color: var(--primary-color);
+    background-color: var(--color-tertiary);
     color: white;
     font-size: 16px;
     font-weight: 700;
@@ -383,6 +370,16 @@
     background-color: rgb(255, 129, 144);
 }
 
+/* ── Required marker ── */
+.required_star {
+    color: #FF3D00;
+}
+
+.required_note {
+    font-size: 14px;
+    margin-top: auto;
+}
+
 /* ── Actions ── */
 .add_task_actions {
     display: flex;
@@ -390,7 +387,6 @@
     justify-content: flex-end;
     margin-top: auto;
     padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
 }
 
 .add_task_btn {
@@ -406,25 +402,25 @@
 
 .add_task_btn_clear {
     background-color: white;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    color: var(--color-tertiary);
+    border: 2px solid var(--color-tertiary);
     transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .add_task_btn_clear:hover {
-    border-color: var(--secondary-color);
-    color: var(--secondary-color);
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .add_task_btn_create {
-    background-color: var(--primary-color);
+    background-color: var(--color-tertiary);
     color: white;
     border: none;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .add_task_btn_create:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--color-secondary);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
