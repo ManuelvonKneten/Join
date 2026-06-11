@@ -25,6 +25,9 @@
   --sidebar-link-color: #cdcdcd;
   --sidebar-current-color: #ffffff;
 
+  /* used by add_task.css and contacts.css */
+  --hover-color: #a8a8a8;
+
   /* obligatory font-sizes*/
   --font-size-button: 16px;
   --font-size-page-title: clamp(36px, 4vw, 48px);
