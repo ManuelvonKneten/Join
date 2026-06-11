@@ -1,12 +1,5 @@
 
 /* Variables */
-:root {
-  --primary-color: #2a3647;
-  --secondary-color: #29abe2;
-  --background-color: #ffffff;
-  --text-color: #2a3647;
-  --hover-color: #a8a8a8;
-}
 
 .splashScreen {
   min-height: 100vh;
