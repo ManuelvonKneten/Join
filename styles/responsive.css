@@ -3,6 +3,10 @@
   display: none;
 }
 
+user_dropdown_mobile_help {
+  display: none;
+}
+
 /* Bottom navigation */
 .bottom_nav {
   display: none;
@@ -192,5 +196,12 @@
   .header_mobile img {
     height: 39px;
     width: 32px;
+  }
+
+  .user_dropdown_mobile_help {
+    display: block;
+    padding: 8px 16px;
+    color: var(--color-primary);
+    text-decoration: none;
   }
 }
