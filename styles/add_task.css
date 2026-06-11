@@ -319,7 +319,11 @@
 
 .due_date_trigger:hover svg rect,
 .due_date_trigger:hover svg path {
-    stroke: var(--c
+    stroke: var(--color-tertiary);
+}
+
+#addSubtaskIcon {
+    cursor: pointer;
     pointer-events: auto;
 }
 
