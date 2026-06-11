@@ -32,7 +32,7 @@ h1 {
     background-color: var(--main-background);
     border: 1px solid var(--color-tertiary);
     border-radius: 10px;
-}
+    }
 
 .search_field input {
     flex: 1;
@@ -362,7 +362,7 @@ label {
 
 .add_task_layout_popup {
     min-width: 1000px;
-    min-height: 600px;
+    min-height: 700px;
     /* overflow-y: auto; */
     background-color: var(--main-background);
     border-radius: 20px;

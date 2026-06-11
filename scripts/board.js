@@ -299,6 +299,8 @@ async function openAddTaskPopUp() {
 
     layout?.classList.add('add_task_layout_popup');
 
+    await initAddTask();
+
     dialog.showModal();
 }
 
