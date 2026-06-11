@@ -16,7 +16,7 @@ function getTaskTemplate(task) {
         <span>Subtasks</span>
         
         <div class="card_footer">
-          <div  class="assigned_contacts">${getAssingnedContacts(task.assignedTo, false)}</div>
+          <div  class="assigned_contacts">${renderAssingnedContacts(task.assignedTo, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
         </div>
         
@@ -66,7 +66,7 @@ function getTaskDetailsTemplate(task) {
   
         <div class="dialog_assigned">
           <p>Assigned To:</p>
-           ${getAssingnedContacts(task.assignedTo)}
+           ${renderAssingnedContacts(task.assignedTo)}
         </div>  
 
         <div class="dialog_subtasks">
@@ -93,5 +93,18 @@ function getTaskDetailsTemplate(task) {
         </div>
     </div>
   
+  `;
+}
+
+
+function getContactsAvatar(name, showName) {
+  return `
+     <div class="contact_task">
+                <div class="contact_avatar"
+                    style="background-color:${avatarColor(name)}">
+                    ${initials(name)}
+                </div>
+                ${showName ? `<span>${name}</span>` : ''} 
+            </div>
   `;
 }

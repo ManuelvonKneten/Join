@@ -1,8 +1,4 @@
 
-/* body:has(dialog[open]) {
-    overflow: hidden;
-} */
-
 .board {
     display: flex;
     flex-direction: column;  
@@ -227,9 +223,6 @@ dialog{
     transform: translate(-50%, -50%);
 }
 
-body:has(dialog[open]){
-    overflow: hidden;
-}
 
 .dialog_content {
     /* width: 90%; */

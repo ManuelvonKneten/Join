@@ -269,8 +269,7 @@ dialogTask.addEventListener('click', (event) => {
 });
 
 
-function getAssingnedContacts(contacts, showName = true) {
-
+function renderAssingnedContacts(contacts, showName = true) {
     let html = '';
 
     if (!Array.isArray(contacts)) {
@@ -278,30 +277,30 @@ function getAssingnedContacts(contacts, showName = true) {
     }
 
     for (const name of contacts) {  
-    
-        html += `
-            <div class="contact_task">
-                <div class="contact_avatar"
-                    style="background-color:${avatarColor(name)}">
-                    ${initials(name)}
-                </div>
-                ${showName ? `<span>${name}</span>` : ''} 
-            </div>
-        `;
+        html += getContactsAvatar(name, showName);
     }
     return html;
 }
+
 
 async function openAddTaskPopUp() {
     const response = await fetch('./add_task.html');
     const html = await response.text();
 
-    document.getElementById('dialog_add_task_board').innerHTML = html;
-    document.getElementById('dialog_add_task_board').
-    showModal().focus();  
+    const dialog = document.getElementById('dialog_add_task_board');
 
+    dialog.innerHTML = html;
+    dialog.focus();
 }
+
 
 function closeAddTaskPopUp() {
     document.getElementById('dialog_add_task_board').close();
 }
+
+
+dialog_add_task_board.addEventListener('click', (event) => {
+        if (event.target === dialog_add_task_board) {
+            dialog_add_task_board.close();
+        }
+});
