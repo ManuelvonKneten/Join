@@ -26,7 +26,6 @@
   --sidebar-current-color: #ffffff;
 
   /* obligatory font-sizes*/
-  --font-size-body: 16px;
   --font-size-button: 16px;
   --font-size-page-title: clamp(36px, 4vw, 48px);
 }

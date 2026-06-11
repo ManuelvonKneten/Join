@@ -11,6 +11,7 @@ async function includeHTML() {
   }
 
   setActiveSidebarLink();
+  setActiveBottomNavLink();
   setUserInitials();
   initUserDropdown();
   initMobileNavigation();
@@ -147,6 +148,19 @@ function setUserInitials() {
   if (!btn) return;
   const name = localStorage.getItem("currentUser") || "";
   btn.textContent = name ? initials(name) : "?";
+}
+
+function setActiveBottomNavLink() {
+  const currentPage = window.location.pathname.split("/").pop();
+  const navLinks = document.querySelectorAll(".bottom_nav_item");
+
+  navLinks.forEach((link) => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+
+    if (linkPage === currentPage) {
+      link.classList.add("bottom_nav_item_active");
+    }
+  });
 }
 
 includeHTML();

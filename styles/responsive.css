@@ -1,4 +1,45 @@
-@media (max-width: 1024px) {
+.bottom_nav {
+  display: none;
+}
+
+.bottom_nav_icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-color: #cdcdcd;
+
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+.bottom_nav_icon_summary {
+  mask-image: url("../assets/icons/summary.svg");
+  -webkit-mask-image: url("../assets/icons/summary.svg");
+}
+
+.bottom_nav_icon_add_task {
+  mask-image: url("../assets/icons/add_task.svg");
+  -webkit-mask-image: url("../assets/icons/add_task.svg");
+}
+
+.bottom_nav_icon_board {
+  mask-image: url("../assets/icons/board.svg");
+  -webkit-mask-image: url("../assets/icons/board.svg");
+}
+
+.bottom_nav_icon_contacts {
+  mask-image: url("../assets/icons/contacts.svg");
+  -webkit-mask-image: url("../assets/icons/contacts.svg");
+}
+
+/* tablet and mobile */
+
+@media (max-width: 1023px) {
   :root {
     --sidebar-width: 0px;
   }
@@ -55,5 +96,24 @@
 
   body {
     overflow: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  .bottom_nav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    height: var(--bottom-nav-height);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--sidebar-background);
+  
+  }
+  .header_mobile_menu_button {
+    display: none;
   }
 }
