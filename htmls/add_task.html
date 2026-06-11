@@ -27,7 +27,7 @@
 
           <div class="add_task_left">
             <div class="add_task_field">
-              <label class="add_task_label" for="taskTitle">Title</label>
+              <label class="add_task_label" for="taskTitle">Title <span class="required_star">*</span></label>
               <div class="inputField">
                 <input id="taskTitle" type="text" placeholder="Enter a title" required />
               </div>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="add_task_field">
-              <label class="add_task_label" for="taskDueDate">Due Date</label>
+              <label class="add_task_label" for="taskDueDate">Due Date <span class="required_star">*</span></label>
               <div class="inputField">
                 <input id="taskDueDate" type="text" placeholder="dd/mm/yyyy" maxlength="10" inputmode="numeric" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required />
                 <input id="taskDueDatePicker" type="date" class="due_date_picker_hidden" tabindex="-1" />
@@ -52,6 +52,7 @@
                 </button>
               </div>
             </div>
+            <span class="required_note"><span class="required_star">*</span> This field is required</span>
           </div>
 
           <div class="add_task_divider"></div>
@@ -99,12 +100,17 @@
             </div>
 
             <div class="add_task_field add_task_field--category">
-              <label class="add_task_label" for="taskCategory">Category</label>
-              <select id="taskCategory" class="add_task_select">
-                <option value="">Select task category</option>
-                <option value="technical">Technical Task</option>
-                <option value="user_story">User Story</option>
-              </select>
+              <label class="add_task_label" for="taskCategory">Category <span class="required_star">*</span></label>
+              <div class="category_select_wrapper">
+                <select id="taskCategory" class="add_task_select">
+                  <option value="" disabled hidden>Select task category</option>
+                  <option value="technical">Technical Task</option>
+                  <option value="user_story">User Story</option>
+                </select>
+                <svg class="category_arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L6 7L11 1" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
             </div>
 
             <div class="add_task_field add_task_field--subtasks">
