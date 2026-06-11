@@ -108,3 +108,14 @@ function getContactsAvatar(name, showName) {
             </div>
   `;
 }
+
+function getNewHTMLTag() {
+  return `
+        <div class="popup_header">
+            <h1 class="add_task_heading">Add Task</h1>
+            <button onclick="closeAddTaskPopUp()">
+            <img src="../assets/icons/close_icon.svg" alt="close icon">
+            </button>
+        </div>
+  `;
+}

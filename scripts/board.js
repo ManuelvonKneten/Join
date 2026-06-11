@@ -254,7 +254,6 @@ function openTaskPopUp(taskId) {
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getTaskDetailsTemplate(task);
     dialogTask.showModal(); 
-    dialogTask.focus();
 }
 
 
@@ -285,12 +284,22 @@ function renderAssingnedContacts(contacts, showName = true) {
 
 async function openAddTaskPopUp() {
     const response = await fetch('./add_task.html');
-    const html = await response.text();
+    let html = await response.text();
 
+    html = html.replace('<h1 class="add_task_heading">Add Task</h1>', getNewHTMLTag());
+
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+
+    const content = temp.querySelector('.add_task_layout');
+ 
     const dialog = document.getElementById('dialog_add_task_board');
+    dialog.innerHTML = content.outerHTML;
+    const layout = dialog.querySelector('.add_task_layout');
 
-    dialog.innerHTML = html;
-    dialog.focus();
+    layout?.classList.add('add_task_layout_popup');
+
+    dialog.showModal();
 }
 
 

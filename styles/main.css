@@ -31,7 +31,7 @@
   --font-size-page-title: clamp(36px, 4vw, 48px);
 }
 
-/* Fonts */
+Fonts
 @font-face {
   font-family: "Inter";
   src: url("../assets/fonts/Inter_18pt-Regular.ttf") format("truetype");
