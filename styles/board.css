@@ -1,3 +1,4 @@
+
 .board {
     display: flex;
     flex-direction: column;  
@@ -76,6 +77,11 @@
     background-color: var(--color-secondary);
 }
 
+#no_results_alert {
+    color: red;
+    font-weight: 700;
+}
+
 /* Task Field */
 .task_steps{
     display: flex;
@@ -125,7 +131,8 @@
  
 }
 /* Card */
-.card{
+.card {
+  
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -136,7 +143,7 @@
     cursor: pointer;
 }
 
-.card div {
+.card_header {
     color: white;
     border: none;
     border-radius: 8px;
@@ -146,11 +153,7 @@
     width: fit-content;
 }
 
-.card p {
-   color: var(--color-tertiary); 
-}
-
-.user_story{
+.user_story {
     background-color: var(--color-quinary);
 }
 
@@ -158,17 +161,38 @@
     background-color: var(--color-quaternary);
 }
 
+.card p {
+   opacity: 80%;
+}
+
 .card_footer{
+ width: 100%;
+ display: flex; 
+ align-items: center;
+ justify-content: space-between;
+
+}
+
+.card_footer img {
+    height: 20px;
+    width: 20px;
+}
+
+.assigned_contacts{
     display: flex;
-    align-items: center;
-    
 }
 
-.icons_in_card img {
-   height: 20px; 
+.assigned_contacts .contact_task {
+    margin-left: -10px;
 }
 
+.assigned_contacts .contact_avatar:first-child{
+    margin-left: 0;
+}
 
+.card_footer .contact_task {
+    padding-top: 0;
+}
 
 .empty_card {
     background-color: var(--color-primary) ;
@@ -185,7 +209,8 @@
     background-color: rgba(14, 96, 48, 0.1);
 } 
 
-/* Dialog */
+
+/* Dialog Card */
 dialog{ 
     /* min oder max???? */
     width: 400px;
@@ -198,9 +223,6 @@ dialog{
     transform: translate(-50%, -50%);
 }
 
-body:has(dialog[open]){
-    overflow: hidden;
-}
 
 .dialog_content {
     /* width: 90%; */
@@ -228,9 +250,6 @@ body:has(dialog[open]){
     font-weight: 700;
 }
 
-.dialog_content img {
-    height: 12px;
-}
 
 .dialog_header button {
     border: none;
@@ -268,16 +287,17 @@ body:has(dialog[open]){
 
 
 .contact_avatar {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    color: white;
     display: flex;
-    justify-content: center;
     align-items: center;
-    letter-spacing: 1px;
+    justify-content: center;
+    color: white;
+    font-size: clamp(10px, 1.8vw, 14px);
+    font-weight: 700;
     flex-shrink: 0;
-    padding: 5px;
+    letter-spacing: 0.5px;
 }
 
 
@@ -326,3 +346,16 @@ label {
     gap: 8px;
 }
 
+/* Dialog Add-Task  */
+
+#dialog_add_task_board { 
+    width: 1400px;
+    height: 1000px;
+    background-color: var(--main-backgro);
+    border: none;
+    border-radius: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
