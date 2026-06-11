@@ -27,3 +27,13 @@ function avatarColor(name) {
     for (const character of name) hash += character.charCodeAt(0);
     return AVATAR_COLORS[hash % AVATAR_COLORS.length];
 }
+
+/**
+ * Clears the current user session from localStorage and redirects to login.
+ *
+ * @returns {void}
+ */
+function clearLocalStorage() {
+    localStorage.removeItem('currentUser');
+    window.location.replace('/htmls/login.html');
+}
