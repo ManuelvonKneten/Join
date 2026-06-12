@@ -37,3 +37,4 @@ function clearLocalStorage() {
     localStorage.removeItem('currentUser');
     window.location.replace('/htmls/login.html');
 }
+
