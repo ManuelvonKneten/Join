@@ -206,7 +206,7 @@
 }
 
 
-.logInBox h2 {
+.logInBox h1 {
     font-weight: 700;
     font-size: 61px;
     margin: 0;
@@ -216,7 +216,7 @@
 }
 
 
-.logInBox h2::after {
+.logInBox h1::after {
     content: "";
     position: absolute;
     left: 50%;

@@ -20,7 +20,7 @@
     <main class="logInMain fadeMain">
         <div class="logInBox">
 
-            <h2>Sign up</h2>
+            <h1>Sign up</h1>
 
             <form action="#">
 
@@ -95,7 +95,7 @@
         <a href="/htmls/legal_notice.html">Legal Notice</a>
     </footer>
 
-    <div id="signupToast" class="signupToast">You Signed Up successfully</div>
+    <div id="signupToast" class="signupToast" role="status" aria-live="polite" aria-atomic="true">You Signed Up successfully</div>
 
     <!-- defer ist nötig: register.js greift beim Laden direkt auf DOM-Elemente zu (getElementById etc.) -->
     <script src="../scripts/firebase.js" defer></script>
