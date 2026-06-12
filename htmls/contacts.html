@@ -24,7 +24,7 @@
         <div class="contacts_left">
           <button class="btn_add_contact" onclick="openAddContact()">
             Add new contact
-            <img src="/assets/icons/person.png" alt="" />
+            <img src="/assets/icons/person.png" alt="" aria-hidden="true" />
           </button>
           <div id="contactList" class="contact_list"></div>
         </div>
@@ -35,8 +35,8 @@
             <h2 class="contacts_heading">Contacts</h2>
             <div class="contacts_divider_vertical"></div>
             <span class="contacts_subheading">Better with a team</span>
-            <button class="btn_back_to_contacts" onclick="closeContactDetail()">
-              <img src="/assets/icons/arrow-left.svg" alt="Back" />
+            <button class="btn_back_to_contacts" onclick="closeContactDetail()" aria-label="Zurück zur Kontaktliste">
+              <img src="/assets/icons/arrow-left.svg" alt="" aria-hidden="true" />
             </button>
           </div>
 
@@ -47,11 +47,11 @@
               <div class="crb_name_actions">
                 <h3 class="crb_name">Full Name</h3>
                 <div class="crb_actions">
-                  <button class="crb_btn" onclick="openEditContact(activeContact)">
-                    <img src="/assets/icons/edit.png" alt="" /> Edit
+                  <button class="crb_btn" onclick="openEditContact(activeContact)" aria-label="Kontakt bearbeiten">
+                    <img src="/assets/icons/edit.png" alt="" aria-hidden="true" /> Edit
                   </button>
-                  <button class="crb_btn" onclick="deleteContact()">
-                    <img src="/assets/icons/delete.png" alt="" /> Delete
+                  <button class="crb_btn" onclick="deleteContact()" aria-label="Kontakt löschen">
+                    <img src="/assets/icons/delete.png" alt="" aria-hidden="true" /> Delete
                   </button>
                 </div>
               </div>
@@ -79,39 +79,38 @@
     <div data-include="../templates/bottom_nav.html"></div>
 
     <div id="addContactOverlay" class="add_contact_overlay hidden" onclick="overlayClose(event)">
-      <div class="add_contact_modal">
+      <div class="add_contact_modal" role="dialog" aria-modal="true" aria-labelledby="addContactTitle">
 
         <div class="modal_left">
-          <img class="modal_logo" src="/assets/img/logo.png" alt="Join Logo" />
-          <h2 class="modal_heading">Add contact</h2>
+          <img class="modal_logo" src="/assets/img/logo.png" alt="" aria-hidden="true" />
+          <h2 class="modal_heading" id="addContactTitle">Add contact</h2>
           <p class="modal_sub">Tasks are better with a team!</p>
           <div class="modal_divider"></div>
         </div>
 
         <div class="modal_right">
-          <button class="modal_close_btn" onclick="closeAddContact()">&#x2715;</button>
+          <button class="modal_close_btn" onclick="closeAddContact()" aria-label="Dialog schließen">&#x2715;</button>
 
           <div class="modal_body">
 
             <div class="modal_avatar_col">
               <div class="modal_avatar">
-                <img src="/assets/icons/person.png" alt="" />
+                <img src="/assets/icons/person.png" alt="" aria-hidden="true" />
               </div>
             </div>
 
             <form class="modal_form_col" onsubmit="createContact(event)">
               <div class="inputField">
-                <input id="contactName" type="text" placeholder="Name" required />
-                <img class="inputIcon" src="/assets/icons/person.png" alt="" />
+                <input id="contactName" type="text" placeholder="Name" aria-label="Name" required />
+                <img class="inputIcon" src="/assets/icons/person.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
-                <input id="contactEmail" type="email" placeholder="Email" required />
-                <img class="inputIcon" src="/assets/icons/mail.png" alt="" />
+                <input id="contactEmail" type="email" placeholder="Email" aria-label="Email" required />
+                <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
-                <input id="contactPhone" type="tel" placeholder="Phone" />
-                <img class="inputIcon" src="/assets/icons/phone.png" alt="phone" />
-
+                <input id="contactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
+                <img class="inputIcon" src="/assets/icons/phone.png" alt="" aria-hidden="true" />
               </div>
 
               <div class="modal_actions">
@@ -131,38 +130,38 @@
     </div>
 
     <div id="editContactOverlay" class="add_contact_overlay hidden" onclick="overlayEditClose(event)">
-      <div class="add_contact_modal">
+      <div class="add_contact_modal" role="dialog" aria-modal="true" aria-labelledby="editContactTitle">
 
         <div class="modal_left">
-          <img class="modal_logo" src="/assets/img/logo.png" alt="Join Logo" />
-          <h2 class="modal_heading">Edit contact</h2>
+          <img class="modal_logo" src="/assets/img/logo.png" alt="" aria-hidden="true" />
+          <h2 class="modal_heading" id="editContactTitle">Edit contact</h2>
           <p class="modal_sub">Tasks are better with a team!</p>
           <div class="modal_divider"></div>
         </div>
 
         <div class="modal_right">
-          <button class="modal_close_btn" onclick="closeEditContact()">&#x2715;</button>
+          <button class="modal_close_btn" onclick="closeEditContact()" aria-label="Dialog schließen">&#x2715;</button>
 
           <div class="modal_body">
 
             <div class="modal_avatar_col">
               <div class="modal_avatar">
-                <img src="/assets/icons/person.png" alt="" />
+                <img src="/assets/icons/person.png" alt="" aria-hidden="true" />
               </div>
             </div>
 
             <form class="modal_form_col" onsubmit="saveContact(event)">
               <div class="inputField">
-                <input id="editContactName" type="text" placeholder="Name" required />
-                <img class="inputIcon" src="/assets/icons/person.png" alt="" />
+                <input id="editContactName" type="text" placeholder="Name" aria-label="Name" required />
+                <img class="inputIcon" src="/assets/icons/person.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
-                <input id="editContactEmail" type="email" placeholder="Email" required />
-                <img class="inputIcon" src="/assets/icons/mail.png" alt="" />
+                <input id="editContactEmail" type="email" placeholder="Email" aria-label="Email" required />
+                <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
-                <input id="editContactPhone" type="tel" placeholder="Phone" />
-                <img class="inputIcon" src="/assets/icons/phone.png" alt="phone" />
+                <input id="editContactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
+                <img class="inputIcon" src="/assets/icons/phone.png" alt="" aria-hidden="true" />
               </div>
 
               <div class="modal_actions">
@@ -188,7 +187,7 @@
       <img src="/assets/icons/more_vert.png" alt="More options" />
     </button>
 
-    <div id="contactToast" class="contactToast"></div>
+    <div id="contactToast" class="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>
 
     <script src="../scripts/firebase.js"></script>
     <script src="../scripts/utils.js"></script>

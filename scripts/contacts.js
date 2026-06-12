@@ -5,6 +5,11 @@ let activeContact = null;
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', loadContacts);
+document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (!document.getElementById('addContactOverlay').classList.contains('hidden')) closeAddContact();
+    else if (!document.getElementById('editContactOverlay').classList.contains('hidden')) closeEditContact();
+});
 
 
 /* ── CRUD ── */

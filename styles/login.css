@@ -238,8 +238,9 @@
 
 
 .loginInputWrapper input:focus {
-    border: 1px solid rgba(42, 54, 71, 1);;
-    outline: none;
+    border: 1px solid rgba(42, 54, 71, 1);
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
 }
 
 

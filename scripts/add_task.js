@@ -69,6 +69,7 @@ function toggleCategoryDropdown() {
     const isHidden = options.classList.contains('hidden');
     options.classList.toggle('hidden', !isHidden);
     document.getElementById('categoryArrow').classList.toggle('rotated', isHidden);
+    document.querySelector('#categoryDropdown .assigned_trigger').setAttribute('aria-expanded', String(isHidden));
 }
 
 function selectCategory(value, label, el) {
@@ -92,6 +93,7 @@ function toggleAssignedDropdown() {
 function setAssignedDropdownOpen(isOpen) {
     document.getElementById('assignedOptions').classList.toggle('hidden', !isOpen);
     document.getElementById('assignedArrow').classList.toggle('rotated', isOpen);
+    document.querySelector('#assignedDropdown .assigned_trigger').setAttribute('aria-expanded', String(isOpen));
 }
 
 /** @returns {void} */
@@ -120,6 +122,9 @@ function toggleContactSelection(event, contactId) {
     }
     renderAssignedOptions();
     renderSelectedAvatars();
+
+    const refocusItem = document.querySelector(`#assignedOptions [data-id="${contactId}"]`);
+    if (refocusItem) refocusItem.focus();
 }
 
 /**
@@ -140,12 +145,17 @@ function assignedOptionHTML(contact) {
     const isSelected = selectedContacts.some(c => c.id === contact.id);
     return `
         <li class="assigned_option ${isSelected ? 'assigned_option_active' : ''}"
-            onclick="toggleContactSelection(event, '${contact.id}')">
+            role="option"
+            aria-selected="${isSelected}"
+            tabindex="0"
+            data-id="${contact.id}"
+            onclick="toggleContactSelection(event, '${contact.id}')"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleContactSelection(event,'${contact.id}');}">
             <div class="assigned_option_avatar" style="background-color: ${avatarColor(contact.name)}">
                 ${initials(contact.name)}
             </div>
             <span class="assigned_option_name">${contact.name}</span>
-            <input type="checkbox" class="assigned_option_checkbox" ${isSelected ? 'checked' : ''} tabindex="-1">
+            <input type="checkbox" class="assigned_option_checkbox" ${isSelected ? 'checked' : ''} tabindex="-1" aria-hidden="true">
         </li>
     `;
 }
@@ -188,8 +198,12 @@ function setupPriorityButtons() {
  * @returns {void}
  */
 function onPriorityButtonClick(event) {
-    document.querySelectorAll('.add_task_prio_btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.add_task_prio_btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+    });
     event.currentTarget.classList.add('active');
+    event.currentTarget.setAttribute('aria-pressed', 'true');
     selectedPriority = event.currentTarget.dataset.priority;
 }
 
