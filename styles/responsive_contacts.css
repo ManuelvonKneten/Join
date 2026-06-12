@@ -1,5 +1,6 @@
-/* ── FAB (hidden on desktop) ── */
-.fab_add_contact {
+/* ── FABs (hidden on desktop) ── */
+.fab_add_contact,
+.fab_contact_more {
     display: none;
 }
 
@@ -122,6 +123,10 @@
         height: 24px;
     }
 
+    .crb_actions {
+        display: none;
+    }
+
     .crb_avatar {
         width: 64px;
         height: 64px;
@@ -137,8 +142,9 @@
         display: none;
     }
 
-    /* ── FAB ── */
-    .fab_add_contact {
+    /* ── FAB shared styles ── */
+    .fab_add_contact,
+    .fab_contact_more {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -156,15 +162,30 @@
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .fab_add_contact:hover {
+    .fab_add_contact:hover,
+    .fab_contact_more:hover {
         background-color: var(--secondary-color);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
     }
 
-    .fab_add_contact img {
+    .fab_add_contact img,
+    .fab_contact_more img {
         width: 34px;
         height: 34px;
         filter: brightness(0) invert(1);
+    }
+
+    /* more_vert FAB only visible when detail is open */
+    .fab_contact_more {
+        display: none;
+    }
+
+    body.contact_detail_open .fab_add_contact {
+        display: none;
+    }
+
+    body.contact_detail_open .fab_contact_more {
+        display: flex;
     }
 
     /* ── Modal: centered overlay ── */

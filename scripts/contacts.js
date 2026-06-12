@@ -147,6 +147,7 @@ async function deleteContact() {
         renderContacts();
         document.querySelector('.contacts_right_bottom').classList.add('hidden');
         document.querySelector('.contacts_layout').classList.remove('detail_open');
+        document.body.classList.remove('contact_detail_open');
         closeEditContact();
         showContactToast('Contact deleted');
     } catch {
@@ -232,12 +233,14 @@ function showContactDetail(contact) {
     document.getElementById('detailPhone').textContent = contact.phone || '—';
     document.querySelector('.contacts_right_bottom').classList.remove('hidden');
     document.querySelector('.contacts_layout').classList.add('detail_open');
+    document.body.classList.add('contact_detail_open');
 }
 
 function closeContactDetail() {
     document.querySelector('.contacts_layout').classList.remove('detail_open');
     document.querySelector('.contacts_right_bottom').classList.add('hidden');
     document.querySelectorAll('.contact_item').forEach(item => item.classList.remove('active'));
+    document.body.classList.remove('contact_detail_open');
     activeContact = null;
 }
 
