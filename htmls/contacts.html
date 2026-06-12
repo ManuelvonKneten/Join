@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../styles/login.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
     <link rel="stylesheet" href="../styles/responsive.css" />
+    <link rel="stylesheet" href="../styles/responsive_contacts.css" />
   </head>
   <body>
     <div data-include="../templates/sidebar.html"></div>
@@ -34,6 +35,9 @@
             <h2 class="contacts_heading">Contacts</h2>
             <div class="contacts_divider_vertical"></div>
             <span class="contacts_subheading">Better with a team</span>
+            <button class="btn_back_to_contacts" onclick="closeContactDetail()">
+              <img src="/assets/icons/arrow-left.svg" alt="Back" />
+            </button>
           </div>
 
           <div class="contacts_right_bottom hidden">
@@ -176,6 +180,10 @@
 
       </div>
     </div>
+
+    <button class="fab_add_contact" onclick="openAddContact()">
+      <img src="/assets/icons/more_vert.png" alt="More options" />
+    </button>
 
     <div id="contactToast" class="contactToast"></div>
 
