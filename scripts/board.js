@@ -5,6 +5,8 @@
  */
 let allTasks = [];
 
+let currentTaskId = null;
+
 /**
  * Speichert die ID des aktuell gezogenen Tasks für Drag & Drop.
  * @type {string}
@@ -315,3 +317,20 @@ dialog_add_task_board.addEventListener('click', (event) => {
             dialog_add_task_board.close();
         }
 });
+
+
+function openDeletePopup(taskId) {
+    currentTaskId = taskId;
+    document.getElementById('delete_task').classList.remove('d_none');
+}
+
+function closeDeleteTask() {
+    document.getElementById('delete_task').classList.add('d_none');   
+}
+
+function deleteTask(){
+    console.log('task gelöscht', currentTaskId);
+    
+    closeDeleteTask();
+    
+}
