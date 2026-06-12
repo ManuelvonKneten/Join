@@ -38,3 +38,19 @@ function clearLocalStorage() {
     window.location.replace('/htmls/login.html');
 }
 
+
+/* ── Toast ── */
+/**
+ * Zeigt eine Toast-Nachricht für 3 Sekunden an.
+ *
+ * @param {string} message
+ * @param {boolean} [isError=false] - true = roter Toast
+ * @returns {void}
+ */
+function showTaskToast(message, isError = false) {
+    const toastElement = document.getElementById('addTaskToast');
+    toastElement.textContent = message;
+    toastElement.classList.toggle('toast_error', isError);
+    toastElement.classList.add('show');
+    setTimeout(() => toastElement.classList.remove('show'), 3000);
+}
