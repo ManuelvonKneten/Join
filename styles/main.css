@@ -27,6 +27,7 @@
 
   /* used by add_task.css and contacts.css */
   --hover-color: #a8a8a8;
+  --primary-color: var(--sidebar-background);
 
   /* obligatory font-sizes*/
   --font-size-button: 16px;
