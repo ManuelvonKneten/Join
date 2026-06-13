@@ -6,7 +6,7 @@
   max-width: 1180px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   gap: 48px;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .summary_headline h1 {
-  font-size: 48px;
+  font-size: clamp(32px, 20vw, 48px);
   font-weight: 700;
   line-height: 1.2;
   margin: 0;
@@ -167,30 +167,40 @@
   }
 }
 @media (max-width: 767px) {
-.summary_headline {
-  flex-direction: column;
-  align-items: start;
-  gap: 4px;
-}
+  .summary_page {
+    min-height: calc(
+      100dvh - var(--header-height) - var(--bottom-nav-height, 80px) -
+        var(--content-padding-y) - var(--content-padding-y)
+    );
+    justify-content: center;
+    gap: clamp(16px, 3dvh, 28px);
+  }
 
-.summary_headline h1 {
-  font-size: 56px;
-  line-height: 0.8;
-}
+  .summary_headline {
+    flex-direction: column;
+    align-items: start;
+    gap: 4px;
+    padding-bottom: 24px;
+  }
 
-.summary_headline p{
-  border: none;
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 0.8;
-  padding: 0;
-}
+  .summary_headline h1 {
+    font-size: clamp(40px, 13vw, 56px);
+    line-height: 0.9;
+  }
 
-.seperating_line {
-  display: block;
-  width: 110px;
-  border-top: 3px solid var(--color-secondary) ;
-}
+  .summary_headline p {
+    border: none;
+    font-size: clamp(18px, 6vw, 24px);
+    font-weight: 400;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .seperating_line {
+    display: block;
+    width: 110px;
+    border-top: 3px solid var(--color-secondary);
+  }
 
   .summary_body {
     width: clamp(288px, 100%, 560px);
@@ -200,18 +210,18 @@
 
   .summary_overview {
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: clamp(14px, 4vw, 24px);
+    gap: clamp(8px, 2.5dvh, 16px);
   }
 
   .summary_card {
-    min-height: clamp(110px, 28vw, 168px);
+    min-height: clamp(88px, 16dvh, 118px);
     border-radius: clamp(20px, 6vw, 30px);
   }
 
   .summary_card_urgent {
-    min-height: clamp(110px, 28vw, 168px);
-    gap: clamp(16px, 5vw, 32px);
-    padding: 0 clamp(16px, 5vw, 32px);
+    min-height: clamp(88px, 16dvh, 118px);
+    gap: clamp(12px, 4vw, 24px);
+    padding: 0 clamp(12px, 4vw, 24px);
   }
 
   .summary_card_content {
