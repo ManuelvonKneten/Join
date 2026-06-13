@@ -1,0 +1,337 @@
+/* ── Add contact overlay ── */
+.add_contact_overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: overlayFadeIn 0.2s ease-in-out;
+}
+
+.add_contact_overlay.hidden {
+    display: none;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateX(80px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.add_contact_modal {
+    display: flex;
+    width: 860px;
+    max-width: 95vw;
+    min-height: 480px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-in-out;
+}
+
+
+/* Left column */
+.modal_left {
+    width: 40%;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 40px;
+    gap: 16px;
+}
+
+.modal_logo {
+    width: 80px;
+    height: auto;
+}
+
+.modal_heading {
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.modal_sub {
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.modal_divider {
+    width: 80px;
+    height: 3px;
+    background-color: var(--color-secondary);
+    border-radius: 2px;
+    margin-top: 8px;
+}
+
+
+/* Right column */
+.modal_right {
+    width: 60%;
+    background-color: #fff;
+    padding: 40px 48px 40px 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.modal_close_btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--primary-color);
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+}
+
+.modal_close_btn:hover {
+    color: var(--secondary-color);
+}
+
+
+/* Body: avatar + form */
+.modal_body {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.modal_avatar_col {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+.modal_avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_avatar img {
+    width: 44px;
+    height: 44px;
+    opacity: 0.5;
+}
+
+.modal_avatar_initials {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+/* Form fields */
+.modal_form_col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal_actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    justify-content: flex-end;
+}
+
+.btn_modal_cancel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn_modal_cancel:hover {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn_modal_create {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn_modal_create:hover {
+    background-color: var(--secondary-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn_modal_create:disabled {
+    background-color: var(--hover-color);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* ── Tablet (768px – 1023px) ── */
+@media (max-width: 1023px) {
+    .add_contact_modal {
+        width: 92vw;
+    }
+}
+
+
+/* ── Mobile (≤ 767px) ── */
+@media (max-width: 767px) {
+
+    /* ── Modal: centered overlay ── */
+    .add_contact_overlay {
+        align-items: center;
+        padding: 16px;
+    }
+
+    .add_contact_modal {
+        width: 100%;
+        max-width: 360px;
+        height: min(600px, calc(100vh - 32px));
+        min-height: auto;
+        overflow-y: auto;
+        border-radius: 20px;
+        flex-direction: column;
+    }
+
+    /* ── Add & Edit modal: shared blue top bar / white bottom layout ── */
+
+    /* Top blue bar */
+    #addContactOverlay .modal_left,
+    #editContactOverlay .modal_left {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 28px 24px 40px;
+        gap: 8px;
+    }
+
+    #addContactOverlay .modal_logo,
+    #editContactOverlay .modal_logo {
+        display: none;
+    }
+
+    #addContactOverlay .modal_heading,
+    #editContactOverlay .modal_heading {
+        font-size: 30px;
+    }
+
+    #addContactOverlay .modal_sub,
+    #editContactOverlay .modal_sub {
+        font-size: 16px;
+    }
+
+    /* White bottom part */
+    #addContactOverlay .modal_right,
+    #editContactOverlay .modal_right {
+        flex: 1;
+        width: 100%;
+        padding: 64px 24px 32px;
+        border-radius: 0;
+        align-items: center;
+    }
+
+    #addContactOverlay .modal_body,
+    #editContactOverlay .modal_body {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        position: static;
+    }
+
+    /* Person icon centered on the color seam between top and bottom */
+    #addContactOverlay .modal_avatar_col,
+    #editContactOverlay .modal_avatar_col {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding-top: 0;
+        z-index: 2;
+    }
+
+    #addContactOverlay .modal_avatar,
+    #editContactOverlay .modal_avatar {
+        border: 4px solid #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Close button sits on the blue top bar */
+    #addContactOverlay .modal_close_btn,
+    #editContactOverlay .modal_close_btn {
+        top: -52px;
+        right: 16px;
+        color: #fff;
+    }
+
+    /* Add modal: only the Create contact button */
+    #addContactOverlay .modal_actions {
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    #addContactOverlay .btn_modal_cancel {
+        display: none;
+    }
+
+    #addContactOverlay .btn_modal_create {
+        justify-content: center;
+        padding: 14px 24px;
+    }
+
+    /* Edit modal: Delete and Save side by side */
+    #editContactOverlay .modal_actions {
+        flex-direction: row;
+        justify-content: stretch;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    #editContactOverlay .btn_modal_cancel,
+    #editContactOverlay .btn_modal_create {
+        flex: 1;
+        justify-content: center;
+        padding: 14px 12px;
+    }
+}

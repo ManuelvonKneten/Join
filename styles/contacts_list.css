@@ -1,0 +1,96 @@
+/* ── Contact list ── */
+.contact_list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+}
+
+.no_contacts {
+    font-size: 14px;
+    color: var(--hover-color);
+    padding: 8px 0;
+}
+
+.contact_group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.contact_group_letter {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    padding: 4px 0;
+    padding-left: 12px;
+}
+
+.contact_group_divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin-bottom: 4px;
+}
+
+.contact_item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.contact_item:hover {
+    background-color: #f0f4ff;
+}
+
+.contact_item.active {
+    background-color: var(--primary-color);
+    border-radius: 8px;
+}
+
+.contact_item.active .contact_name,
+.contact_item.active .contact_email {
+    color: white;
+}
+
+.contact_avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: clamp(10px, 1.8vw, 14px);
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.contact_info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.contact_name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact_email {
+    font-size: 13px;
+    color: var(--secondary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

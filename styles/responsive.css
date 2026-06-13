@@ -162,10 +162,6 @@ user_dropdown_mobile_help {
 }
 
 @media (max-width: 767px) {
-  :root {
-    --bottom-nav-height: 80px;
-  }
-
   /* bottom navigation */
   .bottom_nav {
     position: fixed;
@@ -222,8 +218,9 @@ user_dropdown_mobile_help {
     color: var(--color-primary);
     text-decoration: none;
   }
-}
 
-.content {
-  height: calc(100dvh - 176px);
+  .content {
+    min-height: calc(100dvh - var(--header-height) - var(--bottom-nav-height));
+    padding-bottom: calc(var(--bottom-nav-height) + var(--content-padding-y));
+  }
 }
