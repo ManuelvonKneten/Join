@@ -223,3 +223,7 @@ user_dropdown_mobile_help {
     text-decoration: none;
   }
 }
+
+.content {
+  height: calc(100dvh - 176px);
+}
