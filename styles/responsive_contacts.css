@@ -52,16 +52,11 @@
 /* ── Mobile (≤ 767px) ── */
 @media (max-width: 767px) {
 
-    /* Page padding for bottom nav */
-    .content {
-        padding-bottom: calc(var(--bottom-nav-height, 80px) + 16px);
-    }
-
     /* ── Layout: full-screen panel switching ── */
     .contacts_layout {
         flex-direction: column;
         height: auto;
-        padding: 16px 16px calc(var(--bottom-nav-height, 80px) + 24px);
+        padding: 16px 16px 24px;
         gap: 0;
     }
 
