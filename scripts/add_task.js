@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', initAddTask);
  * @returns {Promise<void>}
  */
 async function initAddTask() {
+    if (!document.getElementById('assignedOptions')) return;
+
     await loadAvailableContacts();
     setupPriorityButtons();
     setupSubtaskInput();
@@ -134,7 +136,7 @@ function toggleContactSelection(event, contactId) {
  */
 function renderAssignedOptions() {
     document.getElementById('assignedOptions').innerHTML =
-        availableContacts.map(contact => assignedOptionHTML(contact)).join('');
+    availableContacts.map(contact => assignedOptionHTML(contact)).join('');
 }
 
 /**
@@ -326,7 +328,7 @@ function getTaskFormData() {
         assignedTo: selectedContacts.map(c => c.name),
         category: document.getElementById('taskCategory').value,
         subtasks: taskSubtasks,
-        status: 'todo'
+        status: window.currentTaskStatus || 'todo'
     };
 }
 

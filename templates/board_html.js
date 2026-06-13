@@ -82,7 +82,7 @@ function getTaskDetailsTemplate(task) {
         </div>
   
         <div class="dialog_footer">
-          <button>
+          <button onclick="openDeletePopup('${task.id}')">
              <img src="../assets/icons/delete.png" alt="delete icon">Delete
           </button>
   

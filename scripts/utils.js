@@ -12,6 +12,9 @@ const AVATAR_COLORS = [
  * @returns {string}
  */
 function initials(name) {
+    
+    if (typeof name !== "string") return ""; 
+
     return name.trim().split(/\s+/).map(word => word[0].toUpperCase()).join('');
 }
 
@@ -23,6 +26,9 @@ function initials(name) {
  * @returns {string} Hex-Farbwert
  */
 function avatarColor(name) {
+
+    if (typeof name !== "string") name = "";
+
     let hash = 0;
     for (const character of name) hash += character.charCodeAt(0);
     return AVATAR_COLORS[hash % AVATAR_COLORS.length];

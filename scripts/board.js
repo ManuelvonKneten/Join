@@ -1,4 +1,3 @@
-
 /**
  * Enthält alle Tasks, die aus Firebase geladen wurden.
  * @type {Array<Object>}
@@ -6,7 +5,6 @@
 
 let allTasks = [];
 let currentTaskId = null;
-
 
 
 /**
@@ -52,7 +50,6 @@ async function loadTasks() {
     } catch (error) {
         console.error('Tasks could not be loaded!', error);
     }
-
 }
 
 /**
@@ -286,7 +283,7 @@ function renderAssingnedContacts(contacts, showName = true) {
 }
 
 
-async function openAddTaskPopUp() {
+async function openAddTaskPopUp(status = 'todo') {
     const response = await fetch('./add_task.html');
     let html = await response.text();
 
@@ -302,9 +299,9 @@ async function openAddTaskPopUp() {
     const layout = dialog.querySelector('.add_task_layout');
 
     layout?.classList.add('add_task_layout_popup');
-
+    
+    window.currentTaskStatus = status;
     await initAddTask();
-
     dialog.showModal();
 }
 
@@ -321,3 +318,41 @@ dialog_add_task_board.addEventListener('click', (event) => {
 });
 
 
+function openDeletePopup(taskId) {
+  
+    
+    currentTaskId = taskId;
+    document.getElementById('delete_task').showModal();
+}
+
+
+function closeDeleteTask() {
+    document.getElementById('delete_task').close();
+}
+
+
+async function deleteTask() {
+    await deleteFromDB(`tasks/${currentTaskId}`);
+
+    allTasks = allTasks.filter(task => task.id !== currentTaskId);
+    
+    renderBoard();
+    showTaskToast('Task deleted successfully');
+
+    document.getElementById('delete_task').close();
+    closeTaskPopUp();
+}
+
+function enableDragEffect() {
+    const tasks = document.querySelectorAll(`.task`);
+
+    for (const task of tasks) {
+        task.addEventListener('dragstart', () => {
+            task.classList.add('dragging');
+        });
+
+        task.addEventListener('dragend', () => {
+            task.classList.remove('dragging') 
+        });
+    }
+}

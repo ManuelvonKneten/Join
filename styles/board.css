@@ -131,7 +131,6 @@ h1 {
 }
 /* Card */
 .card {
-  
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -139,8 +138,15 @@ h1 {
     border-radius: 10px;
     padding: 24px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
+    cursor: grab;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.card.dragging {
+    transform: rotate(3deg) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+} 
 
 .card_header {
     color: white;
@@ -279,6 +285,7 @@ h1 {
 .priority {
  padding-left: 8px;
 }
+
 .contact_task {
     padding-top: 12px;
     display: flex;
@@ -348,11 +355,8 @@ label {
 }
 
 .delete_task {
-    display: flex;
-    flex-direction: column;
     background-color: var(--main-background);
     width: 300px;
-    gap: 8px;
     border: none;
     border-radius: 20px;
     padding: 24px;
@@ -399,10 +403,9 @@ label {
 .add_task_layout_popup {
     width: 1000px;
     max-width: 90vw;
-
     min-height: 700px;
     max-height: 90vh;
-    
+
     overflow-y: auto;
     background-color: var(--main-background);
     border-radius: 20px;
