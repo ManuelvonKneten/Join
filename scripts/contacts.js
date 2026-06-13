@@ -288,6 +288,11 @@ function openEditContact(contact) {
     document.getElementById('editContactName').value = contact.name || '';
     document.getElementById('editContactEmail').value = contact.email || '';
     document.getElementById('editContactPhone').value = contact.phone || '';
+
+    const avatarElement = document.getElementById('editContactAvatar');
+    avatarElement.textContent = contact.name ? initials(contact.name) : '';
+    avatarElement.style.backgroundColor = contact.name ? avatarColor(contact.name) : '';
+
     document.getElementById('editContactOverlay').classList.remove('hidden');
 }
 

@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="../styles/summary.css" />
     <link rel="stylesheet" href="../styles/login.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
+    <link rel="stylesheet" href="../styles/contacts_list.css" />
+    <link rel="stylesheet" href="../styles/contacts_modal.css" />
     <link rel="stylesheet" href="../styles/responsive.css" />
-    <link rel="stylesheet" href="../styles/responsive_contacts.css" />
   </head>
   <body>
     <div data-include="../templates/sidebar.html"></div>
@@ -145,9 +146,7 @@
           <div class="modal_body">
 
             <div class="modal_avatar_col">
-              <div class="modal_avatar">
-                <img src="/assets/icons/person.png" alt="" aria-hidden="true" />
-              </div>
+              <div class="modal_avatar modal_avatar_initials" id="editContactAvatar"></div>
             </div>
 
             <form class="modal_form_col" onsubmit="saveContact(event)">
