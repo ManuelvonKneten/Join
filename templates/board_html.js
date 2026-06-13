@@ -1,6 +1,5 @@
 
 function getTaskTemplate(task) {
-    console.log(task.priority);
   return `
     <div draggable="true" ondragstart="startDragging('${task.id}')" class="card"
     onclick="openTaskPopUp('${task.id}')">
@@ -83,11 +82,11 @@ function getTaskDetailsTemplate(task) {
         </div>
   
         <div class="dialog_footer">
-          <button onclick="openDeletePopup('${task.id}')">
+          <button>
              <img src="../assets/icons/delete.png" alt="delete icon">Delete
           </button>
   
-          <button onclick="editTask('${task.id}')">
+          <button>
              <img class="edit_icon" src="../assets/icons/edit.png" alt="edit icon">Edit
           </button>
         </div>

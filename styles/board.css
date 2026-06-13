@@ -327,36 +327,59 @@ label {
 .dialog_footer button {
     border: none;
     background: none;
-}
-.edit_icon{
-    border-left: 1px solid var(--color-tertiary);
-    opacity: 60%;
-    padding-left: 8px;
-}
-
-.dialog_footer img {
-    height: 20px;
-}
-
-.dialog_footer button {
     display: flex;
     align-items: center;
     cursor: pointer;
     gap: 8px;
 }
 
-.delete_task {
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.dialog_footer button:hover{
+    color: var(--color-secondary);
 }
 
-.delete_task_content {
-    background-color: aqua;
-    padding: 24px;
-    border-radius: 20px;
+.dialog_footer img {
+    height: 20px;
+}
+
+.edit_icon{
+    border-left: 1px solid var(--color-tertiary);
+    opacity: 60%;
+    padding-left: 8px;
+}
+
+.delete_task {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-background);
     width: 300px;
+    gap: 8px;
+    border: none;
+    border-radius: 20px;
+    padding: 24px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.delete_buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    width: 100%;;
+}
+
+.delete_buttons button {
+    background-color: var(--color-tertiary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.delete_buttons button:hover{
+    background-color: var(--color-secondary);
 }
 
 

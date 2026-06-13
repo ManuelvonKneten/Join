@@ -1,9 +1,11 @@
-let currentTaskId = null;
-**
+
+/**
  * Enthält alle Tasks, die aus Firebase geladen wurden.
  * @type {Array<Object>}
  */
+
 let allTasks = [];
+let currentTaskId = null;
 
 
 
@@ -50,8 +52,8 @@ async function loadTasks() {
     } catch (error) {
         console.error('Tasks could not be loaded!', error);
     }
-}
 
+}
 
 /**
  * Leert alle Board-Spalten und rendert anschließend alle Tasks neu.
@@ -319,20 +321,3 @@ dialog_add_task_board.addEventListener('click', (event) => {
 });
 
 
-
-function openDeletePopup(taskId) {
-    currentTaskId = taskId;
-    document.getElementById('delete_task').showModal();
-}
-
-function closeDeleteTask() {
-    document.getElementById('delete_task').close();   
-}
-
-function deleteTask(){
-    console.log('task gelöscht', currentTaskId);
-    showTaskToast('Task deleted successfully');
-    
-    closeDeleteTask();
-    
-}
