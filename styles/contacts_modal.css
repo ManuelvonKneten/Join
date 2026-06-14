@@ -25,6 +25,7 @@
 }
 
 .add_contact_modal {
+    position: relative;
     display: flex;
     width: 860px;
     max-width: 95vw;
@@ -164,7 +165,7 @@
     gap: 8px;
     background-color: white;
     color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 8px;
     padding: 12px 24px;
     font-size: 16px;
@@ -254,7 +255,7 @@
 
     #addContactOverlay .modal_heading,
     #editContactOverlay .modal_heading {
-        font-size: 30px;
+        font-size: 40px;
     }
 
     #addContactOverlay .modal_sub,
@@ -297,10 +298,10 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* Close button sits on the blue top bar */
+    /* Close button: top right corner inside the blue top bar */
     #addContactOverlay .modal_close_btn,
     #editContactOverlay .modal_close_btn {
-        top: -52px;
+        top: 16px;
         right: 16px;
         color: #fff;
     }
@@ -323,15 +324,15 @@
     /* Edit modal: Delete and Save side by side */
     #editContactOverlay .modal_actions {
         flex-direction: row;
-        justify-content: stretch;
+        justify-content: center;
         gap: 12px;
         margin-top: 8px;
     }
 
     #editContactOverlay .btn_modal_cancel,
     #editContactOverlay .btn_modal_create {
-        flex: 1;
+        flex: 0 0 auto;
         justify-content: center;
-        padding: 14px 12px;
+        padding: 12px 24px;
     }
 }
