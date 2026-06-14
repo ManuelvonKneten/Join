@@ -343,16 +343,52 @@ async function deleteTask() {
     closeTaskPopUp();
 }
 
+
 function enableDragEffect() {
-    const tasks = document.querySelectorAll(`.task`);
+    const container = document.getElementById(`taskContainer`);
 
-    for (const task of tasks) {
-        task.addEventListener('dragstart', () => {
-            task.classList.add('dragging');
-        });
+    container. addEventListener('dragstart', (event) => {
+        if (event.target.classList.contains('task')) {
+            event.target.classList.add('dragging');
+        }
+    });
 
-        task.addEventListener('dragend', () => {
-            task.classList.remove('dragging') 
-        });
-    }
+    container.addEventListener('dragend', (event) => {
+        if (event.target.classList.contains('task')) {
+            event.target.classList.remove('dragging');
+        }
+    });
+}
+
+function startDragEffect(event) {
+    
+    event.currentTarget.classList.add('dragging');
+}
+
+function endDragEffect(event) {
+    event.currentTarget.classList.remove('dragging');
+}
+
+
+function openEditTaskPopup(taskId) {
+    const task = allTasks.find(t => t.id === taskId);
+
+    const dialogTask = document.getElementById('dialogTask');
+    dialogTask.innerHTML = getEditTaskTemplate(task);
+    dialogTask.showModal();
+}
+
+
+
+function saveTaskEdit(taskId) {
+    const task = allTasks.find(t => t.id === taskId);
+
+    task.title = document.getElementById("editTitle").value;
+    task.description = document.getElementById("editDescription").value;
+    task.dueDate = document.getElementById("editDueDate").value;
+    task.priority = document.getElementById("editPriority").value;
+    
+    closeTaskPopUp();
+
+    renderTask(task);
 }

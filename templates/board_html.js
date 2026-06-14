@@ -1,8 +1,11 @@
-
 function getTaskTemplate(task) {
   return `
-    <div draggable="true" ondragstart="startDragging('${task.id}')" class="card"
-    onclick="openTaskPopUp('${task.id}')">
+    <div  id="taskContainer">
+      <div draggable="true"
+      ondragstart="startDragEffect(event); startDragging('${task.id}')"
+      ondragend="endDragEffect(event)"
+      onclick="openTaskPopUp('${task.id}')"
+      class="card">
 
         <div class="${task.category} card_header">
         ${formatCategory(task.category)}
@@ -17,8 +20,8 @@ function getTaskTemplate(task) {
         <div class="card_footer">
           <div  class="assigned_contacts">${renderAssingnedContacts(task.assignedTo, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
-        </div>
-        
+        </div> 
+      </div>
     </div>
     `;
 }
@@ -72,12 +75,12 @@ function getTaskDetailsTemplate(task) {
           <p>Subtasks</p>
           <label>
             <input type="checkbox" checked>
-            <div>Implement Recipe Recommendation</div>
+            <div></div>
           </label>
   
           <label>
             <input type="checkbox">
-            <div>Start Page Layout</div>
+            <div></div>
           </label>
         </div>
   
@@ -86,7 +89,7 @@ function getTaskDetailsTemplate(task) {
              <img src="../assets/icons/delete.png" alt="delete icon">Delete
           </button>
   
-          <button>
+          <button onclick="openEditTaskPopup('${task.id}')">
              <img class="edit_icon" src="../assets/icons/edit.png" alt="edit icon">Edit
           </button>
         </div>
@@ -103,10 +106,11 @@ function getContactsAvatar(name, showName) {
                     style="background-color:${avatarColor(name)}">
                     ${initials(name)}
                 </div>
-                ${showName ? `<span>${name}</span>` : ''} 
+                ${showName ? `<span>${name}</span>` : ""} 
             </div>
   `;
 }
+
 
 function getNewHTMLTag() {
   return `
@@ -116,5 +120,53 @@ function getNewHTMLTag() {
             <img src="../assets/icons/close_icon.svg" alt="close icon">
             </button>
         </div>
+  `;
+}
+
+
+function getEditTaskTemplate(task) {
+  return `
+    <div class="dialog_content">
+
+      <div class="dialog_header">
+        <h2>Edit Task</h2>
+        <button onclick="closeTaskPopUp()">
+          <img src="../assets/icons/close_icon.svg" alt="close icon">
+        </button>
+      </div>
+
+      <label>
+        Title
+        <input id="editTitle" value="${task.title}">
+      </label>
+
+      <label>
+        Description
+        <textarea id="editDescription">${task.description}</textarea>
+      </label>
+
+      <label>
+        Due Date
+        <input type="date" id="editDueDate" value="${task.dueDate}">
+      </label>
+
+
+      <label>
+        Priority
+        <select id="editPriority">
+          <option value="low" ${task.priority === "low" ? "selected" : ""}>Low</option>
+          <option value="medium" ${task.priority === "medium" ? "selected" : ""}>Medium</option>
+          <option value="high" ${task.priority === "high" ? "selected" : ""}>High</option>
+        </select>
+      </label>
+
+   
+      <div class="dialog_footer">
+        <button onclick="saveTaskEdit('${task.id}')">
+          Save
+        </button>
+      </div>
+
+    </div>
   `;
 }
