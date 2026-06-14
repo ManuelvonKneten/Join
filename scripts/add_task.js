@@ -339,7 +339,13 @@ function getTaskFormData() {
  * @returns {void}
  */
 function onTaskCreated() {
-    window.location.href = '/htmls/board.html';
+    const notice = document.getElementById('taskAddedNotice');
+    if (!notice) {
+        window.location.href = '/htmls/board.html';
+        return;
+    }
+    notice.classList.add('show');
+    setTimeout(() => { window.location.href = '/htmls/board.html'; }, 1200);
 }
 
 
