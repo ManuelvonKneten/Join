@@ -54,13 +54,31 @@
 
 .add_task_label {
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--color-tertiary);
+}
+
+.add_task_label[for="taskTitle"],
+.add_task_label[for="taskDescription"],
+.add_task_label[for="taskDueDate"] {
+    color: #000000;
+}
+
+/* Title & Due Date inputs */
+.add_task_left .inputField input {
+    height: 40px;
+    font-size: 16px;
+}
+
+/* Assigned to trigger */
+#assignedDropdown .assigned_trigger {
+    height: 40px;
+    font-size: 16px;
 }
 
 .add_task_textarea {
     width: 100%;
-    height: 134px;
+    height: 90px;
     padding: 12px 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -76,6 +94,10 @@
 }
 
 /* ── Priority buttons ── */
+.add_task_right .add_task_field:first-child {
+    margin-top: 16px;
+}
+
 .add_task_prio_btns {
     display: flex;
     gap: 12px;
@@ -88,7 +110,7 @@
     justify-content: center;
     gap: 8px;
     padding: 13px 10px;
-    border: 2px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 700;
@@ -404,7 +426,7 @@
 .add_task_btn_clear {
     background-color: white;
     color: var(--color-tertiary);
-    border: 2px solid var(--color-tertiary);
+    border: 1px solid var(--color-tertiary);
     transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -474,12 +496,13 @@
     }
 
     .add_task_field--category,
-    .add_task_field--subtasks {
+    .add_task_field--subtasks,
+    .required_note {
         display: none;
     }
 
     .add_task_heading {
-        font-size: 32px;
+        font-size: 46px;
     }
 
     .add_task_label {
@@ -501,11 +524,12 @@
 
     .add_task_actions {
         flex-direction: row;
+        gap: 21px;
     }
 
     .add_task_btn {
         justify-content: center;
-        flex: 1;
+        flex: 0 0 auto;
         font-size: 14px;
         padding: 11px 16px;
     }
