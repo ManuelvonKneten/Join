@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/login.css">
-    <link rel="stylesheet" href="../styles/responsive.css">
 </head>
 <body class="logIn">
 
@@ -96,6 +95,10 @@
     </footer>
 
     <div id="signupToast" class="signupToast" role="status" aria-live="polite" aria-atomic="true">You Signed Up successfully</div>
+
+    <div class="landscape_blocker">
+        <p>Please rotate your device.</p>
+    </div>
 
     <!-- defer ist nötig: register.js greift beim Laden direkt auf DOM-Elemente zu (getElementById etc.) -->
     <script src="../scripts/firebase.js" defer></script>
