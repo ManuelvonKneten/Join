@@ -85,7 +85,6 @@ h1 {
 /* Task Field */
 .task_steps{
     display: flex;
-    /* justify-content: space-between; */
     width: 100%;
     gap:24px;
 }
@@ -231,9 +230,8 @@ h1 {
     transform: translate(-50%, -50%);
 }
 
-
 .dialog_content {
-    /* width: 90%; */
+    width: 90%;
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -257,7 +255,6 @@ h1 {
     font-size: 48px;
     font-weight: 700;
 }
-
 
 .dialog_header button {
     border: none;
@@ -317,17 +314,11 @@ h1 {
     gap: 8px;
 }
 
-
-label {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-} 
-
 .dialog_footer {
     display: flex;
     justify-content: right;
     gap: 10px;
+   
 }
 
 .dialog_footer button {
@@ -337,6 +328,7 @@ label {
     align-items: center;
     cursor: pointer;
     gap: 8px;
+    font-size: 18px;
 }
 
 .dialog_footer button:hover{
@@ -414,20 +406,50 @@ label {
     transform: translate(-50%, -50%); 
 } 
 
-/* Edit */
-/* .save_button {
-    height: 24px;
-    background-color: var(--color-tertiary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 16px 20px;
-    font-size: 20px;
-    font-weight: 700;
-    cursor: pointer;
+label {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+} 
+
+/* Edit Button */
+.edit_content{
+    width: 100%;
+    font-size: 18px;
 }
 
 
-.save_button:hover{
-     background-color: var(--color-secondary);
-} */
+.label_input {
+    width: 70%;
+    height: 32px;
+    padding: 4px;
+    font-size: 18px;
+    font-weight:400;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.description{
+    width: 60%;
+    height: 64px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box; 
+    font-size: 18px;
+    font-weight:400;
+}
+
+.subtask_add {
+    display: flex;
+    gap: 8px;
+}
+
+.subtask_add button {
+    background: none;
+    height: 20px;
+
+}
+
+

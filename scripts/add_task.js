@@ -239,7 +239,7 @@ function renderSubtaskList() {
 }
 
 /**
- * @param {{ title: string, completed: boolean }} subtask
+ * @param {{ title: string, done: boolean }} subtask
  * @param {number} index
  * @returns {string} HTML-String des Subtask-Listeneintrags
  */

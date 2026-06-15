@@ -118,7 +118,7 @@ function getNewHTMLTag() {
 
 function getEditTaskTemplate(task) {
   return `
-    <div class="dialog_content">
+    <div class="dialog_content edit_content">
 
       <div class="dialog_header">
         <h2>Edit Task</h2>
@@ -129,41 +129,62 @@ function getEditTaskTemplate(task) {
 
       <label>
         Title
-        <input id="editTitle" value="${task.title}">
+        <input class="label_input" id="editTitle" value="${task.title}">
       </label>
 
       <label>
         Description
-        <textarea id="editDescription">${task.description}</textarea>
+        <textarea class="description" id="editDescription">${task.description}</textarea>
       </label>
 
       <label>
         Due Date
-        <input type="date" id="editDueDate" value="${task.dueDate}">
+        <input class="label_input" type="date" id="editDueDate" value="${task.dueDate}">
       </label>
 
       <label>
         Priority
-        <select id="editPriority">
+        <select class="label_input" id="editPriority">
           <option value="low" ${task.priority === "low" ? "selected" : ""}>Low</option>
           <option value="medium" ${task.priority === "medium" ? "selected" : ""}>Medium</option>
-          <option value="high" ${task.priority === "high" ? "selected" : ""}>High</option>
+          <option value="urgent" ${task.priority === "urgent" ? "selected" : ""}>Urgent</option>
         </select>
 
         <img id="editPriorityIcon" src="../assets/icons/${task.priority}.svg">
       </label>
 
+        <label>
+          Assigned To: <div>${renderAssingnedContacts(task.assignedTo)}</div>
+        </label>  
+
       <label>Subtasks</label>   
+      <div class="subtask_add">
+        <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleSubtaskEnter(event)">
+        <button onclick="addSubtask()">✓</button>
+      </div>
       <div id="editSubtasks">${renderEditSubtasks(task.subtasks)}</div>
    
       <div class="dialog_footer">
         <button onclick="saveTaskEdit('${task.id}')">
-          Save
+        ✓ Save
         </button>
       </div>
 
     </div>
   `;
+}
+
+
+function editSubtaskTemplate(value, index) {
+  return `
+        <div class="edit_subtask">
+            <input
+                class="edit_subtask_input"
+                type="text"
+                value="${value}">
+            <button onclick="deleteSubtask(${index})">✕</button>
+        </div>
+    `;
 }
 
 

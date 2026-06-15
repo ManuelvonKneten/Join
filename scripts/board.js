@@ -5,6 +5,7 @@
 
 let allTasks = [];
 let currentTaskId = null;
+let editSubtasks = [];
 
 
 /**
@@ -281,12 +282,13 @@ function closeTaskPopUp() {
    document.getElementById('dialogTask').close();
 }
 
-// was ist das?????
-dialogTask.addEventListener('click', (event) => {
+
+function handleDialogClick(event) {
     if (event.target === dialogTask) {
         dialogTask.close();
-    }
-});
+    }   
+}
+dialogTask.addEventListener('click', handleDialogClick);
 
 
 /**
@@ -351,11 +353,12 @@ function closeAddTaskPopUp() {
 }
 
 
-dialog_add_task_board.addEventListener('click', (event) => {
-        if (event.target === dialog_add_task_board) {
+function handleDialogAddTaskBoard (params) {
+      if (event.target === dialog_add_task_board) {
             dialog_add_task_board.close();
         }
-});
+}
+dialog_add_task_board.addEventListener('click', handleDialogAddTaskBoard);
 
 
 /**
@@ -459,8 +462,34 @@ function openEditTaskPopup(taskId) {
     dialogTask.showModal();
 
     setupPriorityIcon();
+    updatePriorityIcon(); 
 }
 
+
+function updatePriorityIcon() {
+    const icon = document.getElementById("editPriorityIcon");
+    const select = document.getElementById("editPriority");
+
+    if (icon && select) {
+        icon.src = `../assets/icons/${select.value}.svg`;
+    }
+}
+
+
+/**
+ * Initialisiert EventListener für das Priority Icon
+ * im Edit-Popup (ändert Icon je nach Auswahl).
+ *
+ * @returns {void}
+ */
+function setupPriorityIcon() {
+    const select = document.getElementById("editPriority");
+    const icon = document.getElementById("editPriorityIcon");
+
+    select.addEventListener("change", () => {
+        icon.src = `../assets/icons/${select.value}.svg`;
+    });
+}
 
 /**
  * Speichert die bearbeiteten Task-Daten in Firebase.
@@ -476,7 +505,7 @@ async function saveTaskEdit(taskId) {
     task.description = document.getElementById("editDescription").value;
     task.dueDate = document.getElementById("editDueDate").value;
     task.priority = document.getElementById("editPriority").value;
-    task.subtasks = document.querySelectorAll(".edit_subtask_input");
+    task.subtasks = getSubtasksFromInputs();
 
     await fetch(`${DB_URL}/tasks/${taskId}.json`, {
         method: "PATCH",
@@ -485,12 +514,25 @@ async function saveTaskEdit(taskId) {
         },
         body: JSON.stringify(task)
     });
-
     closeTaskPopUp();
     await loadTasks();
     renderBoard();
 }
 
+
+function getSubtasksFromInputs(selector = ".edit_subtask_input") {
+    const inputs = document.querySelectorAll(selector);
+
+    const subtasks = [];
+
+    for (const input of inputs) {
+        subtasks.push({
+            title: input.value,
+            completed: false
+        });
+    }
+    return subtasks;
+}
 
 /**
  * Rendert die Subtasks im Edit-Modus als Input-Felder.
@@ -532,7 +574,6 @@ function renderSubtasks(subtasks = [], taskId) {
     return html;
 }
 
-
 /**
  * Toggle für Subtask (completed / not completed) und speichert in Firebase.
  *
@@ -562,18 +603,22 @@ function toggleSubtask(taskId, subtaskIndex) {
 }
 
 
-/**
- * Initialisiert EventListener für das Priority Icon
- * im Edit-Popup (ändert Icon je nach Auswahl).
- *
- * @returns {void}
- */
-function setupPriorityIcon() {
-    const select = document.getElementById("editPriority");
-    const icon = document.getElementById("editPriorityIcon");
+function handleSubtaskEnter(event) {
+    if (event.key === "Enter") {
+        addSubtask();
+    }
+}
 
-    select.addEventListener("change", () => {
-        icon.src = `../assets/icons/${select.value}.svg`;
-    });
+
+function addSubtask() {
+    const input = document.getElementById('newSubtask')
+    
+    if (!input.value.trim()) return;
+
+    const container = document.getElementById('editSubtasks');
+    const index = container.children.length;
+
+    container.innerHTML += editSubtaskTemplate(input.value, index);
+    input.value = '';
 }
 
