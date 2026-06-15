@@ -84,6 +84,8 @@
     <div id="addContactOverlay" class="add_contact_overlay hidden" onclick="overlayClose(event)">
       <div class="add_contact_modal" role="dialog" aria-modal="true" aria-labelledby="addContactTitle">
 
+        <button class="modal_close_btn" onclick="closeAddContact()" aria-label="Dialog schließen">&#x2715;</button>
+
         <div class="modal_left">
           <img class="modal_logo" src="/assets/img/logo.png" alt="" aria-hidden="true" />
           <h2 class="modal_heading" id="addContactTitle">Add contact</h2>
@@ -92,7 +94,6 @@
         </div>
 
         <div class="modal_right">
-          <button class="modal_close_btn" onclick="closeAddContact()" aria-label="Dialog schließen">&#x2715;</button>
 
           <div class="modal_body">
 
@@ -135,6 +136,8 @@
     <div id="editContactOverlay" class="add_contact_overlay hidden" onclick="overlayEditClose(event)">
       <div class="add_contact_modal" role="dialog" aria-modal="true" aria-labelledby="editContactTitle">
 
+        <button class="modal_close_btn" onclick="closeEditContact()" aria-label="Dialog schließen">&#x2715;</button>
+
         <div class="modal_left">
           <img class="modal_logo" src="/assets/img/logo.png" alt="" aria-hidden="true" />
           <h2 class="modal_heading" id="editContactTitle">Edit contact</h2>
@@ -143,7 +146,6 @@
         </div>
 
         <div class="modal_right">
-          <button class="modal_close_btn" onclick="closeEditContact()" aria-label="Dialog schließen">&#x2715;</button>
 
           <div class="modal_body">
 
@@ -167,7 +169,7 @@
 
               <div class="modal_actions">
                 <button type="button" class="btn_modal_cancel" onclick="deleteContact()">
-                  Delete <span>&#x2715;</span>
+                  Delete
                 </button>
                 <button type="submit" class="btn_modal_create">
                   Save <span>&#x2713;</span>
@@ -193,6 +195,7 @@
     <script src="../scripts/firebase.js"></script>
     <script src="../scripts/utils.js"></script>
     <script src="../templates/include_html.js"></script>
+    <script src="../templates/template.js"></script>
     <script src="../scripts/contacts.js"></script>
   </body>
 </html>

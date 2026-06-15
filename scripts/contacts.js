@@ -185,31 +185,9 @@ function renderContacts() {
         return letterGroups;
     }, {});
 
-    contactListElement.innerHTML = Object.keys(contactGroups).sort().map(letter => `
-        <div class="contact_group">
-            <span class="contact_group_letter">${letter}</span>
-            <div class="contact_group_divider"></div>
-            ${contactGroups[letter].map(contactItemHTML).join('')}
-        </div>
-    `).join('');
-}
-
-/**
- * @param {{ id: string, name: string, email: string, phone: string }} contact
- * @returns {string} HTML-String des Kontakteintrags
- */
-function contactItemHTML(contact) {
-    return `
-        <div class="contact_item" data-id="${contact.id}" onclick="showContactDetail(${JSON.stringify(contact).replace(/"/g, '&quot;')})">
-            <div class="contact_avatar" style="background-color:${avatarColor(contact.name)}">
-                ${initials(contact.name)}
-            </div>
-            <div class="contact_info">
-                <span class="contact_name">${contact.name}</span>
-                <span class="contact_email">${contact.email}</span>
-            </div>
-        </div>
-    `;
+    contactListElement.innerHTML = Object.keys(contactGroups).sort()
+        .map(letter => contactGroupHTML(letter, contactGroups[letter]))
+        .join('');
 }
 
 
