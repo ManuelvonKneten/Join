@@ -239,7 +239,7 @@ function addSubtask() {
     const subtaskTitle = subtaskInputElement.value.trim();
     if (!subtaskTitle) return;
 
-    taskSubtasks.push({ title: subtaskTitle, done: false });
+    taskSubtasks.push({ title: subtaskTitle, completed: false });
     subtaskInputElement.value = '';
     renderSubtaskList();
 }
@@ -266,7 +266,7 @@ function renderSubtaskList() {
 }
 
 /**
- * @param {{ title: string, done: boolean }} subtask
+ * @param {{ title: string, completed: boolean }} subtask
  * @param {number} index
  * @returns {string} HTML-String des Subtask-Listeneintrags
  */

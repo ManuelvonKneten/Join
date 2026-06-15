@@ -73,15 +73,7 @@ function getTaskDetailsTemplate(task) {
 
         <div class="dialog_subtasks">
           <p>Subtasks</p>
-          <label>
-            <input type="checkbox" checked>
-            <div></div>
-          </label>
-  
-          <label>
-            <input type="checkbox">
-            <div></div>
-          </label>
+          ${renderSubtasks(task.subtasks, task.id)}
         </div>
   
         <div class="dialog_footer">
@@ -150,7 +142,6 @@ function getEditTaskTemplate(task) {
         <input type="date" id="editDueDate" value="${task.dueDate}">
       </label>
 
-
       <label>
         Priority
         <select id="editPriority">
@@ -158,8 +149,12 @@ function getEditTaskTemplate(task) {
           <option value="medium" ${task.priority === "medium" ? "selected" : ""}>Medium</option>
           <option value="high" ${task.priority === "high" ? "selected" : ""}>High</option>
         </select>
+
+        <img id="editPriorityIcon" src="../assets/icons/${task.priority}.svg">
       </label>
 
+      <label>Subtasks</label>   
+      <div id="editSubtasks">${renderEditSubtasks(task.subtasks)}</div>
    
       <div class="dialog_footer">
         <button onclick="saveTaskEdit('${task.id}')">
@@ -169,4 +164,18 @@ function getEditTaskTemplate(task) {
 
     </div>
   `;
+}
+
+
+function getSubtasksTemplate(subtask, index, taskId) {
+    return `
+      <label>
+        <input 
+          type="checkbox" 
+          ${subtask.completed ? "checked" : ""} 
+          onchange="toggleSubtask('${taskId}', ${index})"
+        >
+        <div>${subtask.title}</div>
+      </label>
+    `;
 }
