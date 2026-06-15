@@ -1,4 +1,22 @@
 /**
+ * Gibt das HTML einer alphabetischen Kontaktgruppe (inkl. ihrer Einträge) zurück.
+ *
+ * @function contactGroupHTML
+ * @param {string} letter - Anfangsbuchstabe der Gruppe
+ * @param {Array<{ id: string, name: string, email: string, phone: string }>} contacts - Kontakte der Gruppe
+ * @returns {string} HTML-String der Kontaktgruppe
+ */
+function contactGroupHTML(letter, contacts) {
+    return `
+        <div class="contact_group">
+            <span class="contact_group_letter">${letter}</span>
+            <div class="contact_group_divider"></div>
+            ${contacts.map(contactItemHTML).join('')}
+        </div>
+    `;
+}
+
+/**
  * Gibt das HTML eines einzelnen Kontakteintrags als String zurück.
  *
  * @function contactItemHTML
@@ -7,7 +25,7 @@
  */
 function contactItemHTML(contact) {
     return `
-        <div class="contact_item">
+        <div class="contact_item" data-id="${contact.id}" onclick="showContactDetail(${JSON.stringify(contact).replace(/"/g, '&quot;')})">
             <div class="contact_avatar" style="background-color:${avatarColor(contact.name)}">
                 ${initials(contact.name)}
             </div>
