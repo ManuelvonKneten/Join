@@ -140,40 +140,13 @@ function renderAssignedOptions() {
 }
 
 /**
- * @param {{ id: string, name: string }} contact
- * @returns {string}
- */
-function assignedOptionHTML(contact) {
-    const isSelected = selectedContacts.some(c => c.id === contact.id);
-    return `
-        <li class="assigned_option ${isSelected ? 'assigned_option_active' : ''}"
-            role="option"
-            aria-selected="${isSelected}"
-            tabindex="0"
-            data-id="${contact.id}"
-            onclick="toggleContactSelection(event, '${contact.id}')"
-            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleContactSelection(event,'${contact.id}');}">
-            <div class="assigned_option_avatar" style="background-color: ${avatarColor(contact.name)}">
-                ${initials(contact.name)}
-            </div>
-            <span class="assigned_option_name">${contact.name}</span>
-            <input type="checkbox" class="assigned_option_checkbox" ${isSelected ? 'checked' : ''} tabindex="-1" aria-hidden="true">
-        </li>
-    `;
-}
-
-/**
  * Rendert die Initialen-Avatare der ausgewählten Kontakte unterhalb des Dropdowns.
  *
  * @returns {void}
  */
 function renderSelectedAvatars() {
     document.getElementById('assignedAvatars').innerHTML = selectedContacts
-        .map(contact => `
-            <div class="assigned_selected_avatar" style="background-color: ${avatarColor(contact.name)}">
-                ${initials(contact.name)}
-            </div>
-        `)
+        .map(contact => selectedAvatarHTML(contact))
         .join('');
 
     const placeholder = document.querySelector('.assigned_placeholder');
@@ -263,20 +236,6 @@ function removeSubtask(subtaskIndex) {
 function renderSubtaskList() {
     document.getElementById('subtaskList').innerHTML =
         taskSubtasks.map((subtask, i) => subtaskItemHTML(subtask, i)).join('');
-}
-
-/**
- * @param {{ title: string, done: boolean }} subtask
- * @param {number} index
- * @returns {string} HTML-String des Subtask-Listeneintrags
- */
-function subtaskItemHTML(subtask, index) {
-    return `
-        <li class="add_task_subtask_item">
-            <span>${subtask.title}</span>
-            <button type="button" class="add_task_subtask_remove" onclick="removeSubtask(${index})">&#x2715;</button>
-        </li>
-    `;
 }
 
 
