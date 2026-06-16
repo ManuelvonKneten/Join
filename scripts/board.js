@@ -2,10 +2,9 @@
  * Enthält alle Tasks, die aus Firebase geladen wurden.
  * @type {Array<Object>}
  */
-
+let taskEditSubtasks = [];
 let allTasks = [];
 let currentTaskId = null;
-let editSubtasks = [];
 
 
 /**
@@ -298,7 +297,7 @@ dialogTask.addEventListener('click', handleDialogClick);
  * @param {boolean} [showName=true] - Ob der Name angezeigt werden soll
  * @returns {string} HTML-String mit Avataren
  */
-function renderAssingnedContacts(contacts, showName = true) {
+function renderAssignedContacts(contacts, showName = true) {
     let html = '';
 
     if (!Array.isArray(contacts)) {
@@ -457,12 +456,19 @@ function endDragEffect(event) {
 function openEditTaskPopup(taskId) {
     const task = allTasks.find(t => t.id === taskId);
 
+    taskEditSubtasks = [...task.subtasks];
+
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
     dialogTask.showModal();
 
     setupPriorityIcon();
     updatePriorityIcon(); 
+}
+
+function deleteSubtask(index){
+    taskEditSubtasks.splice(index, 1);
+    renderSubtasks();
 }
 
 
@@ -505,7 +511,7 @@ async function saveTaskEdit(taskId) {
     task.description = document.getElementById("editDescription").value;
     task.dueDate = document.getElementById("editDueDate").value;
     task.priority = document.getElementById("editPriority").value;
-    task.subtasks = getSubtasksFromInputs();
+    task.subtasks = taskEditSubtasks;
 
     await fetch(`${DB_URL}/tasks/${taskId}.json`, {
         method: "PATCH",
@@ -605,20 +611,60 @@ function toggleSubtask(taskId, subtaskIndex) {
 
 function handleSubtaskEnter(event) {
     if (event.key === "Enter") {
-        addSubtask();
+        addEditSubtask();
     }
 }
 
 
-function addSubtask() {
+function addEditSubtask() {
     const input = document.getElementById('newSubtask')
     
     if (!input.value.trim()) return;
-
-    const container = document.getElementById('editSubtasks');
-    const index = container.children.length;
-
-    container.innerHTML += editSubtaskTemplate(input.value, index);
+    taskEditSubtasks.push({
+        title: input.value,
+        completed: false
+    });
+    renderSubtasksEdit();
     input.value = '';
 }
 
+
+function renderSubtasksEdit() {
+    const container = document.getElementById('editSubtasks');
+    container.innerHTML = "";
+
+    taskEditSubtasks.forEach((value, index) => {
+        container.innerHTML += editSubtaskTemplate(value, index);
+    });
+}
+
+
+function getProgress(subtasks = []) {
+    if(!Array.isArray(subtasks)) {
+        return {
+            total: 0,
+            completed: 0
+        };
+    }
+    const total = subtasks.length;
+    const completed = subtasks.filter(subtask => subtask.completed).length;
+
+    return {
+        total,
+        completed,
+        percent: total ? (completed / total) *100 :0
+    };   
+}
+
+function getProgressTemplate(subtasks = []) {
+    const progress = getProgress(subtasks);
+      return `
+        <div class="task_progress">
+            <progress value="${progress.completed}" max="${progress.total}"></progress>
+
+            <span title="${progress.completed} von ${progress.total} Subtasks erledigt">
+                ${progress.completed}/${progress.total} Subtasks
+            </span>
+        </div>
+    `;
+}

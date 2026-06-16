@@ -1,4 +1,5 @@
 function getTaskTemplate(task) {
+  
   return `
     <div  id="taskContainer">
       <div draggable="true"
@@ -11,14 +12,14 @@ function getTaskTemplate(task) {
         ${formatCategory(task.category)}
         </div>
         
-        <h4>${task.title}</h4>
+        <h2>${task.title}</h2>
         
         <p>${task.description}</p>
 
-        <span>Subtasks</span>
+        <div>${getProgressTemplate(task.subtasks || [])}</div>
         
         <div class="card_footer">
-          <div  class="assigned_contacts">${renderAssingnedContacts(task.assignedTo, false)}</div>
+          <div  class="assigned_contacts">${renderAssignedContacts(task.assignedTo, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
         </div> 
       </div>
@@ -26,6 +27,9 @@ function getTaskTemplate(task) {
     `;
 }
 
+function getProgressTemplate() {
+    
+}
 
 function getEmptyCardTemplate(fieldName) {
   return `
@@ -68,7 +72,7 @@ function getTaskDetailsTemplate(task) {
   
         <div class="dialog_assigned">
           <p>Assigned To:</p>
-           ${renderAssingnedContacts(task.assignedTo)}
+           ${renderAssignedContacts(task.assignedTo)}
         </div>  
 
         <div class="dialog_subtasks">
@@ -78,7 +82,7 @@ function getTaskDetailsTemplate(task) {
   
         <div class="dialog_footer">
           <button onclick="openDeletePopup('${task.id}')">
-             <img src="../assets/icons/delete.png" alt="delete icon">Delete
+          <img src="../assets/icons/delete.png" alt="delete icon">Delete
           </button>
   
           <button onclick="openEditTaskPopup('${task.id}')">
@@ -89,6 +93,21 @@ function getTaskDetailsTemplate(task) {
   
   `;
 }
+
+
+function getSubtasksTemplate(subtask, index, taskId) {
+    return `
+      <label class="subtask_checkbox">
+        <input 
+          type="checkbox" 
+          ${subtask.completed ? "checked" : ""} 
+          onchange="toggleSubtask('${taskId}', ${index})"
+        >
+        <div>${subtask.title}</div>
+      </label>
+    `;
+}
+
 
 
 function getContactsAvatar(name, showName) {
@@ -128,39 +147,42 @@ function getEditTaskTemplate(task) {
       </div>
 
       <label>
-        Title
+        <p>Title</p>
         <input class="label_input" id="editTitle" value="${task.title}">
       </label>
 
       <label>
-        Description
+        <p>Description</p>
         <textarea class="description" id="editDescription">${task.description}</textarea>
       </label>
 
       <label>
-        Due Date
+       <p>Due Date</p> 
         <input class="label_input" type="date" id="editDueDate" value="${task.dueDate}">
       </label>
 
       <label>
-        Priority
-        <select class="label_input" id="editPriority">
-          <option value="low" ${task.priority === "low" ? "selected" : ""}>Low</option>
-          <option value="medium" ${task.priority === "medium" ? "selected" : ""}>Medium</option>
-          <option value="urgent" ${task.priority === "urgent" ? "selected" : ""}>Urgent</option>
-        </select>
-
-        <img id="editPriorityIcon" src="../assets/icons/${task.priority}.svg">
-      </label>
+        
+        <p>Priority</p>
+        <div class="edit_priority">
+          <select class="label_input" id="editPriority">
+            <option value="low" ${task.priority === "low" ? "selected" : ""}>Low</option>
+            <option value="medium" ${task.priority === "medium" ? "selected" : ""}>Medium</option>
+            <option value="urgent" ${task.priority === "urgent" ? "selected" : ""}>Urgent</option>
+          </select>
+       
+          <img id="editPriorityIcon" src="../assets/icons/${task.priority}.svg">
+        </div>
+     </label>
 
         <label>
-          Assigned To: <div>${renderAssingnedContacts(task.assignedTo)}</div>
+          <p>Assigned To:</p> <div>${renderAssignedContacts(task.assignedTo)}</div>
         </label>  
 
       <label>Subtasks</label>   
       <div class="subtask_add">
         <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleSubtaskEnter(event)">
-        <button onclick="addSubtask()">✓</button>
+        <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
       </div>
       <div id="editSubtasks">${renderEditSubtasks(task.subtasks)}</div>
    
@@ -179,24 +201,11 @@ function editSubtaskTemplate(value, index) {
   return `
         <div class="edit_subtask">
             <input
-                class="edit_subtask_input"
                 type="text"
-                value="${value}">
+                value="${value.title}">
             <button onclick="deleteSubtask(${index})">✕</button>
         </div>
     `;
 }
 
 
-function getSubtasksTemplate(subtask, index, taskId) {
-    return `
-      <label>
-        <input 
-          type="checkbox" 
-          ${subtask.completed ? "checked" : ""} 
-          onchange="toggleSubtask('${taskId}', ${index})"
-        >
-        <div>${subtask.title}</div>
-      </label>
-    `;
-}
