@@ -27,9 +27,30 @@ function getTaskTemplate(task) {
     `;
 }
 
-function getProgressTemplate() {
-    
+function getContactsAvatar(name, showName) {
+  return `
+     <div class="contact_task">
+                <div class="contact_avatar"
+                    style="background-color:${avatarColor(name)}">
+                    ${initials(name)}
+                </div>
+                ${showName ? `<span>${name}</span>` : ""} 
+            </div>
+  `;
 }
+
+
+function getNewHTMLTag() {
+  return `
+        <div class="popup_header">
+            <h1 class="add_task_heading">Add Task</h1>
+            <button onclick="closeAddTaskPopUp()">
+            <img src="../assets/icons/close_icon.svg" alt="close icon">
+            </button>
+        </div>
+  `;
+}
+
 
 function getEmptyCardTemplate(fieldName) {
   return `
@@ -109,32 +130,6 @@ function getSubtasksTemplate(subtask, index, taskId) {
 }
 
 
-
-function getContactsAvatar(name, showName) {
-  return `
-     <div class="contact_task">
-                <div class="contact_avatar"
-                    style="background-color:${avatarColor(name)}">
-                    ${initials(name)}
-                </div>
-                ${showName ? `<span>${name}</span>` : ""} 
-            </div>
-  `;
-}
-
-
-function getNewHTMLTag() {
-  return `
-        <div class="popup_header">
-            <h1 class="add_task_heading">Add Task</h1>
-            <button onclick="closeAddTaskPopUp()">
-            <img src="../assets/icons/close_icon.svg" alt="close icon">
-            </button>
-        </div>
-  `;
-}
-
-
 function getEditTaskTemplate(task) {
   return `
     <div class="dialog_content edit_content">
@@ -184,8 +179,7 @@ function getEditTaskTemplate(task) {
         <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleSubtaskEnter(event)">
         <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
       </div>
-      <div id="editSubtasks">${renderEditSubtasks(task.subtasks)}</div>
-   
+        <div id="editSubtasks">${renderEditSubtasks(task.subtasks)}</div>
       <div class="dialog_footer">
         <button onclick="saveTaskEdit('${task.id}')">
         ✓ Save

@@ -207,10 +207,12 @@ h1 {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    gap: 16px;
 }
 
 .task_progress progress {
     height: 25px;
+    max-width: 120px;
 }
 
 .task_progress span{
@@ -316,9 +318,7 @@ h1 {
     font-weight: 400;
 }
 
-.subtask_checkbox input {
-    
-}
+
 
 .priority {
  padding-left: 8px;
@@ -498,7 +498,9 @@ label {
 
 .edit_subtask{
     display: flex;
-    gap: 8px;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 8px;
 }
 
 .edit_subtask input {
@@ -528,6 +530,10 @@ label {
     cursor: pointer;
 }
 
+.subtask_add button:hover{
+    color: var(--color-secondary);
+}
+
 .edit_subtask button {
     background: none;
     border: none;
@@ -542,3 +548,6 @@ label {
     cursor: pointer;
 }
 
+.edit_subtask button:hover{
+    color: var(--color-secondary);
+}

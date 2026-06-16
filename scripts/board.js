@@ -540,25 +540,15 @@ function getSubtasksFromInputs(selector = ".edit_subtask_input") {
     return subtasks;
 }
 
-/**
- * Rendert die Subtasks im Edit-Modus als Input-Felder.
- *
- * @param {Array<Object>} [subtasks=[]] - Liste der Subtasks
- * @returns {string} HTML-String
- */
+
 function renderEditSubtasks(subtasks = []) {
-    let html = "";
-
-    for (const subtask of subtasks) {
-        html += `
-            <div class="edit_subtask">
-                <input class="edit_subtask_input" type="text" value="${subtask.title}">
-            </div>
-        `;
-    }
-    return html;
+    return subtasks.map((subtask, index) => `
+        <div class="edit_subtask">
+            <span>${subtask.title}</span>
+            <button onclick="deleteSubtask(${index})">✕</button>
+        </div>
+    `).join('');
 }
-
 
 /**
  * Rendert Subtasks im Task-Detail Popup.
@@ -652,17 +642,17 @@ function getProgress(subtasks = []) {
     return {
         total,
         completed,
-        percent: total ? (completed / total) *100 :0
+        percent: total ? (completed / total) *100 : 0
     };   
 }
 
 function getProgressTemplate(subtasks = []) {
     const progress = getProgress(subtasks);
       return `
-        <div class="task_progress">
+        <div class="task_progress" title="${progress.completed} of ${progress.total} subtasks completed">
             <progress value="${progress.completed}" max="${progress.total}"></progress>
 
-            <span title="${progress.completed} von ${progress.total} Subtasks erledigt">
+            <span>
                 ${progress.completed}/${progress.total} Subtasks
             </span>
         </div>
