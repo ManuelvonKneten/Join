@@ -1,7 +1,6 @@
 function getTaskTemplate(task) {
-  
   return `
-    <div  id="taskContainer">
+    <div  class="taskContainer">
       <div draggable="true"
       ondragstart="startDragEffect(event); startDragging('${task.id}')"
       ondragend="endDragEffect(event)"
@@ -19,13 +18,14 @@ function getTaskTemplate(task) {
         <div>${getProgressTemplate(task.subtasks || [])}</div>
         
         <div class="card_footer">
-          <div  class="assigned_contacts">${renderAssignedContacts(task.assignedTo, false)}</div>
+          <div class="assigned_contacts">${renderAssignedContacts(task.assignedTo, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
         </div> 
       </div>
     </div>
     `;
 }
+
 
 function getContactsAvatar(name, showName) {
   return `
@@ -70,7 +70,7 @@ function getTaskDetailsTemplate(task) {
             ${formatCategory(task.category)}
             </div>
             <button onclick="closeTaskPopUp()">
-              <img src="../assets/icons/close_icon.svg" alt="close icon">
+              x
             </button>
           </div>
   
@@ -92,7 +92,7 @@ function getTaskDetailsTemplate(task) {
         </div>
   
         <div class="dialog_assigned">
-          <p>Assigned To:</p>
+          <p>Assigned to:</p>
            ${renderAssignedContacts(task.assignedTo)}
         </div>  
 
@@ -117,7 +117,7 @@ function getTaskDetailsTemplate(task) {
 
 
 function getSubtasksTemplate(subtask, index, taskId) {
-    return `
+  return `
       <label class="subtask_checkbox">
         <input 
           type="checkbox" 
@@ -137,7 +137,7 @@ function getEditTaskTemplate(task) {
       <div class="dialog_header">
         <h2>Edit Task</h2>
         <button onclick="closeTaskPopUp()">
-          <img src="../assets/icons/close_icon.svg" alt="close icon">
+          x
         </button>
       </div>
 
@@ -157,7 +157,6 @@ function getEditTaskTemplate(task) {
       </label>
 
       <label>
-        
         <p>Priority</p>
         <div class="edit_priority">
           <select class="label_input" id="editPriority">
@@ -166,14 +165,27 @@ function getEditTaskTemplate(task) {
             <option value="urgent" ${task.priority === "urgent" ? "selected" : ""}>Urgent</option>
           </select>
        
-          <img id="editPriorityIcon" src="../assets/icons/${task.priority}.svg">
+          <img id="editPriorityIcon" src="../assets/icons/${task.priority}.svg"  alt="${task.priority}">
         </div>
      </label>
 
-        <label>
-          <p>Assigned To:</p> <div>${renderAssignedContacts(task.assignedTo)}</div>
-        </label>  
+    <label>
+    <p>Assigned to:</p>
 
+    <div class="assigned_add">
+      <input class="label_input" id="assignedInput"
+         type="text"
+         placeholder="Assign contact"
+         oninput="renderAssignedDropdown()"
+         onkeydown="handleAssignedEnter(event)">
+      
+      <div id="assignedDropdownList" class="assigned_dropdown_list hidden"></div>
+    </div>
+   
+    <div id="assignedList" class="assigned_list"></div>
+
+     </label>
+      
       <label>Subtasks</label>   
       <div class="subtask_add">
         <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleSubtaskEnter(event)">
@@ -197,9 +209,10 @@ function editSubtaskTemplate(value, index) {
             <input
                 type="text"
                 value="${value.title}">
+            <button onclick="deleteSubtask(${index})">
+            <img src="/assets/icons/edit.png" alt="" aria-hidden="true" /></button>    
             <button onclick="deleteSubtask(${index})">✕</button>
         </div>
     `;
 }
-
 

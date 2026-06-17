@@ -5,7 +5,7 @@
 let taskEditSubtasks = [];
 let allTasks = [];
 let currentTaskId = null;
-
+let selectedEditContacts= [];
 
 /**
  * Speichert die ID des aktuell gezogenen Tasks für Drag & Drop.
@@ -68,7 +68,7 @@ function renderBoard(tasks = allTasks) {
      for (const task of tasks) {
         renderTask(task);
      }
-     renderEmptyCards()
+     renderEmptyCards();
 }
 
 
@@ -82,28 +82,16 @@ function renderBoard(tasks = allTasks) {
  * @returns {void}
  */
 function renderTask(task) {
-    let container;
+    const containers = {
+        todo: '#toDo .task_field',
+        inprogress: '#InProgress .task_field',
+        awaitfeedback: '#awaitFeedback .task_field',
+        done: '#done .task_field'
+    };
 
-    switch (task.status) {
-        case 'todo':
-            container = document.querySelector('#toDo .task_field');
-            break;
-
-        case 'inprogress':
-            container = document.querySelector('#InProgress .task_field');
-            break;
-
-        case 'awaitfeedback':
-            container = document.querySelector('#awaitFeedback .task_field');
-            break;
-
-        case 'done':
-            container = document.querySelector('#done .task_field');
-            break;
-    }
+    const container = document.querySelector(containers[task.status]);
 
     if (!container) return;
-
     container.innerHTML += getTaskTemplate(task);
 }
 
@@ -266,6 +254,7 @@ function removeHighlight(id) {
 function openTaskPopUp(taskId) {
     const task = allTasks.find(task => task.id === taskId);
     
+    if(!task) return;
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getTaskDetailsTemplate(task);
     dialogTask.showModal(); 
@@ -283,10 +272,12 @@ function closeTaskPopUp() {
 
 
 function handleDialogClick(event) {
-    if (event.target === dialogTask) {
-        dialogTask.close();
+    const dialog = document.getElementById('dialogTask');
+    if (event.target === dialog) {
+        dialog.close();
     }   
 }
+const dialogTask = document.getElementById('dialogTask');
 dialogTask.addEventListener('click', handleDialogClick);
 
 
@@ -352,7 +343,7 @@ function closeAddTaskPopUp() {
 }
 
 
-function handleDialogAddTaskBoard (params) {
+function handleDialogAddTaskBoard (event) {
       if (event.target === dialog_add_task_board) {
             dialog_add_task_board.close();
         }
@@ -408,7 +399,7 @@ async function deleteTask() {
  * @returns {void}
  */
 function enableDragEffect() {
-    const container = document.getElementById(`taskContainer`);
+    const container = document.getElementById(`.taskContainer`);
 
     container. addEventListener('dragstart', (event) => {
         if (event.target.classList.contains('task')) {
@@ -446,6 +437,36 @@ function endDragEffect(event) {
     event.currentTarget.classList.remove('dragging');
 }
 
+function getProgress(subtasks = []) {
+    if(!Array.isArray(subtasks)) {
+        return {
+            total: 0,
+            completed: 0
+        };
+    }
+    const total = subtasks.length;
+    const completed = subtasks.filter(subtask => subtask.completed).length;
+
+    return {
+        total,
+        completed,
+        percent: total ? (completed / total) *100 : 0
+    };   
+}
+
+function getProgressTemplate(subtasks = []) {
+    const progress = getProgress(subtasks);
+      return `
+        <div class="task_progress" title="${progress.completed} of ${progress.total} subtasks completed">
+            <progress value="${progress.completed}" max="${progress.total}"></progress>
+
+            <span>
+                ${progress.completed}/${progress.total} Subtasks
+            </span>
+        </div>
+    `;
+}
+
 
 /**
  * Öffnet das Edit-Task Popup und lädt die Task-Daten in das Formular.
@@ -456,7 +477,8 @@ function endDragEffect(event) {
 function openEditTaskPopup(taskId) {
     const task = allTasks.find(t => t.id === taskId);
 
-    taskEditSubtasks = [...task.subtasks];
+    taskEditSubtasks = Array.isArray(task.subtasks) 
+    ? [...task.subtasks] : [];
 
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
@@ -468,7 +490,7 @@ function openEditTaskPopup(taskId) {
 
 function deleteSubtask(index){
     taskEditSubtasks.splice(index, 1);
-    renderSubtasks();
+    renderSubtasksEdit();
 }
 
 
@@ -492,9 +514,9 @@ function setupPriorityIcon() {
     const select = document.getElementById("editPriority");
     const icon = document.getElementById("editPriorityIcon");
 
-    select.addEventListener("change", () => {
+    select.onchange = () => {
         icon.src = `../assets/icons/${select.value}.svg`;
-    });
+    };
 }
 
 /**
@@ -619,6 +641,7 @@ function addEditSubtask() {
 }
 
 
+
 function renderSubtasksEdit() {
     const container = document.getElementById('editSubtasks');
     container.innerHTML = "";
@@ -629,32 +652,81 @@ function renderSubtasksEdit() {
 }
 
 
-function getProgress(subtasks = []) {
-    if(!Array.isArray(subtasks)) {
-        return {
-            total: 0,
-            completed: 0
-        };
-    }
-    const total = subtasks.length;
-    const completed = subtasks.filter(subtask => subtask.completed).length;
+function renderAssignedDropdown() {
+    const input = document.getElementById('assignedInput');
+    const dropdown = document.getElementById("assignedDropdownList");
+    const value = input.value.toLowerCase();
+    const filtered = allContacts.filter(c => c.name.toLowerCase().includes(value)
+    );
 
-    return {
-        total,
-        completed,
-        percent: total ? (completed / total) *100 : 0
-    };   
+    dropdown.innerHTML = "";
+
+      if (filtered.length === 0) {
+        dropdown.classList.add("hidden");
+        return;
+    }
+
+    dropdown.classList.remove("hidden");
+
+    filtered.forEach(contact => {
+        const checked = selectedContacts.includes(contact.id);
+    
+        dropdown.innerHTML += `
+            <div class="assigned_option"
+                 onclick="toggleContact('${contact.id}')">
+
+                <img src="${contact.avatar}" class="assigned_avatar">
+
+                <span>${contact.name}</span>
+
+                <input type="checkbox"
+                       ${checked ? "checked" : ""}
+                       onclick="event.stopPropagation(); toggleContact('${contact.id}')">
+            </div>
+        `;
+    });
+
 }
 
-function getProgressTemplate(subtasks = []) {
-    const progress = getProgress(subtasks);
-      return `
-        <div class="task_progress" title="${progress.completed} of ${progress.total} subtasks completed">
-            <progress value="${progress.completed}" max="${progress.total}"></progress>
+function handleAssignedEnter (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        renderAssignedDropdown();
+    }
+}
 
-            <span>
-                ${progress.completed}/${progress.total} Subtasks
-            </span>
-        </div>
-    `;
+function toggleContact(id) {
+    if (selectedContacts.includes(id)) {
+        selectedEditContacts= selectedContacts.filter(c => c !== id);
+    } else {
+        selectedContacts.push(id);
+    }
+
+    renderAssignedList();
+    renderAssignedDropdown();
+}
+
+function renderAssignedList() {
+    const list = document.getElementById('assignedList');
+
+    list.innerHTML = "";
+
+    selectedContacts.forEach(id => {
+        const contact = allContacts.find(c => c.id === id);
+
+        if(!contact) return;
+
+        list.innerHTML += `
+           <div class="assigned_item">
+                <img src="${contact.avatar}" class="assigned_avatar">
+                <span>${contact.name}</span>
+            </div>
+        `;
+    });
+}
+
+function openEditTask(task) {
+    selectedEditContacts= [...task.assignedTo];
+    renderAssignedList();
+    
 }
