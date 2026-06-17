@@ -238,20 +238,6 @@ function renderSubtaskList() {
         taskSubtasks.map((subtask, i) => subtaskItemHTML(subtask, i)).join('');
 }
 
-/**
- * @param {{ title: string, done: boolean }} subtask
- * @param {number} index
- * @returns {string} HTML-String des Subtask-Listeneintrags
- */
-function subtaskItemHTML(subtask, index) {
-    return `
-        <li class="add_task_subtask_item">
-            <span>${subtask.title}</span>
-            <button type="button" class="add_task_subtask_remove" onclick="removeSubtask(${index})">&#x2715;</button>
-        </li>
-    `;
-}
-
 
 /* ── Create Task ── */
 /**
@@ -283,15 +269,21 @@ async function createTask(submitEvent) {
 }
 
 /**
- * Liest alle Formularfelder aus und gibt ein Task-Objekt zurück.
+ * Wandelt ein Datum im Format DD/MM/YYYY in das ISO-Format YYYY-MM-DD um.
  *
- * @returns {{ title: string, description: string, dueDate: string, priority: string, assignedTo: string[], category: string, subtasks: Array, status: string }}
+ * @param {string} dateStr - Datum im Format DD/MM/YYYY
+ * @returns {string} Datum im Format YYYY-MM-DD
  */
 function ddmmyyyyToISO(dateStr) {
     const [day, month, year] = dateStr.split('/');
     return `${year}-${month}-${day}`;
 }
 
+/**
+ * Liest alle Formularfelder aus und gibt ein Task-Objekt zurück.
+ *
+ * @returns {{ title: string, description: string, dueDate: string, priority: string, assignedTo: string[], category: string, subtasks: Array, status: string }}
+ */
 function getTaskFormData() {
     return {
         title: document.getElementById('taskTitle').value.trim(),
