@@ -483,15 +483,12 @@ function openEditTaskPopup(taskId) {
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
     dialogTask.showModal();
+     renderSubtasksEdit();
 
     setupPriorityIcon();
     updatePriorityIcon(); 
 }
 
-function deleteSubtask(index){
-    taskEditSubtasks.splice(index, 1);
-    renderSubtasksEdit();
-}
 
 
 function updatePriorityIcon() {
@@ -563,14 +560,7 @@ function getSubtasksFromInputs(selector = ".edit_subtask_input") {
 }
 
 
-function renderEditSubtasks(subtasks = []) {
-    return subtasks.map((subtask, index) => `
-        <div class="edit_subtask">
-            <span>${subtask.title}</span>
-            <button onclick="deleteSubtask(${index})">✕</button>
-        </div>
-    `).join('');
-}
+
 
 /**
  * Rendert Subtasks im Task-Detail Popup.
@@ -621,17 +611,24 @@ function toggleSubtask(taskId, subtaskIndex) {
 }
 
 
-function handleSubtaskEnter(event) {
-    if (event.key === "Enter") {
-        addEditSubtask();
-    }
-}
 
+
+function renderSubtasksEdit() {
+    const container = document.getElementById('editSubtasks');
+
+    container.innerHTML = '';
+    taskEditSubtasks.forEach((subtask, index) => {
+        container.innerHTML += getSubtasksEditTemplate(subtask, index)
+    });
+}
+   
 
 function addEditSubtask() {
     const input = document.getElementById('newSubtask')
+    const value = input.value.trim();
     
-    if (!input.value.trim()) return;
+    if (!value) return;
+
     taskEditSubtasks.push({
         title: input.value,
         completed: false
@@ -640,93 +637,50 @@ function addEditSubtask() {
     input.value = '';
 }
 
-
-
-function renderSubtasksEdit() {
-    const container = document.getElementById('editSubtasks');
-    container.innerHTML = "";
-
-    taskEditSubtasks.forEach((value, index) => {
-        container.innerHTML += editSubtaskTemplate(value, index);
-    });
+function deleteSubtask(index){
+    taskEditSubtasks.splice(index, 1);
+    renderSubtasksEdit();
 }
 
 
-function renderAssignedDropdown() {
-    const input = document.getElementById('assignedInput');
-    const dropdown = document.getElementById("assignedDropdownList");
-    const value = input.value.toLowerCase();
-    const filtered = allContacts.filter(c => c.name.toLowerCase().includes(value)
-    );
+function editSubtask(index) {
+        taskEditSubtasks[index].isEditing = true;
+        renderSubtasksEdit();
 
-    dropdown.innerHTML = "";
-
-      if (filtered.length === 0) {
-        dropdown.classList.add("hidden");
-        return;
-    }
-
-    dropdown.classList.remove("hidden");
-
-    filtered.forEach(contact => {
-        const checked = selectedContacts.includes(contact.id);
     
-        dropdown.innerHTML += `
-            <div class="assigned_option"
-                 onclick="toggleContact('${contact.id}')">
+    if(!newTitle || !newTitle.trim()) return;
 
-                <img src="${contact.avatar}" class="assigned_avatar">
+    taskEditSubtasks[index].title = newTitle.trim();
 
-                <span>${contact.name}</span>
-
-                <input type="checkbox"
-                       ${checked ? "checked" : ""}
-                       onclick="event.stopPropagation(); toggleContact('${contact.id}')">
-            </div>
-        `;
-    });
-
+    renderSubtasksEdit();
 }
 
-function handleAssignedEnter (event) {
+
+function handleSubtaskEnter(event) {
     if (event.key === "Enter") {
-        event.preventDefault();
-        renderAssignedDropdown();
+         event.preventDefault();
+        addEditSubtask();
     }
 }
 
-function toggleContact(id) {
-    if (selectedContacts.includes(id)) {
-        selectedEditContacts= selectedContacts.filter(c => c !== id);
-    } else {
-        selectedContacts.push(id);
-    }
 
-    renderAssignedList();
-    renderAssignedDropdown();
-}
+function openEditTask(taskId) {
+    const task = allTasks.find(task => task.id === taskId);
 
-function renderAssignedList() {
-    const list = document.getElementById('assignedList');
-
-    list.innerHTML = "";
-
-    selectedContacts.forEach(id => {
-        const contact = allContacts.find(c => c.id === id);
-
-        if(!contact) return;
-
-        list.innerHTML += `
-           <div class="assigned_item">
-                <img src="${contact.avatar}" class="assigned_avatar">
-                <span>${contact.name}</span>
-            </div>
-        `;
-    });
-}
-
-function openEditTask(task) {
-    selectedEditContacts= [...task.assignedTo];
-    renderAssignedList();
+    taskEditSubtasks = [...task-subtasks];
     
+    renderSubtasksEdit();
 }
+
+function saveSubtask(index){
+    const input = document.getElementById(`subtaskInput${index}`);
+
+    taskEditSubtasks[index].title = input.value.trim();
+    taskEditSubtasks[index].isEditing = false;
+
+    renderSubtasksEdit();
+}
+
+
+
+

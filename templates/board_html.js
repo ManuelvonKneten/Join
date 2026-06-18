@@ -169,29 +169,14 @@ function getEditTaskTemplate(task) {
         </div>
      </label>
 
-    <label>
-    <p>Assigned to:</p>
-
-    <div class="assigned_add">
-      <input class="label_input" id="assignedInput"
-         type="text"
-         placeholder="Assign contact"
-         oninput="renderAssignedDropdown()"
-         onkeydown="handleAssignedEnter(event)">
-      
-      <div id="assignedDropdownList" class="assigned_dropdown_list hidden"></div>
-    </div>
-   
-    <div id="assignedList" class="assigned_list"></div>
-
-     </label>
       
       <label>Subtasks</label>   
       <div class="subtask_add">
         <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleSubtaskEnter(event)">
         <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
       </div>
-        <div id="editSubtasks">${renderEditSubtasks(task.subtasks)}</div>
+        <div id="editSubtasks"></div>
+        
       <div class="dialog_footer">
         <button onclick="saveTaskEdit('${task.id}')">
         ✓ Save
@@ -203,16 +188,38 @@ function getEditTaskTemplate(task) {
 }
 
 
-function editSubtaskTemplate(value, index) {
-  return `
+function getSubtasksEditTemplate(subtask, index) {
+
+    if (subtask.isEditing) {
+        return `
+            <div class="edit_subtask">
+                <input
+                    id="subtaskInput${index}"
+                    type="text"
+                    value="${subtask.title}"
+                >
+
+                <div class="delete_edit_icon">
+                    <button onclick="deleteSubtask(${index})">
+                    <img src="/assets/icons/delete.png"></button>
+
+                    <button onclick="saveSubtask(${index})">✔️</button>
+                </div>
+            </div>
+        `;
+    }
+
+    return `
         <div class="edit_subtask">
-            <input
-                type="text"
-                value="${value.title}">
-            <button onclick="deleteSubtask(${index})">
-            <img src="/assets/icons/edit.png" alt="" aria-hidden="true" /></button>    
-            <button onclick="deleteSubtask(${index})">✕</button>
+            <span>• ${subtask.title}</span>
+
+            <div class="delete_edit_icon">
+                <button onclick="editSubtask(${index})">
+                    <img src="/assets/icons/edit.png" alt="">
+                </button>
+
+                <button onclick="deleteSubtask(${index})"><img src="/assets/icons/delete.png"></button>
+            </div>
         </div>
     `;
 }
-
