@@ -78,6 +78,7 @@
 
 .subtask_checkbox {
     display: flex;
+    flex-direction: row;
     justify-content: flex-start;
     width: fit-content;
     align-items: center;
@@ -220,11 +221,26 @@
 
 label {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px; 
+    color:var(--sidebar-background)
 } 
+
+.subtasks_edit_title{
+    font-size: 18px;
+    font-weight: 400;
+    color:var(--sidebar-background)
+}
+
+.priority_edit{
+    display: flex;
+    width: 100%;  
+}
+
+.priority_edit label {
+    font-size: 18px;
+}
 
 /* Edit Button */
 .edit_content{
@@ -235,6 +251,7 @@ label {
 
 .label_input {
     height: 48px;
+    width: 100%;
     padding: 8px;
     font-size: 18px;
     font-weight:400;
@@ -244,6 +261,7 @@ label {
 
 .description{
     height: 64px;
+    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -288,11 +306,6 @@ label {
     border: 1px solid grey;
 }
 
-.edit_priority{
-    display: flex;
-    gap: 16px;
-
-}
 
 .subtask_add button {
     background: none;

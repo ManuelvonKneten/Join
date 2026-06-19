@@ -474,7 +474,7 @@ function getProgressTemplate(subtasks = []) {
  * @param {string} taskId - ID des Tasks
  * @returns {void}
  */
-function openEditTaskPopup(taskId) {
+async function openEditTaskPopup(taskId) {
     const task = allTasks.find(t => t.id === taskId);
 
     taskEditSubtasks = Array.isArray(task.subtasks) 
@@ -483,10 +483,10 @@ function openEditTaskPopup(taskId) {
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
     dialogTask.showModal();
-     renderSubtasksEdit();
 
-    setupPriorityIcon();
-    updatePriorityIcon(); 
+    setPriority(task.priority);
+    renderSubtasksEdit();
+    await initEditAssigned(task);
 }
 
 
@@ -502,21 +502,6 @@ function updatePriorityIcon() {
 
 
 /**
- * Initialisiert EventListener für das Priority Icon
- * im Edit-Popup (ändert Icon je nach Auswahl).
- *
- * @returns {void}
- */
-function setupPriorityIcon() {
-    const select = document.getElementById("editPriority");
-    const icon = document.getElementById("editPriorityIcon");
-
-    select.onchange = () => {
-        icon.src = `../assets/icons/${select.value}.svg`;
-    };
-}
-
-/**
  * Speichert die bearbeiteten Task-Daten in Firebase.
  *
  * @async
@@ -529,10 +514,10 @@ async function saveTaskEdit(taskId) {
     task.title = document.getElementById("editTitle").value;
     task.description = document.getElementById("editDescription").value;
     task.dueDate = document.getElementById("editDueDate").value;
-    task.priority = document.getElementById("editPriority").value;
     task.subtasks = taskEditSubtasks;
+    task.priority = document.querySelector(".add_task_prio_btn.active")?.dataset.priority;
 
-    await fetch(`${DB_URL}/tasks/${taskId}.json`, {
+    await fetch(`${DB_URL}/tasks/$  {taskId}.json`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -664,11 +649,8 @@ function handleSubtaskEnter(event) {
 }
 
 
-function openEditTask(taskId) {
-    const task = allTasks.find(task => task.id === taskId);
-
-    taskEditSubtasks = [...task-subtasks];
-    
+function editSubtask(index) {
+taskEditSubtasks[index].isEditing = true;
     renderSubtasksEdit();
 }
 
@@ -683,4 +665,64 @@ function saveSubtask(index){
 
 
 
+async function initEditAssigned(task) {
+ 
+    await loadAvailableContacts();
 
+    selectedEditContacts = availableContacts.filter(c => task.assignedTo.includes(c.name));
+
+    renderAssignedOptionsEdit();
+    renderAssignedAvatarsEdit();
+}
+
+
+function renderAssignedOptionsEdit() {
+    
+    const container = document.getElementById('assignedOptionsEdit');
+
+    if(!container) return;
+
+    container.innerHTML = availableContacts.map(contact => {
+        const checked = selectedEditContacts.some (c =>  c.id === contact.id);
+        return `
+            <li onclick="toggleEditContact('${contact.id}')">
+                <input type="checkbox" ${checked ? "checked" : ""}>
+                ${contact.name}
+            </li>
+        `;
+    }).join("");
+}
+
+function renderAssignedAvatarsEdit() {
+    const container = document.getElementById("assignedAvatarsEdit")
+    if (!container) return;
+    container.innerHTML = selectedEditContacts.map(c => getContactsAvatar(c.name, false)).join('');
+}
+
+
+function toggleEditContact(id) {
+    const contact = availableContacts.find(c => c.id === id);
+    if (!contact) return;
+
+    const index = selectedEditContacts.findIndex(c => c.id === id);
+
+    if (index === -1) {
+        selectedEditContacts.push(contact);
+    } else {
+        selectedEditContacts.splice(index, 1);
+    }
+
+    renderAssignedOptionsEdit();
+    renderAssignedAvatarsEdit();
+}
+
+function setPriority(priority) {
+    document.querySelectorAll('.add_task_prio_btn').forEach(btn => {
+        const isActive = btn.dataset.priority === priority;
+
+        btn. classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+    });
+    
+    selectedPriority = priority;
+}

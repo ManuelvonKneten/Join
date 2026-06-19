@@ -48,6 +48,7 @@ async function loadAvailableContacts() {
     }
 }
 
+
 /**
  * Richtet den Outside-Click-Listener zum Schließen des Dropdowns ein.
  *
@@ -86,6 +87,23 @@ function selectCategory(value, label, el) {
 function toggleAssignedDropdown() {
     const options = document.getElementById('assignedOptions');
     options.classList.contains('hidden') ? openAssignedDropdown() : closeAssignedDropdown();
+}
+
+
+function toggleAssignedDropdown() {
+    const dropdown = document.getElementById("assignedDropdown");
+
+    if (!dropdown) return; // 🔥 HIER
+
+    const list = document.getElementById("assignedOptions");
+    const arrow = document.getElementById("assignedArrow");
+
+    list.classList.toggle("hidden");
+    dropdown.classList.toggle("open");
+
+    if (arrow) {
+        arrow.classList.toggle("rotated");
+    }
 }
 
 /**
