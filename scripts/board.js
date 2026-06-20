@@ -260,9 +260,22 @@ function renderAssignedOptionsEdit() {
     container.innerHTML = availableContacts.map(contact => {
         const checked = selectedEditContacts.some (c =>  c.id === contact.id);
         return `
-            <li onclick="toggleEditContact('${contact.id}')">
-                <input type="checkbox" ${checked ? "checked" : ""}>
-                ${contact.name}
+            <li class="assigned_option ${checked ? 'assigned_option_active' : ''}"
+                onclick="toggleEditContact('${contact.id}')">
+
+                <div class="assigned_option_avatar">
+                    ${getContactsAvatar(contact.name, false)}
+                </div>
+
+                <span class="assigned_option_name">
+                    ${contact.name}
+                </span>
+
+                <input 
+                    type="checkbox" 
+                    class="assigned_option_checkbox"
+                    ${checked ? "checked" : ""}
+                >
             </li>
         `;
     }).join("");
@@ -387,7 +400,7 @@ async function openEditTaskPopup(taskId) {
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
     dialogTask.showModal();
-    
+
     setupPriorityButtons();
     setPriority(task.priority);
     renderSubtasksEdit();
@@ -508,10 +521,16 @@ function saveSubtask(index){
  * @returns {Promise<void>}
  */
 async function initEditAssigned(task) {
- 
+
+    
     await loadAvailableContacts();
 
-    selectedEditContacts = availableContacts.filter(c => (task.assignedTo || []).includes(c.id));
+    const assigned = Array.isArray(task.assignedTo)
+    ? task.assignedTo
+    : (task.assignedTo ? [task.assignedTo] : []);
+
+
+    selectedEditContacts = availableContacts.filter(contact => assigned.includes(contact.id));
 
     renderAssignedOptionsEdit();
     renderAssignedAvatarsEdit();
@@ -539,7 +558,6 @@ function toggleEditContact(id) {
     renderAssignedOptionsEdit();
     renderAssignedAvatarsEdit();
 }
-
 
 
 /**
