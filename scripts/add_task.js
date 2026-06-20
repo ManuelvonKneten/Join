@@ -313,7 +313,7 @@ function getTaskFormData() {
         description: document.getElementById('taskDescription').value.trim(),
         dueDate: ddmmyyyyToISO(document.getElementById('taskDueDate').value),
         priority: selectedPriority,
-        assignedTo: selectedContacts.map(c => c.name),
+        assignedTo: selectedContacts.map(c => c.id),
         category: document.getElementById('taskCategory').value,
         subtasks: taskSubtasks,
         status: window.currentTaskStatus || 'todo'
