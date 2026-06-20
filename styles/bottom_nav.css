@@ -95,9 +95,4 @@
   .bottom_nav_item {
     height: 100%;
   }
-
-  .content {
-    min-height: calc(100dvh - var(--header-height) - var(--bottom-nav-height));
-    padding-bottom: calc(var(--bottom-nav-height) + var(--content-padding-y));
-  }
 }

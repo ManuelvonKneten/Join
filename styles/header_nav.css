@@ -1,12 +1,4 @@
-/* Header and main content frame */
-.content {
-  min-height: calc(100vh - var(--header-height));
-  margin-top: var(--header-height);
-  margin-left: var(--sidebar-width);
-  padding: var(--content-padding-y) var(--content-padding-x);
-  background-color: var(--content-background);
-}
-
+/* Header */
 .header_main {
   height: var(--header-height);
   background: var(--main-background);
@@ -136,10 +128,6 @@
   .header_main {
     left: 0;
     width: 100%;
-  }
-
-  .content {
-    margin-left: 0;
   }
 
   .header_mobile_menu_button {
