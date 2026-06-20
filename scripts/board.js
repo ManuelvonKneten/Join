@@ -387,7 +387,8 @@ async function openEditTaskPopup(taskId) {
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
     dialogTask.showModal();
-
+    
+    setupPriorityButtons();
     setPriority(task.priority);
     renderSubtasksEdit();
     await initEditAssigned(task);
