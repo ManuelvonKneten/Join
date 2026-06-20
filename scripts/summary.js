@@ -1,49 +1,112 @@
+/**
+ * @file summary.js
+ * Handles the summary dashboard logic.
+ *
+ * This file renders the greeting, loads tasks from the database,
+ * updates all task counters and displays the next upcoming urgent deadline.
+ */
+
+/**
+ * global active user
+ */
+let userName = localStorage.getItem("currentUser") || "";
+
+/**
+ * Represents a task object used on the summary dashboard.
+ *
+ * @typedef {Object} Task
+ * @property {string} [status] - The current task status, for example "todo", "done", "inprogress" or "awaitfeedback".
+ * @property {string} [priority] - The task priority, for example "urgent".
+ * @property {string} [dueDate] - The task due date as a date string.
+ */
+
+/**
+ * Returns greeting text
+ *
+ * @returns {string} The greeting text, depending on real-time on system
+ */
 function getGreetingText() {
   const currentHour = new Date().getHours();
-
+  
   if (currentHour >= 6 && currentHour < 12) {
-    return "Good morning,";
+    if (currentUser === "Guest") {
+      return "Good Morning!";
+    } else {
+      return "Good morning,";
+    }
   }
 
   if (currentHour >= 12 && currentHour < 18) {
-    return "Good afternoon,";
+    if (currentUser === "Guest") {
+      return "Good afternoon!";
+    } else {
+      return "Good afternoon,";
+    }
   }
 
   if (currentHour >= 18 && currentHour < 20) {
-    return "Good evening,";
+        if (currentUser === "Guest") {
+      return "Good evening!";
+    } else {
+      return "Good evening,";
+    }
   }
 
-  return "Good night,";
+  if (currentUser === "Guest") {
+      return "Good night!";
+    } else {
+      return "Good night,";
+    }
 }
 
+/**
+ * Renders the greeting text and the current user name into the summary page.
+ *
+ * The user name is read from localStorage.
+ *
+ * @returns {void}
+ */
 function renderGreeting() {
   const greetingElement = document.getElementById("summary_greeting");
   const userElement = document.getElementById("summary_user_name");
 
   if (!greetingElement || !userElement) return;
 
-  const userName = localStorage.getItem("currentUser") || "Guest";
+  if (userName === "Guest") userName = "";
 
   greetingElement.innerText = getGreetingText();
   userElement.innerText = userName;
 }
 
-
-
 // firebase-actions
 async function loadSummaryTasks() {
   const taskObject = await getFromDB("tasks");
-  const tasks = Object.values(taskObject ||{});
+  const tasks = Object.values(taskObject || {});
 
   console.log("Loaded tasks:", tasks);
-  setSummaryText("summary_todo_amount", countSummaryTasksByKey(tasks, "status", "todo"));
-  setSummaryText("summary_done_amount", countSummaryTasksByKey(tasks, "status", "done"));
+  setSummaryText(
+    "summary_todo_amount",
+    countSummaryTasksByKey(tasks, "status", "todo"),
+  );
+  setSummaryText(
+    "summary_done_amount",
+    countSummaryTasksByKey(tasks, "status", "done"),
+  );
 
-  setSummaryText("summary_urgent_amount", countSummaryTasksByKey(tasks, "priority", "urgent"));
+  setSummaryText(
+    "summary_urgent_amount",
+    countSummaryTasksByKey(tasks, "priority", "urgent"),
+  );
 
   setSummaryText("summary_board_amount", tasks.length);
-  setSummaryText("summary_progress_amount", countSummaryTasksByKey(tasks, "status", "inprogress"));
-  setSummaryText("summary_feedback_amount", countSummaryTasksByKey(tasks, "status", "awaitfeedback"));
+  setSummaryText(
+    "summary_progress_amount",
+    countSummaryTasksByKey(tasks, "status", "inprogress"),
+  );
+  setSummaryText(
+    "summary_feedback_amount",
+    countSummaryTasksByKey(tasks, "status", "awaitfeedback"),
+  );
 
   renderUpcomingDeadline(tasks);
 }
@@ -64,12 +127,12 @@ function renderUpcomingDeadline(tasks) {
   const upcomingUrgentTasks = tasks
     .filter((task) => task.priority === "urgent")
     .filter((task) => isUpcomingDate(task.dueDate))
-    .sort((taskA,taskB) => {
+    .sort((taskA, taskB) => {
       return new Date(taskA.dueDate) - new Date(taskB.dueDate);
     });
-  
+
   const nextTask = upcomingUrgentTasks[0];
-  
+
   if (!nextTask) {
     setSummaryText("summary_deadline", "No deadline");
     return;
@@ -79,7 +142,6 @@ function renderUpcomingDeadline(tasks) {
 }
 
 function isUpcomingDate(dateString) {
-
   const today = new Date();
   const taskDate = new Date(dateString);
 
