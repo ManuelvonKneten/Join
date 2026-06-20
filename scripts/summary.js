@@ -1,15 +1,13 @@
 /**
- * @file summary.js
- * Handles the summary dashboard logic.
- *
- * This file renders the greeting, loads tasks from the database,
- * updates all task counters and displays the next upcoming urgent deadline.
+ * @file Handles the summary dashboard rendering and task counters.
  */
 
 /**
- * global active user
+ * Global active user.
+ *
+ * @type {string}
  */
-let userName = localStorage.getItem("currentUser") || "";
+let currentUser = localStorage.getItem("currentUser") || "Guest";
 
 /**
  * Represents a task object used on the summary dashboard.
@@ -21,42 +19,39 @@ let userName = localStorage.getItem("currentUser") || "";
  */
 
 /**
- * Returns greeting text
+ * Returns greeting text for the current user and time.
  *
- * @returns {string} The greeting text, depending on real-time on system
+ * @returns {string}
  */
 function getGreetingText() {
   const currentHour = new Date().getHours();
-  
+  const isGuest = currentUser === "Guest";
+  const punctuation = isGuest ? "!" : ",";
+  const greetingBaseText = getGreetingBaseText(currentHour);
+
+  return greetingBaseText + punctuation;
+}
+
+/**
+ * Returns the base greeting for a given hour.
+ *
+ * @param {number} currentHour
+ * @returns {string}
+ */
+function getGreetingBaseText(currentHour) {
   if (currentHour >= 6 && currentHour < 12) {
-    if (currentUser === "Guest") {
-      return "Good Morning!";
-    } else {
-      return "Good morning,";
-    }
+    return "Good morning";
   }
 
   if (currentHour >= 12 && currentHour < 18) {
-    if (currentUser === "Guest") {
-      return "Good afternoon!";
-    } else {
-      return "Good afternoon,";
-    }
+    return "Good afternoon";
   }
 
   if (currentHour >= 18 && currentHour < 20) {
-        if (currentUser === "Guest") {
-      return "Good evening!";
-    } else {
-      return "Good evening,";
-    }
+    return "Good evening";
   }
 
-  if (currentUser === "Guest") {
-      return "Good night!";
-    } else {
-      return "Good night,";
-    }
+  return "Good night";
 }
 
 /**
@@ -72,13 +67,18 @@ function renderGreeting() {
 
   if (!greetingElement || !userElement) return;
 
-  if (userName === "Guest") userName = "";
-
   greetingElement.innerText = getGreetingText();
-  userElement.innerText = userName;
+
+  if (currentUser === "Guest") currentUser = "";
+  userElement.innerText = currentUser;
 }
 
 // firebase-actions
+/**
+ * Loads task records from the database and updates the summary dashboard.
+ *
+ * @returns {Promise<void>}
+ */
 async function loadSummaryTasks() {
   const taskObject = await getFromDB("tasks");
   const tasks = Object.values(taskObject || {});
@@ -111,6 +111,13 @@ async function loadSummaryTasks() {
   renderUpcomingDeadline(tasks);
 }
 
+/**
+ * Sets inner text for a summary stat element.
+ *
+ * @param {string} id - Element id to update.
+ * @param {number|string} value - Text to render.
+ * @returns {void}
+ */
 function setSummaryText(id, value) {
   const element = document.getElementById(id);
 
@@ -119,10 +126,24 @@ function setSummaryText(id, value) {
   element.innerText = value;
 }
 
+/**
+ * Counts tasks matching a specific key/value pair.
+ *
+ * @param {Task[]} tasks
+ * @param {string} key
+ * @param {string} value
+ * @returns {number}
+ */
 function countSummaryTasksByKey(tasks, key, value) {
   return tasks.filter((task) => task[key] === value).length;
 }
 
+/**
+ * Finds and displays the next urgent upcoming deadline.
+ *
+ * @param {Task[]} tasks
+ * @returns {void}
+ */
 function renderUpcomingDeadline(tasks) {
   const upcomingUrgentTasks = tasks
     .filter((task) => task.priority === "urgent")
@@ -141,6 +162,12 @@ function renderUpcomingDeadline(tasks) {
   setSummaryText("summary_deadline", formatSummeryDate(nextTask.dueDate));
 }
 
+/**
+ * Determines whether a date string points to today or a future date.
+ *
+ * @param {string} dateString
+ * @returns {boolean}
+ */
 function isUpcomingDate(dateString) {
   const today = new Date();
   const taskDate = new Date(dateString);
@@ -151,6 +178,12 @@ function isUpcomingDate(dateString) {
   return taskDate >= today;
 }
 
+/**
+ * Formats a due date for display on the summary dashboard.
+ *
+ * @param {string} dateString
+ * @returns {string}
+ */
 function formatSummeryDate(dateString) {
   const date = new Date(dateString);
 
