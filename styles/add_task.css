@@ -501,13 +501,13 @@
     }
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
     .content {
         margin-left: 0;
         padding-left: 0;
         padding-right: 0;
     }
-}
+} */
 
 @media (max-width: 767px) {
     .add_task_layout {
