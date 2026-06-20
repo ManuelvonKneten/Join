@@ -9,7 +9,7 @@
 /**
  * global active user
  */
-let userName = localStorage.getItem("currentUser") || "";
+let currentUser = localStorage.getItem("currentUser") || "Guest";
 
 /**
  * Represents a task object used on the summary dashboard.
@@ -27,36 +27,27 @@ let userName = localStorage.getItem("currentUser") || "";
  */
 function getGreetingText() {
   const currentHour = new Date().getHours();
-  
+  const isGuest = currentUser === "Guest";
+  const punctuation = isGuest ? "!" : ",";
+  const greetingBaseText = getGreetingBaseText(currentHour);
+
+  return greetingBaseText + punctuation;
+}
+
+function getGreetingBaseText(currentHour) {
   if (currentHour >= 6 && currentHour < 12) {
-    if (currentUser === "Guest") {
-      return "Good Morning!";
-    } else {
-      return "Good morning,";
-    }
+    return "Good morning";
   }
 
   if (currentHour >= 12 && currentHour < 18) {
-    if (currentUser === "Guest") {
-      return "Good afternoon!";
-    } else {
-      return "Good afternoon,";
-    }
+    return "Good afternoon";
   }
 
   if (currentHour >= 18 && currentHour < 20) {
-        if (currentUser === "Guest") {
-      return "Good evening!";
-    } else {
-      return "Good evening,";
-    }
+    return "Good evening";
   }
 
-  if (currentUser === "Guest") {
-      return "Good night!";
-    } else {
-      return "Good night,";
-    }
+  return "Good night";
 }
 
 /**
@@ -72,10 +63,10 @@ function renderGreeting() {
 
   if (!greetingElement || !userElement) return;
 
-  if (userName === "Guest") userName = "";
-
   greetingElement.innerText = getGreetingText();
-  userElement.innerText = userName;
+
+  if (currentUser === "Guest") currentUser = "";
+  userElement.innerText = currentUser;
 }
 
 // firebase-actions
