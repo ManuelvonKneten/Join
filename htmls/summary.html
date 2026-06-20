@@ -22,14 +22,14 @@
         <div class="summary_headline">
           <h1>Join 360</h1>
           <p>Key Metrics at a Glance</p>
-          <div class="seperating_line"></div>
+          <div class="seperating_line" aria-hidden="true"></div>
         </div>
 
         <div class="summary_body">
           <div class="summary_overview">
-            <article class="summary_card summary_card_top">
+            <article class="summary_card summary_card_top" aria-label="Total To-Do tasks">
               <div class="summary_card_content">
-                <img src="../assets/icons/pencil.svg" alt="" />
+                <img src="../assets/icons/pencil.svg" alt="Pencil icon" />
                 <div class="summary_card_text">
                   <span id="summary_todo_amount" class="summary_number">0</span>
                   <span class="summary_label">To-Do</span>
@@ -37,9 +37,9 @@
               </div>
             </article>
 
-            <article class="summary_card summary_card_top">
+            <article class="summary_card summary_card_top" aria-label="Total completed tasks">
               <div class="summary_card_content">
-                <img src="../assets/icons/check.svg" alt="" />
+                <img src="../assets/icons/check.svg" alt="Check mark icon" />
                 <div class="summary_card_text">
                   <span id="summary_done_amount" class="summary_number">0</span>
                   <span class="summary_label">Done</span>
@@ -47,9 +47,9 @@
               </div>
             </article>
 
-            <article class="summary_card summary_card_urgent">
+            <article class="summary_card summary_card_urgent" aria-label="Urgent tasks with upcoming deadline">
               <div class="summary_card_content">
-                <img src="../assets/icons/urgency.svg" alt="" />
+                <img src="../assets/icons/urgency.svg" alt="Urgency alert icon" />
                 <div class="summary_card_text">
                   <span id="summary_urgent_amount" class="summary_number">0</span>
                   <span class="summary_label">Urgent</span>
@@ -57,28 +57,28 @@
               </div>
 
               <div class="summary_deadline_box">
-                <strong id="summary_deadline"></strong>
+                <strong id="summary_deadline" aria-label="Next urgent deadline"></strong>
                 <span>Upcoming Deadline</span>
               </div>
             </article>
 
-            <article class="summary_card">
+            <article class="summary_card" aria-label="Total tasks in board">
               <span id="summary_board_amount" class="summary_number">0</span>
               <span class="summary_label">Tasks in Board</span>
             </article>
 
-            <article class="summary_card">
+            <article class="summary_card" aria-label="Tasks currently in progress">
               <span id="summary_progress_amount" class="summary_number">0</span>
               <span class="summary_label">Tasks in Progress</span>
             </article>
 
-            <article class="summary_card">
+            <article class="summary_card" aria-label="Tasks awaiting feedback">
               <span id="summary_feedback_amount" class="summary_number">0</span>
               <span class="summary_label">Awaiting Feedback</span>
             </article>
           </div>
 
-          <aside class="summary_greeting_box">
+          <aside class="summary_greeting_box" role="complementary" aria-label="User greeting">
             <h2 id="summary_greeting">Good morning,</h2>
             <p id="summary_user_name">Guest</p>
           </aside>
