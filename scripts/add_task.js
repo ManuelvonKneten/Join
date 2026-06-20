@@ -20,6 +20,7 @@ async function initAddTask() {
     if (!document.getElementById('assignedOptions')) return;
 
     await loadAvailableContacts();
+    renderAssignedOptions();
     setupPriorityButtons();
     setupSubtaskInput();
     setupClearButton();
@@ -36,12 +37,16 @@ async function initAddTask() {
  * @returns {Promise<void>}
  */
 async function loadAvailableContacts() {
+    
     try {
         const rawContactData = await getFromDB('contacts');
+    
         availableContacts = rawContactData
             ? Object.entries(rawContactData).map(([id, contact]) => ({ id, ...contact }))
             : [];
-        renderAssignedOptions();
+            
+        // renderAssignedOptions();
+
     } catch (error) {
         console.error('Contacts could not be loaded:', error);
         showTaskToast('Contacts could not be loaded.', true);
@@ -400,3 +405,4 @@ function clearTaskForm() {
     renderSelectedAvatars();
     document.querySelectorAll('.add_task_prio_btn').forEach(btn => btn.classList.remove('active'));
 }
+// 
