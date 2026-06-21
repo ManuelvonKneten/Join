@@ -11,21 +11,19 @@
     <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/header_nav.css" />
     <link rel="stylesheet" href="../styles/bottom_nav.css" />
-    <link rel="stylesheet" href="../styles/contacts.css">
-    <link rel="stylesheet" href="../styles/contacts_list.css">
-    <link rel="stylesheet" href="../styles/contacts_modal.css">
+    <link rel="stylesheet" href="../styles/contacts.css" />
+    <link rel="stylesheet" href="../styles/contacts_list.css" />
+    <link rel="stylesheet" href="../styles/contacts_modal.css" />
     <link rel="stylesheet" href="../styles/add_task.css" />
     <link rel="stylesheet" href="../styles/board_dialog.css" />
     <link rel="stylesheet" href="../styles/board.css" />
   </head>
 
   <body>
-
     <div data-include="../templates/sidebar.html"></div>
     <div data-include="../templates/header.html"></div>
 
     <main class="content">
-      
       <dialog id="delete_task" class="delete_task">
         <h2>Delete Task?</h2>
         <p>Are you sure you want to delete this task?</p>
@@ -42,7 +40,12 @@
 
       <section id="board" class="board">
         <div class="titel_and_search">
-          <h1>Board</h1>
+          <div class="header_mobile_flex">
+            <h1 class="header_mobile">Board</h1>
+            <button class="header_mobile">
+              <img src="../assets/icons/add_plus.svg" alt="plus icos" />
+            </button>
+          </div>
           <div class="search">
             <div class="search_field">
               <input type="text" id="search" placeholder="Find Task" />
@@ -160,7 +163,7 @@
     <script src="../scripts/utils.js"></script>
 
     <script src="../scripts/contacts.js"></script>
-    
+
     <script src="../scripts/add_task.js"></script>
 
     <script src="../templates/template.js"></script>
