@@ -1,11 +1,15 @@
 function getTaskTemplate(task) {
   return `
     <div  class="taskContainer">
-      <div draggable="true"
+      <div
+      class="card"
+      role="button"
+      draggable="true"
+      tabindex="0"
       ondragstart="startDragEffect(event); startDragging('${task.id}')"
       ondragend="endDragEffect(event)"
       onclick="openTaskPopUp('${task.id}')"
-      class="card">
+      >
 
         <div class="${task.category} card_header">
         ${formatCategory(task.category)}
