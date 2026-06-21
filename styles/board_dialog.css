@@ -57,7 +57,6 @@
 
 .dialog_row {
     display: flex;
-    flex-direction: row;
 }
 
 .dialog_row span {
@@ -101,7 +100,6 @@
 .contact_task {
     padding-top: 12px;
     display: flex;
-    flex-direction: row;
     gap: 16px;
     align-items: center;
 }
@@ -176,7 +174,7 @@
     display: flex;
     gap: 16px;
     justify-content: flex-end;
-    width: 100%;;
+    width: 100%;
 }
 
 .delete_buttons button {
@@ -208,7 +206,7 @@
 .add_task_layout_popup {
     width: 1000px;
     max-width: 90vw;
-    min-height: 700px;
+    min-height: 80vh;
     max-height: 90vh;
     overflow-y: auto;
     background-color: var(--main-background);
@@ -307,7 +305,8 @@ label {
 }
 
 
-.subtask_add button {
+.subtask_add button,
+.edit_subtask button  {
     background: none;
     border: none;
     height: 20px;
@@ -321,27 +320,11 @@ label {
     cursor: pointer;
 }
 
-.subtask_add button:hover{
+.subtask_add button:hover,
+.edit_subtask button:hover {
     color: var(--color-secondary);
 }
 
-.edit_subtask button {
-    background: none;
-    border: none;
-    height: 20px;
-    width: 20px;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 3px 3px 6px 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.edit_subtask button:hover{
-    color: var(--color-secondary);
-}
 
 .delete_edit_icon {
     display: flex;

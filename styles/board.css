@@ -10,7 +10,7 @@
     padding-bottom: 50px;
 }
 
-h1 {
+.board h1 {
     font-size: var(--font-size-page-title);
     font-weight: 700;
 }
@@ -67,7 +67,7 @@ h1 {
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
-    font-size: 20px;
+    font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 700;
     cursor: pointer;
 }
@@ -88,9 +88,12 @@ h1 {
     gap:24px;
 }
 
-.to_do, .in_progress, .await_feedback, .done {
-  flex: 1; 
-  }
+.to_do, 
+.in_progress, 
+.await_feedback, 
+.done {
+    flex: 1; 
+}
 
 .task_column {
     display: flex;
@@ -120,19 +123,18 @@ h1 {
 }
 
 .task_field {
- min-height: 700px;
+ min-height: calc(100vh - 250px);
  width: 100%;
  display: flex;
  flex-direction: column;
  gap: 32px;
- 
+
 }
 
 /* Card */
 .card {
     display: flex;
     flex-direction: column;
-    /* align-items: flex-start; */
     gap: 24px;
     border-radius: 10px;
     padding: 24px;
@@ -142,12 +144,12 @@ h1 {
 }
 
 .card h4{
-    font-size: 32px;
+    font-size: clamp(20px, 2vw, 32px);
     font-weight: 700;
 }
 
 .card p {
-    font-size: 24px;
+    font-size: clamp(14px, 1.5vw, 24px);
     opacity: 0.8;
 }
 
