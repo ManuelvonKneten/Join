@@ -217,7 +217,8 @@
     transform: translate(-50%, -50%); 
 } 
 
-label {
+label,
+.edit_assigned_field {
     display: flex;
     flex-direction: column;
     align-items: flex-start;

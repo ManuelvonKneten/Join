@@ -59,10 +59,12 @@ async function loadAvailableContacts() {
  *
  * @returns {void}
  */
-function setupAssignedDropdown() {
+function setupAssignedDropdown(suffix = '') {
     document.addEventListener('click', (event) => {
-        if (!document.getElementById('assignedDropdown').contains(event.target)) {
-            closeAssignedDropdown();
+        const dropdown = document.getElementById('assignedDropdown' + suffix);
+        if (!dropdown) return;
+        if (!dropdown.contains(event.target)) {
+            closeAssignedDropdown(suffix);
         }
     });
 }
@@ -89,26 +91,23 @@ function selectCategory(value, label, el) {
     document.getElementById('categoryArrow').classList.remove('rotated');
 }
 
-function toggleAssignedDropdown() {
-    const options = document.getElementById('assignedOptions');
-    options.classList.contains('hidden') ? openAssignedDropdown() : closeAssignedDropdown();
-}
+/**
+ * Öffnet oder schließt ein Assigned-Dropdown.
+ * Wird von Add-Task (ohne Argument) und vom Edit-Popup (suffix = 'Edit') genutzt.
+ *
+ * @param {string} [suffix=''] - ID-Zusatz, z.B. 'Edit' für das Edit-Popup
+ * @returns {void}
+ */
+function toggleAssignedDropdown(suffix = '') {
+    const dropdown = document.getElementById('assignedDropdown' + suffix);
+    if (!dropdown) return;
 
+    const list = document.getElementById('assignedOptions' + suffix);
+    const arrow = dropdown.querySelector('.assigned_arrow');
 
-function toggleAssignedDropdown() {
-    const dropdown = document.getElementById("assignedDropdown");
-
-    if (!dropdown) return; // 🔥 HIER
-
-    const list = document.getElementById("assignedOptions");
-    const arrow = document.getElementById("assignedArrow");
-
-    list.classList.toggle("hidden");
-    dropdown.classList.toggle("open");
-
-    if (arrow) {
-        arrow.classList.toggle("rotated");
-    }
+    list.classList.toggle('hidden');
+    dropdown.classList.toggle('open');
+    if (arrow) arrow.classList.toggle('rotated');
 }
 
 /**
@@ -124,8 +123,19 @@ function setAssignedDropdownOpen(isOpen) {
 /** @returns {void} */
 function openAssignedDropdown()  { setAssignedDropdownOpen(true);  }
 
-/** @returns {void} */
-function closeAssignedDropdown() { setAssignedDropdownOpen(false); }
+/**
+ * Schließt ein Assigned-Dropdown.
+ *
+ * @param {string} [suffix=''] - ID-Zusatz, z.B. 'Edit' für das Edit-Popup
+ * @returns {void}
+ */
+function closeAssignedDropdown(suffix = '') {
+    const dropdown = document.getElementById('assignedDropdown' + suffix);
+    if (!dropdown) return;
+    document.getElementById('assignedOptions' + suffix)?.classList.add('hidden');
+    dropdown.classList.remove('open');
+    dropdown.querySelector('.assigned_arrow')?.classList.remove('rotated');
+}
 
 /**
  * Fügt einen Kontakt zur Auswahl hinzu oder entfernt ihn daraus.

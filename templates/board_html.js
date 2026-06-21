@@ -183,7 +183,7 @@ function getEditTaskTemplate(task) {
             </div>
      </label>
 
-    <label>
+    <div class="edit_assigned_field">
     <p>Assigned to:</p>
 
     <div class="add_task_field">
@@ -196,8 +196,8 @@ function getEditTaskTemplate(task) {
            aria-controls="assignedOptions"
            aria-label="Kontakte zuweisen"
            tabindex="0"
-           onclick="toggleAssignedDropdown()"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAssignedDropdown();}">
+           onclick="toggleAssignedDropdown('Edit')"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAssignedDropdown('Edit');}">
         <span class="assigned_placeholder">
           Select contacts to assign
         </span>
@@ -216,7 +216,7 @@ function getEditTaskTemplate(task) {
     <div class="assigned_avatars" id="assignedAvatarsEdit"></div>
 
   </div>
-</label>
+</div>
 
   
       <p class="subtasks_edit_title">Subtasks</p>   
