@@ -5,6 +5,8 @@ let currentTaskId = null;
 let selectedEditContacts= [];
 let currentDraggedTask;
 let selectedEditPriority = '';
+let keyboardDraggedTask = null;
+
 
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', initBoard);
@@ -327,6 +329,68 @@ function searchTask() {
  showNoResultsAlert(filteredTasks);
  renderBoard(filteredTasks);
 }
+
+
+
+function handleTaskKey(event, taskId){
+    if (event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        openTaskPopUp(taskId);
+    }
+}
+
+const KEY_MOVES = {
+    ArrowRight: "inprogress",
+    ArrowLeft: "todo",
+    ArrowDown: "awaitfeedback",
+    ArrowUp: "done"
+};
+
+function handleKeyboardBoard(event){
+    if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+        return;
+    }
+
+    if ( event.key === "Enter" && event.target.classList.contains("card")) {
+        keyboardDraggedTask = event.target;
+        event.target.classList.add("keyboard-selected");
+        event.target.classList.add("dragging-keyboard");
+        return;
+    }
+
+    if (event.key === "Escape" && keyboardDraggedTask) {
+            keyboardDraggedTask.classList.remove("keyboard-selected");
+            keyboardDraggedTask = null;
+        return;
+    }
+
+    if(!keyboardDraggedTask) return;
+
+    if(KEY_MOVES[event.key]){
+        event.preventDefault();
+        moveKeyboardTask(KEY_MOVES[event.key]);
+    }
+    
+}
+
+document.addEventListener("keydown", handleKeyboardBoard);
+
+// function moveWithKeyboard(direction){
+//     if(!keyboardDraggedTask) return;
+    
+//     const moves = {
+//         right: "inprogress",
+//         left: "todo",
+//         down: "awaitfeedback",
+//         up: "done"
+//     };
+
+//     if(moves[direction]){
+//         moveKeyboardTask(moves[direction]);
+//     }
+    
+// }
+
 
 
 /**
