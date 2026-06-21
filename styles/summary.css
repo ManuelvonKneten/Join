@@ -111,10 +111,10 @@
   background-color: var(--main-background);
   mask-repeat: no-repeat;
   mask-position: center;
-  mask-size: 45%;
+  mask-size: 66%;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  -webkit-mask-size: 45%;
+  -webkit-mask-size: 66%;
 }
 
 .summary_icon_check::after {
@@ -271,11 +271,6 @@
 
   .summary_card_content {
     gap: clamp(10px, 3vw, 18px);
-  }
-
-  .summary_icon {
-    width: clamp(40px, 12vw, 69px);
-    height: clamp(40px, 12vw, 69px);
   }
 
   .summary_number {
