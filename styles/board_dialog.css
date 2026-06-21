@@ -57,8 +57,7 @@
 }
 
 .dialog_row {
-  display: flex;
-  flex-direction: row;
+    display: flex;
 }
 
 .dialog_row span {
@@ -100,11 +99,10 @@
 }
 
 .contact_task {
-  padding-top: 12px;
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  align-items: center;
+    padding-top: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 
 .contact_avatar {
@@ -172,10 +170,10 @@
 }
 
 .delete_buttons {
-  display: flex;
-  gap: 16px;
-  justify-content: flex-end;
-  width: 100%;
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .delete_buttons button {
@@ -204,18 +202,18 @@
 }
 
 .add_task_layout_popup {
-  width: 1000px;
-  max-width: 90vw;
-  min-height: 700px;
-  max-height: 90vh;
-  overflow-y: auto;
-  background-color: var(--main-background);
-  border-radius: 20px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    width: 1000px;
+    max-width: 90vw;
+    min-height: 80vh;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: var(--main-background);
+    border-radius: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+} 
 
 label,
 .edit_assigned_field {
@@ -305,41 +303,26 @@ label,
   border: 1px solid grey;
 }
 
-.subtask_add button {
-  background: none;
-  border: none;
-  height: 20px;
-  width: 20px;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 3px 3px 6px 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+.subtask_add button,
+.edit_subtask button  {
+    background: none;
+    border: none;
+    height: 20px;
+    width: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 3px 3px 6px 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
-.subtask_add button:hover {
-  color: var(--color-secondary);
-}
-
-.edit_subtask button {
-  background: none;
-  border: none;
-  height: 20px;
-  width: 20px;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 3px 3px 6px 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
+.subtask_add button:hover,
 .edit_subtask button:hover {
-  color: var(--color-secondary);
+    color: var(--color-secondary);
 }
+
 
 .delete_edit_icon {
   display: flex;

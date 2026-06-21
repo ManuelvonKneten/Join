@@ -13,10 +13,10 @@
   gap: clamp(24px, 4vw, 48px);
 }
 
-h1 {
-  font-size: var(--font-size-page-title);
-  font-weight: 700;
-  line-height: 1.2;
+.board h1 {
+    font-size: var(--font-size-page-title);
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .header_mobile_flex {
@@ -357,3 +357,5 @@ h1 {
     width: 72%;
   }
 }
+
+
