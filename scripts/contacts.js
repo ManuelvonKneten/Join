@@ -171,6 +171,8 @@ async function deleteContact() {
 function renderContacts() {
     const contactListElement = document.getElementById('contactList');
 
+    if (!contactListElement) return;
+
     if (!allContacts.length) {
         contactListElement.innerHTML = '<p class="no_contacts">No contacts yet.</p>';
         return;
