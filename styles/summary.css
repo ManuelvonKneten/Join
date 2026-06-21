@@ -64,6 +64,7 @@
   border-radius: 30px;
   background-color: var(--main-background);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .summary_card:hover {
