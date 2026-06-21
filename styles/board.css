@@ -353,4 +353,7 @@ h1 {
   .search button {
     display: none;
   }
+  .card {
+    width: 72%;
+  }
 }
