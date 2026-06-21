@@ -66,6 +66,16 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
+.summary_card:hover {
+  background-color: var(--color-tertiary);
+  cursor: pointer;
+}
+
+.summary_card:hover span,
+.summary_card:hover strong {
+  color: var(--color-primary);
+}
+
 .summary_card_top {
   grid-column: span 3;
 }
@@ -85,9 +95,44 @@
   gap: 18px;
 }
 
-.summary_card_content img {
+.summary_icon {
   width: 69px;
   height: 69px;
+  border-radius: 50%;
+  background-color: var(--color-tertiary);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.summary_icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--main-background);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 45%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 45%;
+}
+
+.summary_icon_check::after {
+  mask-image: url("../assets/icons/check-mask.svg");
+  -webkit-mask-image: url("../assets/icons/check-mask.svg");
+}
+
+.summary_icon_pencil::after {
+  mask-image: url("../assets/icons/pencil-mask.svg");
+  -webkit-mask-image: url("../assets/icons/pencil-mask.svg");
+}
+
+.summary_card:hover .summary_icon {
+  background-color: var(--main-background);
+}
+
+.summary_card:hover .summary_icon::after {
+  background-color: var(--color-tertiary);
 }
 
 .summary_card_text {
@@ -228,7 +273,7 @@
     gap: clamp(10px, 3vw, 18px);
   }
 
-  .summary_card_content img {
+  .summary_icon {
     width: clamp(40px, 12vw, 69px);
     height: clamp(40px, 12vw, 69px);
   }
