@@ -97,7 +97,8 @@ async function saveTaskEdit(taskId) {
     task.dueDate = document.getElementById("editDueDate").value;
     task.subtasks = taskEditSubtasks;
     task.priority = document.querySelector(".add_task_prio_btn.active")?.dataset.priority;
-   
+    task.assignedTo = selectedEditContacts.map(c => c.id);
+
     await fetch(`${DB_URL}/tasks/${taskId}.json`, {
         method: "PATCH",
         headers: {
@@ -399,7 +400,7 @@ async function openEditTaskPopup(taskId) {
 
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
-    dialogTask.showModal();
+    if (!dialogTask.open) dialogTask.showModal();
 
     setupPriorityButtons();
     setPriority(task.priority);
@@ -534,6 +535,7 @@ async function initEditAssigned(task) {
 
     renderAssignedOptionsEdit();
     renderAssignedAvatarsEdit();
+    setupAssignedDropdown('Edit');   // wiederverwendete add_task-Funktion
 }
 
 

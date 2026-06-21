@@ -217,13 +217,14 @@
   transform: translate(-50%, -50%);
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  color: var(--sidebar-background);
-}
+label,
+.edit_assigned_field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px; 
+    color:var(--sidebar-background)
+} 
 
 .subtasks_edit_title {
   font-size: 18px;
