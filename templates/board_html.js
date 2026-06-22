@@ -1,3 +1,6 @@
+//       onkeydown="handleTaskKey(event, '${task.id}')"
+
+
 function getTaskTemplate(task) {
   return `
     <div  class="taskContainer">
@@ -8,7 +11,6 @@ function getTaskTemplate(task) {
       draggable="true"
       tabindex="0"
       ondragstart="startDragEffect(event); startDragging('${task.id}')"
-      onkeydown="handleTaskKey(event, '${task.id}')"
       ondragend="endDragEffect(event)"
       onclick="openTaskPopUp('${task.id}')"
       >

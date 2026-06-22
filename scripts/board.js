@@ -362,23 +362,24 @@ function handleKeyboardBoard(event){
     }
 
     if (event.key === "Enter" ) {
-        const card = event.target.closest(".card")
+        const card = document.activeElement.closest(".card");
         if(!card) return;
 
-        keyboardDraggedTask = card;
+        keyboardDraggedTaskId = card.dataset.id;
         keyboardModeActive = true;
         card.classList.add("keyboard-selected", "dragging-keyboard");
+        card.focus();
         return;
     }
 
-    if (event.key === "Escape" && keyboardDraggedTask) {
-        keyboardDraggedTask.classList.remove("keyboard-selected", "dragging-keyboard");
-        keyboardDraggedTask = null;
+    if (event.key === "Escape" && keyboardDraggedTaskId) {
+        keyboardDraggedTaskId.classList.remove("keyboard-selected", "dragging-keyboard");
+        keyboardDraggedTaskId = null;
         keyboardModeActive = false;
         return;
     }
 
-    if(!keyboardDraggedTask) return;
+    if(!keyboardDraggedTaskId) return;
 
     if(KEY_MOVES[event.key]){
         event.preventDefault();
