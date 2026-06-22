@@ -31,7 +31,8 @@
   justify-content: space-between;
 }
 
-.dialog_header div {
+.dialog_header .user_story,
+.dialog_header .technical  {
   color: white;
   border: none;
   border-radius: 8px;
@@ -72,7 +73,6 @@
   color: var(--sidebar-background);
   display: inline-block;
   width: 120px;
-  font-size: 18px;
   font-weight: 400;
 }
 
@@ -128,7 +128,7 @@
 
 .dialog_footer {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   gap: 10px;
 }
 

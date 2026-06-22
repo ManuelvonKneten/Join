@@ -1,14 +1,24 @@
-/* ---  State / Globals --- */
-let taskEditSubtasks = [];
+                                /* ---  State / Globals --- */
+/** @type {Array<Object>} */
 let allTasks = [];
+
+/** @type {string|null} */
 let currentTaskId = null;
-let selectedEditContacts= [];
+
+/** @type {string|null} */
 let currentDraggedTask;
-let selectedEditPriority = '';
+
+/** @type {string|null} */
 let keyboardDraggedTaskId = null;
+
+/** @type {boolean} */
 let keyboardModeActive = false;
 
-/* --- Init --- */
+/** @type {string|null} */
+let focusedTaskId = null;
+
+
+                                        /* --- Init --- */
 document.addEventListener('DOMContentLoaded', initBoard);
 
 
@@ -26,7 +36,7 @@ async function initBoard() {
 }
 
 
-/* --- Init / Event Listeners --- */
+                                        /* --- Init / Event Listeners --- */
 /**
  * Registriert alle Event Listener für das Board.
  *
@@ -38,8 +48,7 @@ function initEventListeners(){
 }
 
 
-/* ---  Data Layer (Firebase / API) --- */
-
+                                        /* ---  Data Layer (Firebase / API) --- */
 /**
  * Lädt alle Tasks aus Firebase, speichert sie im lokalen State
  * und rendert anschließend das Board.
@@ -63,25 +72,6 @@ async function loadTasks() {
     } catch (error) {
         console.error('Tasks could not be loaded!', error);
     }
-}
-
-
-/**
- * Löscht einen Task aus Firebase und aus dem lokalen State.
- *
- * @async
- * @returns {Promise<void>}
- */
-async function deleteTask() {
-    await deleteFromDB(`tasks/${currentTaskId}`);
-
-    allTasks = allTasks.filter(task => task.id !== currentTaskId);
-    
-    renderBoard();
-    showTaskToast('Task deleted successfully');
-
-    document.getElementById('delete_task').close();
-    closeTaskPopUp();
 }
 
 
@@ -115,7 +105,6 @@ async function saveTaskEdit(taskId) {
 }
 
 
-
 /**
  * Verschiebt einen Task in eine andere Spalte,
  * aktualisiert den Status in Firebase
@@ -137,6 +126,15 @@ async function moveTo(event) {
     await loadTasks(); 
 }
 
+
+/**
+ * Verschiebt den aktuell per Tastatur ausgewählten Task
+ * in einen neuen Status.
+ *
+ * @async
+ * @param {string} newStatus - Zielstatus.
+ * @returns {Promise<void>}
+ */
 async function moveKeyboardTask(newStatus) {
     const taskId = keyboardDraggedTaskId;
 
@@ -147,37 +145,7 @@ async function moveKeyboardTask(newStatus) {
 }
 
 
-/**
- * Wechselt den Status eines Subtasks (completed / not completed)
- * und speichert die Änderung in Firebase.
- *
- * @param {string} taskId - ID des Tasks
- * @param {number} subtaskIndex - Index des Subtasks im Array
- * @returns {Promise<void>}
- */
-function toggleSubtask(taskId, subtaskIndex) {
-    const task = allTasks.find (t => t.id === taskId);
-
-    if (!task) {
-        console.error("No task found:", taskId)
-        return;
-    }
-
-    task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
-    
-    fetch(`${DB_URL}/tasks/${taskId}.json`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({subtasks: task.subtasks})
-    });
-
-    openTaskPopUp(taskId);
-}
-
-
-/* --- Render Functions --- */
+                                    /* --- Render Functions --- */
 /**
  * Leert alle Board-Spalten und rendert anschließend alle Tasks neu.
  *
@@ -307,7 +275,6 @@ function renderAssignedAvatarsEdit() {
 }
 
 
-
 /**
  * Rendert alle Subtasks im Edit-Task Popup.
  *
@@ -322,586 +289,6 @@ function renderSubtasksEdit() {
     });
 }
   
-
-/* --- Event Handlers --- */
-/**
- * Event-Handler für die Task-Suche.
- * Liest den Suchbegriff aus dem Inputfeld,
- * filtert allTasks und rendert das Board neu.
- *
- * @returns {void}
- */
-function searchTask() {
-    let input = document.getElementById('search').value.toLowerCase();
-    let filteredTasks = allTasks.filter(task => task.title.toLowerCase().includes(input) ||
-    task.description.toLowerCase().includes(input)
- );
- showNoResultsAlert(filteredTasks);
- renderBoard(filteredTasks);
-}
-
-
-
-function handleTaskKey(event, taskId){
-    if (event.key === "Enter" || event.key === " "){
-        event.preventDefault();
-        openTaskPopUp(taskId);
-    }
-}
-
-const KEY_MOVES = {
-    ArrowRight: "inprogress",
-    ArrowLeft: "todo",
-    ArrowDown: "awaitfeedback",
-    ArrowUp: "done"
-};
-
-function handleKeyboardBoard(event){
-    if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
-        return;
-    }
-
-    if (event.key === "Enter" ) {
-        const card = document.activeElement.closest(".card");
-        if(!card) return;
-
-        keyboardDraggedTaskId = card.dataset.id;
-        keyboardModeActive = true;
-        card.classList.add("keyboard-selected", "dragging-keyboard");
-        card.focus();
-        return;
-    }
-
-    if (event.key === "Escape" && keyboardDraggedTaskId) {
-        keyboardDraggedTaskId.classList.remove("keyboard-selected", "dragging-keyboard");
-        keyboardDraggedTaskId = null;
-        keyboardModeActive = false;
-        return;
-    }
-
-    if(!keyboardDraggedTaskId) return;
-
-    if(KEY_MOVES[event.key]){
-        event.preventDefault();
-        moveKeyboardTask(KEY_MOVES[event.key]);
-    }
-    
-}
-
-document.addEventListener("keydown", handleKeyboardBoard);
-
-
-
-/**
- * Speichert die ID des aktuell gezogenen Tasks.
- *
- * @param {string} id - Firebase-ID des Tasks.
- * @returns {void}
- */
-function startDragging(id){
-    currentDraggedTask = id;
-}
-
-
-/**
- * Erlaubt das Ablegen eines Elements auf einer Drop-Zone.
- *
- * @param {DragEvent} ev - Das Drag-Over-Event.
- * @returns {void}
- */
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-
-
-/* --- Pop-Ups --- */
-/**
- * Schließt das Task-Detail-Modal beim Klick außerhalb des Inhalts.
- *
- * @param {MouseEvent} event
- * @returns {void}
- */
-function handleDialogClick(event) {
-    const dialog = document.getElementById('dialogTask');
-    if (event.target === dialog) {
-        dialog.close();
-    }   
-}
-
-const dialogTask = document.getElementById('dialogTask');
-dialogTask.addEventListener('click', handleDialogClick);
-
-
-/**
- * Öffnet das Detail-Popup eines Tasks.
- *
- * @param {string} taskId - ID des Tasks
- * @returns {void}
- */
-function openTaskPopUp(taskId) {
-    if (keyboardModeActive) return;
-
-    const task = allTasks.find(task => task.id === taskId);
-    
-    if(!task) return;
-    const dialogTask = document.getElementById('dialogTask');
-    dialogTask.innerHTML = getTaskDetailsTemplate(task);
-    dialogTask.showModal(); 
-}
-
-
-/**
- * Öffnet das Edit-Task Popup und lädt die Task-Daten in das Formular.
- *
- * @param {string} taskId - ID des Tasks
- * @returns {void}
- */
-async function openEditTaskPopup(taskId) {
-    const task = allTasks.find(t => t.id === taskId);
-    
-    taskEditSubtasks = Array.isArray(task.subtasks) 
-    ? [...task.subtasks] : [];
-
-    const dialogTask = document.getElementById('dialogTask');
-    dialogTask.innerHTML = getEditTaskTemplate(task);
-    if (!dialogTask.open) dialogTask.showModal();
-
-    setupPriorityButtons();
-    setPriority(task.priority);
-    renderSubtasksEdit();
-    await initEditAssigned(task);
-}
-
-
-/**
- * Öffnet das "Add Task" Popup im Board.
- * Lädt dazu das HTML dynamisch und initialisiert das Formular.
- *
- * @async
- * @param {string} [status='todo'] - Standard-Status für den neuen Task
- * @returns {Promise<void>}
- */
-async function openAddTaskPopUp(status = 'todo') {
-    const response = await fetch('./add_task.html');
-    let html = await response.text();
-
-    html = html.replace('<h1 class="add_task_heading">Add Task</h1>', getNewHTMLTag());
-
-    const temp = document.createElement('div');
-    temp.innerHTML = html;
-
-    const content = temp.querySelector('.add_task_layout');
- 
-    const dialog = document.getElementById('dialog_add_task_board');
-    dialog.innerHTML = content.outerHTML;
-    const layout = dialog.querySelector('.add_task_layout');
-
-    layout?.classList.add('add_task_layout_popup');
-    
-    window.currentTaskStatus = status;
-    await initAddTask();
-    dialog.showModal();
-}
-
-
-/**
- * Öffnet das Delete-Confirm-Popup und speichert die Task-ID.
- *
- * @param {string} taskId - ID des zu löschenden Tasks
- * @returns {void}
- */
-function openDeletePopup(taskId) {
-    currentTaskId = taskId;
-    document.getElementById('delete_task').showModal();
-}
-
-
-/* --- Edit Functions---*/
-/**
- * Aktiviert den Edit-Modus für einen Subtask.
- *
- * @param {number} index - Index des Subtasks
- * @returns {void}
- */
-function editSubtask(index) {
-        taskEditSubtasks[index].isEditing = true;
-        renderSubtasksEdit();
-}
-
-
-/**
- * Fügt einen neuen Subtask zum Edit-Task hinzu.
- * Liest den Wert aus dem Inputfeld.
- *
- * @returns {void}
- */
-function addEditSubtask() {
-    const input = document.getElementById('newSubtask')
-    const value = input.value.trim();
-    
-    if (!value) return;
-
-    taskEditSubtasks.push({
-        title: input.value,
-        completed: false
-    });
-    renderSubtasksEdit();
-    input.value = '';
-}
-
-
-/**
- * Löscht einen Subtask aus der Edit-Liste.
- *
- * @param {number} index - Index des Subtasks
- * @returns {void}
- */
-function deleteSubtask(index){
-    taskEditSubtasks.splice(index, 1);
-    renderSubtasksEdit();
-}
-
-
-/**
- * Speichert die Bearbeitung eines Subtasks.
- *
- * @param {number} index - Index des Subtasks
- * @returns {void}
- */
-function saveSubtask(index){
-    const input = document.getElementById(`subtaskInput${index}`);
-
-    taskEditSubtasks[index].title = input.value.trim();
-    taskEditSubtasks[index].isEditing = false;
-
-    renderSubtasksEdit();
-}
-
-
-/**
- * Initialisiert die Kontakt-Zuweisung im Edit Task Popup.
- * Lädt Kontakte und setzt bereits ausgewählte Kontakte.
- *
- * @param {Object} task - Task Objekt
- * @returns {Promise<void>}
- */
-async function initEditAssigned(task) {
-
-    
-    await loadAvailableContacts();
-
-    const assigned = Array.isArray(task.assignedTo)
-    ? task.assignedTo
-    : (task.assignedTo ? [task.assignedTo] : []);
-
-
-    selectedEditContacts = availableContacts.filter(contact => assigned.includes(contact.id));
-
-    renderAssignedOptionsEdit();
-    renderAssignedAvatarsEdit();
-    setupAssignedDropdown('Edit');  
-}
-
-
-/**
- * Fügt einen Kontakt hinzu oder entfernt ihn aus der Auswahl.
- *
- * @param {string} id - Kontakt-ID
- * @returns {void}
- */
-function toggleEditContact(id) {
-    const contact = availableContacts.find(c => c.id === id);
-    if (!contact) return;
-
-    const index = selectedEditContacts.findIndex(c => c.id === id);
-
-    if (index === -1) {
-        selectedEditContacts.push(contact);
-    } else {
-        selectedEditContacts.splice(index, 1);
-    }
-
-    renderAssignedOptionsEdit();
-    renderAssignedAvatarsEdit();
-}
-
-
-/**
- * Fügt einen Subtask hinzu, wenn Enter gedrückt wird.
- *
- * @param {KeyboardEvent} event
- * @returns {void}
- */
-function handleSubtaskEnter(event) {
-    if (event.key === "Enter") {
-         event.preventDefault();
-        addEditSubtask();
-    }
-}
-
-
-/**
- * Setzt die Priorität im UI und markiert den aktiven Button.
- *
- * @param {string} priority - z.B. "low", "medium", "urgent"
- * @returns {void}
- */
-function setPriority(priority) {
-    document.querySelectorAll('.add_task_prio_btn').forEach(btn => {
-        const isActive = btn.dataset.priority === priority;
-
-        btn. classList.toggle('active', isActive);
-        btn.setAttribute('aria-pressed', isActive);
-    });
-    
-    selectedEditPriority = priority;
-}
-
-
-/* --- Utils --- */
-/**
- * Zeigt oder versteckt eine "No Results"-Meldung,
- * abhängig davon ob Tasks gefunden wurden.
- *
- * @param {Array<Object>} tasks - Gefilterte Task-Liste
- * @returns {void}
- */
-function showNoResultsAlert(tasks) {
-    const alertRef = document.getElementById('no_results_alert');  
-
-    if (tasks.length === 0) {
-        alertRef.innerHTML = 'No results found!';
-        return;
-    }
-    alertRef.innerHTML = '';
-}
-
-
-/**
- * Fügt einer Task-Spalte die Hervorhebungs-Klasse hinzu,
- * wenn ein Task darüber gezogen wird.
- *
- * @param {string} id - Die ID der Zielspalte.
- * @returns {void}
- */
-function highlight(id) {
-    document.getElementById(id).classList.add('task_field_highlight');
-}
- 
-
-/**
- * Entfernt die Hervorhebungs-Klasse von einer Task-Spalte.
- *
- * @param {string} id - Die ID der Zielspalte.
- * @returns {void}
- */
-function removeHighlight(id) {
-    document.getElementById(id).classList.remove('task_field_highlight');
-}
-
-/**
- * Schließt das Task-Detail-Popup.
- *
- * @returns {void}
- */
-function closeTaskPopUp() {
-   document.getElementById('dialogTask').close();
-}
-
-
-/**
- * Schließt das "Add Task" Popup.
- *
- * @returns {void}
- */
-function closeAddTaskPopUp() {
-    document.getElementById('dialog_add_task_board').close();
-}
-
-/**
- * Schließt das Add-Task Modal beim Klick auf Hintergrund.
- *
- * @param {MouseEvent} event
- * @returns {void}
- */
-function handleDialogAddTaskBoard (event) {
-      if (event.target === dialog_add_task_board) {
-            dialog_add_task_board.close();
-        }
-}
-dialog_add_task_board.addEventListener('click', handleDialogAddTaskBoard);
-
-
-/**
- * Schließt das Delete-Confirm-Popup.
- *
- * @returns {void}
- */
-function closeDeleteTask() {
-    document.getElementById('delete_task').close();
-}
-
-
-/**
- * Aktiviert Drag & Drop visuelle Effekte (CSS Klassen).
- * Fügt Events für Dragstart und Dragend hinzu.
- *
- * @returns {void}
- */
-function enableDragEffect() {
-    const container = document.querySelector(`.taskContainer`);
-
-    container. addEventListener('dragstart', (event) => {
-        if (event.target.classList.contains('task')) {
-            event.target.classList.add('dragging');
-        }
-    });
-
-    container.addEventListener('dragend', (event) => {
-        if (event.target.classList.contains('task')) {
-            event.target.classList.remove('dragging');
-        }
-    });
-}
-
-
-/**
- * Startet den Drag-Effekt (fügt CSS Klasse hinzu).
- *
- * @param {DragEvent} event - Dragstart Event
- * @returns {void}
- */
-function startDragEffect(event) {
-    
-    event.currentTarget.classList.add('dragging');
-}
-
-
-/**
- * Beendet den Drag-Effekt (entfernt CSS Klasse).
- *
- * @param {DragEvent} event - Dragend Event
- * @returns {void}
- */
-function endDragEffect(event) {
-    event.currentTarget.classList.remove('dragging');
-}
-
-
-/**
- * Aktualisiert das Priority-Icon im Edit-Task Popup
- * basierend auf dem aktuell ausgewählten Priority-Wert.
- *
- * @returns {void}
- */
-function updatePriorityIcon() {
-    const icon = document.getElementById("editPriorityIcon");
-    const select = document.getElementById("editPriority");
-
-    if (icon && select) {
-        icon.src = `../assets/icons/${select.value}.svg`;
-    }
-}
-
-
-/**
- * Liest alle Subtask-Inputs aus dem DOM aus
- * und erstellt daraus ein Subtask-Array.
- *
- * @param {string} selector - CSS Selector für Input Felder
- * @returns {{title: string, completed: boolean}[]} Array von Subtasks
- */
-function getSubtasksFromInputs(selector = ".edit_subtask_input") {
-    const inputs = document.querySelectorAll(selector);
-
-    const subtasks = [];
-
-    for (const input of inputs) {
-        subtasks.push({
-            title: input.value,
-            completed: false
-        });
-    }
-    return subtasks;
-}
-
-
-/**
- * Formatiert die Kategorie für die Anzeige im UI.
- *
- * @param {string} category - Die Kategorie des Tasks.
- * @returns {string} Formatierter Kategoriename.
- */
-function formatCategory(category) {
-
-    if (category === 'user_story') {
-        return 'User Story';
-    }
-
-    if (category === 'technical') {
-        return 'Technical Task';
-    }
-    return category;
-}
-
-
-function getProgress(subtasks = []) {
-    if(!Array.isArray(subtasks)) {
-        return {
-            total: 0,
-            completed: 0
-        };
-    }
-    const total = subtasks.length;
-    const completed = subtasks.filter(subtask => subtask.completed).length;
-
-    return {
-        total,
-        completed,
-        percent: total ? (completed / total) *100 : 0
-    };   
-}
-
-
-function getProgressTemplate(subtasks = []) {
-    const progress = getProgress(subtasks);
-      return `
-        <div class="task_progress" title="${progress.completed} of ${progress.total} subtasks completed">
-            <progress value="${progress.completed}" max="${progress.total}"></progress>
-
-            <span>
-                ${progress.completed}/${progress.total} Subtasks
-            </span>
-        </div>
-    `;
-}
-
-
-/**
- * Rendert die Avatare der zugewiesenen Kontakte.
- *
- * @param {string|Array<string>} contacts - Name(n) der Kontakte
- * @param {boolean} [showName=true] - Ob der Name angezeigt werden soll
- * @returns {string} HTML-String mit Avataren
- */
-function renderAssignedContacts(contacts, showName = true) {
-    if(!contacts || contacts.length === 0){
-        return '';
-    }
-    let html = '';
-
-    if (!Array.isArray(contacts)) {
-        contacts = [contacts];
-    }
-
-    for (const entry of contacts) {
-        const contact = availableContacts.find(c => c.id === entry);
-        const name = contact ? contact.name : entry;
-        html += getContactsAvatar(name, showName);
-    }
-    return html;
-}
 
 
 

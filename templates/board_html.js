@@ -1,6 +1,3 @@
-//       onkeydown="handleTaskKey(event, '${task.id}')"
-
-
 function getTaskTemplate(task) {
   return `
     <div  class="taskContainer">
@@ -10,11 +7,11 @@ function getTaskTemplate(task) {
       role="button"
       draggable="true"
       tabindex="0"
+       onkeydown="handleTaskKey(event, '${task.id}')"
       ondragstart="startDragEffect(event); startDragging('${task.id}')"
       ondragend="endDragEffect(event)"
       onclick="openTaskPopUp('${task.id}')"
       >
-
         <div class="${task.category} card_header">
         ${formatCategory(task.category)}
         </div>
@@ -34,6 +31,7 @@ function getTaskTemplate(task) {
     `;
 }
 
+
 function getContactsAvatar(name, showName) {
   return `
      <div class="contact_task">
@@ -46,6 +44,7 @@ function getContactsAvatar(name, showName) {
   `;
 }
 
+
 function getNewHTMLTag() {
   return `
         <div class="popup_header">
@@ -57,6 +56,7 @@ function getNewHTMLTag() {
   `;
 }
 
+
 function getEmptyCardTemplate(fieldName) {
   return `
     <div class="empty_card">
@@ -64,6 +64,7 @@ function getEmptyCardTemplate(fieldName) {
     </div>
   `;
 }
+
 
 function getTaskDetailsTemplate(task) {
   return `
@@ -117,7 +118,8 @@ function getTaskDetailsTemplate(task) {
     </div>
   
   `;
-}
+}   
+
 
 function getSubtasksTemplate(subtask, index, taskId) {
   return `
@@ -131,6 +133,7 @@ function getSubtasksTemplate(subtask, index, taskId) {
       </label>
     `;
 }
+
 
 function getEditTaskTemplate(task) {
   return `
@@ -239,6 +242,7 @@ function getEditTaskTemplate(task) {
     </div>
   `;
 }
+
 
 function getSubtasksEditTemplate(subtask, index) {
   if (subtask.isEditing) {
