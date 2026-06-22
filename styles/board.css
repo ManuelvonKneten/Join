@@ -158,10 +158,14 @@
   border-radius: 10px;
   padding: clamp(14px, 1.6vw, 24px);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  cursor: grab;
+  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
   position: relative;
+}
+
+.card:hover {
+  transform: translateX(3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .card:focus {
