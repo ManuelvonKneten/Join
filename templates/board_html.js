@@ -3,6 +3,7 @@ function getTaskTemplate(task) {
     <div  class="taskContainer">
       <div
       class="card"
+      data-id="${task.id}"
       role="button"
       draggable="true"
       tabindex="0"

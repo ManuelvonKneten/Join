@@ -7,8 +7,19 @@ let activeContact = null;
 document.addEventListener('DOMContentLoaded', loadContacts);
 document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
-    if (!document.getElementById('addContactOverlay').classList.contains('hidden')) closeAddContact();
-    else if (!document.getElementById('editContactOverlay').classList.contains('hidden')) closeEditContact();
+
+    const addOverlay = document.getElementById('addContactOverlay');
+    const editOverlay = document.getElementById('editContactOverlay');
+
+    if (addOverlay && !addOverlay.classList.contains('hidden')) {
+        closeAddContact();
+        return;
+    }
+
+    if(editOverlay && !editOverlay.classList.contains('hidden')){
+        closeEditContact();
+        return;
+    }
 });
 
 

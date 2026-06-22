@@ -5,8 +5,8 @@ let currentTaskId = null;
 let selectedEditContacts= [];
 let currentDraggedTask;
 let selectedEditPriority = '';
-let keyboardDraggedTask = null;
-
+let keyboardDraggedTaskId = null;
+let keyboardModeActive = false;
 
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', initBoard);
@@ -135,6 +135,15 @@ async function moveTo(event) {
     await patchToDB(`tasks/${currentDraggedTask}`, { status: newStatus
     });
     await loadTasks(); 
+}
+
+async function moveKeyboardTask(newStatus) {
+    const taskId = keyboardDraggedTaskId;
+
+    await patchToDB(`tasks/${taskId}`, {
+        status: newStatus
+    });
+    await loadTasks();
 }
 
 
@@ -352,16 +361,20 @@ function handleKeyboardBoard(event){
         return;
     }
 
-    if ( event.key === "Enter" && event.target.classList.contains("card")) {
-        keyboardDraggedTask = event.target;
-        event.target.classList.add("keyboard-selected");
-        event.target.classList.add("dragging-keyboard");
+    if (event.key === "Enter" ) {
+        const card = event.target.closest(".card")
+        if(!card) return;
+
+        keyboardDraggedTask = card;
+        keyboardModeActive = true;
+        card.classList.add("keyboard-selected", "dragging-keyboard");
         return;
     }
 
     if (event.key === "Escape" && keyboardDraggedTask) {
-            keyboardDraggedTask.classList.remove("keyboard-selected");
-            keyboardDraggedTask = null;
+        keyboardDraggedTask.classList.remove("keyboard-selected", "dragging-keyboard");
+        keyboardDraggedTask = null;
+        keyboardModeActive = false;
         return;
     }
 
@@ -375,22 +388,6 @@ function handleKeyboardBoard(event){
 }
 
 document.addEventListener("keydown", handleKeyboardBoard);
-
-// function moveWithKeyboard(direction){
-//     if(!keyboardDraggedTask) return;
-    
-//     const moves = {
-//         right: "inprogress",
-//         left: "todo",
-//         down: "awaitfeedback",
-//         up: "done"
-//     };
-
-//     if(moves[direction]){
-//         moveKeyboardTask(moves[direction]);
-//     }
-    
-// }
 
 
 
@@ -442,6 +439,8 @@ dialogTask.addEventListener('click', handleDialogClick);
  * @returns {void}
  */
 function openTaskPopUp(taskId) {
+    if (keyboardModeActive) return;
+
     const task = allTasks.find(task => task.id === taskId);
     
     if(!task) return;
@@ -886,6 +885,9 @@ function getProgressTemplate(subtasks = []) {
  * @returns {string} HTML-String mit Avataren
  */
 function renderAssignedContacts(contacts, showName = true) {
+    if(!contacts || contacts.length === 0){
+        return '';
+    }
     let html = '';
 
     if (!Array.isArray(contacts)) {

@@ -164,19 +164,19 @@
   cursor: grab;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .card:focus {
     outline: 2px solid var(--color-tertiary);
     outline-offset: 2px;
 }
 
+.keyboard-selected {
+    background-color: var(--sidebar-hover-background);
+} 
+
 .dragging-keyboard {
   outline: 1px solid var(--color-tertiary);
   transform: scale(1.05);
-}
-
-.keyboard-selected {
-    outline: 3px solid var(--color-tertiary);
-    background-color: rgba(10, 54, 71, 0.1);
 }
 
 .card h2 {
