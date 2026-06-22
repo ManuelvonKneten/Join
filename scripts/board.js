@@ -599,7 +599,7 @@ async function initEditAssigned(task) {
 
     renderAssignedOptionsEdit();
     renderAssignedAvatarsEdit();
-    setupAssignedDropdown('Edit');   // wiederverwendete add_task-Funktion
+    setupAssignedDropdown('Edit');  
 }
 
 
