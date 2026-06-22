@@ -117,7 +117,7 @@
     color: var(--color-tertiary);
     background: white;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .prio_icon {
@@ -130,32 +130,33 @@
     transition: fill 0.2s ease;
 }
 
-/* Urgent — active/hover: red */
-.add_task_prio_btn[data-priority="urgent"]:hover,
+/* Hover: keine Farbänderung, nur leichter Schatten */
+.add_task_prio_btn:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Urgent — nur bei Auswahl (Klick): red */
 .add_task_prio_btn[data-priority="urgent"].active {
     background-color: #FF3D00;
     border-color: #FF3D00;
     color: white;
 }
 
-/* Medium — active/hover: orange */
-.add_task_prio_btn[data-priority="medium"]:hover,
+/* Medium — nur bei Auswahl (Klick): orange */
 .add_task_prio_btn[data-priority="medium"].active {
     background-color: #FFA800;
     border-color: #FFA800;
     color: white;
 }
 
-/* Low — active/hover: green */
-.add_task_prio_btn[data-priority="low"]:hover,
+/* Low — nur bei Auswahl (Klick): green */
 .add_task_prio_btn[data-priority="low"].active {
     background-color: #7AE229;
     border-color: #7AE229;
     color: white;
 }
 
-/* On hover/active: alle Icon-Pfade weiß */
-.add_task_prio_btn:hover .prio_icon path,
+/* Nur im aktiven Zustand Icon-Pfade weiß */
 .add_task_prio_btn.active .prio_icon path {
     fill: white;
 }
