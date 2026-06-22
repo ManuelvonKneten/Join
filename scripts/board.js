@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', initBoard);
  */
 async function initBoard() {
     initEventListeners();
+    await loadAvailableContacts();
     await loadTasks();
     renderBoard();
 }
@@ -891,7 +892,9 @@ function renderAssignedContacts(contacts, showName = true) {
         contacts = [contacts];
     }
 
-    for (const name of contacts) {  
+    for (const entry of contacts) {
+        const contact = availableContacts.find(c => c.id === entry);
+        const name = contact ? contact.name : entry;
         html += getContactsAvatar(name, showName);
     }
     return html;
