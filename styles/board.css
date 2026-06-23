@@ -370,14 +370,14 @@
     color: white;
     border-radius: 8px;
   }
-  .header_mobile {
+  .header_mobile_board {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     box-shadow: none;
   }
 
-  .header_mobile img {
+  .header_mobile_board img {
     height: 16px;
     width: 16px;
   }
