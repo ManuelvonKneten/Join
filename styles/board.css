@@ -89,7 +89,8 @@
   cursor: pointer;
 }
 
-.search button:hover {
+.search button:hover,
+.search button:focus {
   background-color: var(--color-secondary);
 }
 
@@ -131,7 +132,8 @@
   cursor: pointer;
 }
 
-.task_column button:hover {
+.task_column button:hover,
+.task_column button:focus {
   background-color: var(--color-secondary);
 }
 

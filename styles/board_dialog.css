@@ -142,7 +142,8 @@
   font-weight: 700;
 }
 
-.dialog_footer button:hover {
+.dialog_footer button:hover,
+.dialog_footer button:focus {
   color: var(--color-secondary);
 }
 
@@ -184,7 +185,8 @@
   cursor: pointer;
 }
 
-.delete_buttons button:hover {
+.delete_buttons button:hover,
+.delete_buttons button:focus {
   background-color: var(--color-secondary);
 }
 
