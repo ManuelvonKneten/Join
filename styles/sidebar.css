@@ -67,6 +67,13 @@
   color: var(--sidebar-current-color);
 }
 
+.sidebar_link:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 3px;
+  background: var(--sidebar-hover-background);
+  color: var(--sidebar-current-color);
+}
+
 .sidebar_link_active,
 .sidebar_link_active:hover {
   background: var(--sidebar-current-background);
@@ -152,6 +159,12 @@
 .sidebar_footer_link:hover,
 .sidebar_footer_link_active,
 .sidebar_footer_link_active:hover {
+  color: var(--color-secondary);
+}
+
+.sidebar_footer_link:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 3px;
   color: var(--color-secondary);
 }
 
