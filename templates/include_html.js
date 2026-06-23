@@ -18,7 +18,8 @@ async function includeHTML() {
 }
 
 function initUserDropdown() {
-  document.onclick = closeUserDropdown;
+  document.onclick = () => closeUserDropdown();
+  document.addEventListener("keydown", handleUserDropdownKeydown);
 }
 
 function toggleUserDropdown(event) {
@@ -34,15 +35,31 @@ function toggleUserDropdown(event) {
   userButton.setAttribute("aria-expanded", isOpen ? "false" : "true");
 }
 
-function closeUserDropdown() {
+function closeUserDropdown(options = {}) {
   const dropdown = document.getElementById("user_dropdown");
   const userButton = document.getElementById("userInitialsBtn");
+  const shouldRestoreFocus = options.restoreFocus === true;
+  const shouldCloseMobileNavigation = options.closeMobileNavigation !== false;
 
   if (!dropdown || !userButton) return;
 
   dropdown.classList.add("d_none");
   userButton.setAttribute("aria-expanded", "false");
-  closeMobileNavigation();
+
+  if (shouldRestoreFocus) userButton.focus();
+  if (shouldCloseMobileNavigation) closeMobileNavigation();
+}
+
+function handleUserDropdownKeydown(event) {
+  const dropdown = document.getElementById("user_dropdown");
+
+  if (!dropdown || dropdown.classList.contains("d_none")) return;
+  if (event.key !== "Escape") return;
+
+  closeUserDropdown({
+    restoreFocus: true,
+    closeMobileNavigation: false,
+  });
 }
 
 function initMobileNavigation() {
