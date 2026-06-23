@@ -226,6 +226,8 @@ function setUserInitials() {
 }
 
 function setActiveBottomNavLink() {
+  clearBottomNavActiveLinks();
+
   const currentPage = window.location.pathname.split("/").pop();
   const navLinks = document.querySelectorAll(".bottom_nav_item");
 
@@ -234,7 +236,17 @@ function setActiveBottomNavLink() {
 
     if (linkPage === currentPage) {
       link.classList.add("bottom_nav_item_active");
+      link.setAttribute("aria-current", "page");
     }
+  });
+}
+
+function clearBottomNavActiveLinks() {
+  const navLinks = document.querySelectorAll(".bottom_nav_item");
+
+  navLinks.forEach((link) => {
+    link.classList.remove("bottom_nav_item_active");
+    link.removeAttribute("aria-current");
   });
 }
 

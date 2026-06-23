@@ -54,6 +54,16 @@
   color: var(--sidebar-current-color);
 }
 
+.bottom_nav_item:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: -3px;
+  height: 100%;
+  width: 76px;
+  border-radius: 16px;
+  background: var(--sidebar-hover-background);
+  color: var(--sidebar-current-color);
+}
+
 .bottom_nav_item_active {
   height: 100%;
   width: 76px;
