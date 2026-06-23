@@ -212,7 +212,7 @@
 }
 
 .user_story {
-  background-color: var(--color-quinary);
+  background-color: var( --color-quinary);
 }
 
 .technical {
@@ -318,8 +318,47 @@
   margin-left: 0;
 }
 
+.card_header_wrapper{
+  display: flex;
+  position: relative;
+}
+
+.move_menu_container{
+  display: flex;
+  position: relative;
+}
+
+.move_menu_btn{
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.move_menu{
+  position: absolute;
+  color: var( --sidebar-current-color);
+  top: 35px;
+  right: 0;
+  background-color: var(--sidebar-current-background);
+  border-radius: 0 10px 10px 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.move_option {
+  color: var( --sidebar-current-color);
+  border: none;
+  background: none;
+  display: flex;
+}
 
 @media (max-width: 767px) {
+  .move_menu_btn{
+    display: block;
+  }
   .titel_and_search {
     flex-direction: column;
     align-items: stretch;
