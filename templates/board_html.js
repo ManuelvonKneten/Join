@@ -1,7 +1,6 @@
 function getTaskTemplate(task) {
   return `
-    <div  class="taskContainer">
-      <div
+    <div 
       class="card"
       data-id="${task.id}"
       role="button"
@@ -12,10 +11,11 @@ function getTaskTemplate(task) {
       ondragend="endDragEffect(event)"
       onclick="openTaskPopUp('${task.id}')"
       >
+      
         <div class="${task.category} card_header">
         ${formatCategory(task.category)}
         </div>
-        
+
         <h2>${task.title}</h2>
         
         <p>${task.description}</p>
@@ -26,8 +26,8 @@ function getTaskTemplate(task) {
           <div class="assigned_contacts">${renderAssignedContacts(task.assignedTo, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
         </div> 
-      </div>
     </div>
+  
     `;
 }
 
