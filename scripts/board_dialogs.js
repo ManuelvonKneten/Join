@@ -1,5 +1,4 @@
-                                        /* --- Pop-Ups --- */
-/**
+                                       /* --- Pop-Ups --- *//**
  * Schließt das Task-Detail-Modal beim Klick außerhalb des Inhalts.
  *
  * @param {MouseEvent} event
@@ -127,6 +126,7 @@ function openDeletePopup(taskId) {
 function closeTaskPopUp() {
    document.getElementById('dialogTask').close();
 }
+
 
 /**
  * Schließt das "Add Task" Popup.

@@ -278,3 +278,26 @@ function getSubtasksEditTemplate(subtask, index) {
         </div>
     `;
 }
+
+
+function getAssignedOptionsEdit(contact, checked) {
+  return `
+            <li class="assigned_option ${checked ? 'assigned_option_active' : ''}"
+                onclick="toggleEditContact('${contact.id}')">
+
+                <div class="assigned_option_avatar">
+                    ${getContactsAvatar(contact.name, false)}
+                </div>
+
+                <span class="assigned_option_name">
+                    ${contact.name}
+                </span>
+
+                <input 
+                    type="checkbox" 
+                    class="assigned_option_checkbox"
+                    ${checked ? "checked" : ""}
+                >
+            </li>
+        `;
+}

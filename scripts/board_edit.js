@@ -81,13 +81,11 @@ function saveSubtask(index){
  */
 async function initEditAssigned(task) {
 
-    
     await loadAvailableContacts();
 
     const assigned = Array.isArray(task.assignedTo)
     ? task.assignedTo
     : (task.assignedTo ? [task.assignedTo] : []);
-
 
     selectedEditContacts = availableContacts.filter(contact => assigned.includes(contact.id));
 

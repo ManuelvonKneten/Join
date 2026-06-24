@@ -1,5 +1,4 @@
-                                        /* --- Utils --- */
-/**
+                                       /* --- Utils --- *//**
  * Aktiviert Drag & Drop visuelle Effekte (CSS Klassen).
  * Fügt Events für Dragstart und Dragend hinzu.
  *
@@ -62,6 +61,7 @@ function formatCategory(category) {
     }
     return category;
 }
+
 
 /**
  * Berechnet den Fortschritt der Subtasks.
@@ -179,6 +179,7 @@ function handleTaskKey(event, taskId){
     }
 }
 
+
 /**
  * Zuordnung von Pfeiltasten zu Board-Statuswerten.
  *
@@ -222,7 +223,7 @@ function handleKeyboardBoard(event){
         event.preventDefault();
         moveKeyboardTask(KEY_MOVES[event.key]);
     }
-   
+  
 }
 
 document.addEventListener("keydown", handleKeyboardBoard);
