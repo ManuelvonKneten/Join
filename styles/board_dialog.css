@@ -213,7 +213,8 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
+    padding: clamp(8px, 4vw, 24px); 
 } 
 
 label,
