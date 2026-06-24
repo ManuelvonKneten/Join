@@ -5,7 +5,7 @@ let allTasks = [];
 /** @type {string|null} */
 let currentTaskId = null;
 
-/** @type {string|null} */
+/** @type {string|undefined} */
 let currentDraggedTask;
 
 /** @type {string|null} */
@@ -209,9 +209,9 @@ function renderEmptyCards() {
 /**
  * Rendert die Subtasks im Task Detail Popup.
  *
- * @param {Array<Object>} subtasks - Liste der Subtasks
- * @param {string} taskId - ID des Tasks
- * @returns {string} HTML-String
+ * @param {Array<Object>} [subtasks=[]] - Liste der Subtasks.
+ * @param {string} taskId - ID des Tasks.
+ * @returns {string} HTML-String.
  */
 function renderSubtasks(subtasks = [], taskId) {
     if(!subtasks.length) return "<p>No Subtasks</p>"
@@ -242,7 +242,7 @@ function renderAssignedOptionsEdit() {
         const checked = selectedEditContacts.some (c =>  c.id === contact.id);
 
         return getAssignedOptionsEdit(contact, checked);
-        
+
     }).join("");
 }
 

@@ -149,7 +149,11 @@ function closeDeleteTask() {
 
 
 /**
- * @returns {Promise<void>}
+ * Ändert den Status eines Subtasks und speichert die Änderung.
+ *
+ * @param {string} taskId - ID des Tasks.
+ * @param {number} subtaskIndex - Index des Subtasks.
+ * @returns {void}
  */
 function toggleSubtask(taskId, subtaskIndex) {
     const task = allTasks.find (t => t.id === taskId);
