@@ -77,11 +77,11 @@ modularer Code-Organisation nachzuweisen.
 
 ## Screenshots
 
-> _Platzhalter – Screenshots hier einfügen (z. B. `assets/img/screenshot-board.png`)._
+<div align="center">
 
-| Login | Board | Add Task |
-|---|---|---|
-| _Login-Ansicht_ | _Kanban Board_ | _Aufgabe erstellen_ |
+![Join Screenshot](./assets/screenshots/join.png)
+
+</div>
 
 ---
 
