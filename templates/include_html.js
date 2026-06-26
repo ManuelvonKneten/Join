@@ -10,11 +10,21 @@ async function includeHTML() {
     element.removeAttribute("data-include");
   }
 
+  updateNavigationForAuthState();
   setActiveSidebarLink();
   setActiveBottomNavLink();
   setUserInitials();
   initUserDropdown();
   initMobileNavigation();
+}
+
+function updateNavigationForAuthState() {
+  const isLoggedIn = Boolean(localStorage.getItem("currentUser"));
+  const selector = isLoggedIn
+    ? '[data-auth-public="true"]'
+    : '[data-auth-required="true"]';
+
+  document.querySelectorAll(selector).forEach((element) => element.remove());
 }
 
 function initUserDropdown() {

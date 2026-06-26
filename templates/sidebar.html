@@ -1,34 +1,38 @@
 <div class="sidebarLeft">
   <aside id="mainSidebar" class="sidebar">
-    <a class="sidebar_logo" href="./summary.html" aria-label="Go to summary">
+    <a class="sidebar_logo" href="./summary.html" aria-label="Go to summary" data-auth-required="true">
       <img src="../assets/img/logo.png" alt="Join logo" />
     </a>
 
     <nav class="sidebar_nav" aria-label="Main navigation">
-      <a class="nav_item sidebar_link" href="../htmls/summary.html">
+      <a class="nav_item sidebar_link" href="../htmls/summary.html" data-auth-required="true">
         <span
           class="sidebar_icon sidebar_icon_summary"
           aria-hidden="true"
         ></span>
         <span class="sidebar_text">Summary</span>
       </a>
-      <a class="nav_item sidebar_link" href="../htmls/add_task.html">
+      <a class="nav_item sidebar_link" href="../htmls/add_task.html" data-auth-required="true">
         <span
           class="sidebar_icon sidebar_icon_add_task"
           aria-hidden="true"
         ></span>
         <span class="sidebar_text">Add Task</span>
       </a>
-      <a class="nav_item sidebar_link" href="../htmls/board.html">
+      <a class="nav_item sidebar_link" href="../htmls/board.html" data-auth-required="true">
         <span class="sidebar_icon sidebar_icon_board" aria-hidden="true"></span>
         <span class="sidebar_text">Board</span>
       </a>
-      <a class="nav_item sidebar_link" href="../htmls/contacts.html">
+      <a class="nav_item sidebar_link" href="../htmls/contacts.html" data-auth-required="true">
         <span
           class="sidebar_icon sidebar_icon_contacts"
           aria-hidden="true"
         ></span>
         <span class="sidebar_text">Contacts</span>
+      </a>
+      <a class="nav_item sidebar_link" href="../index.html" data-auth-public="true">
+        <span class="sidebar_icon sidebar_icon_login" aria-hidden="true"></span>
+        <span class="sidebar_text">Sign In</span>
       </a>
     </nav>
 

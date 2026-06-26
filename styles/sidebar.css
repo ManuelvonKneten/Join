@@ -120,6 +120,11 @@
   -webkit-mask-image: url("../assets/icons/contacts.svg");
 }
 
+.sidebar_icon_login {
+  mask-image: url("../assets/icons/login.svg");
+  -webkit-mask-image: url("../assets/icons/login.svg");
+}
+
 .icon_hover {
   position: absolute;
   opacity: 0;

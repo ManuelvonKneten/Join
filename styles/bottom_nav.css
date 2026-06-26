@@ -36,6 +36,11 @@
   -webkit-mask-image: url("../assets/icons/contacts.svg");
 }
 
+.bottom_nav_icon_login {
+  mask-image: url("../assets/icons/login.svg");
+  -webkit-mask-image: url("../assets/icons/login.svg");
+}
+
 .bottom_nav_item {
   height: 100px;
   flex: 1;
