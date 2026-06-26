@@ -3,21 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
+    <title>Join – Log in</title>
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/png">
     <link rel="stylesheet" href="./style.css">
-    <script src="./scripts/splashlogo.js" defer></script>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/login.css">
 </head>
+<body class="logIn">
 
-<body>
+    <div class="splashLogoContainer" id="splashLogoContainer">
+        <img class="logoImage" id="splashLogo" src="./assets/img/logo_dark.png" alt="Join Logo">
+    </div>
 
-    <main class="splashScreen">
-        <img
-            class="splashLogo"
-            src="./assets/img/logo_dark.png"
-            alt="Join Logo"
-        >
+    <header class="logInHeader fadeHeader">
+        <img class="logInLogo" src="/assets/img/logo_dark.png" alt="Join Logo">
+        <div class="signupContainer">
+            <span>Not a Join user?</span>
+            <a href="/htmls/signup.html">Sign up</a>
+        </div>
+    </header>
+
+    <main class="logInMain fadeMain">
+        <div class="logInBox">
+
+            <h1>Log in</h1>
+
+            <p id="msgBox" class="msgBox"></p>
+
+            <form action="#">
+
+                <div class="inputField">
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        aria-label="Email"
+                        required
+                    >
+                    <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true">
+                </div>
+
+                <div class="inputField loginInputWrapper">
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        aria-label="Password"
+                        required
+                    >
+                    <img class="inputIcon" src="/assets/icons/lock.png" alt="" aria-hidden="true">
+                </div>
+
+                <p class="wrongDataAlert">Wrong email or password. Try again.</p>
+
+                <div class="loginButtons">
+                    <button class="logInBtn" type="submit">Log in</button>
+                    <button class="guestBtn" type="button" id="guestLoginBtn">Guest Log in</button>
+                </div>
+
+            </form>
+
+        </div>
     </main>
 
+    <footer class="logInFooter fadeFooter">
+        <a href="/htmls/privacy_policy.html">Privacy Policy</a>
+        <a href="/htmls/legal_notice.html">Legal Notice</a>
+    </footer>
+
+    <div class="landscape_blocker">
+        <p>Please rotate your device.</p>
+    </div>
+
+    <script src="./scripts/firebase.js" defer></script>
+    <script src="./scripts/splashlogo.js" defer></script>
+    <script src="./scripts/login.js" defer></script>
 </body>
 </html>

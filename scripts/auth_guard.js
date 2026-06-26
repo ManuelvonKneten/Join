@@ -13,6 +13,6 @@
  */
 (function guardRoute() {
     if (!localStorage.getItem('currentUser')) {
-        window.location.replace('/htmls/login.html');
+        window.location.replace('/index.html');
     }
 })();

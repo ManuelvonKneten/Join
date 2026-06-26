@@ -89,11 +89,10 @@ modularer Code-Organisation nachzuweisen.
 
 ```text
 Join/
-├── index.html              # Splash Screen (Einstiegspunkt)
+├── index.html              # Splash Screen + Login (Einstiegspunkt)
 ├── style.css               # Globale Basisstyles & CSS-Variablen
 │
 ├── htmls/                  # Alle Seiten
-│   ├── login.html          # Login
 │   ├── signup.html         # Registrierung
 │   ├── summary.html        # Dashboard
 │   ├── board.html          # Kanban Board
