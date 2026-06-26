@@ -6,26 +6,80 @@ function initLogin() {
     const alertBox   = document.querySelector('.wrongDataAlert');
     const emailInput = document.getElementById('loginEmail');
     const passInput  = document.getElementById('loginPassword');
+    const passToggle = document.getElementById('loginPasswordToggle');
 
-    guestBtn.addEventListener('click', () => {
-        localStorage.setItem('currentUser', 'Guest');
+    guestBtn.addEventListener('click', loginAsGuest);
+    loginForm.addEventListener('submit', (e) => handleLogin(e, emailInput, passInput, alertBox));
+
+    initPasswordToggle(passInput, passToggle);
+    initBlurCheck(emailInput, passInput, alertBox);
+}
+
+function loginAsGuest() {
+    localStorage.setItem('currentUser', 'Guest');
+    window.location.href = '/htmls/summary.html';
+}
+
+async function findUser(email, password) {
+    const data  = await getFromDB('users');
+    const users = data ? Object.values(data) : [];
+    return users.find(u => u.email === email && u.password === password);
+}
+
+async function handleLogin(e, emailInput, passInput, alertBox) {
+    e.preventDefault();
+    const found = await findUser(emailInput.value, passInput.value);
+
+    if (found) {
+        localStorage.setItem('currentUser', found.name || found.email);
         window.location.href = '/htmls/summary.html';
+    } else {
+        alertBox.style.display = 'block';
+    }
+}
+
+// Prüft die Eingaben, sobald das Passwortfeld den Fokus verliert (onblur),
+// und zeigt darunter den Hinweis, wenn E-Mail/Passwort nicht passen.
+function initBlurCheck(emailInput, passInput, alertBox) {
+    const hideAlert = () => { alertBox.style.display = 'none'; };
+    emailInput.addEventListener('input', hideAlert);
+    passInput.addEventListener('input', hideAlert);
+
+    passInput.addEventListener('blur', async () => {
+        if (!emailInput.value || !passInput.value) return;
+        const found = await findUser(emailInput.value, passInput.value);
+        alertBox.style.display = found ? 'none' : 'block';
     });
+}
 
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+// Schloss-Icon, solange das Feld leer ist; sobald getippt wird, erscheint das
+// Augen-Icon. Ein Klick darauf schaltet die Passwort-Sichtbarkeit um.
+function initPasswordToggle(input, toggle) {
+    const icons = {
+        lock:   '/assets/icons/lock.png',
+        hidden: '/assets/icons/visibility_off.svg',
+        shown:  '/assets/icons/visibility.svg',
+    };
 
-        const email    = emailInput.value;
-        const password = passInput.value;
-        const data     = await getFromDB('users');
-        const users    = data ? Object.values(data) : [];
-        const found    = users.find(u => u.email === email && u.password === password);
-
-        if (found) {
-            localStorage.setItem('currentUser', found.name || found.email);
-            window.location.href = '/htmls/summary.html';
-        } else {
-            alertBox.style.display = 'block';
+    const update = () => {
+        if (!input.value) {
+            input.type = 'password';
+            toggle.src = icons.lock;
+            toggle.classList.remove('isToggle');
+            return;
         }
+        toggle.classList.add('isToggle');
+        toggle.src = input.type === 'password' ? icons.hidden : icons.shown;
+    };
+
+    input.addEventListener('input', update);
+    input.addEventListener('blur', () => { if (!input.value) update(); });
+    toggle.addEventListener('click', () => {
+        if (!input.value) return;
+        input.type = input.type === 'password' ? 'text' : 'password';
+        update();
+        input.focus();
     });
+
+    update();
 }

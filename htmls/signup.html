@@ -60,7 +60,14 @@
                         aria-label="Password"
                         required
                     >
-                    <img class="inputIcon" src="/assets/icons/lock.png" alt="" aria-hidden="true">
+                    <img
+                        id="signupPasswordToggle"
+                        class="inputIcon passwordToggle"
+                        src="/assets/icons/lock.png"
+                        alt="Toggle password visibility"
+                        role="button"
+                        tabindex="0"
+                    >
                 </div>
 
                 <div class="inputField">
@@ -72,9 +79,16 @@
                         aria-label="Confirm Password"
                         required
                     >
-                    <img class="inputIcon" src="/assets/icons/lock.png" alt="" aria-hidden="true">
+                    <img
+                        id="signupConfirmPasswordToggle"
+                        class="inputIcon passwordToggle"
+                        src="/assets/icons/lock.png"
+                        alt="Toggle password visibility"
+                        role="button"
+                        tabindex="0"
+                    >
                 </div>
-                <span id="passwordMismatch" class="passwordMismatch">Passwords do not match.</span>
+                <span id="passwordMismatch" class="passwordMismatch">Your passwords don't match. Please try again</span>
 
                 <label class="signupCheckboxLabel">
                     <input
