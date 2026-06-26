@@ -43,6 +43,49 @@ if (signupConfirmInput) {
     signupPasswordInput.addEventListener('input', updatePasswordValidity);
 }
 
+initPasswordToggle(signupPasswordInput, document.getElementById('signupPasswordToggle'));
+initPasswordToggle(signupConfirmInput, document.getElementById('signupConfirmPasswordToggle'));
+
+/**
+ * Zeigt ein Schloss-Icon, solange das Feld leer ist; sobald etwas eingegeben
+ * wird, erscheint das Augen-Icon. Ein Klick darauf schaltet die Sichtbarkeit
+ * des Passworts um.
+ *
+ * @param {HTMLInputElement} input - Das Passwort-Eingabefeld
+ * @param {HTMLImageElement} toggle - Das zugehörige Icon
+ */
+function initPasswordToggle(input, toggle) {
+    if (!input || !toggle) return;
+
+    const icons = {
+        lock:   '/assets/icons/lock.png',
+        hidden: '/assets/icons/visibility_off.svg',
+        shown:  '/assets/icons/visibility.svg',
+    };
+
+    const update = () => {
+        if (!input.value) {
+            input.type = 'password';
+            toggle.src = icons.lock;
+            toggle.classList.remove('isToggle');
+            return;
+        }
+        toggle.classList.add('isToggle');
+        toggle.src = input.type === 'password' ? icons.hidden : icons.shown;
+    };
+
+    input.addEventListener('input', update);
+    input.addEventListener('blur', () => { if (!input.value) update(); });
+    toggle.addEventListener('click', () => {
+        if (!input.value) return;
+        input.type = input.type === 'password' ? 'text' : 'password';
+        update();
+        input.focus();
+    });
+
+    update();
+}
+
 if (acceptCheckbox) {
     acceptCheckbox.addEventListener('change', function () {
         signupBtn.disabled = !this.checked;

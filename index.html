@@ -53,10 +53,17 @@
                         aria-label="Password"
                         required
                     >
-                    <img class="inputIcon" src="/assets/icons/lock.png" alt="" aria-hidden="true">
+                    <img
+                        id="loginPasswordToggle"
+                        class="inputIcon passwordToggle"
+                        src="/assets/icons/lock.png"
+                        alt="Toggle password visibility"
+                        role="button"
+                        tabindex="0"
+                    >
                 </div>
 
-                <p class="wrongDataAlert">Wrong email or password. Try again.</p>
+                <p class="wrongDataAlert">Check your email and password. Please try again.</p>
 
                 <div class="loginButtons">
                     <button class="logInBtn" type="submit">Log in</button>
