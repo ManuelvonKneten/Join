@@ -11,18 +11,36 @@ const messageBox     = document.getElementById('msgBox');
 
 
 /**
- * Prüft ob Passwort und Bestätigungsfeld übereinstimmen.
- * Zeigt eine Fehlermeldung an, wenn sie es nicht tun.
+ * Aktualisiert die Validität des Bestätigungsfeldes (gate für den Submit),
+ * ohne die Fehlermeldung anzuzeigen.
+ *
+ * @returns {boolean} true, wenn beide Passwörter übereinstimmen
  */
-function validatePasswords() {
+function updatePasswordValidity() {
     const match = signupPasswordInput.value === signupConfirmInput.value;
     signupConfirmInput.setCustomValidity(match ? '' : 'Passwords do not match.');
+    return match;
+}
+
+/**
+ * Prüft die Passwörter und zeigt die Fehlermeldung an,
+ * wenn sie nicht übereinstimmen (für das blur-Event).
+ */
+function validatePasswordsOnBlur() {
+    const match = updatePasswordValidity();
     mismatchMsg.classList.toggle('visible', !match && signupConfirmInput.value.length > 0);
 }
 
 if (signupConfirmInput) {
-    signupConfirmInput.addEventListener('input', validatePasswords);
-    signupPasswordInput.addEventListener('input', validatePasswords);
+    // Fehlermeldung erst beim Verlassen des Bestätigungsfeldes anzeigen
+    signupConfirmInput.addEventListener('blur', validatePasswordsOnBlur);
+
+    // Beim Tippen nur die Validität aktualisieren und den Fehler ausblenden
+    signupConfirmInput.addEventListener('input', () => {
+        updatePasswordValidity();
+        mismatchMsg.classList.remove('visible');
+    });
+    signupPasswordInput.addEventListener('input', updatePasswordValidity);
 }
 
 if (acceptCheckbox) {
