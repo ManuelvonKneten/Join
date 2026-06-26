@@ -273,18 +273,3 @@ function renderSubtasksEdit() {
     });
 }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

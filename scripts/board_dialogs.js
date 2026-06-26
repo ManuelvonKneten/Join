@@ -23,6 +23,7 @@ function handleDialogAddTaskBoard (event) {
             dialog_add_task_board.close();
         }
 }
+
 dialog_add_task_board.addEventListener('click', handleDialogAddTaskBoard);
 
 
