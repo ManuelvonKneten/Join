@@ -26,6 +26,44 @@ async function initAddTask() {
     setupClearButton();
     setupAssignedDropdown();
     setupDueDateInput();
+    setupRequiredFieldValidation();
+}
+
+
+/**
+ * Zeigt bei den Pflichtfeldern Title und Due Date den Hinweis
+ * "This field is required" an, sobald das Feld leer verlassen wird (onblur).
+ * Beim erneuten Tippen wird der Hinweis wieder ausgeblendet.
+ *
+ * @returns {void}
+ */
+function setupRequiredFieldValidation() {
+    const fields = [
+        { input: 'taskTitle',   error: 'taskTitleError' },
+        { input: 'taskDueDate', error: 'taskDueDateError' },
+    ];
+
+    fields.forEach(({ input, error }) => {
+        const field = document.getElementById(input);
+        const message = document.getElementById(error);
+        if (!field || !message) return;
+
+        field.addEventListener('blur', () => toggleRequiredError(field, message, !field.value.trim()));
+        field.addEventListener('input', () => toggleRequiredError(field, message, false));
+    });
+}
+
+/**
+ * Blendet den Pflichtfeld-Hinweis ein oder aus und markiert das Eingabefeld.
+ *
+ * @param {HTMLInputElement} field
+ * @param {HTMLElement} message
+ * @param {boolean} show
+ * @returns {void}
+ */
+function toggleRequiredError(field, message, show) {
+    message.classList.toggle('visible', show);
+    field.classList.toggle('input_invalid', show);
 }
 
 

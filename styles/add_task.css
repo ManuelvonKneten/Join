@@ -439,6 +439,22 @@
     margin-top: auto;
 }
 
+/* ── Pflichtfeld-Fehler (onblur) ── */
+.field_error {
+    display: none;
+    margin-top: -4px;
+    font-size: 12px;
+    color: #FF8190;
+}
+
+.field_error.visible {
+    display: block;
+}
+
+.add_task_left .inputField input.input_invalid {
+    border-color: #FF8190;
+}
+
 /* ── Actions ── */
 .add_task_actions {
     display: flex;
