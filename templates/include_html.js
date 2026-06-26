@@ -20,9 +20,14 @@ async function includeHTML() {
 
 function updateNavigationForAuthState() {
   const isLoggedIn = Boolean(localStorage.getItem("currentUser"));
+  const logoLink = document.querySelector('[data-auth-logo-link="true"]');
   const selector = isLoggedIn
     ? '[data-auth-public="true"]'
     : '[data-auth-required="true"]';
+
+  if (logoLink) {
+    logoLink.href = isLoggedIn ? "./summary.html" : "../index.html";
+  }
 
   document.querySelectorAll(selector).forEach((element) => element.remove());
 }
