@@ -52,7 +52,7 @@
 }
 
 .contacts_heading {
-    font-size: 48px;
+    font-size: var( --font-size-page-title);
     font-weight: 700;
     color: var(--primary-color);
     margin: 0;

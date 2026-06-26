@@ -9,7 +9,7 @@
 }
 
 .add_task_heading {
-    font-size: 48px;
+    font-size: var( --font-size-page-title);
     font-weight: 700;
     color: var(--color-tertiary);
     margin: 0;

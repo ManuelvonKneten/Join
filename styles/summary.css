@@ -17,7 +17,7 @@
 }
 
 .summary_headline h1 {
-  font-size: clamp(32px, 20vw, 48px);
+  font-size: var( --font-size-page-title);
   font-weight: 700;
   line-height: 1.2;
   margin: 0;
