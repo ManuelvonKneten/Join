@@ -79,7 +79,7 @@
 
 
 .animateLogo {
-    animation: logoFlyUp 0.8s ease-in-out forwards;
+    animation: logoFlyUp 255ms ease-in-out forwards;
     position: fixed;
     z-index: 100;
 }

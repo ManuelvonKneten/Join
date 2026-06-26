@@ -81,7 +81,7 @@ function onUserRegistered() {
     const signupToast = document.getElementById('signupToast');
     signupToast.classList.add('show');
     setTimeout(() => {
-        window.location.href = '/htmls/login.html?msg=registered';
+        window.location.href = '/index.html?msg=registered';
     }, 2500);
 }
 
