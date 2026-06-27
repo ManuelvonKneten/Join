@@ -11,106 +11,108 @@
 </head>
 <body class="logIn">
 
-    <header class="logInHeader fadeHeader">
-        <img class="logInLogo" src="/assets/img/logo_dark.png" alt="Join Logo">
+    <div class="loginPageWrapper">
+        <header class="logInHeader fadeHeader">
+            <img class="logInLogo" src="/assets/img/logo_dark.png" alt="Join Logo">
 
-    </header>
+        </header>
 
-    <main class="logInMain fadeMain">
-        <div class="logInBox">
+        <main class="logInMain fadeMain">
+            <div class="logInBox">
 
-            <a href="/index.html" class="backArrow" aria-label="Back to login">
-                <img src="/assets/icons/arrow-left.svg" alt="">
-            </a>
+                <a href="/index.html" class="backArrow" aria-label="Back to login">
+                    <img src="/assets/icons/arrow-left.svg" alt="">
+                </a>
 
-            <h1>Sign up</h1>
+                <h1>Sign up</h1>
 
-            <form action="#">
+                <form action="#">
 
-                <div class="inputField">
-                    <input
-                        id="signupName"
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        aria-label="Name"
-                        required
-                    >
-                    <img class="inputIcon" src="/assets/icons/person.png" alt="" aria-hidden="true">
-                </div>
+                    <div class="inputField">
+                        <input
+                            id="signupName"
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                            aria-label="Name"
+                            required
+                        >
+                        <img class="inputIcon" src="/assets/icons/person.png" alt="" aria-hidden="true">
+                    </div>
 
-                <div class="inputField">
-                    <input
-                        id="signupEmail"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        aria-label="Email"
-                        required
-                    >
-                    <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true">
-                </div>
+                    <div class="inputField">
+                        <input
+                            id="signupEmail"
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            aria-label="Email"
+                            required
+                        >
+                        <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true">
+                    </div>
 
-                <div class="inputField">
-                    <input
-                        id="signupPassword"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        aria-label="Password"
-                        required
-                    >
-                    <img
-                        id="signupPasswordToggle"
-                        class="inputIcon passwordToggle"
-                        src="/assets/icons/lock.png"
-                        alt="Toggle password visibility"
-                        role="button"
-                        tabindex="0"
-                    >
-                </div>
+                    <div class="inputField">
+                        <input
+                            id="signupPassword"
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            aria-label="Password"
+                            required
+                        >
+                        <img
+                            id="signupPasswordToggle"
+                            class="inputIcon passwordToggle"
+                            src="/assets/icons/lock.png"
+                            alt="Toggle password visibility"
+                            role="button"
+                            tabindex="0"
+                        >
+                    </div>
 
-                <div class="inputField">
-                    <input
-                        id="signupConfirmPassword"
-                        type="password"
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        aria-label="Confirm Password"
-                        required
-                    >
-                    <img
-                        id="signupConfirmPasswordToggle"
-                        class="inputIcon passwordToggle"
-                        src="/assets/icons/lock.png"
-                        alt="Toggle password visibility"
-                        role="button"
-                        tabindex="0"
-                    >
-                </div>
-                <span id="passwordMismatch" class="passwordMismatch">Your passwords don't match. Please try again</span>
+                    <div class="inputField">
+                        <input
+                            id="signupConfirmPassword"
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            aria-label="Confirm Password"
+                            required
+                        >
+                        <img
+                            id="signupConfirmPasswordToggle"
+                            class="inputIcon passwordToggle"
+                            src="/assets/icons/lock.png"
+                            alt="Toggle password visibility"
+                            role="button"
+                            tabindex="0"
+                        >
+                    </div>
+                    <span id="passwordMismatch" class="passwordMismatch">Your passwords don't match. Please try again</span>
 
-                <label class="signupCheckboxLabel">
-                    <input
-                        id="signupAccept"
-                        type="checkbox"
-                    >
-                    I accept the <a href="/htmls/privacy_policy.html">Privacy Policy</a>
-                </label>
+                    <label class="signupCheckboxLabel">
+                        <input
+                            id="signupAccept"
+                            type="checkbox"
+                        >
+                        I accept the <a href="/htmls/privacy_policy.html">Privacy Policy</a>
+                    </label>
 
-                <div class="loginButtons signupButtons">
-                    <button id="signupBtn" class="logInBtn" type="submit" disabled>Sign up</button>
-                </div>
+                    <div class="loginButtons signupButtons">
+                        <button id="signupBtn" class="logInBtn" type="submit" disabled>Sign up</button>
+                    </div>
 
-            </form>
+                </form>
 
-        </div>
-    </main>
+            </div>
+        </main>
 
-    <footer class="logInFooter fadeFooter">
-        <a href="/htmls/privacy_policy.html">Privacy Policy</a>
-        <a href="/htmls/legal_notice.html">Legal Notice</a>
-    </footer>
+        <footer class="logInFooter fadeFooter">
+            <a href="/htmls/privacy_policy.html">Privacy Policy</a>
+            <a href="/htmls/legal_notice.html">Legal Notice</a>
+        </footer>
+    </div>
 
     <div id="signupToast" class="signupToast" role="status" aria-live="polite" aria-atomic="true">You Signed Up successfully</div>
 

@@ -15,70 +15,72 @@
         <img class="logoImage" id="splashLogo" src="./assets/img/logo_dark.png" alt="Join Logo">
     </div>
 
-    <header class="logInHeader fadeHeader">
-        <img class="logInLogo" src="/assets/img/logo_dark.png" alt="Join Logo">
-        <div class="signupContainer">
-            <span>Not a Join user?</span>
-            <a href="/htmls/signup.html">Sign up</a>
-        </div>
-    </header>
+    <div class="loginPageWrapper">
+        <header class="logInHeader fadeHeader">
+            <img class="logInLogo" src="/assets/img/logo_dark.png" alt="Join Logo">
+            <div class="signupContainer">
+                <span>Not a Join user?</span>
+                <a href="/htmls/signup.html">Sign up</a>
+            </div>
+        </header>
 
-    <main class="logInMain fadeMain">
-        <div class="logInBox">
+        <main class="logInMain fadeMain">
+            <div class="logInBox">
 
-            <h1>Log in</h1>
+                <h1>Log in</h1>
 
-            <p id="msgBox" class="msgBox"></p>
+                <p id="msgBox" class="msgBox"></p>
 
-            <form action="#">
+                <form action="#">
 
-                <div class="inputField">
-                    <input
-                        id="loginEmail"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        aria-label="Email"
-                        required
-                    >
-                    <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true">
-                </div>
+                    <div class="inputField">
+                        <input
+                            id="loginEmail"
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            aria-label="Email"
+                            required
+                        >
+                        <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true">
+                    </div>
 
-                <div class="inputField loginInputWrapper">
-                    <input
-                        id="loginPassword"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        aria-label="Password"
-                        required
-                    >
-                    <img
-                        id="loginPasswordToggle"
-                        class="inputIcon passwordToggle"
-                        src="/assets/icons/lock.png"
-                        alt="Toggle password visibility"
-                        role="button"
-                        tabindex="0"
-                    >
-                </div>
+                    <div class="inputField loginInputWrapper">
+                        <input
+                            id="loginPassword"
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            aria-label="Password"
+                            required
+                        >
+                        <img
+                            id="loginPasswordToggle"
+                            class="inputIcon passwordToggle"
+                            src="/assets/icons/lock.png"
+                            alt="Toggle password visibility"
+                            role="button"
+                            tabindex="0"
+                        >
+                    </div>
 
-                <p class="wrongDataAlert">Check your email and password. Please try again.</p>
+                    <p class="wrongDataAlert">Check your email and password. Please try again.</p>
 
-                <div class="loginButtons">
-                    <button class="logInBtn" type="submit">Log in</button>
-                    <button class="guestBtn" type="button" id="guestLoginBtn">Guest Log in</button>
-                </div>
+                    <div class="loginButtons">
+                        <button class="logInBtn" type="submit">Log in</button>
+                        <button class="guestBtn" type="button" id="guestLoginBtn">Guest Log in</button>
+                    </div>
 
-            </form>
+                </form>
 
-        </div>
-    </main>
+            </div>
+        </main>
 
-    <footer class="logInFooter fadeFooter">
-        <a href="/htmls/privacy_policy.html">Privacy Policy</a>
-        <a href="/htmls/legal_notice.html">Legal Notice</a>
-    </footer>
+        <footer class="logInFooter fadeFooter">
+            <a href="/htmls/privacy_policy.html">Privacy Policy</a>
+            <a href="/htmls/legal_notice.html">Legal Notice</a>
+        </footer>
+    </div>
 
     <div class="landscape_blocker">
         <p>Please rotate your device.</p>

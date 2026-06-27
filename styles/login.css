@@ -1,5 +1,19 @@
 .logIn {
     background-color: rgb(246, 247, 248);
+    margin: 0;
+    min-height: 100vh;
+}
+
+
+.loginPageWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: rgb(246, 247, 248);
+    box-sizing: border-box;
 }
 
 
@@ -9,18 +23,15 @@
     align-items: center;
     position: relative;
     z-index: 2;
-    padding: 0 50px 0 40px;
-    overflow: hidden;
-    height: 150px;
-    top: 64px;
-    padding-left: 64px;
+    padding: 64px clamp(40px, 8vw, 116px) 0 clamp(40px, 5.3vw, 77px);
+    min-height: 150px;
+    box-sizing: border-box;
 }
 
 
 .logInLogo {
     width: 100px;
     height: auto;
-    padding-top: 24px;
 }
 
 
@@ -187,7 +198,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 270px);
+    flex: 1;
+    padding: 0 clamp(16px, 4vw, 64px);
+    box-sizing: border-box;
 }
 
 
@@ -379,7 +392,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 120px;
+    min-height: 120px;
 }
 
 
@@ -506,15 +519,18 @@
 
 
 @media (max-width: 600px) {
+    .loginPageWrapper {
+        min-height: 100svh;
+    }
+
     .logInHeader {
         height: clamp(96px, 30vw, 130px);
-        top: clamp(16px, 8vw, 48px);
-        padding: 0 clamp(16px, 6vw, 40px);
+        min-height: auto;
+        padding: clamp(24px, 8vw, 48px) clamp(16px, 6vw, 40px) 0;
     }
 
     .logInLogo {
         width: clamp(64px, 22vw, 90px);
-        padding-top: clamp(8px, 4vw, 20px);
     }
 
     .signupContainer {
@@ -531,8 +547,7 @@
     }
 
     .logInMain {
-        height: auto;
-        min-height: calc(100vh - 240px);
+        min-height: 0;
         padding: clamp(24px, 8vw, 48px) clamp(12px, 4vw, 24px);
         box-sizing: border-box;
     }
