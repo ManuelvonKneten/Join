@@ -87,11 +87,13 @@
   font-size: clamp(16px, 1.4vw, 20px);
   font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .search button:hover,
 .search button:focus {
   background-color: var(--color-secondary);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 #no_results_alert {
