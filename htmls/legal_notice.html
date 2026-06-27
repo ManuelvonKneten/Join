@@ -4,20 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Legal Notice</title>
-    <link rel="icon" href="../assets/icons/favicon.svg" type="image/png" />
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/sidebar.css" />
-    <link rel="stylesheet" href="../styles/header_nav.css" />
-    <link rel="stylesheet" href="../styles/bottom_nav.css" />
-    <link rel="stylesheet" href="../styles/summary.css" />
     <link rel="stylesheet" href="../styles/legal_notice.css" />
   </head>
-  <body>
-    <div data-include="../templates/sidebar.html"></div>
-    <div data-include="../templates/header.html"></div>
+  <body class="publicPage">
+    <div class="publicPageWrapper">
+      <aside class="publicLegalSidebar">
+        <a class="publicLegalLogoLink" href="/index.html" aria-label="Join login">
+          <img class="publicLegalSidebarLogo" src="/assets/img/logo.png" alt="Join Logo" />
+        </a>
+        <nav class="publicLegalSidebarNav" aria-label="Public legal navigation">
+          <a class="publicLegalNavLink" href="/index.html">
+            <img class="publicLegalLoginIcon" src="../assets/icons/login.svg" alt="" aria-hidden="true" />
+            Log In
+          </a>
+        </nav>
+        <nav class="publicLegalSidebarFooter" aria-label="Public legal footer navigation">
+          <a class="publicLegalFooterLink" href="/htmls/privacy_policy.html">Privacy Policy</a>
+          <a class="publicLegalFooterLink publicLegalFooterLinkActive" href="/htmls/legal_notice.html" aria-current="page">
+            Legal Notice
+          </a>
+        </nav>
+      </aside>
 
-    <main class="content">
+      <header class="publicLegalHeader">
+        <a class="publicLegalMobileLogoLink" href="/index.html" aria-label="Join login">
+          <img class="publicLegalMobileLogo" src="/assets/img/logo_dark.png" alt="Join Logo" />
+        </a>
+        <p class="publicLegalHeaderTitle">Kanban Project Management Tool</p>
+      </header>
+
+    <main class="publicContent">
       <h1>Legal Notice</h1>
 
       <h2>Imprint</h2>
@@ -97,10 +116,16 @@
       <p>Date: May 05, 2026</p>
     </main>
 
-    <div data-include="../templates/bottom_nav.html"></div>
-
-    <script src="../scripts/utils.js"></script>
-    <script src="../templates/include_html.js"></script>
-    <script src="../scripts/summary.js"></script>
+      <nav class="publicLegalBottomNav" aria-label="Public legal mobile navigation">
+        <a class="publicLegalBottomNavItem publicLegalBottomNavLogin" href="/index.html">
+          <img class="publicLegalBottomNavIcon" src="../assets/icons/login.svg" alt="" aria-hidden="true" />
+          <span>Log In</span>
+        </a>
+        <a class="publicLegalBottomNavItem" href="/htmls/privacy_policy.html">Privacy Policy</a>
+        <a class="publicLegalBottomNavItem publicLegalBottomNavItemActive" href="/htmls/legal_notice.html" aria-current="page">
+          Legal Notice
+        </a>
+      </nav>
+    </div>
   </body>
 </html>
