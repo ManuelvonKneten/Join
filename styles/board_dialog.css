@@ -183,11 +183,14 @@
   border-radius: 8px;
   padding: 5px 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
 }
 
 .delete_buttons button:hover,
 .delete_buttons button:focus {
   background-color: var(--color-secondary);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Dialog Add-Task */

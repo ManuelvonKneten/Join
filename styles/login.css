@@ -519,6 +519,14 @@
 
 
 @media (max-width: 600px) {
+    .splashLogoContainer {
+        background-color: #2a3647;
+    }
+
+    .logoImage {
+        width: clamp(64px, 22vw, 90px);
+    }
+
     .loginPageWrapper {
         min-height: 100svh;
     }
