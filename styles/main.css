@@ -12,7 +12,7 @@
   --sidebar-current-background: #091931;
   --main-background: #ffffff;
   --content-background: #f6f7f8;
-  --sidebar-hover-background: rgba(255, 255, 255, 0.08);
+  --sidebar-hover-background: color-mix(in srgb, var(--color-secondary) 20%, transparent);
   --backdrop: rgba(0, 0, 0, 0.6);
 
   /* Layout */
