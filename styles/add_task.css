@@ -69,23 +69,29 @@
 
 /* Title & Due Date inputs */
 .add_task_left .inputField input {
-    height: 40px;
-    font-size: 16px;
+    height: 50px;
+    font-size: 21px;
+}
+
+.add_task_left .inputField input::placeholder,
+.add_task_textarea::placeholder,
+#subtaskInput::placeholder {
+    color: #d1d5db;
 }
 
 /* Assigned to trigger */
 #assignedDropdown .assigned_trigger {
-    height: 40px;
-    font-size: 16px;
+    height: 50px;
+    font-size: 21px;
 }
 
 .add_task_textarea {
     width: 100%;
-    height: 90px;
+    height: 50px;
     padding: 12px 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 21px;
     font-family: "Inter", sans-serif;
     resize: vertical;
 }
@@ -112,10 +118,10 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 13px 10px;
-    border: 1px solid #ccc;
+    padding: 17px 10px;
+    border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 21px;
     font-weight: 400;
     color: var(--color-tertiary);
     background: white;
@@ -141,21 +147,18 @@
 /* Urgent — nur bei Auswahl (Klick): red */
 .add_task_prio_btn[data-priority="urgent"].active {
     background-color: #FF3D00;
-    border-color: #FF3D00;
     color: white;
 }
 
 /* Medium — nur bei Auswahl (Klick): orange */
 .add_task_prio_btn[data-priority="medium"].active {
     background-color: #FFA800;
-    border-color: #FFA800;
     color: white;
 }
 
 /* Low — nur bei Auswahl (Klick): green */
 .add_task_prio_btn[data-priority="low"].active {
     background-color: #7AE229;
-    border-color: #7AE229;
     color: white;
 }
 
@@ -166,6 +169,10 @@
 
 .add_task_prio_btn.active {
     font-weight: 600;
+}
+
+.add_task_prio_btn.active:hover {
+    box-shadow: none;
 }
 
 /* ── Dropdowns ── */
@@ -180,11 +187,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    height: 48px;
+    height: 50px;
     padding: 0 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 21px;
     font-family: "Inter", sans-serif;
     color: var(--color-tertiary);
     background: white;
@@ -197,7 +204,7 @@
 }
 
 .assigned_placeholder {
-    font-size: 16px;
+    font-size: 21px;
     color: var(--color-tertiary);
 }
 
@@ -293,14 +300,13 @@
 }
 
 .assigned_selected_avatar {
-    width: 34px;
-    height: 34px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 16px;
     color: white;
     border: 2px solid white;
 }
@@ -314,16 +320,30 @@
     padding-left: 12px;
 }
 
+
 .add_task_subtask_item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 400;
     color: var(--color-tertiary);
     padding: 6px 10px;
     border-radius: 6px;
-    background-color: #f0f4ff;
+    background-color: transparent;
     cursor: pointer;
+}
+
+.add_task_subtask_item:hover {
+    background-color: #e9ecef;
+}
+
+.add_task_subtask_item .add_task_subtask_actions {
+    visibility: hidden;
+}
+
+.add_task_subtask_item:hover .add_task_subtask_actions {
+    visibility: visible;
 }
 
 .due_date_picker_hidden {
@@ -373,6 +393,13 @@
 }
 
 /* Hover-Effekt auf Subtask-Input */
+#subtaskInput {
+    background-color: white;
+    font-weight: 400;
+    height: 50px;
+    font-size: 21px;
+}
+
 #subtaskInput:hover {
     border-color: var(--color-tertiary);
     cursor: pointer;
@@ -457,20 +484,24 @@
     padding: 0 1px;
 }
 
-.add_task_subtask_item--editing {
-    background-color: #eef1ff;
+.add_task_subtask_item--editing,
+.add_task_subtask_item--editing:hover {
+    background-color: white;
     gap: 8px;
+    margin-left: -12px;
+    border-bottom: 1px solid var(--color-secondary);
 }
 
 .add_task_subtask_input {
     flex: 1;
     min-width: 0;
     border: none;
-    border-bottom: 1px solid var(--color-tertiary);
-    background: transparent;
+    background: white;
     font-size: 16px;
+    font-weight: 400;
     color: var(--color-tertiary);
     outline: none;
+    height: 40px;
     padding: 2px 0;
 }
 

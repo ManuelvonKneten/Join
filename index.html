@@ -34,7 +34,7 @@
 
                 <p id="msgBox" class="msgBox"></p>
 
-                <form action="#">
+                <form action="#" novalidate>
 
                     <div class="inputField">
                         <input
@@ -43,10 +43,10 @@
                             name="email"
                             placeholder="Email"
                             aria-label="Email"
-                            required
                         >
                         <img class="inputIcon" src="./assets/icons/mail.png" alt="" aria-hidden="true">
                     </div>
+                    <span id="loginEmailError" class="inputError">Please enter a valid email address</span>
 
                     <div class="inputField loginInputWrapper">
                         <input
@@ -55,7 +55,6 @@
                             name="password"
                             placeholder="Password"
                             aria-label="Password"
-                            required
                         >
                         <img
                             id="loginPasswordToggle"
