@@ -58,9 +58,9 @@ function initPasswordToggle(input, toggle) {
     if (!input || !toggle) return;
 
     const icons = {
-        lock:   '/assets/icons/lock.png',
-        hidden: '/assets/icons/visibility_off.svg',
-        shown:  '/assets/icons/visibility.svg',
+        lock:   '../assets/icons/lock.png',
+        hidden: '../assets/icons/visibility_off.svg',
+        shown:  '../assets/icons/visibility.svg',
     };
 
     const update = () => {
@@ -142,7 +142,7 @@ function onUserRegistered() {
     const signupToast = document.getElementById('signupToast');
     signupToast.classList.add('show');
     setTimeout(() => {
-        window.location.href = '/index.html?msg=registered';
+        window.location.href = '../index.html?msg=registered';
     }, 2500);
 }
 

@@ -17,7 +17,7 @@ function initLogin() {
 
 function loginAsGuest() {
     localStorage.setItem('currentUser', 'Guest');
-    window.location.href = '/htmls/summary.html';
+    window.location.href = './htmls/summary.html';
 }
 
 async function findUser(email, password) {
@@ -32,7 +32,7 @@ async function handleLogin(e, emailInput, passInput, alertBox) {
 
     if (found) {
         localStorage.setItem('currentUser', found.name || found.email);
-        window.location.href = '/htmls/summary.html';
+        window.location.href = './htmls/summary.html';
     } else {
         alertBox.style.display = 'block';
     }
@@ -56,9 +56,9 @@ function initBlurCheck(emailInput, passInput, alertBox) {
 // Augen-Icon. Ein Klick darauf schaltet die Passwort-Sichtbarkeit um.
 function initPasswordToggle(input, toggle) {
     const icons = {
-        lock:   '/assets/icons/lock.png',
-        hidden: '/assets/icons/visibility_off.svg',
-        shown:  '/assets/icons/visibility.svg',
+        lock:   './assets/icons/lock.png',
+        hidden: './assets/icons/visibility_off.svg',
+        shown:  './assets/icons/visibility.svg',
     };
 
     const update = () => {

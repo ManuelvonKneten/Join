@@ -256,7 +256,7 @@ function getSubtasksEditTemplate(subtask, index) {
 
                 <div class="delete_edit_icon">
                     <button onclick="deleteSubtask(${index})">
-                    <img src="/assets/icons/delete.png"></button>
+                    <img src="../assets/icons/delete.png"></button>
 
                     <button onclick="saveSubtask(${index})">✔️</button>
                 </div>
@@ -270,10 +270,10 @@ function getSubtasksEditTemplate(subtask, index) {
 
             <div class="delete_edit_icon">
                 <button onclick="editSubtask(${index})">
-                    <img src="/assets/icons/edit.png" alt="">
+                    <img src="../assets/icons/edit.png" alt="">
                 </button>
 
-                <button onclick="deleteSubtask(${index})"><img src="/assets/icons/delete.png"></button>
+                <button onclick="deleteSubtask(${index})"><img src="../assets/icons/delete.png"></button>
             </div>
         </div>
     `;

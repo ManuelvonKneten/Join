@@ -41,7 +41,7 @@ function avatarColor(name) {
  */
 function clearLocalStorage() {
     localStorage.removeItem('currentUser');
-    window.location.replace('/index.html');
+    window.location.replace('../index.html');
 }
 
 

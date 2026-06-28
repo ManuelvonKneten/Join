@@ -27,7 +27,7 @@
         <div class="contacts_left">
           <button class="btn_add_contact" onclick="openAddContact()">
             Add new contact
-            <img src="/assets/icons/person.png" alt="" aria-hidden="true" />
+            <img src="../assets/icons/person.png" alt="" aria-hidden="true" />
           </button>
           <div id="contactList" class="contact_list"></div>
         </div>
@@ -39,7 +39,7 @@
             <div class="contacts_divider_vertical"></div>
             <span class="contacts_subheading">Better with a team</span>
             <button class="btn_back_to_contacts" onclick="closeContactDetail()" aria-label="Zurück zur Kontaktliste">
-              <img src="/assets/icons/arrow-left.svg" alt="" aria-hidden="true" />
+              <img src="../assets/icons/arrow-left.svg" alt="" aria-hidden="true" />
             </button>
           </div>
 
@@ -51,10 +51,10 @@
                 <h3 class="crb_name">Full Name</h3>
                 <div class="crb_actions">
                   <button class="crb_btn" onclick="openEditContact(activeContact)" aria-label="Kontakt bearbeiten">
-                    <img src="/assets/icons/edit.png" alt="" aria-hidden="true" /> Edit
+                    <img src="../assets/icons/edit.png" alt="" aria-hidden="true" /> Edit
                   </button>
                   <button class="crb_btn" onclick="deleteContact()" aria-label="Kontakt löschen">
-                    <img src="/assets/icons/delete.png" alt="" aria-hidden="true" /> Delete
+                    <img src="../assets/icons/delete.png" alt="" aria-hidden="true" /> Delete
                   </button>
                 </div>
               </div>
@@ -87,7 +87,7 @@
         <button class="modal_close_btn" onclick="closeAddContact()" aria-label="Dialog schließen">&#x2715;</button>
 
         <div class="modal_left">
-          <img class="modal_logo" src="/assets/img/logo.png" alt="" aria-hidden="true" />
+          <img class="modal_logo" src="../assets/img/logo.png" alt="" aria-hidden="true" />
           <h2 class="modal_heading" id="addContactTitle">Add contact</h2>
           <p class="modal_sub">Tasks are better with a team!</p>
           <div class="modal_divider"></div>
@@ -99,22 +99,22 @@
 
             <div class="modal_avatar_col">
               <div class="modal_avatar">
-                <img src="/assets/icons/person.png" alt="" aria-hidden="true" />
+                <img src="../assets/icons/person.png" alt="" aria-hidden="true" />
               </div>
             </div>
 
             <form class="modal_form_col" onsubmit="createContact(event)">
               <div class="inputField">
                 <input id="contactName" type="text" placeholder="Name" aria-label="Name" required />
-                <img class="inputIcon" src="/assets/icons/person.png" alt="" aria-hidden="true" />
+                <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
                 <input id="contactEmail" type="email" placeholder="Email" aria-label="Email" required />
-                <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true" />
+                <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
                 <input id="contactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
-                <img class="inputIcon" src="/assets/icons/phone.png" alt="" aria-hidden="true" />
+                <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
               </div>
 
               <div class="modal_actions">
@@ -139,7 +139,7 @@
         <button class="modal_close_btn" onclick="closeEditContact()" aria-label="Dialog schließen">&#x2715;</button>
 
         <div class="modal_left">
-          <img class="modal_logo" src="/assets/img/logo.png" alt="" aria-hidden="true" />
+          <img class="modal_logo" src="../assets/img/logo.png" alt="" aria-hidden="true" />
           <h2 class="modal_heading" id="editContactTitle">Edit contact</h2>
           <p class="modal_sub">Tasks are better with a team!</p>
           <div class="modal_divider"></div>
@@ -156,15 +156,15 @@
             <form class="modal_form_col" onsubmit="saveContact(event)">
               <div class="inputField">
                 <input id="editContactName" type="text" placeholder="Name" aria-label="Name" required />
-                <img class="inputIcon" src="/assets/icons/person.png" alt="" aria-hidden="true" />
+                <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
                 <input id="editContactEmail" type="email" placeholder="Email" aria-label="Email" required />
-                <img class="inputIcon" src="/assets/icons/mail.png" alt="" aria-hidden="true" />
+                <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
               </div>
               <div class="inputField">
                 <input id="editContactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
-                <img class="inputIcon" src="/assets/icons/phone.png" alt="" aria-hidden="true" />
+                <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
               </div>
 
               <div class="modal_actions">
@@ -184,10 +184,10 @@
     </div>
 
     <button class="fab_add_contact" onclick="openAddContact()">
-      <img src="/assets/icons/person_add.png" alt="Add contact" />
+      <img src="../assets/icons/person_add.png" alt="Add contact" />
     </button>
     <button class="fab_contact_more" onclick="openEditContact(activeContact)">
-      <img src="/assets/icons/more_vert.png" alt="More options" />
+      <img src="../assets/icons/more_vert.png" alt="More options" />
     </button>
 
     <div id="contactToast" class="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>

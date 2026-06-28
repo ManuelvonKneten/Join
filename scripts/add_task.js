@@ -377,11 +377,11 @@ function getTaskFormData() {
 function onTaskCreated() {
     const notice = document.getElementById('taskAddedNotice');
     if (!notice) {
-        window.location.href = '/htmls/board.html';
+        window.location.href = '../htmls/board.html';
         return;
     }
     notice.classList.add('show');
-    setTimeout(() => { window.location.href = '/htmls/board.html'; }, 1200);
+    setTimeout(() => { window.location.href = '../htmls/board.html'; }, 1200);
 }
 
 
