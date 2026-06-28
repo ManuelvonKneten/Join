@@ -335,6 +335,25 @@ function removeSubtask(subtaskIndex) {
     renderSubtaskList();
 }
 
+function editSubtaskItem(index) {
+    taskSubtasks[index].isEditing = true;
+    renderSubtaskList();
+    document.getElementById(`subtaskEdit${index}`)?.focus();
+}
+
+function saveSubtaskItem(index) {
+    const input = document.getElementById(`subtaskEdit${index}`);
+    const val = input?.value.trim();
+    if (val) taskSubtasks[index].title = val;
+    taskSubtasks[index].isEditing = false;
+    renderSubtaskList();
+}
+
+function cancelSubtaskEdit(index) {
+    taskSubtasks[index].isEditing = false;
+    renderSubtaskList();
+}
+
 /**
  * Rendert alle Subtasks als Listeneinträge mit Löschen-Button.
  *

@@ -367,6 +367,65 @@
     color: var(--color-tertiary);
 }
 
+.add_task_subtask_actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.add_task_subtask_action_btn {
+    background: none;
+    border: none;
+    color: var(--hover-color);
+    font-size: 15px;
+    cursor: pointer;
+    padding: 0 3px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.add_task_subtask_action_btn img {
+    width: 14px;
+    height: 14px;
+    filter: brightness(0) invert(0.55);
+    transition: filter 0.2s ease;
+}
+
+.add_task_subtask_action_btn:hover {
+    color: var(--color-tertiary);
+}
+
+.add_task_subtask_action_btn:hover img {
+    filter: brightness(0) invert(0.2);
+}
+
+.add_task_subtask_divider {
+    color: #ccc;
+    font-size: 12px;
+    user-select: none;
+    padding: 0 1px;
+}
+
+.add_task_subtask_item--editing {
+    background-color: #eef1ff;
+    gap: 8px;
+}
+
+.add_task_subtask_input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-bottom: 1px solid var(--color-tertiary);
+    background: transparent;
+    font-size: 16px;
+    color: var(--color-tertiary);
+    outline: none;
+    padding: 2px 0;
+}
+
 /* ── Toast ── */
 .add_task_toast {
     position: fixed;

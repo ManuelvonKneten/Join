@@ -87,10 +87,34 @@ function selectedAvatarHTML(contact) {
  * @returns {string} HTML-String des Subtask-Listeneintrags
  */
 function subtaskItemHTML(subtask, index) {
+    if (subtask.isEditing) {
+        return `
+            <li class="add_task_subtask_item add_task_subtask_item--editing">
+                <input
+                    id="subtaskEdit${index}"
+                    class="add_task_subtask_input"
+                    type="text"
+                    value="${subtask.title}"
+                    onkeydown="if(event.key==='Enter'){event.preventDefault();saveSubtaskItem(${index});}if(event.key==='Escape'){cancelSubtaskEdit(${index});}"
+                >
+                <div class="add_task_subtask_actions">
+                    <button type="button" class="add_task_subtask_action_btn" onclick="removeSubtask(${index})" aria-label="Delete">&#x2715;</button>
+                    <span class="add_task_subtask_divider">|</span>
+                    <button type="button" class="add_task_subtask_action_btn" onclick="saveSubtaskItem(${index})" aria-label="Save">&#x2713;</button>
+                </div>
+            </li>
+        `;
+    }
     return `
         <li class="add_task_subtask_item">
-            <span>${subtask.title}</span>
-            <button type="button" class="add_task_subtask_remove" onclick="removeSubtask(${index})">&#x2715;</button>
+            <span>&#8226; ${subtask.title}</span>
+            <div class="add_task_subtask_actions">
+                <button type="button" class="add_task_subtask_action_btn" onclick="editSubtaskItem(${index})" aria-label="Edit">
+                    <img src="../assets/icons/edit.svg" alt="" aria-hidden="true">
+                </button>
+                <span class="add_task_subtask_divider">|</span>
+                <button type="button" class="add_task_subtask_action_btn" onclick="removeSubtask(${index})" aria-label="Delete">&#x2715;</button>
+            </div>
         </li>
     `;
 }
