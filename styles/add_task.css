@@ -451,7 +451,8 @@
     display: block;
 }
 
-.add_task_left .inputField input.input_invalid {
+.add_task_left .inputField input.input_invalid,
+.assigned_trigger.input_invalid {
     border-color: #FF8190;
 }
 

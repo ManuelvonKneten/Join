@@ -1,7 +1,7 @@
 /* ── State ── */
 let availableContacts = [];
 let selectedContacts = [];
-let selectedPriority = '';
+let selectedPriority = 'medium';
 let taskSubtasks = [];
 
 
@@ -22,6 +22,7 @@ async function initAddTask() {
     await loadAvailableContacts();
     renderAssignedOptions();
     setupPriorityButtons();
+    setDefaultPriority();
     setupSubtaskInput();
     setupClearButton();
     setupAssignedDropdown();
@@ -29,6 +30,39 @@ async function initAddTask() {
     setupRequiredFieldValidation();
 }
 
+
+function setDefaultPriority() {
+    const mediumBtn = document.querySelector('.add_task_prio_btn[data-priority="medium"]');
+    if (!mediumBtn) return;
+    mediumBtn.classList.add('active');
+    mediumBtn.setAttribute('aria-pressed', 'true');
+    selectedPriority = 'medium';
+}
+
+function validateTaskForm() {
+    const title    = document.getElementById('taskTitle');
+    const dueDate  = document.getElementById('taskDueDate');
+    const category = document.getElementById('taskCategory');
+
+    const titleError    = document.getElementById('taskTitleError');
+    const dueDateError  = document.getElementById('taskDueDateError');
+    const categoryError = document.getElementById('taskCategoryError');
+
+    let valid = true;
+
+    toggleRequiredError(title,   titleError,   !title.value.trim());
+    toggleRequiredError(dueDate, dueDateError, !dueDate.value.trim());
+    if (!title.value.trim())   valid = false;
+    if (!dueDate.value.trim()) valid = false;
+
+    const noCategory = !category.value;
+    if (categoryError) categoryError.classList.toggle('visible', noCategory);
+    document.querySelector('#categoryDropdown .assigned_trigger')
+        ?.classList.toggle('input_invalid', noCategory);
+    if (noCategory) valid = false;
+
+    return valid;
+}
 
 /**
  * Zeigt bei den Pflichtfeldern Title und Due Date den Hinweis
@@ -127,6 +161,8 @@ function selectCategory(value, label, el) {
     el.classList.add('assigned_option_active');
     document.getElementById('categoryOptions').classList.add('hidden');
     document.getElementById('categoryArrow').classList.remove('rotated');
+    document.getElementById('taskCategoryError')?.classList.remove('visible');
+    document.querySelector('#categoryDropdown .assigned_trigger')?.classList.remove('input_invalid');
 }
 
 /**
@@ -323,6 +359,8 @@ function renderSubtaskList() {
 async function createTask(submitEvent) {
     submitEvent.preventDefault();
 
+    if (!validateTaskForm()) return;
+
     const taskData = getTaskFormData();
     const submitButton = submitEvent.target.querySelector('.add_task_btn_create');
     submitButton.disabled = true;
@@ -445,12 +483,17 @@ function clearTaskForm() {
     document.querySelector('.add_task_columns').reset();
 
     taskSubtasks = [];
-    selectedPriority = '';
     selectedContacts = [];
 
     renderSubtaskList();
     renderAssignedOptions();
     renderSelectedAvatars();
-    document.querySelectorAll('.add_task_prio_btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.add_task_prio_btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+    });
+    setDefaultPriority();
+    document.querySelectorAll('.field_error').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.input_invalid').forEach(el => el.classList.remove('input_invalid'));
 }
 // 
