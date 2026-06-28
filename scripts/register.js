@@ -1,46 +1,50 @@
-const acceptCheckbox = document.getElementById('signupAccept');
-const signupBtn      = document.getElementById('signupBtn');
-const signupForm     = document.querySelector('form');
+const acceptCheckbox       = document.getElementById('signupAccept');
+const signupBtn            = document.getElementById('signupBtn');
+const signupForm           = document.querySelector('form');
 const signupNameInput      = document.getElementById('signupName');
 const signupEmailInput     = document.getElementById('signupEmail');
-const signupPasswordInput      = document.getElementById('signupPassword');
+const signupPasswordInput  = document.getElementById('signupPassword');
 const signupConfirmInput   = document.getElementById('signupConfirmPassword');
-const mismatchMsg    = document.getElementById('passwordMismatch');
-const urlParams      = new URLSearchParams(window.location.search);
-const messageBox     = document.getElementById('msgBox');
+const mismatchMsg          = document.getElementById('passwordMismatch');
+const nameError            = document.getElementById('nameError');
+const urlParams            = new URLSearchParams(window.location.search);
+const messageBox           = document.getElementById('msgBox');
 
 
-/**
- * Aktualisiert die Validität des Bestätigungsfeldes (gate für den Submit),
- * ohne die Fehlermeldung anzuzeigen.
- *
- * @returns {boolean} true, wenn beide Passwörter übereinstimmen
- */
-function updatePasswordValidity() {
-    const match = signupPasswordInput.value === signupConfirmInput.value;
-    signupConfirmInput.setCustomValidity(match ? '' : 'Passwords do not match.');
-    return match;
+function isValidName(value) {
+    return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 2;
 }
 
-/**
- * Prüft die Passwörter und zeigt die Fehlermeldung an,
- * wenn sie nicht übereinstimmen (für das blur-Event).
- */
+function validateNameOnBlur() {
+    if (nameError) nameError.classList.toggle('visible', !isValidName(signupNameInput.value) && signupNameInput.value.length > 0);
+}
+
+if (signupNameInput) {
+    signupNameInput.addEventListener('blur', validateNameOnBlur);
+    signupNameInput.addEventListener('input', () => {
+        const showError = signupNameInput.value.length > 0 && !isValidName(signupNameInput.value);
+        if (nameError) nameError.classList.toggle('visible', showError);
+    });
+}
+
+function passwordsMatch() {
+    return signupPasswordInput.value === signupConfirmInput.value;
+}
+
 function validatePasswordsOnBlur() {
-    const match = updatePasswordValidity();
-    mismatchMsg.classList.toggle('visible', !match && signupConfirmInput.value.length > 0);
+    mismatchMsg.classList.toggle('visible', !passwordsMatch() && signupConfirmInput.value.length > 0);
 }
 
 if (signupConfirmInput) {
-    // Fehlermeldung erst beim Verlassen des Bestätigungsfeldes anzeigen
     signupConfirmInput.addEventListener('blur', validatePasswordsOnBlur);
-
-    // Beim Tippen nur die Validität aktualisieren und den Fehler ausblenden
     signupConfirmInput.addEventListener('input', () => {
-        updatePasswordValidity();
         mismatchMsg.classList.remove('visible');
     });
-    signupPasswordInput.addEventListener('input', updatePasswordValidity);
+    signupPasswordInput.addEventListener('input', () => {
+        if (signupConfirmInput.value.length > 0) {
+            mismatchMsg.classList.toggle('visible', !passwordsMatch());
+        }
+    });
 }
 
 initPasswordToggle(signupPasswordInput, document.getElementById('signupPasswordToggle'));
@@ -95,6 +99,11 @@ if (acceptCheckbox) {
 if (signupForm) {
     signupForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        const nameOk = isValidName(signupNameInput.value);
+        const pwOk   = passwordsMatch();
+        if (nameError) nameError.classList.toggle('visible', !nameOk);
+        mismatchMsg.classList.toggle('visible', !pwOk);
+        if (!nameOk || !pwOk) return;
         addUser();
     });
 }

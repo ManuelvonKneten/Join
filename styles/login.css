@@ -421,16 +421,19 @@
 }
 
 
-.passwordMismatch {
-    display: none;
+.inputError {
+    display: block;
+    visibility: hidden;
     font-size: 12px;
+    line-height: 1;
+    height: 14px;
     color: rgb(255, 129, 144);
     text-align: left;
     margin-top: -12px;
 }
 
-.passwordMismatch.visible {
-    display: block;
+.inputError.visible {
+    visibility: visible;
 }
 
 
