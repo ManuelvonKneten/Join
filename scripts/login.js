@@ -28,6 +28,10 @@ async function findUser(email, password) {
 
 async function handleLogin(e, emailInput, passInput, alertBox) {
     e.preventDefault();
+    if (!emailInput.value || !passInput.value) {
+        alertBox.style.display = 'block';
+        return;
+    }
     const found = await findUser(emailInput.value, passInput.value);
 
     if (found) {
@@ -45,10 +49,13 @@ function initBlurCheck(emailInput, passInput, alertBox) {
     emailInput.addEventListener('input', hideAlert);
     passInput.addEventListener('input', hideAlert);
 
-    passInput.addEventListener('blur', async () => {
-        if (!emailInput.value || !passInput.value) return;
-        const found = await findUser(emailInput.value, passInput.value);
-        alertBox.style.display = found ? 'none' : 'block';
+    const emailError = document.getElementById('loginEmailError');
+    emailInput.addEventListener('blur', () => {
+        const invalid = emailInput.value.length > 0 && !emailInput.value.includes('@');
+        if (emailError) emailError.classList.toggle('visible', invalid);
+    });
+    emailInput.addEventListener('input', () => {
+        if (emailError) emailError.classList.remove('visible');
     });
 }
 
