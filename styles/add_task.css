@@ -13,6 +13,8 @@
     font-weight: 700;
     color: var(--color-tertiary);
     margin: 0;
+    padding-top: 90px;
+    padding-bottom: 20px;
 }
 
 .add_task_columns {
@@ -41,8 +43,9 @@
 .add_task_divider {
     width: 1px;
     background-color: #e0e0e0;
-    align-self: stretch;
     flex-shrink: 0;
+    align-self: flex-start;
+    height: 40vw;
 }
 
 /* ── Fields ── */
@@ -84,7 +87,7 @@
     border-radius: 8px;
     font-size: 16px;
     font-family: "Inter", sans-serif;
-    resize: none;
+    resize: vertical;
 }
 
 .add_task_textarea:focus {
@@ -95,7 +98,7 @@
 
 /* ── Priority buttons ── */
 .add_task_right .add_task_field:first-child {
-    margin-top: 16px;
+    margin-top: 0;
 }
 
 .add_task_prio_btns {
@@ -113,7 +116,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--color-tertiary);
     background: white;
     cursor: pointer;
@@ -159,6 +162,10 @@
 /* Nur im aktiven Zustand Icon-Pfade weiß */
 .add_task_prio_btn.active .prio_icon path {
     fill: white;
+}
+
+.add_task_prio_btn.active {
+    font-weight: 600;
 }
 
 /* ── Dropdowns ── */
@@ -304,6 +311,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    padding-left: 12px;
 }
 
 .add_task_subtask_item {
@@ -315,6 +323,7 @@
     padding: 6px 10px;
     border-radius: 6px;
     background-color: #f0f4ff;
+    cursor: pointer;
 }
 
 .due_date_picker_hidden {
@@ -347,9 +356,48 @@
     stroke: var(--color-tertiary);
 }
 
-#addSubtaskIcon {
+#subtaskEditIcons {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Edit-Icons einblenden: bei Fokus oder wenn Inhalt vorhanden */
+.inputField:focus-within #subtaskEditIcons,
+.inputField:has(#subtaskInput:not(:placeholder-shown)) #subtaskEditIcons {
+    display: flex;
+}
+
+/* Hover-Effekt auf Subtask-Input */
+#subtaskInput:hover {
+    border-color: var(--color-tertiary);
     cursor: pointer;
-    pointer-events: auto;
+}
+
+.subtask_icon_btn {
+    background: none;
+    border: none;
+    padding: 0 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #a8a8a8;
+    transition: color 0.2s ease;
+}
+
+.subtask_icon_btn:hover {
+    color: var(--color-tertiary);
+}
+
+.subtask_sep {
+    color: #ccc;
+    font-size: 13px;
+    user-select: none;
 }
 
 .add_task_subtask_remove {
@@ -399,7 +447,7 @@
 }
 
 .add_task_subtask_action_btn:hover img {
-    filter: brightness(0) invert(0.2);
+    filter: brightness(0) invert(0.15);
 }
 
 .add_task_subtask_divider {
@@ -529,7 +577,7 @@
     align-items: center;
     gap: 8px;
     border-radius: 8px;
-    padding: 13px 28px;
+    padding: 10px 14px;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -539,6 +587,7 @@
     background-color: white;
     color: var(--color-tertiary);
     border: 1px solid var(--color-tertiary);
+    font-weight: 400;
     transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 

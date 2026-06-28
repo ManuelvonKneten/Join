@@ -98,7 +98,9 @@ function subtaskItemHTML(subtask, index) {
                     onkeydown="if(event.key==='Enter'){event.preventDefault();saveSubtaskItem(${index});}if(event.key==='Escape'){cancelSubtaskEdit(${index});}"
                 >
                 <div class="add_task_subtask_actions">
-                    <button type="button" class="add_task_subtask_action_btn" onclick="removeSubtask(${index})" aria-label="Delete">&#x2715;</button>
+                    <button type="button" class="add_task_subtask_action_btn" onclick="removeSubtask(${index})" aria-label="Delete">
+                        <img src="../assets/icons/delete.svg" alt="" aria-hidden="true">
+                    </button>
                     <span class="add_task_subtask_divider">|</span>
                     <button type="button" class="add_task_subtask_action_btn" onclick="saveSubtaskItem(${index})" aria-label="Save">&#x2713;</button>
                 </div>
@@ -113,7 +115,9 @@ function subtaskItemHTML(subtask, index) {
                     <img src="../assets/icons/edit.svg" alt="" aria-hidden="true">
                 </button>
                 <span class="add_task_subtask_divider">|</span>
-                <button type="button" class="add_task_subtask_action_btn" onclick="removeSubtask(${index})" aria-label="Delete">&#x2715;</button>
+                <button type="button" class="add_task_subtask_action_btn" onclick="removeSubtask(${index})" aria-label="Delete">
+                    <img src="../assets/icons/delete.svg" alt="" aria-hidden="true">
+                </button>
             </div>
         </li>
     `;

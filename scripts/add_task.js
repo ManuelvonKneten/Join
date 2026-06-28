@@ -297,12 +297,21 @@ function onPriorityButtonClick(event) {
  */
 function setupSubtaskInput() {
     const subtaskInputElement = document.getElementById('subtaskInput');
-    document.getElementById('addSubtaskIcon').addEventListener('click', addSubtask);
+
+    document.getElementById('clearSubtaskBtn').addEventListener('click', () => {
+        subtaskInputElement.value = '';
+        subtaskInputElement.focus();
+    });
+    document.getElementById('confirmSubtaskBtn').addEventListener('click', addSubtask);
 
     subtaskInputElement.addEventListener('keydown', (keyEvent) => {
         if (keyEvent.key === 'Enter') {
             keyEvent.preventDefault();
             addSubtask();
+        }
+        if (keyEvent.key === 'Escape') {
+            subtaskInputElement.value = '';
+            subtaskInputElement.blur();
         }
     });
 }
