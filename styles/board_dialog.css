@@ -89,6 +89,10 @@
   transition: background-color 0.2s ease;
 }
 
+.subtask_checkbox input {
+  height: 20px;
+}
+
 .subtask_checkbox:hover {
   background-color: rgb(226, 223, 223);
 }
@@ -140,6 +144,7 @@
   gap: 8px;
   font-size: 18px;
   font-weight: 700;
+  color: black;
 }
 
 .dialog_footer button:hover,
@@ -150,6 +155,16 @@
 .dialog_footer img {
   height: 20px;
 }
+
+.dialog_footer button:hover .edit_icon {
+    content: url("../assets/icons/edit_blue.svg");
+}
+
+.dialog_footer button:hover .delete_icon {
+    content: url("../assets/icons/delete_blue.svg");
+}
+
+
 
 .edit_icon {
   border-left: 1px solid var(--color-tertiary);

@@ -73,6 +73,10 @@
   width: 32px;
   height: 32px;
 }
+.search_icon img:hover {
+  background-color: rgb(226, 223, 223);
+  border-radius: 16px;
+}
 
 .search button {
   display: flex;
@@ -129,19 +133,17 @@
 }
 
 .task_column button {
-  border: 0.5px solid var(--color-tertiary);
-  border-radius: 8px;
+  border: 1px solid var(--color-tertiary);
+  border-radius: 5px;
+  font-size: clamp(16px, 1.8vw, 24px);
+  padding: 1px 4px;
   cursor: pointer;
 }
 
 .task_column button:hover,
 .task_column button:focus {
-  background-color: var(--color-secondary);
-}
-
-.task_column img {
-  width: 22px;
-  padding: 3px;
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
 }
 
 .task_field {
@@ -285,13 +287,13 @@
 }
 
 .empty_card {
-  background-color: var(--color-primary);
+  background-color: rgb(222, 221, 221);
   color: var(--color-tertiary);
-  opacity: 0.9;
+  opacity: 0.6;
   border-radius: 10px;
   padding: clamp(14px, 1.6vw, 24px);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  border: 1px dashed var(--color-primary);
+  border: 1px dashed rgb(115, 114, 114);
   text-align: center;
 }
 

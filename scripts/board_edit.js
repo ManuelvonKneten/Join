@@ -166,23 +166,3 @@ function updatePriorityIcon() {
 }
 
 
-/**
- * Liest alle Subtask-Inputs aus dem DOM aus
- * und erstellt daraus ein Subtask-Array.
- *
- * @param {string} selector - CSS Selector für Input Felder
- * @returns {{title: string, completed: boolean}[]} Array von Subtasks
- */
-function getSubtasksFromInputs(selector = ".edit_subtask_input") {
-    const inputs = document.querySelectorAll(selector);
-
-    const subtasks = [];
-
-    for (const input of inputs) {
-        subtasks.push({
-            title: input.value,
-            completed: false
-        });
-    }
-    return subtasks;
-}
