@@ -256,8 +256,6 @@ function renderSelectedAvatars() {
         .map(contact => selectedAvatarHTML(contact))
         .join('');
 
-    const placeholder = document.querySelector('.assigned_placeholder');
-    if (placeholder) placeholder.style.display = selectedContacts.length > 0 ? 'none' : '';
 }
 
 
