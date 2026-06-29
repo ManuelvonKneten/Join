@@ -141,6 +141,15 @@
   cursor: pointer;
 }
 
+.aw_btn_wrap {
+  width: clamp(16px, 1.8vw, 24px);
+  height: 24px;
+}
+
+.aw_btn_wrap button {
+  height: 100%;
+}
+
 .task_column button:hover,
 .task_column button:focus {
   color: var(--color-secondary);
