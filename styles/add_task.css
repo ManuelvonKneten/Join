@@ -684,9 +684,12 @@
     }
 
     .add_task_field--category,
-    .add_task_field--subtasks,
     .required_note {
         display: none;
+    }
+
+    .add_task_field--subtasks {
+        display: flex;
     }
 
     .add_task_heading {
@@ -699,10 +702,20 @@
 
     .add_task_textarea,
     .add_task_select,
+    #subtaskInput,
     .assigned_placeholder,
     .assigned_option_name,
     .add_task_subtask_item {
         font-size: 14px;
+    }
+
+    #subtaskInput {
+        height: 44px;
+        padding-right: 78px;
+    }
+
+    .add_task_subtask_list {
+        padding-left: 0;
     }
 
     .add_task_prio_btn {
