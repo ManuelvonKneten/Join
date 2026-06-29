@@ -25,7 +25,6 @@
     <div data-include="../templates/header.html"></div>
 
     <main class="content">
-
       <dialog id="delete_task" class="delete_task">
         <h2>Delete Task?</h2>
         <p>Are you sure you want to delete this task?</p>
@@ -45,8 +44,11 @@
           <div class="header_mobile_flex">
             <h1 class="header_mobile_board">Board</h1>
             <button class="header_mobile_board">
-              <img src="../assets/icons/add_plus.svg" alt="plus icos" 
-              onclick="openAddTaskPopUp()"/>
+              <img
+                src="../assets/icons/add_plus.svg"
+                alt="plus icos"
+                onclick="openAddTaskPopUp()"
+              />
             </button>
           </div>
           <div class="search">
@@ -68,9 +70,7 @@
           <div id="toDo" class="to_do">
             <div class="task_column">
               <h3>To do</h3>
-              <button onclick="openAddTaskPopUp('todo')">
-                +
-              </button>
+              <button onclick="openAddTaskPopUp('todo')">+</button>
             </div>
             <div
               id="toDoField"
@@ -88,9 +88,7 @@
           <div id="InProgress" class="in_progress">
             <div class="task_column">
               <h3>In progress</h3>
-              <button onclick="openAddTaskPopUp('inprogress')">
-                +
-              </button>
+              <button onclick="openAddTaskPopUp('inprogress')">+</button>
             </div>
             <div
               id="inProgressField"
@@ -108,11 +106,9 @@
           <div id="awaitFeedback" class="await_feedback">
             <div class="task_column">
               <h3>Await feedback</h3>
-                <div class="aw_btn_wrap">
-                  <button onclick="openAddTaskPopUp('awaitfeedback')">
-                    +
-                  </button>
-                </div>
+              <button class="aw_btn_wrap" onclick="openAddTaskPopUp('awaitfeedback')">
+                +
+              </button>
             </div>
             <div
               id="awaitFeedbackField"
@@ -145,7 +141,6 @@
           </div>
         </div>
       </section>
-
     </main>
 
     <div
