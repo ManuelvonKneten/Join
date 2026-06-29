@@ -213,7 +213,7 @@
     display: none;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .summary_page {
     min-height: calc(
       100dvh - var(--header-height) - var(--bottom-nav-height, 80px) -

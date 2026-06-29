@@ -286,8 +286,8 @@
 }
 
 
-/* ── Mobile (≤ 767px) ── */
-@media (max-width: 767px) {
+/* ── Mobile (≤ 1023px) ── */
+@media (max-width: 1023px) {
 
     /* ── Layout: full-screen panel switching ── */
     .contacts_layout {
