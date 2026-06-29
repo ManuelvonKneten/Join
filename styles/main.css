@@ -35,6 +35,25 @@
   --font-size-page-title: clamp(36px, 4vw, 48px);
 }
 
+/* hover */
+button,
+a,
+.summary_card,
+.sidebar_link,
+.bottom_nav_item,
+.add_task_prio_btn,
+.assigned_trigger,
+.contact_item,
+.task_card {
+  transition:
+    background-color 120ms ease-in-out,
+    color 120ms ease-in-out,
+    border-color 120ms ease-in-out,
+    box-shadow 120ms ease-in-out,
+    transform 120ms ease-in-out,
+    filter 120ms ease-in-out;
+}
+
 /*Fonts*/
 @font-face {
   font-family: "Inter";
