@@ -4,7 +4,6 @@
     flex-direction: column;
     gap: 32px;
     height: calc(100vh - 140px);
-    padding: 8px 56px 24px;
     max-width: 1440px;
 }
 
@@ -13,8 +12,9 @@
     font-weight: 700;
     color: var(--color-tertiary);
     margin: 0;
-    padding-top: 90px;
-    padding-bottom: 20px;
+    padding-bottom: clamp(24px, 4vw, 50px);
+    padding-top: clamp(24px, 4vw, 50px);
+    color: #000000;
 }
 
 .add_task_columns {
@@ -71,12 +71,14 @@
 .add_task_left .inputField input {
     height: 50px;
     font-size: 21px;
+    padding: 12px 14px;
 }
 
 .add_task_left .inputField input::placeholder,
 .add_task_textarea::placeholder,
 #subtaskInput::placeholder {
     color: #d1d5db;
+    
 }
 
 /* Assigned to trigger */
@@ -398,6 +400,7 @@
     font-weight: 400;
     height: 50px;
     font-size: 21px;
+    padding: 12px 14px;
 }
 
 #subtaskInput:hover {
