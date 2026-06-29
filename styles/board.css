@@ -126,7 +126,9 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
+  padding: 4px 0px;
   padding-bottom: clamp(12px, 1.8vw, 24px);
+  height: 44px;
 }
 
 .task_column h3 {
