@@ -22,7 +22,7 @@
 }
 
 .dialog_content p {
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
 }
 
 .dialog_header {
@@ -142,7 +142,7 @@
   align-items: center;
   cursor: pointer;
   gap: 8px;
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   font-weight: 700;
   color: black;
 }
@@ -270,7 +270,7 @@ label,
   height: 48px;
   width: 100%;
   padding: 8px;
-  font-size: 18px;
+  font-size: (16px, 2vw, 18px);
   font-weight: 400;
   border-radius: 8px;
   border: 1px solid grey;
@@ -329,7 +329,7 @@ label,
     border: none;
     height: 20px;
     width: 20px;
-    font-size: 18px;
+    font-size: clamp(16px, 2vw, 18px);
     font-weight: 700;
     padding: 3px 3px 6px 3px;
     display: flex;
