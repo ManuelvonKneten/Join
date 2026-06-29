@@ -223,16 +223,17 @@
 .add_task_layout_popup {
     width: 1000px;
     max-width: 90vw;
-    min-height: 90vh;
     max-height: 90vh;
-    overflow-y: auto;
+    height: auto;
+
     background-color: var(--main-background);
     border-radius: 20px;
+    
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: clamp(8px, 4vw, 24px); 
+    padding: clamp(10px, 4vw, 24px); 
 } 
 
 label,
