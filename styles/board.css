@@ -128,7 +128,7 @@
   gap: 8px;
   padding: 4px 0px;
   padding-bottom: clamp(12px, 1.8vw, 24px);
-  height: 44px;
+  height: 48px;
 }
 
 .task_column h3 {
