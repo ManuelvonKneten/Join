@@ -69,6 +69,10 @@
   cursor: pointer;
 }
 
+.header_main_user_button:hover {
+  background-color: var(--color-primary);
+}
+
 .header_main_user_button:focus-visible {
   outline: 3px solid var(--color-secondary);
   outline-offset: 3px;

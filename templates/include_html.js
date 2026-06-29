@@ -235,6 +235,26 @@ async function openFooterContent(url, clickedLink) {
   clickedLink.classList.add("sidebar_footer_link_active");
 }
 
+async function openUserDropdownContent(url, activePage) {
+  await renderContent(url);
+  clearSidebarActiveLinks();
+  clearFooterActiveLinks();
+  setActiveSidebarFooterLink(activePage);
+  closeUserDropdown();
+}
+
+function setActiveSidebarFooterLink(activePage) {
+  const footerLinks = document.querySelectorAll(".sidebar_footer_link");
+
+  footerLinks.forEach((link) => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+
+    if (linkPage === activePage) {
+      link.classList.add("sidebar_footer_link_active");
+    }
+  });
+}
+
 function clearSidebarActiveLinks() {
   const sidebarLinks = document.querySelectorAll(".sidebar_link");
   sidebarLinks.forEach((link) => {

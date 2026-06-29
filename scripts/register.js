@@ -7,6 +7,9 @@ const signupPasswordInput  = document.getElementById('signupPassword');
 const signupConfirmInput   = document.getElementById('signupConfirmPassword');
 const mismatchMsg          = document.getElementById('passwordMismatch');
 const nameError            = document.getElementById('nameError');
+const emailError           = document.getElementById('emailError');
+const passwordError        = document.getElementById('passwordError');
+const acceptError          = document.getElementById('acceptError');
 const urlParams            = new URLSearchParams(window.location.search);
 const messageBox           = document.getElementById('msgBox');
 
@@ -15,8 +18,54 @@ function isValidName(value) {
     return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 2;
 }
 
+function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function isValidPassword(value) {
+    return value.trim().length >= 4;
+}
+
+function setErrorVisible(errorElement, visible) {
+    if (errorElement) errorElement.classList.toggle('visible', visible);
+}
+
 function validateNameOnBlur() {
-    if (nameError) nameError.classList.toggle('visible', !isValidName(signupNameInput.value) && signupNameInput.value.length > 0);
+    setErrorVisible(nameError, !isValidName(signupNameInput.value));
+}
+
+function validateEmailOnBlur() {
+    setErrorVisible(emailError, !isValidEmail(signupEmailInput.value));
+}
+
+function validatePasswordOnBlur() {
+    const passwordOk = isValidPassword(signupPasswordInput.value);
+    setErrorVisible(passwordError, !passwordOk);
+    setErrorVisible(mismatchMsg, signupConfirmInput.value.length > 0 && (!passwordOk || !passwordsMatch()));
+}
+
+function validateConfirmPasswordOnBlur() {
+    setErrorVisible(mismatchMsg, !isValidPassword(signupPasswordInput.value) || !passwordsMatch());
+}
+
+function validateAcceptCheckbox() {
+    setErrorVisible(acceptError, !acceptCheckbox.checked);
+}
+
+function validateSignupForm() {
+    const nameOk     = isValidName(signupNameInput.value);
+    const emailOk    = isValidEmail(signupEmailInput.value);
+    const passwordOk = isValidPassword(signupPasswordInput.value);
+    const confirmOk  = passwordOk && passwordsMatch();
+    const acceptedOk = acceptCheckbox.checked;
+
+    setErrorVisible(nameError, !nameOk);
+    setErrorVisible(emailError, !emailOk);
+    setErrorVisible(passwordError, !passwordOk);
+    setErrorVisible(mismatchMsg, !confirmOk);
+    setErrorVisible(acceptError, !acceptedOk);
+
+    return nameOk && emailOk && passwordOk && confirmOk && acceptedOk;
 }
 
 if (signupNameInput) {
@@ -27,22 +76,28 @@ if (signupNameInput) {
     });
 }
 
+if (signupEmailInput) {
+    signupEmailInput.addEventListener('blur', validateEmailOnBlur);
+    signupEmailInput.addEventListener('input', () => {
+        setErrorVisible(emailError, signupEmailInput.value.length > 0 && !isValidEmail(signupEmailInput.value));
+    });
+}
+
 function passwordsMatch() {
     return signupPasswordInput.value === signupConfirmInput.value;
 }
 
-function validatePasswordsOnBlur() {
-    mismatchMsg.classList.toggle('visible', !passwordsMatch() && signupConfirmInput.value.length > 0);
-}
-
 if (signupConfirmInput) {
-    signupConfirmInput.addEventListener('blur', validatePasswordsOnBlur);
+    signupPasswordInput.addEventListener('blur', validatePasswordOnBlur);
+    signupConfirmInput.addEventListener('blur', validateConfirmPasswordOnBlur);
     signupConfirmInput.addEventListener('input', () => {
-        mismatchMsg.classList.remove('visible');
+        const confirmInvalid = signupConfirmInput.value.length > 0 && (!isValidPassword(signupPasswordInput.value) || !passwordsMatch());
+        setErrorVisible(mismatchMsg, confirmInvalid);
     });
     signupPasswordInput.addEventListener('input', () => {
+        setErrorVisible(passwordError, signupPasswordInput.value.length > 0 && !isValidPassword(signupPasswordInput.value));
         if (signupConfirmInput.value.length > 0) {
-            mismatchMsg.classList.toggle('visible', !passwordsMatch());
+            setErrorVisible(mismatchMsg, !isValidPassword(signupPasswordInput.value) || !passwordsMatch());
         }
     });
 }
@@ -93,17 +148,14 @@ function initPasswordToggle(input, toggle) {
 if (acceptCheckbox) {
     acceptCheckbox.addEventListener('change', function () {
         signupBtn.disabled = !this.checked;
+        validateAcceptCheckbox();
     });
 }
 
 if (signupForm) {
     signupForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        const nameOk = isValidName(signupNameInput.value);
-        const pwOk   = passwordsMatch();
-        if (nameError) nameError.classList.toggle('visible', !nameOk);
-        mismatchMsg.classList.toggle('visible', !pwOk);
-        if (!nameOk || !pwOk) return;
+        if (!validateSignupForm()) return;
         addUser();
     });
 }
@@ -121,6 +173,8 @@ if (messageBox && urlParams.get('msg')) {
  * @returns {Promise<void>}
  */
 async function addUser() {
+    if (!validateSignupForm()) return;
+
     const formData = getRegisterFormData();
 
     try {
