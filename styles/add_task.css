@@ -660,18 +660,7 @@
         padding: 8px 0px 24px;
     }
 }
-/* 
-  Disabled for testing:
-  .content is now handled globally in main.css.
-  Re-enable only if add_task.html shows layout issues.
-*/
-/* @media (max-width: 1024px) {
-    .content {
-        margin-left: 0;
-        padding-left: 0;
-        padding-right: 0;
-    }
-} */
+
 
 @media (max-width: 767px) {
     .add_task_layout {
