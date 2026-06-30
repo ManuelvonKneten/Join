@@ -6,7 +6,7 @@ function getTaskTemplate(task) {
       role="button"
       draggable="true"
       tabindex="0"
-       onkeydown="handleTaskKey(event, '${task.id}')"
+      onkeydown="handleTaskKey(event, '${task.id}')"
       ondragstart="startDragEffect(event); startDragging('${task.id}')"
       ondragend="endDragEffect(event)"
       onclick="openTaskPopUp('${task.id}')"

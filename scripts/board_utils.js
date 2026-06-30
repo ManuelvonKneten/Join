@@ -1,26 +1,4 @@
                                        /* --- Utils --- *//**
- * Aktiviert Drag & Drop visuelle Effekte (CSS Klassen).
- * Fügt Events für Dragstart und Dragend hinzu.
- *
- * @returns {void}
- */
-function enableDragEffect() {
-    const container = document.querySelector(`.taskContainer`);
-
-    container. addEventListener('dragstart', (event) => {
-        if (event.target.classList.contains('task')) {
-            event.target.classList.add('dragging');
-        }
-    });
-
-    container.addEventListener('dragend', (event) => {
-        if (event.target.classList.contains('task')) {
-            event.target.classList.remove('dragging');
-        }
-    });
-}
-
-
 /**
  * Startet den Drag-Effekt (fügt CSS Klasse hinzu).
  *
