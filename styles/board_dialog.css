@@ -128,6 +128,11 @@
   margin-bottom: 16px;
   gap: 8px;
 }
+.dialog_subtasks_list {
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 100px;
+}
 
 .dialog_footer {
   display: flex;
@@ -300,6 +305,12 @@ label,
   border-radius: 8px;
   border: 1px solid grey;
 }
+
+.edit_subtasks_container {
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 100px;
+} 
 
 .edit_subtask {
   display: flex;

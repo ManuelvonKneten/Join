@@ -49,20 +49,23 @@
                 alt="plus icos"
                 onclick="openAddTaskPopUp()"
               />
-            </button>
+            </button>  
           </div>
-          <div class="search">
-            <div class="search_field">
-              <input type="text" id="search" placeholder="Find Task" />
-              <div class="search_icon" id="search_icon">
-                <img src="../assets/icons/search.svg" alt="" />
+          <div class="search_container">
+            <div class="search">
+              <div class="search_field">
+                <input type="text" id="search" placeholder="Find Task" />
+                <div class="search_icon" id="search_icon">
+                  <img src="../assets/icons/search.svg" alt="" />
+                </div>
               </div>
+            
+              <button onclick="openAddTaskPopUp()">
+                Add task
+                <img src="../assets/icons/add_plus.svg" alt="plus icos" />
+              </button>
             </div>
             <span id="no_results_alert"></span>
-            <button onclick="openAddTaskPopUp()">
-              Add task
-              <img src="../assets/icons/add_plus.svg" alt="plus icos" />
-            </button>
           </div>
         </div>
 

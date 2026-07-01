@@ -3,6 +3,7 @@ let availableContacts = [];
 let selectedContacts = [];
 let selectedPriority = 'medium';
 let taskSubtasks = [];
+let showAllAvatars = false;
 
 
 /* ── Init ── */
@@ -252,12 +253,29 @@ function renderAssignedOptions() {
  * @returns {void}
  */
 function renderSelectedAvatars() {
-    document.getElementById('assignedAvatars').innerHTML = selectedContacts
+    const visibleContacts = showAllAvatars
+    ? selectedContacts
+    : selectedContacts.slice(0,4);
+
+    let html = visibleContacts
         .map(contact => selectedAvatarHTML(contact))
         .join('');
 
+    if (!showAllAvatars && selectedContacts.length > 4) {
+        html += `
+            <div class="more-contacts"
+            onclick="showAllAssignedAvatars()">
+                +${selectedContacts.length - 4}
+            </div>
+        `;
+    }
+    document.getElementById("assignedAvatars").innerHTML = html;
 }
 
+function showAllAssignedAvatars() {
+    showAllAvatars = true;
+    renderSelectedAvatars();
+}
 
 /* ── Priority ── */
 /**

@@ -41,6 +41,7 @@
               <textarea id="taskDescription" class="add_task_textarea" placeholder="Enter a Description"></textarea>
             </div>
 
+            <div class="due_date_container">
             <div class="add_task_field">
               <label class="add_task_label" for="taskDueDate">Due date <span class="required_star">*</span></label>
               <div class="inputField">
@@ -58,6 +59,7 @@
               <span class="field_error" id="taskDueDateError">This field is required</span>
             </div>
             <span class="required_note"><span class="required_star">*</span> This field is required</span>
+            </div>
           </div>
 
           <div class="add_task_divider"></div>
@@ -152,12 +154,17 @@
                   <button type="button" id="confirmSubtaskBtn" class="subtask_icon_btn" aria-label="Add subtask">&#x2713;</button>
                 </div>
               </div>
-              <ul id="subtaskList" class="add_task_subtask_list"></ul>
+              <div class="subtasks_actions_container">
+              <div class="add_task_subtask_list_container">
+                  <ul id="subtaskList" class="add_task_subtask_list"></ul>
+              </div>
+              
             </div>
 
             <div class="add_task_actions">
               <button type="button" class="add_task_btn add_task_btn_clear">Clear <span>&#x2715;</span></button>
               <button type="submit" class="add_task_btn add_task_btn_create">Create Task <span>&#x2713;</span></button>
+            </div>
             </div>
           </div>
 

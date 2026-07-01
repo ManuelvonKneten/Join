@@ -34,6 +34,11 @@
 
 
 /* Search Field */
+.search_container {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+}
 .search {
   display: flex;
   justify-content: space-between;
@@ -104,6 +109,7 @@
 #no_results_alert {
   color: red;
   font-weight: 700;
+
 }
 
 /* Task Field */
@@ -165,7 +171,7 @@
 }
 
 .task_field {
-  min-height: clamp(360px, 55vh, 700px);
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -183,13 +189,8 @@
   padding: clamp(14px, 1.6vw, 24px);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  /* transition: transform 0.2s ease, box-shadow 0.2s ease; */
   position: relative;
   background: var(--main-background);
-}
-
-.card:hover {
-  transform: translateX(3px);
 }
 
 .keyboard-selected {

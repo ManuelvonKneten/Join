@@ -60,3 +60,5 @@ function showTaskToast(message, isError = false) {
     toastElement.classList.add('show');
     setTimeout(() => toastElement.classList.remove('show'), 3000);
 }
+
+

@@ -103,7 +103,10 @@ function getTaskDetailsTemplate(task) {
 
         <div class="dialog_subtasks">
           <p>Subtasks</p>
-          ${renderSubtasks(task.subtasks, task.id)}
+          <div class="dialog_subtasks_list">
+            ${renderSubtasks(task.subtasks, task.id)}
+          </div>
+         
         </div>
   
         <div class="dialog_footer">
@@ -231,7 +234,7 @@ function getEditTaskTemplate(task) {
         <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleSubtaskEnter(event)">
         <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
       </div>
-        <div id="editSubtasks"></div>
+        <div id="editSubtasks" class="edit_subtasks_container"></div>
         
       <div class="dialog_footer">
         <button onclick="saveTaskEdit('${task.id}')">
@@ -260,7 +263,7 @@ function getSubtasksEditTemplate(subtask, index) {
 
                     <button onclick="saveSubtask(${index})">✔️</button>
                 </div>
-            </div>
+            </div> 
         `;
   }
 
