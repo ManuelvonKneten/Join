@@ -19,7 +19,8 @@ function isValidName(value) {
 }
 
 function isValidEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+    const emailRegex = /^[^\s@.][^\s@]*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/;
+    return emailRegex.test(value.trim());
 }
 
 function isValidPassword(value) {
@@ -70,17 +71,10 @@ function validateSignupForm() {
 
 if (signupNameInput) {
     signupNameInput.addEventListener('blur', validateNameOnBlur);
-    signupNameInput.addEventListener('input', () => {
-        const showError = signupNameInput.value.length > 0 && !isValidName(signupNameInput.value);
-        if (nameError) nameError.classList.toggle('visible', showError);
-    });
 }
 
 if (signupEmailInput) {
     signupEmailInput.addEventListener('blur', validateEmailOnBlur);
-    signupEmailInput.addEventListener('input', () => {
-        setErrorVisible(emailError, signupEmailInput.value.length > 0 && !isValidEmail(signupEmailInput.value));
-    });
 }
 
 function passwordsMatch() {
@@ -90,16 +84,6 @@ function passwordsMatch() {
 if (signupConfirmInput) {
     signupPasswordInput.addEventListener('blur', validatePasswordOnBlur);
     signupConfirmInput.addEventListener('blur', validateConfirmPasswordOnBlur);
-    signupConfirmInput.addEventListener('input', () => {
-        const confirmInvalid = signupConfirmInput.value.length > 0 && (!isValidPassword(signupPasswordInput.value) || !passwordsMatch());
-        setErrorVisible(mismatchMsg, confirmInvalid);
-    });
-    signupPasswordInput.addEventListener('input', () => {
-        setErrorVisible(passwordError, signupPasswordInput.value.length > 0 && !isValidPassword(signupPasswordInput.value));
-        if (signupConfirmInput.value.length > 0) {
-            setErrorVisible(mismatchMsg, !isValidPassword(signupPasswordInput.value) || !passwordsMatch());
-        }
-    });
 }
 
 initPasswordToggle(signupPasswordInput, document.getElementById('signupPasswordToggle'));

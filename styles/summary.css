@@ -18,7 +18,7 @@
 }
 
 .summary_headline h1 {
-  font-size: var( --font-size-page-title);
+  font-size: var(--font-size-page-title);
   font-weight: 700;
   line-height: 1.2;
   margin: 0;
@@ -94,12 +94,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: clamp(10px, 3vw, 18px);
+}
+
+.summary_card_content img {
+  width: clamp(56px, 10vw, 60px);
+  height: auto;
 }
 
 .summary_icon {
-  width: 69px;
-  height: 69px;
+  width: clamp(56px, 10vw, 60px);
+  height: clamp(56px, 10vw, 60px);
   border-radius: 50%;
   background-color: var(--color-tertiary);
   position: relative;
@@ -144,7 +149,7 @@
 }
 
 .summary_number {
-  font-size: 56px;
+  font-size: clamp(44px, 8vw, 56px);
   font-weight: 700;
   line-height: 1;
   color: #000000;
@@ -269,10 +274,6 @@
     min-height: clamp(88px, 16dvh, 118px);
     gap: clamp(12px, 4vw, 24px);
     padding: 0 clamp(12px, 4vw, 24px);
-  }
-
-  .summary_card_content {
-    gap: clamp(10px, 3vw, 18px);
   }
 
   .summary_number {
