@@ -29,7 +29,7 @@ async function findUser(email, password) {
 async function handleLogin(e, emailInput, passInput, alertBox) {
     e.preventDefault();
     if (!emailInput.value || !passInput.value) {
-        alertBox.style.display = 'block';
+        alertBox.classList.add('visible');
         return;
     }
     const found = await findUser(emailInput.value, passInput.value);
@@ -38,14 +38,14 @@ async function handleLogin(e, emailInput, passInput, alertBox) {
         localStorage.setItem('currentUser', found.name || found.email);
         window.location.href = './htmls/summary.html';
     } else {
-        alertBox.style.display = 'block';
+        alertBox.classList.add('visible');
     }
 }
 
 // Prüft die Eingaben, sobald das Passwortfeld den Fokus verliert (onblur),
 // und zeigt darunter den Hinweis, wenn E-Mail/Passwort nicht passen.
 function initBlurCheck(emailInput, passInput, alertBox) {
-    const hideAlert = () => { alertBox.style.display = 'none'; };
+    const hideAlert = () => { alertBox.classList.remove('visible'); };
     emailInput.addEventListener('input', hideAlert);
     passInput.addEventListener('input', hideAlert);
 
