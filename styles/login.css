@@ -417,12 +417,17 @@
 
 
 .wrongDataAlert {
-    display: none;
+    visibility: hidden;
     font-size: 14px;
+    min-height: 18px;
     white-space: nowrap;
     overflow: hidden;
     width: 100%;
     color: rgb(255, 129, 144);
+}
+
+.wrongDataAlert.visible {
+    visibility: visible;
 }
 
 
