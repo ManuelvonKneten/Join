@@ -72,7 +72,9 @@ async function openEditTaskPopup(taskId) {
     setupPriorityButtons();
     setPriority(task.priority);
     renderSubtasksEdit();
+    showAllAvatarsEditTask = false;
     await initEditAssigned(task);
+    renderAssignedAvatarsEdit();
 }
 
 
@@ -174,7 +176,10 @@ function toggleSubtask(taskId, subtaskIndex) {
         body: JSON.stringify({subtasks: task.subtasks})
     });
 
-    openTaskPopUp(taskId);
+    const card = document.querySelector(`[data-id="${taskId}"]`);
+    if (card) {
+        card.outerHTML = getTaskTemplate(task);
+    } 
 }
 
 

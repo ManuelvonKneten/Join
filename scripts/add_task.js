@@ -3,7 +3,7 @@ let availableContacts = [];
 let selectedContacts = [];
 let selectedPriority = 'medium';
 let taskSubtasks = [];
-let showAllAvatars = false;
+
 
 
 /* ── Init ── */
@@ -247,35 +247,30 @@ function renderAssignedOptions() {
     availableContacts.map(contact => assignedOptionHTML(contact)).join('');
 }
 
-/**
- * Rendert die Initialen-Avatare der ausgewählten Kontakte unterhalb des Dropdowns.
- *
- * @returns {void}
- */
-function renderSelectedAvatars() {
-    const visibleContacts = showAllAvatars
-    ? selectedContacts
-    : selectedContacts.slice(0,4);
 
-    let html = visibleContacts
-        .map(contact => selectedAvatarHTML(contact))
-        .join('');
+function renderSelectedAvatars(){
+    const html = buildAvatarsHTML(
+        selectedContacts.map(c => c.id), 
+        availableContacts,
+        showAllAvatarsAddTask
+    );
 
-    if (!showAllAvatars && selectedContacts.length > 4) {
-        html += `
-            <div class="more-contacts"
-            onclick="showAllAssignedAvatars()">
-                +${selectedContacts.length - 4}
-            </div>
-        `;
+    const container = document.getElementById("assignedAvatars");
+    container.innerHTML = html;
+
+    const btn = container.querySelector(".js_more_avatars");
+    if (btn) {
+        btn.addEventListener("click", showAllAssignedAvatarsAddTask);
     }
-    document.getElementById("assignedAvatars").innerHTML = html;
 }
 
-function showAllAssignedAvatars() {
-    showAllAvatars = true;
+
+function showAllAssignedAvatarsAddTask() {
+    showAllAvatarsAddTask = !showAllAvatarsAddTask;
     renderSelectedAvatars();
 }
+
+
 
 /* ── Priority ── */
 /**
@@ -360,6 +355,14 @@ function removeSubtask(subtaskIndex) {
     renderSubtaskList();
 }
 
+
+/**
+ * Aktiviert den Bearbeitungsmodus
+ * eines Subtasks.
+ *
+ * @param {number} index - Index des Subtasks.
+ * @returns {void}
+ */
 function editSubtaskItem(index) {
     taskSubtasks[index].isEditing = true;
     renderSubtaskList();

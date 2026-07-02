@@ -253,9 +253,25 @@ function renderAssignedOptionsEdit() {
  * @returns {void}
  */
 function renderAssignedAvatarsEdit() {
-    const container = document.getElementById("assignedAvatarsEdit")
-    if (!container) return;
-    container.innerHTML = selectedEditContacts.map(c => getContactsAvatar(c.name, false)).join('');
+    const html = buildAvatarsHTML(
+        selectedContacts.map(c => c.id), 
+        availableContacts,
+        showAllAvatarsEditTask
+    );
+
+    const container = document.getElementById("assignedAvatarsEdit");
+    container.innerHTML = html;
+
+    const btn = container.querySelector(".js_more_avatars");
+    if (btn) {
+        btn.addEventListener("click", showAllAssignedAvatarsEditTask);
+    }
+}
+
+
+function showAllAssignedAvatarsEditTask() {
+    showAllAvatarsEditTask = !showAllAvatarsEditTask;
+    renderAssignedAvatarsEdit();
 }
 
 

@@ -416,3 +416,9 @@
     display: block;
   }
 }
+
+@media (max-width: 767px) {
+  .task_field {
+    flex-direction: row;
+  }
+}

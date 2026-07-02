@@ -122,3 +122,18 @@ function subtaskItemHTML(subtask, index) {
         </li>
     `;
 }
+
+
+
+function getContactsAvatar (name, showName) {
+  return `
+     <div class="contact_task">
+                <div class="contact_avatar"
+                    style="background-color:${avatarColor(name)}">
+                    ${initials(name)}
+                </div>
+                ${showName ? `<span>${name}</span>` : ""} 
+            </div>
+  `;
+}
+

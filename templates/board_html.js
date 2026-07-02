@@ -1,3 +1,4 @@
+
 function getTaskTemplate(task) {
   return `
     <div 
@@ -16,34 +17,21 @@ function getTaskTemplate(task) {
         ${formatCategory(task.category)}
         </div>
 
-        <h2>${task.title}</h2>
-        
+        <h2 data-full="false" onclick="toggleFullTitle(this, '${task.title.replace(/'/g, "\\'")}')">
+        ${shortenText(task.title, 30)}</h2>
+      
         <p>${task.description}</p>
 
         <div>${getProgressTemplate(task.subtasks || [])}</div>
         
         <div class="card_footer">
-          <div class="assigned_contacts">${renderAssignedContacts(task.assignedTo, false)}</div>
+          <div class="assigned_contacts">  ${buildAvatarsHTML(task.assignedTo, availableContacts, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
         </div> 
     </div>
   
     `;
 }
-
-
-function getContactsAvatar(name, showName) {
-  return `
-     <div class="contact_task">
-                <div class="contact_avatar"
-                    style="background-color:${avatarColor(name)}">
-                    ${initials(name)}
-                </div>
-                ${showName ? `<span>${name}</span>` : ""} 
-            </div>
-  `;
-}
-
 
 function getNewHTMLTag() {
   return `
@@ -98,7 +86,7 @@ function getTaskDetailsTemplate(task) {
   
         <div class="dialog_assigned">
           <p>Assigned to:</p>
-           ${renderAssignedContacts(task.assignedTo)}
+           ${buildAvatarsHTML(task.assignedTo, availableContacts, false)}
         </div>  
 
         <div class="dialog_subtasks">
@@ -303,4 +291,21 @@ function getAssignedOptionsEdit(contact, checked) {
                 >
             </li>
         `;
+}
+
+function progressHTML(progress) {
+    return `
+        <div class="task_progress"
+             title="${progress.completed} of ${progress.total} subtasks completed">
+
+            <progress
+                value="${progress.completed}"
+                max="${progress.total}">
+            </progress>
+
+            <span>
+                ${progress.completed}/${progress.total} Subtasks
+            </span>
+        </div>
+    `;
 }

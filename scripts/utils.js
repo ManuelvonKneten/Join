@@ -1,3 +1,6 @@
+let showAllAvatarsAddTask = false;
+let showAllAvatarsEditTask = false;
+
 const AVATAR_COLORS = [
     '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF',
     '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E',
@@ -61,4 +64,28 @@ function showTaskToast(message, isError = false) {
     setTimeout(() => toastElement.classList.remove('show'), 3000);
 }
 
+
+function buildAvatarsHTML(contactIds, availableContacts, showAll = false) {
+    if (!Array.isArray(contactIds)) {
+        contactIds = contactIds ? [contactIds]: [];
+    } 
+        const visible = showAll ? contactIds : contactIds.slice(0, 4);
+
+    let html = visible.map(entry => {
+        const contact = availableContacts.find(c => c.id === entry);
+        const name = contact ? contact.name : entry;
+        return getContactsAvatar(name, false);
+    }).join('');
+
+    if (!showAll && contactIds.length > 4) {
+        html += `<div class="more_contacts js_more_avatars">+${contactIds.length - 4}</div>`;
+    }
+    return html;
+}
+
+
+function showAllAssignedAvatars() {
+    showAllAvatars = true;
+    renderSelectedAvatars();
+}
 

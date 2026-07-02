@@ -77,41 +77,26 @@ function getProgress(subtasks = []) {
  */
 function getProgressTemplate(subtasks = []) {
     const progress = getProgress(subtasks);
-      return `
-        <div class="task_progress" title="${progress.completed} of ${progress.total} subtasks completed">
-            <progress value="${progress.completed}" max="${progress.total}"></progress>
-
-            <span>
-                ${progress.completed}/${progress.total} Subtasks
-            </span>
-        </div>
-    `;
+    return progressHTML(progress);
 }
 
 
-/**
- * Rendert die Avatare der zugewiesenen Kontakte.
+ /**
+ * Erstellt das HTML für die Fortschrittsanzeige der Subtasks.
+ * Zeigt nichts an, wenn keine Subtasks vorhanden sind (0/0).
  *
- * @param {string|Array<string>} contacts - Name(n) der Kontakte
- * @param {boolean} [showName=true] - Ob der Name angezeigt werden soll
- * @returns {string} HTML-String mit Avataren
+ * @param {Array<Object>} [subtasks=[]] - Liste der Subtasks.
+ * Jeder Subtask kann ein Objekt sein, z. B. { completed: true }.
+ *
+ * @returns {string} HTML-String für den Progress-Balken oder
+ * ein leerer String, wenn keine Subtasks existieren.
  */
-function renderAssignedContacts(contacts, showName = true) {
-    if(!contacts || contacts.length === 0){
+function getProgressTemplate(subtasks = []) {
+    const progress = getProgress(subtasks);
+    if (progress.total === 0) {
         return '';
     }
-    let html = '';
-
-    if (!Array.isArray(contacts)) {
-        contacts = [contacts];
-    }
-
-    for (const entry of contacts) {
-        const contact = availableContacts.find(c => c.id === entry);
-        const name = contact ? contact.name : entry;
-        html += getContactsAvatar(name, showName);
-    }
-    return html;
+    return progressHTML(progress);
 }
 
 
@@ -269,3 +254,49 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('task_field_highlight');
 }
 
+
+/**
+ * Kürzt einen Text auf eine maximale Länge, ohne Wörter zu zerschneiden.
+ *
+ * Falls der Text länger als `maxLength` ist, werden nur vollständige
+ * Wörter bis zur maximalen Länge übernommen und anschließend
+ * "..." angehängt.
+ *
+ * @param {string} text - Der zu kürzende Text.
+ * @param {number} [maxLength=30] - Maximale Zeichenanzahl der Kurzversion.
+ * @returns {string} Der gekürzte Text oder der Originaltext, wenn er kurz genug ist.
+ */
+function shortenText(text, maxLength = 30) {
+    if (!text || text.length <= maxLength) return text;
+
+    const words = text.split(' ');
+    let result = '';
+
+    for (const word of words) {
+        if ( (result + ' ' + word).trim().length > maxLength) break;
+        result += (result ? ' ' : '') + word;
+    }
+    return result + '...';
+}
+
+
+/**
+ * Wechselt per Klick zwischen der gekürzten und der vollständigen
+ * Anzeige eines Titels.
+ *
+ * Der aktuelle Anzeigestatus wird über das `data-full`-Attribut
+ * des HTML-Elements gespeichert.
+ *
+ * @param {HTMLElement} el - Das angeklickte HTML-Element (z. B. ein <h2>).
+ * @param {string} fullText - Der vollständige Titel.
+ * @returns {void}
+ */
+function toggleFullTitle(el, fullText) {
+    if (el. dataset.full === "true") {
+        el.textContent = shortenText(fullText, 30);
+        el.dataset.full ="false";
+    } else {
+        el.textContent = fullText;
+        el.dataset.full = "true";
+    }
+}
