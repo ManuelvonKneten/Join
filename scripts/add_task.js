@@ -51,10 +51,11 @@ function validateTaskForm() {
 
     let valid = true;
 
-    toggleRequiredError(title,   titleError,   !title.value.trim());
-    toggleRequiredError(dueDate, dueDateError, !dueDate.value.trim());
-    if (!title.value.trim())   valid = false;
-    if (!dueDate.value.trim()) valid = false;
+    toggleRequiredError(title, titleError, !title.value.trim());
+    if (!title.value.trim()) valid = false;
+
+    validateDueDate(dueDate);
+    if (dueDateError.classList.contains('visible')) valid = false;
 
     const noCategory = !category.value;
     if (categoryError) categoryError.classList.toggle('visible', noCategory);
@@ -74,8 +75,7 @@ function validateTaskForm() {
  */
 function setupRequiredFieldValidation() {
     const fields = [
-        { input: 'taskTitle',   error: 'taskTitleError' },
-        { input: 'taskDueDate', error: 'taskDueDateError' },
+        { input: 'taskTitle', error: 'taskTitleError' },
     ];
 
     fields.forEach(({ input, error }) => {
@@ -478,6 +478,8 @@ function setupDueDateInput() {
     const input  = document.getElementById('taskDueDate');
     const picker = document.getElementById('taskDueDatePicker');
 
+    picker.min = new Date().toISOString().split('T')[0];
+
     input.addEventListener('keydown', (e) => {
         if (e.key === 'Backspace') {
             const v = input.value;
@@ -497,7 +499,28 @@ function setupDueDateInput() {
         if (!e.target.value) return;
         const [year, month, day] = e.target.value.split('-');
         input.value = `${day}/${month}/${year}`;
+        validateDueDate(input);
     });
+
+    input.addEventListener('blur', () => validateDueDate(input));
+}
+
+function validateDueDate(input) {
+    const error = document.getElementById('taskDueDateError');
+    if (!input.value.trim()) {
+        error.textContent = 'This field is required';
+        toggleRequiredError(input, error, true);
+        return;
+    }
+    const selected = new Date(ddmmyyyyToISO(input.value));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (selected < today) {
+        error.textContent = 'Please select today or a future date';
+        toggleRequiredError(input, error, true);
+    } else {
+        toggleRequiredError(input, error, false);
+    }
 }
 
 function openDueDatePicker() {
