@@ -64,21 +64,6 @@ function assignedOptionHTML(contact) {
 }
 
 /**
- * Gibt das HTML eines Initialen-Avatars für einen ausgewählten Kontakt zurück.
- *
- * @function selectedAvatarHTML
- * @param {{ name: string }} contact - Kontaktobjekt
- * @returns {string} HTML-String des Avatars
- */
-function selectedAvatarHTML(contact) {
-    return `
-        <div class="assigned_selected_avatar" style="background-color: ${avatarColor(contact.name)}">
-            ${initials(contact.name)}
-        </div>
-    `;
-}
-
-/**
  * Gibt das HTML eines Subtask-Listeneintrags mit Löschen-Button zurück.
  *
  * @function subtaskItemHTML
@@ -128,7 +113,7 @@ function subtaskItemHTML(subtask, index) {
 function getContactsAvatar (name, showName) {
   return `
      <div class="contact_task">
-                <div class="contact_avatar"
+                <div class="contact_avatar assigned_selected_avatar"
                     style="background-color:${avatarColor(name)}">
                     ${initials(name)}
                 </div>

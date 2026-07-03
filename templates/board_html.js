@@ -25,7 +25,7 @@ function getTaskTemplate(task) {
         <div>${getProgressTemplate(task.subtasks || [])}</div>
         
         <div class="card_footer">
-          <div class="assigned_contacts">  ${buildAvatarsHTML(task.assignedTo, availableContacts, false)}</div>
+          <div class="assigned_contacts"> ${buildAvatarsHTML(task.assignedTo, availableContacts, false)}</div>
           <img src="../assets/icons/${task.priority}.svg" alt="${task.priority}"> 
         </div> 
     </div>
