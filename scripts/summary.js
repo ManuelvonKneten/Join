@@ -23,6 +23,8 @@ let currentUser = localStorage.getItem("currentUser") || "Guest";
  *
  * @returns {string}
  */
+
+
 function getGreetingText() {
   const currentHour = new Date().getHours();
   const isGuest = currentUser === "Guest";
@@ -31,6 +33,7 @@ function getGreetingText() {
 
   return greetingBaseText + punctuation;
 }
+
 
 /**
  * Returns the base greeting for a given hour.
@@ -54,6 +57,7 @@ function getGreetingBaseText(currentHour) {
   return "Good night";
 }
 
+
 /**
  * Renders the greeting text and the current user name into the summary page.
  *
@@ -72,6 +76,7 @@ function renderGreeting() {
   if (currentUser === "Guest") currentUser = "";
   userElement.innerText = currentUser;
 }
+
 
 // firebase-actions
 /**
@@ -111,6 +116,7 @@ async function loadSummaryTasks() {
   renderUpcomingDeadline(tasks);
 }
 
+
 /**
  * Sets inner text for a summary stat element.
  *
@@ -125,6 +131,7 @@ function setSummaryText(id, value) {
 
   element.innerText = value;
 }
+
 
 /**
  * Counts tasks matching a specific key/value pair.
@@ -162,6 +169,7 @@ function renderUpcomingDeadline(tasks) {
   setSummaryText("summary_deadline", formatSummeryDate(nextTask.dueDate));
 }
 
+
 /**
  * Determines whether a date string points to today or a future date.
  *
@@ -178,6 +186,7 @@ function isUpcomingDate(dateString) {
   return taskDate >= today;
 }
 
+
 /**
  * Formats a due date for display on the summary dashboard.
  *
@@ -193,6 +202,7 @@ function formatSummeryDate(dateString) {
     year: "numeric",
   });
 }
+
 
 renderGreeting();
 loadSummaryTasks();

@@ -1,7 +1,52 @@
+/**
+ * @file Handles the add-task form, including contact assignment, priority,
+ * subtasks, due date formatting, validation and task creation.
+ */
+
+/**
+ * Represents a contact that can be assigned to a task.
+ *
+ * @typedef {Object} Contact
+ * @property {string} id - Firebase contact id.
+ * @property {string} name - Contact display name.
+ * @property {string} [email] - Contact email address.
+ * @property {string} [phone] - Contact phone number.
+ */
+
+/**
+ * Represents a subtask in the add-task form.
+ *
+ * @typedef {Object} Subtask
+ * @property {string} title - Subtask title.
+ * @property {boolean} completed - Whether the subtask is completed.
+ * @property {boolean} [isEditing] - Whether the subtask is currently edited.
+ */
+
+/**
+ * Represents the task payload saved to Firebase.
+ *
+ * @typedef {Object} TaskFormData
+ * @property {string} title - Task title.
+ * @property {string} description - Task description.
+ * @property {string} dueDate - Due date in ISO format.
+ * @property {string} priority - Selected priority.
+ * @property {string[]} assignedTo - Assigned contact ids.
+ * @property {string} category - Selected category.
+ * @property {Subtask[]} subtasks - Task subtasks.
+ * @property {string} status - Board column status.
+ */
+
 /* ── State ── */
+/** @type {Contact[]} */
 let availableContacts = [];
+
+/** @type {Contact[]} */
 let selectedContacts = [];
+
+/** @type {string} */
 let selectedPriority = 'medium';
+
+/** @type {Subtask[]} */
 let taskSubtasks = [];
 
 
@@ -32,6 +77,11 @@ async function initAddTask() {
 }
 
 
+/**
+ * Sets medium priority as the default active priority.
+ *
+ * @returns {void}
+ */
 function setDefaultPriority() {
     const mediumBtn = document.querySelector('.add_task_prio_btn[data-priority="medium"]');
     if (!mediumBtn) return;
@@ -40,6 +90,11 @@ function setDefaultPriority() {
     selectedPriority = 'medium';
 }
 
+/**
+ * Validates all required task form fields and updates visible error states.
+ *
+ * @returns {boolean} Whether the task form is valid.
+ */
 function validateTaskForm() {
     const title    = document.getElementById('taskTitle');
     const dueDate  = document.getElementById('taskDueDate');
@@ -91,186 +146,15 @@ function setupRequiredFieldValidation() {
 /**
  * Blendet den Pflichtfeld-Hinweis ein oder aus und markiert das Eingabefeld.
  *
- * @param {HTMLInputElement} field
- * @param {HTMLElement} message
- * @param {boolean} show
+ * @param {HTMLInputElement} field - Input element to mark as invalid.
+ * @param {HTMLElement} message - Error message element to show or hide.
+ * @param {boolean} show - Whether the error state should be visible.
  * @returns {void}
  */
 function toggleRequiredError(field, message, show) {
     message.classList.toggle('visible', show);
     field.classList.toggle('input_invalid', show);
 }
-
-
-/* ── Contacts ── */
-/**
- * Lädt alle Kontakte aus Firebase und rendert das Assigned-Dropdown.
- *
- * @async
- * @returns {Promise<void>}
- */
-async function loadAvailableContacts() {
-    
-    try {
-        const rawContactData = await getFromDB('contacts');
-    
-        availableContacts = rawContactData
-            ? Object.entries(rawContactData).map(([id, contact]) => ({ id, ...contact }))
-            : [];
-            
-        // renderAssignedOptions();
-
-    } catch (error) {
-        console.error('Contacts could not be loaded:', error);
-        showTaskToast('Contacts could not be loaded.', true);
-    }
-}
-
-
-/**
- * Richtet den Outside-Click-Listener zum Schließen des Dropdowns ein.
- *
- * @returns {void}
- */
-function setupAssignedDropdown(suffix = '') {
-    document.addEventListener('click', (event) => {
-        const dropdown = document.getElementById('assignedDropdown' + suffix);
-        if (!dropdown) return;
-        if (!dropdown.contains(event.target)) {
-            closeAssignedDropdown(suffix);
-        }
-    });
-}
-
-/**
- * Öffnet oder schließt das Assigned-Dropdown.
- *
- * @returns {void}
- */
-function toggleCategoryDropdown() {
-    const options = document.getElementById('categoryOptions');
-    const isHidden = options.classList.contains('hidden');
-    options.classList.toggle('hidden', !isHidden);
-    document.getElementById('categoryArrow').classList.toggle('rotated', isHidden);
-    document.querySelector('#categoryDropdown .assigned_trigger').setAttribute('aria-expanded', String(isHidden));
-}
-
-function selectCategory(value, label, el) {
-    document.getElementById('taskCategory').value = value;
-    document.getElementById('categoryPlaceholder').textContent = label;
-    document.querySelectorAll('#categoryOptions .assigned_option').forEach(opt => opt.classList.remove('assigned_option_active'));
-    el.classList.add('assigned_option_active');
-    document.getElementById('categoryOptions').classList.add('hidden');
-    document.getElementById('categoryArrow').classList.remove('rotated');
-    document.getElementById('taskCategoryError')?.classList.remove('visible');
-    document.querySelector('#categoryDropdown .assigned_trigger')?.classList.remove('input_invalid');
-}
-
-/**
- * Öffnet oder schließt ein Assigned-Dropdown.
- * Wird von Add-Task (ohne Argument) und vom Edit-Popup (suffix = 'Edit') genutzt.
- *
- * @param {string} [suffix=''] - ID-Zusatz, z.B. 'Edit' für das Edit-Popup
- * @returns {void}
- */
-function toggleAssignedDropdown(suffix = '') {
-    const dropdown = document.getElementById('assignedDropdown' + suffix);
-    if (!dropdown) return;
-
-    const list = document.getElementById('assignedOptions' + suffix);
-    const arrow = dropdown.querySelector('.assigned_arrow');
-
-    list.classList.toggle('hidden');
-    dropdown.classList.toggle('open');
-    if (arrow) arrow.classList.toggle('rotated');
-}
-
-/**
- * @param {boolean} isOpen
- * @returns {void}
- */
-function setAssignedDropdownOpen(isOpen) {
-    document.getElementById('assignedOptions').classList.toggle('hidden', !isOpen);
-    document.getElementById('assignedArrow').classList.toggle('rotated', isOpen);
-    document.querySelector('#assignedDropdown .assigned_trigger').setAttribute('aria-expanded', String(isOpen));
-}
-
-/** @returns {void} */
-function openAssignedDropdown()  { setAssignedDropdownOpen(true);  }
-
-/**
- * Schließt ein Assigned-Dropdown.
- *
- * @param {string} [suffix=''] - ID-Zusatz, z.B. 'Edit' für das Edit-Popup
- * @returns {void}
- */
-function closeAssignedDropdown(suffix = '') {
-    const dropdown = document.getElementById('assignedDropdown' + suffix);
-    if (!dropdown) return;
-    document.getElementById('assignedOptions' + suffix)?.classList.add('hidden');
-    dropdown.classList.remove('open');
-    dropdown.querySelector('.assigned_arrow')?.classList.remove('rotated');
-}
-
-/**
- * Fügt einen Kontakt zur Auswahl hinzu oder entfernt ihn daraus.
- *
- * @param {string} contactId
- * @returns {void}
- */
-function toggleContactSelection(event, contactId) {
-    event.stopPropagation();
-
-    const contact = availableContacts.find(c => c.id === contactId);
-    if (!contact) return;
-
-    const index = selectedContacts.findIndex(c => c.id === contactId);
-    if (index === -1) {
-        selectedContacts.push(contact);
-    } else {
-        selectedContacts.splice(index, 1);
-    }
-    renderAssignedOptions();
-    renderSelectedAvatars();
-
-    const refocusItem = document.querySelector(`#assignedOptions [data-id="${contactId}"]`);
-    if (refocusItem) refocusItem.focus();
-}
-
-/**
- * Rendert alle Kontakte als auswählbare Listeneinträge im Dropdown.
- *
- * @returns {void}
- */
-function renderAssignedOptions() {
-    document.getElementById('assignedOptions').innerHTML =
-    availableContacts.map(contact => assignedOptionHTML(contact)).join('');
-}
-
-
-function renderSelectedAvatars(){
-    const html = buildAvatarsHTML(
-        selectedContacts.map(c => c.id), 
-        availableContacts,
-        showAllAvatarsAddTask
-    );
-
-    const container = document.getElementById("assignedAvatars");
-    container.innerHTML = html;
-
-    const btn = container.querySelector(".js_more_avatars");
-    if (btn) {
-        btn.addEventListener("click", showAllAssignedAvatarsAddTask);
-    }
-}
-
-
-function showAllAssignedAvatarsAddTask() {
-    showAllAvatarsAddTask = !showAllAvatarsAddTask;
-    renderSelectedAvatars();
-}
-
-
 
 /* ── Priority ── */
 /**
@@ -299,99 +183,6 @@ function onPriorityButtonClick(event) {
     event.currentTarget.setAttribute('aria-pressed', 'true');
     selectedPriority = event.currentTarget.dataset.priority;
 }
-
-
-/* ── Subtasks ── */
-/**
- * Richtet das Subtask-Input ein:
- * Icon-Klick und Enter-Taste fügen einen neuen Subtask hinzu.
- *
- * @returns {void}
- */
-function setupSubtaskInput() {
-    const subtaskInputElement = document.getElementById('subtaskInput');
-
-    document.getElementById('clearSubtaskBtn').addEventListener('click', () => {
-        subtaskInputElement.value = '';
-        subtaskInputElement.focus();
-    });
-    document.getElementById('confirmSubtaskBtn').addEventListener('click', addSubtask);
-
-    subtaskInputElement.addEventListener('keydown', (keyEvent) => {
-        if (keyEvent.key === 'Enter') {
-            keyEvent.preventDefault();
-            addSubtask();
-        }
-        if (keyEvent.key === 'Escape') {
-            subtaskInputElement.value = '';
-            subtaskInputElement.blur();
-        }
-    });
-}
-
-/**
- * Liest den Subtask-Input aus, fügt den Subtask zum State hinzu und rendert die Liste.
- *
- * @returns {void}
- */
-function addSubtask() {
-    const subtaskInputElement = document.getElementById('subtaskInput');
-    const subtaskTitle = subtaskInputElement.value.trim();
-    if (!subtaskTitle) return;
-
-    taskSubtasks.push({ title: subtaskTitle, completed: false });
-    subtaskInputElement.value = '';
-    renderSubtaskList();
-}
-
-/**
- * Entfernt einen Subtask anhand seines Index aus dem State und rendert die Liste neu.
- *
- * @param {number} subtaskIndex
- * @returns {void}
- */
-function removeSubtask(subtaskIndex) {
-    taskSubtasks.splice(subtaskIndex, 1);
-    renderSubtaskList();
-}
-
-
-/**
- * Aktiviert den Bearbeitungsmodus
- * eines Subtasks.
- *
- * @param {number} index - Index des Subtasks.
- * @returns {void}
- */
-function editSubtaskItem(index) {
-    taskSubtasks[index].isEditing = true;
-    renderSubtaskList();
-    document.getElementById(`subtaskEdit${index}`)?.focus();
-}
-
-function saveSubtaskItem(index) {
-    const input = document.getElementById(`subtaskEdit${index}`);
-    const val = input?.value.trim();
-    if (val) taskSubtasks[index].title = val;
-    taskSubtasks[index].isEditing = false;
-    renderSubtaskList();
-}
-
-function cancelSubtaskEdit(index) {
-    taskSubtasks[index].isEditing = false;
-    renderSubtaskList();
-}
-
-/**
- * Rendert alle Subtasks als Listeneinträge mit Löschen-Button.
- *
- * @returns {void}
- */
-function renderSubtaskList() {
-    document.getElementById('subtaskList').innerHTML =
-        taskSubtasks.map((subtask, i) => subtaskItemHTML(subtask, i)).join('');
-}
-
 
 /* ── Create Task ── */
 /**
@@ -438,7 +229,7 @@ function ddmmyyyyToISO(dateStr) {
 /**
  * Liest alle Formularfelder aus und gibt ein Task-Objekt zurück.
  *
- * @returns {{ title: string, description: string, dueDate: string, priority: string, assignedTo: string[], category: string, subtasks: Array, status: string }}
+ * @returns {TaskFormData} Current form values as task payload.
  */
 function getTaskFormData() {
     return {
@@ -473,6 +264,8 @@ function onTaskCreated() {
 /* ── Due Date ── */
 /**
  * Formatiert das Due-Date-Feld automatisch als DD/MM/YYYY während der Eingabe.
+ *
+ * @returns {void}
  */
 function setupDueDateInput() {
     const input  = document.getElementById('taskDueDate');
@@ -523,6 +316,11 @@ function validateDueDate(input) {
     }
 }
 
+/**
+ * Opens the native date picker for the hidden due-date input.
+ *
+ * @returns {void}
+ */
 function openDueDatePicker() {
     const picker = document.getElementById('taskDueDatePicker');
     if (picker.showPicker) {
