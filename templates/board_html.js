@@ -86,7 +86,7 @@ function getTaskDetailsTemplate(task) {
   
         <div class="dialog_assigned">
           <p>Assigned to:</p>
-           ${buildAvatarsHTML(task.assignedTo, availableContacts, false)}
+           ${buildAvatarsHTML(task.assignedTo, availableContacts, showAllTaskPopupAvatars, true)}
         </div>  
 
         <div class="dialog_subtasks">

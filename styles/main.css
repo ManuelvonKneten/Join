@@ -94,24 +94,18 @@ a,
 .more_contacts {
     width: 32px;
     height: 32px;
-    margin-left: -3px;
-    margin-top: 10px;
-
+    margin-left: 2px;
+    margin-top: 9px;
     border-radius: 50%;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     background: #2A3647;
     color: white;
-
     font-size: 16px;
-    font-weight: 700;
-
+    font-weight: 600;
     cursor: pointer;
 }
-
 
 @media (max-width: 1023px) {
   .content {

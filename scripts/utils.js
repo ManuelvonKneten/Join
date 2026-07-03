@@ -65,7 +65,7 @@ function showTaskToast(message, isError = false) {
 }
 
 
-function buildAvatarsHTML(contactIds, availableContacts, showAll = false) {
+function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false) {
     if (!Array.isArray(contactIds)) {
         contactIds = contactIds ? [contactIds]: [];
     } 
@@ -74,7 +74,7 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false) {
     let html = visible.map(entry => {
         const contact = availableContacts.find(c => c.id === entry);
         const name = contact ? contact.name : entry;
-        return getContactsAvatar(name, false);
+        return getContactsAvatar(name, showName);
     }).join('');
 
     if (!showAll && contactIds.length > 4) {

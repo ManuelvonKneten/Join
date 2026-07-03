@@ -282,6 +282,15 @@
 
 .assigned_contacts {
   display: flex;
+
+}
+
+.assigned_contacts .more_contacts {
+   width: 24px;
+   height: 24px;
+   font-size: 14px;
+   font-weight: 600;
+   padding: 6px;
 }
 
 .task_progress {

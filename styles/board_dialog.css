@@ -66,6 +66,21 @@
   align-items: center;
 }
 
+.dialog_assigned  {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: auto;
+
+}
+
+.dialog_assigned .more_contacts {
+  margin-left: 6px;
+  padding: 6px; 
+}
+
+
+
 .dialog_row p,
 .dialog_assigned p,
 .dialog_subtasks p {

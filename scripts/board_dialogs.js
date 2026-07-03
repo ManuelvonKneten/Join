@@ -1,4 +1,7 @@
-                                       /* --- Pop-Ups --- *//**
+                                       /* --- Pop-Ups --- */
+let showAllTaskPopupAvatars = false;
+
+/**
  * Schließt das Task-Detail-Modal beim Klick außerhalb des Inhalts.
  *
  * @param {MouseEvent} event
@@ -43,14 +46,26 @@ dialogTask.addEventListener('click', handleDialogClick);
  * @returns {void}
  */
 function openTaskPopUp(taskId) {
+
     const task = allTasks.find(task => task.id === taskId);
     
     if(!task) return;
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getTaskDetailsTemplate(task);
+
+    const btn = dialogTask.querySelector(".js_more_avatars");
+
+    if (btn) {
+        btn.addEventListener("click", () => showAllAssignedAvatarsTask(taskId));
+    }
+
     dialogTask.showModal(); 
 }
 
+function showAllAssignedAvatarsTask(taskId) {
+    showAllTaskPopupAvatars = true;
+    openTaskPopUp(taskId);
+}
 
 /**
  * Öffnet das Edit-Task Popup und lädt die Task-Daten in das Formular.
