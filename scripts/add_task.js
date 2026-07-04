@@ -577,20 +577,90 @@ function setupClearButton() {
  * @returns {void}
  */
 function clearTaskForm() {
-    document.querySelector('.add_task_columns').reset();
+    resetTaskFormElement();
+    resetTaskFormState();
+    resetTaskRenderedLists();
+    resetPriorityButtons();
+    resetFormErrors();
+}
 
+
+/**
+ * Resets the add-task form element.
+ *
+ * @returns {void}
+ */
+function resetTaskFormElement() {
+    document.querySelector('.add_task_columns').reset();
+}
+
+
+/**
+ * Clears task-related in-memory form state.
+ *
+ * @returns {void}
+ */
+function resetTaskFormState() {
     taskSubtasks = [];
     selectedContacts = [];
+}
 
+
+/**
+ * Re-renders task lists and selected contact avatars.
+ *
+ * @returns {void}
+ */
+function resetTaskRenderedLists() {
     renderSubtaskList();
     renderAssignedOptions();
     renderSelectedAvatars();
+}
+
+
+/**
+ * Clears priority button states and restores the default priority.
+ *
+ * @returns {void}
+ */
+function resetPriorityButtons() {
     document.querySelectorAll('.add_task_prio_btn').forEach(btn => {
         btn.classList.remove('active');
         btn.setAttribute('aria-pressed', 'false');
     });
     setDefaultPriority();
-    document.querySelectorAll('.field_error').forEach(el => el.classList.remove('visible'));
-    document.querySelectorAll('.input_invalid').forEach(el => el.classList.remove('input_invalid'));
+}
+
+
+/**
+ * Hides form errors and removes invalid input markers.
+ *
+ * @returns {void}
+ */
+function resetFormErrors() {
+    document.querySelectorAll('.field_error').forEach(hideFieldError);
+    document.querySelectorAll('.input_invalid').forEach(removeInvalidMarker);
+}
+
+
+/**
+ * Hides one field error element.
+ *
+ * @param {HTMLElement} element - Error element to hide.
+ * @returns {void}
+ */
+function hideFieldError(element) {
+    element.classList.remove('visible');
+}
+
+
+/**
+ * Removes the invalid marker from one element.
+ *
+ * @param {HTMLElement} element - Element to mark valid again.
+ * @returns {void}
+ */
+function removeInvalidMarker(element) {
+    element.classList.remove('input_invalid');
 }
 // 
