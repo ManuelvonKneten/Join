@@ -84,10 +84,17 @@ async function loadTasks() {
  */
 async function saveTaskEdit(taskId) {
     const task = allTasks.find(t => t.id === taskId);
-   
+    const dueDateInput = document.getElementById("editDueDate");
+    const dueDateError = document.getElementById("editDueDateError");
+    const isoDate = dueDateInput.value ? ddmmyyyyToISO(dueDateInput.value) : '';
+    const dateInvalid = !isoDate || isPastDate(new Date(`${isoDate}T00:00:00`));
+
+    toggleRequiredError(dueDateInput, dueDateError, dateInvalid);
+    if (dateInvalid) return;
+
     task.title = document.getElementById("editTitle").value;
     task.description = document.getElementById("editDescription").value;
-    task.dueDate = document.getElementById("editDueDate").value;
+    task.dueDate = isoDate;
     task.subtasks = taskEditSubtasks;
     task.priority = document.querySelector(".add_task_prio_btn.active")?.dataset.priority;
     task.assignedTo = selectedEditContacts.map(c => c.id);

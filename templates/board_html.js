@@ -148,8 +148,20 @@ function getEditTaskTemplate(task) {
       </label>
 
       <label>
-       <p>Due Date</p> 
-        <input class="label_input" type="date" id="editDueDate" value="${task.dueDate}">
+       <p>Due Date</p>
+        <div class="inputField">
+          <input type="text" id="editDueDate" placeholder="dd/mm/yyyy" maxlength="10" inputmode="numeric">
+          <input id="editDueDatePicker" type="date" class="due_date_picker_hidden" tabindex="-1">
+          <button type="button" class="due_date_trigger" onclick="openEditDueDatePicker()" aria-label="Kalender öffnen">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="3" width="16" height="14" rx="2" stroke="#2a3647" stroke-width="1.5"/>
+              <path d="M1 7h16" stroke="#2a3647" stroke-width="1.5"/>
+              <path d="M5 1v4M13 1v4" stroke="#2a3647" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="13.5" cy="13.5" r="2" fill="#2a3647"/>
+            </svg>
+          </button>
+        </div>
+        <span class="field_error" id="editDueDateError">Please select today or a future date</span>
       </label>
 
       <label>

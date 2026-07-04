@@ -96,6 +96,68 @@ async function openEditTaskPopup(taskId) {
     showAllAvatarsEditTask = false;
     await initEditAssigned(task);
     renderAssignedAvatarsEdit();
+    setupEditDueDateInput(task.dueDate);
+}
+
+
+/**
+ * Initialisiert das Datumfeld im Edit-Task-Popup.
+ * Befüllt den Text-Input mit DD/MM/YYYY und verdrahtet Picker + Validierung.
+ *
+ * @param {string} isoDate - Datum im Format YYYY-MM-DD
+ * @returns {void}
+ */
+function setupEditDueDateInput(isoDate) {
+    const input  = document.getElementById('editDueDate');
+    const picker = document.getElementById('editDueDatePicker');
+    const error  = document.getElementById('editDueDateError');
+
+    picker.min = getLocalISODate();
+
+    if (isoDate) {
+        const [year, month, day] = isoDate.split('-');
+        input.value = `${day}/${month}/${year}`;
+    }
+
+    input.addEventListener('keydown', handleDueDateBackspace);
+    input.addEventListener('input',   formatDueDateInput);
+    input.addEventListener('blur',    () => validateEditDueDate(input, error));
+    picker.addEventListener('change', (e) => {
+        syncPickerDateToTextInput(e, input);
+        validateEditDueDate(input, error);
+    });
+}
+
+
+/**
+ * Validiert das Datumfeld im Edit-Task-Popup.
+ *
+ * @param {HTMLInputElement} input - Text-Input DD/MM/YYYY
+ * @param {HTMLElement} error - Fehlermeldungs-Element
+ * @returns {void}
+ */
+function validateEditDueDate(input, error) {
+    if (!input.value.trim()) {
+        toggleRequiredError(input, error, true);
+        return;
+    }
+    const selected = new Date(`${ddmmyyyyToISO(input.value)}T00:00:00`);
+    toggleRequiredError(input, error, isPastDate(selected));
+}
+
+
+/**
+ * Öffnet den nativen Datepicker im Edit-Task-Popup.
+ *
+ * @returns {void}
+ */
+function openEditDueDatePicker() {
+    const picker = document.getElementById('editDueDatePicker');
+    if (picker.showPicker) {
+        picker.showPicker();
+    } else {
+        picker.click();
+    }
 }
 
 
