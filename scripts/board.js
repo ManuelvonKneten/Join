@@ -254,7 +254,7 @@ function renderAssignedOptionsEdit() {
  */
 function renderAssignedAvatarsEdit() {
     const html = buildAvatarsHTML(
-        selectedContacts.map(c => c.id), 
+        selectedEditContacts.map(c => c.id),
         availableContacts,
         showAllAvatarsEditTask
     );
