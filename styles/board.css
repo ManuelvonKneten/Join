@@ -424,10 +424,9 @@
   .move-btn {
     display: block;
   }
-}
 
-@media (max-width: 767px) {
-  .task_field {
+   .task_field {
     flex-direction: row;
   }
 }
+
