@@ -269,6 +269,13 @@ function renderAssignedAvatarsEdit() {
 }
 
 
+/**
+ * Schaltet zwischen der kompakten und vollständigen Anzeige
+ * der zugewiesenen Avatare im Edit-Task-Popup um und rendert
+ * die Avatar-Liste anschließend neu.
+ *
+ * @returns {void}
+ */
 function showAllAssignedAvatarsEditTask() {
     showAllAvatarsEditTask = !showAllAvatarsEditTask;
     renderAssignedAvatarsEdit();

@@ -46,7 +46,6 @@ dialogTask.addEventListener('click', handleDialogClick);
  * @returns {void}
  */
 function openTaskPopUp(taskId) {
-
     const task = allTasks.find(task => task.id === taskId);
     
     if(!task) return;
@@ -58,10 +57,17 @@ function openTaskPopUp(taskId) {
     if (btn) {
         btn.addEventListener("click", () => showAllAssignedAvatarsTask(taskId));
     }
-
     dialogTask.showModal(); 
 }
 
+
+/**
+ * Zeigt alle zugewiesenen Avatare im Task-Detail-Popup an
+ * und rendert das Popup anschließend neu.
+ *
+ * @param {string} taskId - ID des Tasks.
+ * @returns {void}
+ */
 function showAllAssignedAvatarsTask(taskId) {
     showAllTaskPopupAvatars = true;
     openTaskPopUp(taskId);

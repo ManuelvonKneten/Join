@@ -25,6 +25,7 @@
     <div data-include="../templates/header.html"></div>
 
     <main class="content">
+      
       <dialog id="delete_task" class="delete_task">
         <h2>Delete Task?</h2>
         <p>Are you sure you want to delete this task?</p>
@@ -49,7 +50,7 @@
                 alt="plus icos"
                 onclick="openAddTaskPopUp()"
               />
-            </button>  
+            </button>
           </div>
           <div class="search_container">
             <div class="search">
@@ -59,7 +60,7 @@
                   <img src="../assets/icons/search.svg" alt="" />
                 </div>
               </div>
-            
+
               <button onclick="openAddTaskPopUp()">
                 Add task
                 <img src="../assets/icons/add_plus.svg" alt="plus icos" />
@@ -109,11 +110,13 @@
           <div id="awaitFeedback" class="await_feedback">
             <div class="task_column">
               <h3>Await feedback</h3>
-        
-                <button class="aw_btn_wrap" onclick="openAddTaskPopUp('awaitfeedback')">
-                  +
-                </button>
-            
+
+              <button
+                class="aw_btn_wrap"
+                onclick="openAddTaskPopUp('awaitfeedback')"
+              >
+                +
+              </button>
             </div>
             <div
               id="awaitFeedbackField"

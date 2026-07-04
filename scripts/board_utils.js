@@ -6,7 +6,6 @@
  * @returns {void}
  */
 function startDragEffect(event) {
-    
     event.currentTarget.classList.add('dragging');
 }
 
@@ -154,6 +153,7 @@ const KEY_MOVES = {
     ArrowDown: "awaitfeedback",
     ArrowUp: "done"
 };
+
 
 /**
  * Verarbeitet Tastatursteuerung für das Board.

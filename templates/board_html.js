@@ -1,4 +1,3 @@
-
 function getTaskTemplate(task) {
   return `
     <div 
@@ -32,6 +31,7 @@ function getTaskTemplate(task) {
   
     `;
 }
+
 
 function getNewHTMLTag() {
   return `

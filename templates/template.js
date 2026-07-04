@@ -16,6 +16,7 @@ function contactGroupHTML(letter, contacts) {
     `;
 }
 
+
 /**
  * Gibt das HTML eines einzelnen Kontakteintrags als String zurück.
  *
@@ -36,6 +37,7 @@ function contactItemHTML(contact) {
         </div>
     `;
 }
+
 
 /**
  * Gibt das HTML eines Kontakt-Eintrags im Assigned-Dropdown zurück.
@@ -62,6 +64,7 @@ function assignedOptionHTML(contact) {
         </li>
     `;
 }
+
 
 /**
  * Gibt das HTML eines Subtask-Listeneintrags mit Löschen-Button zurück.
@@ -107,7 +110,6 @@ function subtaskItemHTML(subtask, index) {
         </li>
     `;
 }
-
 
 
 function getContactsAvatar (name, showName) {
