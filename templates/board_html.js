@@ -73,7 +73,7 @@ function getTaskDetailsTemplate(task) {
   
         <div class="dialog_row">
           <p>Due date:</p>
-          <span> ${task.dueDate}</span>
+          <span> ${task.dueDate ? task.dueDate.split('-').reverse().join('/') : ''}</span>
         </div>
   
         <div class="dialog_row">
