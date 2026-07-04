@@ -581,6 +581,7 @@ function clearTaskForm() {
     resetTaskFormState();
     resetTaskRenderedLists();
     resetPriorityButtons();
+    resetCategoryDropdown();
     resetFormErrors();
 }
 
@@ -629,6 +630,38 @@ function resetPriorityButtons() {
         btn.setAttribute('aria-pressed', 'false');
     });
     setDefaultPriority();
+}
+
+
+/**
+ * Resets the custom category dropdown to its initial state.
+ *
+ * @returns {void}
+ */
+function resetCategoryDropdown() {
+    const category = document.getElementById('taskCategory');
+    const placeholder = document.getElementById('categoryPlaceholder');
+    const options = document.getElementById('categoryOptions');
+    const arrow = document.getElementById('categoryArrow');
+    const trigger = document.querySelector('#categoryDropdown .assigned_trigger');
+
+    if (category) category.value = '';
+    if (placeholder) placeholder.textContent = 'Select task category';
+    document.querySelectorAll('#categoryOptions .assigned_option_active').forEach(removeCategoryActiveState);
+    options?.classList.add('hidden');
+    arrow?.classList.remove('rotated');
+    trigger?.setAttribute('aria-expanded', 'false');
+}
+
+
+/**
+ * Removes the active marker from one category option.
+ *
+ * @param {HTMLElement} option - Category option to reset.
+ * @returns {void}
+ */
+function removeCategoryActiveState(option) {
+    option.classList.remove('assigned_option_active');
 }
 
 
