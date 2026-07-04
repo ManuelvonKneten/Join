@@ -14,6 +14,7 @@ function initSplash() {
     }
 }
 
+
 /**
  * Animiert das Splash-Logo von der Bildschirmmitte bündig auf die
  * Position des Header-Logos und blendet danach das Overlay aus.
@@ -35,6 +36,7 @@ function runSplash() {
     anim.onfinish = () => fadeOutSplash(container);
 }
 
+
 /**
  * Ermittelt die exakte Bildposition des Header-Logos (inkl. Innenabstand).
  *
@@ -51,6 +53,7 @@ function getHeaderLogoPosition() {
         left: rect.left + (parseFloat(style.paddingLeft) || 0)
     };
 }
+
 
 /**
  * Blendet das Splash-Overlay aus und entfernt es nach der Transition.
