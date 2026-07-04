@@ -100,26 +100,56 @@ function validateTaskForm() {
     const title    = document.getElementById('taskTitle');
     const dueDate  = document.getElementById('taskDueDate');
     const category = document.getElementById('taskCategory');
-
-    const titleError    = document.getElementById('taskTitleError');
     const dueDateError  = document.getElementById('taskDueDateError');
     const categoryError = document.getElementById('taskCategoryError');
 
-    let valid = true;
-
-    toggleRequiredError(title, titleError, !title.value.trim());
-    if (!title.value.trim()) valid = false;
-
+    const titleValid = validateTitleField(title);
     validateDueDate(dueDate);
-    if (dueDateError.classList.contains('visible')) valid = false;
+    const dueDateValid = !isDueDateInvalid(dueDateError);
+    const categoryValid = validateTaskCategory(category, categoryError);
 
+    return titleValid && dueDateValid && categoryValid;
+}
+
+
+/**
+ * Validates the task title field and updates its required error state.
+ *
+ * @param {HTMLInputElement} title - Title input to validate.
+ * @returns {boolean} Whether the title is valid.
+ */
+function validateTitleField(title) {
+    const titleError = document.getElementById('taskTitleError');
+    const isEmpty = !title.value.trim();
+    toggleRequiredError(title, titleError, isEmpty);
+    return !isEmpty;
+}
+
+
+/**
+ * Validates the selected task category and updates its error state.
+ *
+ * @param {HTMLInputElement} category - Category field to validate.
+ * @param {HTMLElement} categoryError - Category error message element.
+ * @returns {boolean} Whether a category is selected.
+ */
+function validateTaskCategory(category, categoryError) {
     const noCategory = !category.value;
     if (categoryError) categoryError.classList.toggle('visible', noCategory);
     document.querySelector('#categoryDropdown .assigned_trigger')
         ?.classList.toggle('input_invalid', noCategory);
-    if (noCategory) valid = false;
+    return !noCategory;
+}
 
-    return valid;
+
+/**
+ * Checks whether the due-date error is currently visible.
+ *
+ * @param {HTMLElement} dueDateError - Due-date error message element.
+ * @returns {boolean} Whether the due date is invalid.
+ */
+function isDueDateInvalid(dueDateError) {
+    return dueDateError.classList.contains('visible');
 }
 
 
@@ -206,17 +236,62 @@ async function createTask(submitEvent) {
     if (!validateTaskForm()) return;
 
     const taskData = getTaskFormData();
-    const submitButton = submitEvent.target.querySelector('.add_task_btn_create');
-    submitButton.disabled = true;
-    submitButton.textContent = 'Saving…';
+    const submitButton = getCreateTaskButton(submitEvent);
+    setCreateTaskButtonSaving(submitButton);
+    await saveTask(taskData, submitButton);
+}
 
+
+/**
+ * Gets the create-task submit button from the submitted form.
+ *
+ * @param {Event} submitEvent - Submit event from the add-task form.
+ * @returns {HTMLButtonElement} Create-task button.
+ */
+function getCreateTaskButton(submitEvent) {
+    return submitEvent.target.querySelector('.add_task_btn_create');
+}
+
+
+/**
+ * Disables the create-task button and shows the saving state.
+ *
+ * @param {HTMLButtonElement} button - Create-task button.
+ * @returns {void}
+ */
+function setCreateTaskButtonSaving(button) {
+    button.disabled = true;
+    button.textContent = 'Saving…';
+}
+
+
+/**
+ * Restores the create-task button after a failed save.
+ *
+ * @param {HTMLButtonElement} button - Create-task button.
+ * @returns {void}
+ */
+function resetCreateTaskButton(button) {
+    button.disabled = false;
+    button.innerHTML = 'Create Task <span>&#x2713;</span>';
+}
+
+
+/**
+ * Saves a task and handles success or failure UI updates.
+ *
+ * @async
+ * @param {TaskFormData} taskData - Task payload to save.
+ * @param {HTMLButtonElement} submitButton - Create-task button.
+ * @returns {Promise<void>}
+ */
+async function saveTask(taskData, submitButton) {
     try {
         await postToDB('tasks', taskData);
         onTaskCreated();
     } catch (error) {
         console.error('Task could not be saved:', error);
-        submitButton.disabled = false;
-        submitButton.innerHTML = 'Create Task <span>&#x2713;</span>';
+        resetCreateTaskButton(submitButton);
         showTaskToast('Task could not be saved. Please try again.', true);
     }
 }
