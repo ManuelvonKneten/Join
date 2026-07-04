@@ -104,15 +104,33 @@ function toggleContactSelection(event, contactId) {
     const contact = availableContacts.find(c => c.id === contactId);
     if (!contact) return;
 
-    const index = selectedContacts.findIndex(c => c.id === contactId);
-    if (index === -1) {
-        selectedContacts.push(contact);
-    } else {
-        selectedContacts.splice(index, 1);
-    }
+    toggleSelectedContact(contact);
     renderAssignedOptions();
     renderSelectedAvatars();
+    refocusAssignedOption(contactId);
+}
 
+
+/**
+ * Adds or removes a contact from the selected contacts.
+ *
+ * @param {Contact} contact - Contact to toggle.
+ * @returns {void}
+ */
+function toggleSelectedContact(contact) {
+    const index = selectedContacts.findIndex(c => c.id === contact.id);
+    if (index === -1) selectedContacts.push(contact);
+    else selectedContacts.splice(index, 1);
+}
+
+
+/**
+ * Refocuses the assigned option for the given contact id.
+ *
+ * @param {string} contactId - Contact id to focus.
+ * @returns {void}
+ */
+function refocusAssignedOption(contactId) {
     const refocusItem = document.querySelector(`#assignedOptions [data-id="${contactId}"]`);
     if (refocusItem) refocusItem.focus();
 }
@@ -206,22 +224,58 @@ function selectCategory(value, label, el) {
 function setupSubtaskInput() {
     const subtaskInputElement = document.getElementById('subtaskInput');
 
-    document.getElementById('clearSubtaskBtn').addEventListener('click', () => {
-        subtaskInputElement.value = '';
-        subtaskInputElement.focus();
-    });
+    document.getElementById('clearSubtaskBtn')
+        .addEventListener('click', () => clearSubtaskInput(subtaskInputElement));
     document.getElementById('confirmSubtaskBtn').addEventListener('click', addSubtask);
+    subtaskInputElement.addEventListener('keydown', handleSubtaskKeydown);
+}
 
-    subtaskInputElement.addEventListener('keydown', (keyEvent) => {
-        if (keyEvent.key === 'Enter') {
-            keyEvent.preventDefault();
-            addSubtask();
-        }
-        if (keyEvent.key === 'Escape') {
-            subtaskInputElement.value = '';
-            subtaskInputElement.blur();
-        }
-    });
+
+/**
+ * Clears and focuses the subtask input.
+ *
+ * @param {HTMLInputElement} input - Subtask input element.
+ * @returns {void}
+ */
+function clearSubtaskInput(input) {
+    input.value = '';
+    input.focus();
+}
+
+
+/**
+ * Handles keyboard shortcuts in the subtask input.
+ *
+ * @param {KeyboardEvent} event - Keydown event from the subtask input.
+ * @returns {void}
+ */
+function handleSubtaskKeydown(event) {
+    if (event.key === 'Enter') handleSubtaskEnter(event);
+    if (event.key === 'Escape') handleSubtaskEscape(event.target);
+}
+
+
+/**
+ * Prevents default submit behavior and adds a subtask.
+ *
+ * @param {KeyboardEvent} event - Enter keydown event.
+ * @returns {void}
+ */
+function handleSubtaskEnter(event) {
+    event.preventDefault();
+    addSubtask();
+}
+
+
+/**
+ * Clears and blurs the subtask input.
+ *
+ * @param {HTMLInputElement} input - Subtask input element.
+ * @returns {void}
+ */
+function handleSubtaskEscape(input) {
+    input.value = '';
+    input.blur();
 }
 
 /**
