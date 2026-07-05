@@ -12,9 +12,21 @@ function getTaskTemplate(task) {
       onclick="openTaskPopUp('${task.id}')"
       >
       
+      <div class="card_header_wrapper">
         <div class="${task.category} card_header">
         ${formatCategory(task.category)}
         </div>
+        <button 
+          type="button"
+          class="move-btn"
+          aria-label="Move task to another category"
+          onclick="toggleMoveMenu(event)"
+        >
+          <img src="../assets/icons/swap_horiz.svg" alt="">
+        </button>
+      </div>
+
+      ${getMoveMenuTemplate(task)}
 
         <h2 data-full="false" onclick="toggleFullTitle(this, '${task.title.replace(/'/g, "\\'")}')">
         ${shortenText(task.title, 30)}</h2>
@@ -30,6 +42,35 @@ function getTaskTemplate(task) {
     </div>
   
     `;
+}
+
+
+const BOARD_STATUS_OPTIONS = [
+  { status: 'todo', label: 'To do' },
+  { status: 'inprogress', label: 'In progress' },
+  { status: 'awaitfeedback', label: 'Await feedback' },
+  { status: 'done', label: 'Done' }
+];
+
+
+function getMoveMenuTemplate(task) {
+  const moveButtons = BOARD_STATUS_OPTIONS
+    .filter(option => option.status !== task.status)
+    .map(option => `
+      <button
+        type="button"
+        onclick="moveTaskFromMenu(event, '${task.id}', '${option.status}')"
+      >
+        ${option.label}
+      </button>
+    `)
+    .join('');
+
+  return `
+    <div class="move-menu" onclick="event.preventDefault(); event.stopPropagation()">
+      ${moveButtons}
+    </div>
+  `;
 }
 
 

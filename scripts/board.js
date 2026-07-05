@@ -46,6 +46,7 @@ function initEventListeners(){
     document.getElementById('search').addEventListener('input', searchTask)
     document.getElementById('search_icon').addEventListener('click', searchTask)
     initTouchDragAndDrop();
+    initMoveToMenu();
 }
 
 

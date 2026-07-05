@@ -26,6 +26,7 @@ let touchDragState = null;
 let touchDragInitialized = false;
 let suppressTouchClickUntil = 0;
 let suppressTouchClickTaskId = null;
+let moveToMenuInitialized = false;
 
 
 /**
@@ -57,6 +58,7 @@ function initTouchDragAndDrop() {
  */
 function handleTouchDragStart(event) {
     if (event.pointerType !== 'touch') return;
+    if (event.target.closest('.move-btn, .move-menu')) return;
 
     const card = event.target.closest('.card');
     if (!card) return;
@@ -255,6 +257,69 @@ function suppressClickAfterTouchDrag(event) {
     event.stopPropagation();
     suppressTouchClickUntil = 0;
     suppressTouchClickTaskId = null;
+}
+
+
+/**
+ * Initialisiert das Schliessen offener Move-To-Menues bei Aussenklick.
+ *
+ * @returns {void}
+ */
+function initMoveToMenu() {
+    if (moveToMenuInitialized) return;
+
+    document.addEventListener('click', closeMoveMenus);
+    moveToMenuInitialized = true;
+}
+
+
+/**
+ * Oeffnet oder schliesst das Move-To-Menue einer Task Card.
+ *
+ * @param {MouseEvent} event - Click-Event des Move-Buttons.
+ * @returns {void}
+ */
+function toggleMoveMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const card = event.currentTarget.closest('.card');
+    const menu = card?.querySelector('.move-menu');
+
+    if (!menu) return;
+
+    const shouldOpen = !menu.classList.contains('open');
+    closeMoveMenus();
+    menu.classList.toggle('open', shouldOpen);
+}
+
+
+/**
+ * Verschiebt eine Task ueber das mobile Move-To-Menue.
+ *
+ * @param {MouseEvent} event - Click-Event eines Menue-Buttons.
+ * @param {string} taskId - Firebase-ID des Tasks.
+ * @param {string} newStatus - Zielstatus.
+ * @returns {Promise<void>}
+ */
+async function moveTaskFromMenu(event, taskId, newStatus) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    closeMoveMenus();
+    await moveTaskToStatus(taskId, newStatus);
+}
+
+
+/**
+ * Schliesst alle offenen Move-To-Menues.
+ *
+ * @returns {void}
+ */
+function closeMoveMenus() {
+    document.querySelectorAll('.move-menu.open').forEach(menu => {
+        menu.classList.remove('open');
+    });
 }
 
 

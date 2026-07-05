@@ -261,13 +261,30 @@
   align-items: center;
 }
 
+.move-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.move-btn img {
+  width: 20px;
+  height: 20px;
+}
+
 .move-menu {
   position: absolute;
   top: 40px;
   right: 10px;
   z-index: 10;
 
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 4px;
 
@@ -435,7 +452,11 @@
   }
 
   .move-btn {
-    display: block;
+    display: flex;
+  }
+
+  .move-menu.open {
+    display: flex;
   }
 
   .empty_card {
