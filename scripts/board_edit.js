@@ -124,7 +124,7 @@ function toggleEditContact(id) {
  * @param {KeyboardEvent} event
  * @returns {void}
  */
-function handleSubtaskEnter(event) {
+function handleEditSubtaskEnter(event) {
     if (event.key === "Enter") {
          event.preventDefault();
         addEditSubtask();

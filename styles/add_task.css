@@ -59,6 +59,9 @@
     font-size: 16px;
     font-weight: 400;
     color: var(--color-tertiary);
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
 }
 
 .add_task_label[for="taskTitle"],
@@ -69,8 +72,8 @@
 
 /* Title & Due Date inputs */
 .add_task_left .inputField input {
-    height: 50px;
-    font-size: 21px;
+    height: 40px;
+    font-size: 16px;
     padding: 12px 14px;
 }
 
@@ -84,16 +87,16 @@
 /* Assigned to trigger */
 #assignedDropdown .assigned_trigger {
     height: 50px;
-    font-size: 21px;
+    font-size: 16px;
 }
 
 .add_task_textarea {
     width: 100%;
-    height: 50px;
+    height: 160px;
     padding: 12px 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 21px;
+    font-size: 16px;
     font-family: "Inter", sans-serif;
     resize: vertical;
 }
@@ -123,11 +126,12 @@
     padding: 17px 10px;
     border: none;
     border-radius: 8px;
-    font-size: 21px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--color-tertiary);
     background: white;
     cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -193,7 +197,7 @@
     padding: 0 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 21px;
+    font-size: 16px;
     font-family: "Inter", sans-serif;
     color: var(--color-tertiary);
     background: white;
@@ -206,7 +210,7 @@
 }
 
 .assigned_placeholder {
-    font-size: 21px;
+    font-size: 16px;
     color: var(--color-tertiary);
 }
 
@@ -407,7 +411,7 @@
     background-color: white;
     font-weight: 400;
     height: 50px;
-    font-size: 21px;
+    font-size: 16px;
     padding: 12px 14px;
 }
 
@@ -442,7 +446,7 @@
     background: none;
     border: none;
     color: var(--hover-color);
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     padding: 0 2px;
     line-height: 1;
@@ -592,6 +596,10 @@
     font-size: 14px;
 }
 
+.required_note--mobile {
+    display: none;
+}
+
 /* ── Pflichtfeld-Fehler (onblur) ── */
 .field_error {
     min-height: 16px;
@@ -615,7 +623,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 210px;
+    min-height: 20px;
 }
 .add_task_actions {
     display: flex;
@@ -706,6 +714,10 @@
         display: none;
     }
 
+    .required_note--mobile {
+        display: block;
+    }
+
     .add_task_field--subtasks {
         display: flex;
     }
@@ -724,7 +736,7 @@
     .assigned_placeholder,
     .assigned_option_name,
     .add_task_subtask_item {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     #subtaskInput {
@@ -737,7 +749,7 @@
     }
 
     .add_task_prio_btn {
-        font-size: 14px;
+        font-size: 16px;
         padding: 10px 6px;
     }
 
@@ -749,7 +761,7 @@
     .add_task_btn {
         justify-content: center;
         flex: 0 0 auto;
-        font-size: 14px;
+        font-size: 16px;
         padding: 11px 16px;
     }
 
