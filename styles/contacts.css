@@ -425,5 +425,10 @@
         right: 16px;
         left: 16px;
         text-align: center;
+        transform: translateX(110%);
+    }
+
+    .contactToast.show {
+        transform: translateX(0);
     }
 }
