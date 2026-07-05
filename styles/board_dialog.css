@@ -246,15 +246,16 @@
     max-width: 90vw;
     max-height: 90vh;
     height: auto;
+    overflow-y: auto;
 
     background-color: var(--main-background);
     border-radius: 20px;
-    
+
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: clamp(10px, 4vw, 24px); 
+    padding: clamp(10px, 4vw, 24px);
 } 
 
 label,
