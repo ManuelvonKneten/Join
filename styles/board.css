@@ -380,6 +380,13 @@
 
   .task_field {
     min-height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
 
   .task_progress {
@@ -418,15 +425,17 @@
     display: none;
   }
   .card {
-    width: 72%;
+    flex: 0 0 260px;
+    width: 260px;
+    flex-shrink: 0;
   }
 
   .move-btn {
     display: block;
   }
 
-   .task_field {
-    flex-direction: row;
+  .empty_card {
+    flex: 0 0 100%;
+    width: 100%;
   }
 }
-

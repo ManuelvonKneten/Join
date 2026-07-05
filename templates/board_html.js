@@ -231,7 +231,7 @@ function getEditTaskTemplate(task) {
   
       <p class="subtasks_edit_title">Subtasks</p>   
       <div class="subtask_add">
-        <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleSubtaskEnter(event)">
+        <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskEnter(event)">
         <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
       </div>
         <div id="editSubtasks" class="edit_subtasks_container"></div>
