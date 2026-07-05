@@ -446,7 +446,7 @@
     background: none;
     border: none;
     color: var(--hover-color);
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     padding: 0 2px;
     line-height: 1;
@@ -596,6 +596,10 @@
     font-size: 14px;
 }
 
+.required_note--mobile {
+    display: none;
+}
+
 /* ── Pflichtfeld-Fehler (onblur) ── */
 .field_error {
     min-height: 16px;
@@ -619,7 +623,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 210px;
+    min-height: 20px;
 }
 .add_task_actions {
     display: flex;
@@ -710,6 +714,10 @@
         display: none;
     }
 
+    .required_note--mobile {
+        display: block;
+    }
+
     .add_task_field--subtasks {
         display: flex;
     }
@@ -728,7 +736,7 @@
     .assigned_placeholder,
     .assigned_option_name,
     .add_task_subtask_item {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     #subtaskInput {
@@ -741,7 +749,7 @@
     }
 
     .add_task_prio_btn {
-        font-size: 14px;
+        font-size: 16px;
         padding: 10px 6px;
     }
 
@@ -753,7 +761,7 @@
     .add_task_btn {
         justify-content: center;
         flex: 0 0 auto;
-        font-size: 14px;
+        font-size: 16px;
         padding: 11px 16px;
     }
 

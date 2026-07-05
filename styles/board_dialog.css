@@ -387,3 +387,17 @@ label,
   opacity: 1;
   visibility: visible;
 }
+
+@media (max-width: 1023px) {
+    .add_task_layout_popup {
+        height: 95vh;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add_task_layout_popup .add_task_columns {
+        flex: 1;
+        overflow-y: auto;
+    }
+}
