@@ -14,7 +14,7 @@
 }
 
 .dialog_content {
-  width: 90%;
+  width: 100%;
   padding: clamp(12px, 4vw, 48px);
   display: flex;
   flex-direction: column;
