@@ -44,7 +44,8 @@ async function initBoard() {
  */
 function initEventListeners(){
     document.getElementById('search').addEventListener('input', searchTask)
-    document.getElementById('search_icon').addEventListener('click', searchTask)    
+    document.getElementById('search_icon').addEventListener('click', searchTask)
+    initTouchDragAndDrop();
 }
 
 
@@ -128,7 +129,23 @@ async function moveTo(event) {
     dropField.classList.remove('task_field_highlight');
     const newStatus = event.currentTarget.dataset.status;
 
-    await patchToDB(`tasks/${currentDraggedTask}`, { status: newStatus
+    await moveTaskToStatus(currentDraggedTask, newStatus);
+}
+
+
+/**
+ * Verschiebt einen Task in einen neuen Board-Status
+ * und verwendet die zentrale Speicherlogik für Drag & Drop.
+ *
+ * @async
+ * @param {string} taskId - Firebase-ID des Tasks.
+ * @param {string} newStatus - Zielstatus.
+ * @returns {Promise<void>}
+ */
+async function moveTaskToStatus(taskId, newStatus) {
+    if (!taskId || !newStatus) return;
+
+    await patchToDB(`tasks/${taskId}`, { status: newStatus
     });
     await loadTasks(); 
 }
@@ -145,10 +162,7 @@ async function moveTo(event) {
 async function moveKeyboardTask(newStatus) {
     const taskId = keyboardDraggedTaskId;
 
-    await patchToDB(`tasks/${taskId}`, {
-        status: newStatus
-    });
-    await loadTasks();
+    await moveTaskToStatus(taskId, newStatus);
 }
 
 
