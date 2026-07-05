@@ -285,12 +285,13 @@
 
 }
 
-.assigned_contacts .more_contacts {
-   width: 24px;
-   height: 24px;
-   font-size: 14px;
-   font-weight: 600;
-   padding: 6px;
+.card .more_contacts {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    padding: 0;
+    margin-top: 0;
+    margin-left: clamp(-8px, -0.7vw, -4px);
 }
 
 .task_progress {
@@ -330,9 +331,9 @@
 }
 
 .card .contact_avatar {
-  width: clamp(28px, 2.6vw, 38px);
-  height: clamp(28px, 2.6vw, 38px);
-  font-size: clamp(10px, 1vw, 13px);
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
 }
 
 .card .contact_task {
