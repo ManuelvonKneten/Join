@@ -65,11 +65,11 @@ function showTaskToast(message, isError = false) {
 }
 
 
-function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false) {
+function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false, max = window.innerWidth <= 1023 ? 2 : 4) {
     if (!Array.isArray(contactIds)) {
         contactIds = contactIds ? [contactIds]: [];
-    } 
-        const visible = showAll ? contactIds : contactIds.slice(0, 4);
+    }
+    const visible = showAll ? contactIds : contactIds.slice(0, max);
 
     let html = visible.map(entry => {
         const contact = availableContacts.find(c => c.id === entry);
@@ -77,8 +77,8 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
         return getContactsAvatar(name, showName);
     }).join('');
 
-    if (!showAll && contactIds.length > 4) {
-        html += `<div class="more_contacts js_more_avatars">+${contactIds.length - 4}</div>`;
+    if (!showAll && contactIds.length > max) {
+        html += `<div class="more_contacts js_more_avatars">+${contactIds.length - max}</div>`;
     }
     return html;
 }

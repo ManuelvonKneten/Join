@@ -427,6 +427,18 @@
 
    .task_field {
     flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+  }
+
+  .card {
+    min-width: 252px;
+    width: 252px;
+    min-height: 252px;
+    height: auto;
+    flex-shrink: 0;
+    scroll-snap-align: start;
   }
 }
 
