@@ -75,11 +75,14 @@
 
 }
 
-.dialog_assigned .more_contacts {
-  margin-left: 6px;
-  padding: 6px; 
+.assigned_avatars .more_contacts {
+  width: 24px;
+   height: 24px;
+   font-size: 14px;
+   font-weight: 600;
+   padding: 6px;
+   margin-top: 21px;
 }
-
 
 
 .dialog_row p,
