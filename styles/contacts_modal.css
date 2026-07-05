@@ -234,7 +234,8 @@
     .add_contact_modal {
         width: 100%;
         max-width: 360px;
-        height: min(600px, calc(100vh - 32px));
+        height: auto;
+        max-height: calc(100vh - 32px);
         min-height: auto;
         overflow-y: auto;
         border-radius: 20px;
@@ -309,10 +310,10 @@
     /* Close button: top right corner inside the blue top bar */
     #addContactOverlay .modal_close_btn,
     #editContactOverlay .modal_close_btn {
-        top: 8px;
-        right: 8px;
+        top: 16px;
+        right: 16px;
         color: #fff;
-        font-size: 13px;
+        font-size: 16px;
     }
     
         /* Add modal: only the Create contact button */
