@@ -19,7 +19,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* padding-right: 0px; */
 }
 
 .dialog_content p {
@@ -31,8 +30,7 @@
   justify-content: space-between;
 }
 
-.dialog_header .user_story,
-.dialog_header .technical  {
+.dialog_header .user_story, .dialog_header .technical  {
   color: white;
   border: none;
   border-radius: 8px;
@@ -58,7 +56,7 @@
 }
 
 .dialog_row {
-    display: flex;
+  display: flex;
 }
 
 .dialog_row span {
@@ -72,7 +70,6 @@
   flex-direction: column;
   max-height: 300px;
   overflow-y: auto;
-
 }
 
 .assigned_avatars .more_contacts {
@@ -84,10 +81,7 @@
    margin-top: 21px;
 }
 
-
-.dialog_row p,
-.dialog_assigned p,
-.dialog_subtasks p {
+.dialog_row p, .dialog_assigned p, .dialog_subtasks p {
   color: var(--sidebar-background);
   display: inline-block;
   width: 120px;
@@ -188,8 +182,6 @@
     content: url("../assets/icons/delete_blue.svg");
 }
 
-
-
 .edit_icon {
   border-left: 1px solid var(--color-tertiary);
   opacity: 0.6;
@@ -226,8 +218,7 @@
 
 }
 
-.delete_buttons button:hover,
-.delete_buttons button:focus {
+.delete_buttons button:hover, .delete_buttons button:focus {
   background-color: var(--color-secondary);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
@@ -250,10 +241,8 @@
     max-height: 90vh;
     height: auto;
     overflow-y: auto;
-
     background-color: var(--main-background);
     border-radius: 20px;
-
     position: fixed;
     top: 50%;
     left: 50%;
@@ -308,7 +297,6 @@ label,
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-sizing: border-box;
   font-size: clamp(16px, 2vw, 18px);
   font-weight: 400;
 }
@@ -355,8 +343,7 @@ label,
   border: 1px solid grey;
 }
 
-.subtask_add button,
-.edit_subtask button  {
+.subtask_add button, .edit_subtask button  {
     background: none;
     border: none;
     height: 20px;
@@ -370,17 +357,14 @@ label,
     cursor: pointer;
 }
 
-.subtask_add button:hover,
-.edit_subtask button:hover {
+.subtask_add button:hover, .edit_subtask button:hover {
     color: var(--color-secondary);
 }
-
 
 .delete_edit_icon {
   display: flex;
   flex-direction: row;
   gap: 6px;
-
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease;
