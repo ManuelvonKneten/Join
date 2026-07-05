@@ -30,8 +30,10 @@
     width: 860px;
     max-width: 95vw;
     min-height: 480px;
+    max-height: 90vh;
     border-radius: 30px;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     animation: modalSlideIn 0.3s ease-in-out;
 }
@@ -218,6 +220,11 @@
 /* ── Mobile (≤ 767px) ── */
 @media (max-width: 767px) {
 
+    @keyframes modalSlideIn {
+        from { opacity: 0; transform: translateY(80px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
     /* ── Modal: centered overlay ── */
     .add_contact_overlay {
         align-items: center;
@@ -240,7 +247,7 @@
     #addContactOverlay .modal_left,
     #editContactOverlay .modal_left {
         display: flex;
-        flex: 1;
+        flex: 0 0 auto;
         width: 100%;
         align-items: flex-start;
         justify-content: center;
@@ -266,7 +273,7 @@
     /* White bottom part */
     #addContactOverlay .modal_right,
     #editContactOverlay .modal_right {
-        flex: 1;
+        flex: 0 0 auto;
         width: 100%;
         padding: 64px 24px 32px;
         border-radius: 0;
@@ -301,12 +308,13 @@
     /* Close button: top right corner inside the blue top bar */
     #addContactOverlay .modal_close_btn,
     #editContactOverlay .modal_close_btn {
-        top: 16px;
-        right: 16px;
+        top: 8px;
+        right: 8px;
         color: #fff;
+        font-size: 13px;
     }
-
-    /* Add modal: only the Create contact button */
+    
+        /* Add modal: only the Create contact button */
     #addContactOverlay .modal_actions {
         justify-content: center;
         margin-top: 8px;

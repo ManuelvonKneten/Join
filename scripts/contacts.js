@@ -247,6 +247,7 @@ function closeContactDetail() {
  */
 function openAddContact() {
     document.getElementById('addContactOverlay').classList.remove('hidden');
+    document.body.classList.add('no-scroll');
 }
 
 /**
@@ -256,6 +257,7 @@ function openAddContact() {
  */
 function closeAddContact() {
     document.getElementById('addContactOverlay').classList.add('hidden');
+    document.body.classList.remove('no-scroll');
     document.getElementById('contactName').value = '';
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactPhone').value = '';
@@ -285,6 +287,7 @@ function openEditContact(contact) {
     avatarElement.style.backgroundColor = contact.name ? avatarColor(contact.name) : '';
 
     document.getElementById('editContactOverlay').classList.remove('hidden');
+    document.body.classList.add('no-scroll');
 }
 
 /**
@@ -292,6 +295,7 @@ function openEditContact(contact) {
  */
 function closeEditContact() {
     document.getElementById('editContactOverlay').classList.add('hidden');
+    document.body.classList.remove('no-scroll');
 }
 
 /**
