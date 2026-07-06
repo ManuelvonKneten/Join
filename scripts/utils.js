@@ -82,10 +82,3 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
     }
     return html;
 }
-
-
-function showAllAssignedAvatars() {
-    showAllAvatars = true;
-    renderSelectedAvatars();
-}
-
