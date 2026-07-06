@@ -15,9 +15,9 @@
 }
 
 .board h1 {
-    font-size: var(--font-size-page-title);
-    font-weight: 700;
-    line-height: 1.2;
+  font-size: var(--font-size-page-title);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .header_mobile_flex {
@@ -34,9 +34,9 @@
 
 /* Search Field */
 .search_container {
- display: flex;
- flex-direction: column;
- gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .search {
@@ -97,10 +97,13 @@
   font-size: clamp(16px, 1.4vw, 20px);
   font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
 }
 
-.search button:hover, .search button:focus {
+.search button:hover,
+.search button:focus {
   background-color: var(--color-secondary);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
@@ -117,7 +120,10 @@
   gap: clamp(12px, 1.6vw, 24px);
 }
 
-.to_do, .in_progress, .await_feedback, .done {
+.to_do,
+.in_progress,
+.await_feedback,
+.done {
   flex: 1;
   min-width: 0;
 }
@@ -158,8 +164,8 @@
   align-self: flex-start;
 }
 
-
-.task_column button:hover, .task_column button:focus {
+.task_column button:hover,
+.task_column button:focus {
   color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
 }
@@ -189,7 +195,7 @@
 
 .keyboard-selected {
   background-color: var(--sidebar-hover-background);
-} 
+}
 
 .card h2 {
   font-size: clamp(18px, 1.8vw, 28px);
@@ -210,7 +216,7 @@
 }
 
 .card.dragging {
-  transform: rotate(6deg) scale(1.0);
+  transform: rotate(6deg) scale(1);
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   opacity: 1;
 }
@@ -230,7 +236,7 @@
 }
 
 .user_story {
-  background-color: var( --color-quinary);
+  background-color: var(--color-quinary);
 }
 
 .technical {
@@ -294,16 +300,15 @@
 
 .assigned_contacts {
   display: flex;
-
 }
 
 .card .more_contacts {
-    width: 26px;
-    height: 26px;
-    font-size: 11px;
-    padding: 0;
-    margin-top: 0;
-    margin-left: clamp(-8px, -0.7vw, -4px);
+  width: 26px;
+  height: 26px;
+  font-size: 11px;
+  padding: 0;
+  margin-top: 0;
+  margin-left: clamp(-8px, -0.7vw, -4px);
 }
 
 .task_progress {
@@ -361,7 +366,7 @@
 }
 
 @media (max-width: 1023px) {
-  .move_menu_btn{
+  .move_menu_btn {
     display: block;
   }
   .titel_and_search {
@@ -436,6 +441,7 @@
   .search button {
     display: none;
   }
+
   .card {
     flex: 0 0 260px;
     width: 260px;
@@ -446,8 +452,7 @@
     display: flex;
   }
 
-<<<<<<< HEAD
-   .task_field {
+  .task_field {
     flex-direction: row;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -461,14 +466,13 @@
     height: auto;
     flex-shrink: 0;
     scroll-snap-align: start;
-=======
-  .move-menu.open {
-    display: flex;
   }
+}
+.move-menu.open {
+  display: flex;
+}
 
-  .empty_card {
-    flex: 0 0 100%;
-    width: 100%;
->>>>>>> bf3ebba8a13eba2efa9c9d7f08c5fc62ea5ad844
-  }
+.empty_card {
+  flex: 0 0 100%;
+  width: 100%;
 }
