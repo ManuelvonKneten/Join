@@ -760,6 +760,10 @@
         padding: 10px 6px;
     }
 
+    .form_footer {
+        justify-content: flex-end;
+    }
+
     .add_task_actions {
         flex-direction: row;
         gap: 21px;
