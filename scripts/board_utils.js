@@ -21,6 +21,308 @@ function endDragEffect(event) {
 }
 
 
+const TOUCH_DRAG_THRESHOLD = 16;
+let touchDragState = null;
+let touchDragInitialized = false;
+let suppressTouchClickUntil = 0;
+let suppressTouchClickTaskId = null;
+let moveToMenuInitialized = false;
+
+
+/**
+ * Initialisiert Touch-Drag-&-Drop additiv zur bestehenden Desktop-Logik.
+ *
+ * @returns {void}
+ */
+function initTouchDragAndDrop() {
+    if (touchDragInitialized) return;
+
+    const board = document.getElementById('board');
+    if (!board) return;
+
+    board.addEventListener('pointerdown', handleTouchDragStart);
+    document.addEventListener('pointermove', handleTouchDragMove, { passive: false });
+    document.addEventListener('pointerup', handleTouchDragEnd);
+    document.addEventListener('pointercancel', cancelTouchDrag);
+    document.addEventListener('click', suppressClickAfterTouchDrag, true);
+
+    touchDragInitialized = true;
+}
+
+
+/**
+ * Merkt sich den Startpunkt eines Touch-Drags.
+ *
+ * @param {PointerEvent} event - Pointerdown-Event.
+ * @returns {void}
+ */
+function handleTouchDragStart(event) {
+    if (event.pointerType !== 'touch') return;
+    if (event.target.closest('.move-btn, .move-menu')) return;
+
+    const card = event.target.closest('.card');
+    if (!card) return;
+
+    touchDragState = {
+        pointerId: event.pointerId,
+        taskId: card.dataset.id,
+        card,
+        startX: event.clientX,
+        startY: event.clientY,
+        isDragging: false,
+        highlightedField: null
+    };
+}
+
+
+/**
+ * Aktiviert Touch-Drag erst nach einer kleinen Bewegungsschwelle.
+ *
+ * @param {PointerEvent} event - Pointermove-Event.
+ * @returns {void}
+ */
+function handleTouchDragMove(event) {
+    if (!isCurrentTouchDrag(event)) return;
+
+    const moveX = event.clientX - touchDragState.startX;
+    const moveY = event.clientY - touchDragState.startY;
+    const distance = Math.hypot(moveX, moveY);
+
+    if (!touchDragState.isDragging && distance < TOUCH_DRAG_THRESHOLD) return;
+
+    if (!touchDragState.isDragging) {
+        startTouchDrag(event);
+    }
+
+    event.preventDefault();
+    updateTouchDropHighlight(event);
+}
+
+
+/**
+ * Beendet einen Touch-Drag und speichert den Zielstatus.
+ *
+ * @param {PointerEvent} event - Pointerup-Event.
+ * @returns {Promise<void>}
+ */
+async function handleTouchDragEnd(event) {
+    if (!isCurrentTouchDrag(event)) return;
+
+    const wasDragging = touchDragState.isDragging;
+    const taskId = touchDragState.taskId;
+    const dropField = wasDragging ? getTouchDropField(event) : null;
+    const newStatus = dropField?.dataset.status;
+
+    if (wasDragging) {
+        event.preventDefault();
+        suppressNextTouchClick(taskId);
+    }
+
+    cleanupTouchDrag();
+
+    if (wasDragging && newStatus) {
+        await moveTaskToStatus(taskId, newStatus);
+    }
+}
+
+
+/**
+ * Startet den visuellen Touch-Drag-Zustand.
+ *
+ * @param {PointerEvent} event - Pointermove-Event.
+ * @returns {void}
+ */
+function startTouchDrag(event) {
+    touchDragState.isDragging = true;
+    startDragging(touchDragState.taskId);
+    touchDragState.card.classList.add('dragging', 'touch-dragging');
+
+    if (touchDragState.card.setPointerCapture) {
+        try {
+            touchDragState.card.setPointerCapture(event.pointerId);
+        } catch (error) {
+            console.warn('Touch pointer capture failed:', error);
+        }
+    }
+}
+
+
+/**
+ * Aktualisiert die hervorgehobene Zielspalte unter dem Finger.
+ *
+ * @param {PointerEvent} event - Pointermove-Event.
+ * @returns {void}
+ */
+function updateTouchDropHighlight(event) {
+    const dropField = getTouchDropField(event);
+
+    if (dropField === touchDragState.highlightedField) return;
+
+    if (touchDragState.highlightedField) {
+        touchDragState.highlightedField.classList.remove('task_field_highlight');
+    }
+
+    if (dropField) {
+        dropField.classList.add('task_field_highlight');
+    }
+
+    touchDragState.highlightedField = dropField;
+}
+
+
+/**
+ * Ermittelt die Drop-Zone an der aktuellen Fingerposition.
+ *
+ * @param {PointerEvent} event - Pointer-Event.
+ * @returns {HTMLElement|null} Task-Feld oder null.
+ */
+function getTouchDropField(event) {
+    const elementAtPointer = document.elementFromPoint(event.clientX, event.clientY);
+
+    return elementAtPointer?.closest('.task_field') || null;
+}
+
+
+/**
+ * Bricht einen laufenden Touch-Drag ab.
+ *
+ * @param {PointerEvent} event - Pointercancel-Event.
+ * @returns {void}
+ */
+function cancelTouchDrag(event) {
+    if (!isCurrentTouchDrag(event)) return;
+
+    cleanupTouchDrag();
+}
+
+
+/**
+ * Raeumt Klassen und Highlighting nach Touch-Drag auf.
+ *
+ * @returns {void}
+ */
+function cleanupTouchDrag() {
+    if (!touchDragState) return;
+
+    touchDragState.card.classList.remove('dragging', 'touch-dragging');
+
+    if (touchDragState.highlightedField) {
+        touchDragState.highlightedField.classList.remove('task_field_highlight');
+    }
+
+    touchDragState = null;
+}
+
+
+/**
+ * Prueft, ob ein Pointer-Event zum aktuellen Touch-Drag gehoert.
+ *
+ * @param {PointerEvent} event - Pointer-Event.
+ * @returns {boolean}
+ */
+function isCurrentTouchDrag(event) {
+    return Boolean(
+        touchDragState &&
+        event.pointerType === 'touch' &&
+        event.pointerId === touchDragState.pointerId
+    );
+}
+
+
+/**
+ * Merkt sich, dass der naechste Click nach Touch-Drag ignoriert wird.
+ *
+ * @param {string} taskId - Firebase-ID des Tasks.
+ * @returns {void}
+ */
+function suppressNextTouchClick(taskId) {
+    suppressTouchClickUntil = Date.now() + 500;
+    suppressTouchClickTaskId = taskId;
+}
+
+
+/**
+ * Verhindert, dass nach einem Touch-Drag direkt das Task-Popup oeffnet.
+ *
+ * @param {MouseEvent} event - Click-Event.
+ * @returns {void}
+ */
+function suppressClickAfterTouchDrag(event) {
+    if (Date.now() > suppressTouchClickUntil) return;
+
+    const card = event.target.closest('.card');
+    if (!card || card.dataset.id !== suppressTouchClickTaskId) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    suppressTouchClickUntil = 0;
+    suppressTouchClickTaskId = null;
+}
+
+
+/**
+ * Initialisiert das Schliessen offener Move-To-Menues bei Aussenklick.
+ *
+ * @returns {void}
+ */
+function initMoveToMenu() {
+    if (moveToMenuInitialized) return;
+
+    document.addEventListener('click', closeMoveMenus);
+    moveToMenuInitialized = true;
+}
+
+
+/**
+ * Oeffnet oder schliesst das Move-To-Menue einer Task Card.
+ *
+ * @param {MouseEvent} event - Click-Event des Move-Buttons.
+ * @returns {void}
+ */
+function toggleMoveMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const card = event.currentTarget.closest('.card');
+    const menu = card?.querySelector('.move-menu');
+
+    if (!menu) return;
+
+    const shouldOpen = !menu.classList.contains('open');
+    closeMoveMenus();
+    menu.classList.toggle('open', shouldOpen);
+}
+
+
+/**
+ * Verschiebt eine Task ueber das mobile Move-To-Menue.
+ *
+ * @param {MouseEvent} event - Click-Event eines Menue-Buttons.
+ * @param {string} taskId - Firebase-ID des Tasks.
+ * @param {string} newStatus - Zielstatus.
+ * @returns {Promise<void>}
+ */
+async function moveTaskFromMenu(event, taskId, newStatus) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    closeMoveMenus();
+    await moveTaskToStatus(taskId, newStatus);
+}
+
+
+/**
+ * Schliesst alle offenen Move-To-Menues.
+ *
+ * @returns {void}
+ */
+function closeMoveMenus() {
+    document.querySelectorAll('.move-menu.open').forEach(menu => {
+        menu.classList.remove('open');
+    });
+}
+
+
 /**
  * Formatiert die Kategorie für die Anzeige im UI.
  *

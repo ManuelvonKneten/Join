@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', initLogin);
 
+/**
+ * Sets up the login form, guest login button, password toggle, and input checks.
+ *
+ * @returns {void}
+ */
 function initLogin() {
     const guestBtn   = document.getElementById('guestLoginBtn');
     const loginForm  = document.querySelector('form');
@@ -15,17 +20,38 @@ function initLogin() {
     initBlurCheck(emailInput, passInput, alertBox);
 }
 
+/**
+ * Logs in without a user account and opens the summary page.
+ *
+ * @returns {void}
+ */
 function loginAsGuest() {
     localStorage.setItem('currentUser', 'Guest');
     window.location.href = './htmls/summary.html';
 }
 
+/**
+ * Searches the stored users for matching login credentials.
+ *
+ * @param {string} email - The email address entered in the login form.
+ * @param {string} password - The password entered in the login form.
+ * @returns {Promise<Object|undefined>} The matching user object, or undefined if no user matches.
+ */
 async function findUser(email, password) {
     const data  = await getFromDB('users');
     const users = data ? Object.values(data) : [];
     return users.find(u => u.email === email && u.password === password);
 }
 
+/**
+ * Handles the login form submit event and redirects valid users.
+ *
+ * @param {SubmitEvent} e - The submit event from the login form.
+ * @param {HTMLInputElement} emailInput - The email input element.
+ * @param {HTMLInputElement} passInput - The password input element.
+ * @param {HTMLElement} alertBox - The alert element for wrong login data.
+ * @returns {Promise<void>}
+ */
 async function handleLogin(e, emailInput, passInput, alertBox) {
     e.preventDefault();
     if (!emailInput.value || !passInput.value) {
@@ -42,8 +68,14 @@ async function handleLogin(e, emailInput, passInput, alertBox) {
     }
 }
 
-// Prüft die Eingaben, sobald das Passwortfeld den Fokus verliert (onblur),
-// und zeigt darunter den Hinweis, wenn E-Mail/Passwort nicht passen.
+/**
+ * Sets up input and blur checks for the login fields.
+ *
+ * @param {HTMLInputElement} emailInput - The email input element.
+ * @param {HTMLInputElement} passInput - The password input element.
+ * @param {HTMLElement} alertBox - The alert element for wrong login data.
+ * @returns {void}
+ */
 function initBlurCheck(emailInput, passInput, alertBox) {
     const hideAlert = () => { alertBox.classList.remove('visible'); };
     emailInput.addEventListener('input', hideAlert);
@@ -59,8 +91,13 @@ function initBlurCheck(emailInput, passInput, alertBox) {
     });
 }
 
-// Schloss-Icon, solange das Feld leer ist; sobald getippt wird, erscheint das
-// Augen-Icon. Ein Klick darauf schaltet die Passwort-Sichtbarkeit um.
+/**
+ * Sets up the password icon and toggles password visibility when clicked.
+ *
+ * @param {HTMLInputElement} input - The password input element.
+ * @param {HTMLImageElement} toggle - The icon element for the password toggle.
+ * @returns {void}
+ */
 function initPasswordToggle(input, toggle) {
     const icons = {
         lock:   './assets/icons/lock.png',
