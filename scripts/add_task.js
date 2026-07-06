@@ -71,6 +71,7 @@ async function initAddTask() {
     setupSubtaskInput();
     setupClearButton();
     setupAssignedDropdown();
+    setupCategoryDropdown();
     setupDueDateInput();
     setupRequiredFieldValidation();
 }

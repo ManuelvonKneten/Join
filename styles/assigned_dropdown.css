@@ -156,4 +156,24 @@
         transform: translateY(110%);
         pointer-events: none;
     }
+
+    /* Category-Dropdown bleibt ein normales Dropdown (kein Bottom-Sheet) */
+    #categoryOptions.assigned_options {
+        position: absolute;
+        top: calc(100% + 4px);
+        bottom: auto;
+        left: 0;
+        right: 0;
+        max-height: 200px;
+        border-radius: 8px;
+        transform: none;
+        transition: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    #categoryOptions.assigned_options.hidden {
+        display: none;
+        transform: none;
+        pointer-events: auto;
+    }
 }
