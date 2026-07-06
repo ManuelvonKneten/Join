@@ -322,13 +322,27 @@
         font-size: 46px;
     }
 
-    .add_task_layout > .add_task_heading {
-        position: sticky;
-        top: var(--header-height);
-        z-index: 4;
-        background-color: var(--content-background);
-        padding-top: 16px;
-        padding-bottom: 16px;
+    .content:has(> .add_task_layout) {
+        height: calc(100dvh - var(--header-height) - var(--bottom-nav-height));
+        min-height: 0;
+        padding-bottom: var(--content-padding-y);
+        overflow: hidden;
+    }
+
+    .content > .add_task_layout {
+        height: 100%;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .content > .add_task_layout > .add_task_heading {
+        flex-shrink: 0;
+    }
+
+    .content > .add_task_layout > .form_container {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
     }
 
     .add_task_label {

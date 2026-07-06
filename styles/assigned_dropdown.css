@@ -157,7 +157,6 @@
         pointer-events: none;
     }
 
-    /* Category-Dropdown bleibt ein normales Dropdown (kein Bottom-Sheet) */
     #categoryOptions.assigned_options {
         position: absolute;
         top: calc(100% + 4px);
