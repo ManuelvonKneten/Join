@@ -4,7 +4,6 @@
     min-height: 100vh;
 }
 
-
 .loginPageWrapper {
     display: flex;
     flex-direction: column;
@@ -15,7 +14,6 @@
     background: rgb(246, 247, 248);
     box-sizing: border-box;
 }
-
 
 .logInHeader {
     display: flex;
@@ -28,105 +26,10 @@
     box-sizing: border-box;
 }
 
-
 .logInLogo {
     width: 100px;
     height: auto;
 }
-
-
-.splashLogoContainer {
-    position: fixed;
-    inset: 0;
-    background-color: rgb(246, 247, 248);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    transition: background-color 0.8s ease-in-out, opacity 0.6s ease-in-out;
-}
-
-
-.mobileLogoImage {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: auto;
-    transform: translate(-50%, -50%);
-    opacity: 1;
-    z-index: 1;
-    transition: opacity 0.5s ease-in-out;
-}
-
-
-.logoImage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: auto;
-    transform: translate(-50%, -50%);
-    opacity: 1;
-    z-index: 2;
-    transition: opacity 0.5s ease-in-out;
-}
-
-
-@keyframes logoFlyUp {
-    0% {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(2);
-    }
-
-    100% {
-        top: 40px;
-        left: 40px;
-        transform: translate(0, 0) scale(1);
-    }
-}
-
-
-.animateLogo {
-    animation: logoFlyUp 255ms ease-in-out forwards;
-    position: fixed;
-    z-index: 100;
-}
-
-
-.logoImage.mobileAnimate {
-    animation: logoFlyUp 0.8s ease-in-out forwards;
-    position: fixed;
-    z-index: 101;
-    opacity: 0;
-}
-
-
-@keyframes logoFadeSwap {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
-
-
-.mobileLogoImage.fadeOut {
-    animation: logoFadeSwap 0.5s ease-in-out forwards;
-}
-
-
-.logoImage.fadeIn {
-    opacity: 1;
-    transition: opacity 0.4s ease-in-out;
-}
-
-
-.mobileLogoHidden {
-    display: none !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
-
 
 .signupContainer {
     display: flex;
@@ -134,14 +37,12 @@
     align-items: center;
 }
 
-
 .signupContainer span {
     font-weight: 400;
     font-size: 16px;
     cursor: default;
     white-space: nowrap;
 }
-
 
 .signupContainer a {
     font-size: 16px;
@@ -165,34 +66,22 @@
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 
-
-.fadeHeader {
-    opacity: 0;
-    animation: pageFadeIn 1s ease-in-out forwards;
-    animation-delay: 0.4s;
-}
-
-
-.fadeMain {
-    opacity: 0;
-    animation: pageFadeIn 1s ease-in-out forwards;
-    animation-delay: 0.5s;
-}
-
-
+.fadeHeader,
+.fadeMain,
 .fadeFooter {
     opacity: 0;
     animation: pageFadeIn 1s ease-in-out forwards;
-    animation-delay: 0.6s;
 }
 
+.fadeHeader { animation-delay: 0.4s; }
+.fadeMain   { animation-delay: 0.5s; }
+.fadeFooter { animation-delay: 0.6s; }
 
 @keyframes pageFadeIn {
     0%   { opacity: 0; }
     70%  { opacity: 0.5; }
     100% { opacity: 1; }
 }
-
 
 .logInMain {
     display: flex;
@@ -202,7 +91,6 @@
     padding: 0 clamp(16px, 4vw, 64px);
     box-sizing: border-box;
 }
-
 
 .logInBox {
     position: relative;
@@ -219,7 +107,6 @@
     width: 600px;
 }
 
-
 .backArrow {
     position: absolute;
     top: 40px;
@@ -233,17 +120,14 @@
     transition: background-color 0.2s ease-in-out;
 }
 
-
 .backArrow img {
     width: 24px;
     height: 24px;
 }
 
-
 .backArrow:hover {
     background-color: rgba(41, 171, 226, 0.12);
 }
-
 
 .logInBox h1 {
     font-weight: 700;
@@ -253,7 +137,6 @@
     color: #2a3647;
     position: relative;
 }
-
 
 .logInBox h1::after {
     content: "";
@@ -267,7 +150,6 @@
     border-radius: 2px;
 }
 
-
 .logInBox form {
     display: flex;
     flex-direction: column;
@@ -279,18 +161,15 @@
     margin-top: -8px;
 }
 
-
 .loginInputWrapper input:focus {
     border: 1px solid rgba(42, 54, 71, 1);
     outline: 2px solid var(--color-secondary);
     outline-offset: 2px;
 }
 
-
 .inputField {
     position: relative;
 }
-
 
 .inputField input {
     width: 100%;
@@ -301,7 +180,6 @@
     box-sizing: border-box;
 }
 
-
 .inputIcon {
     position: absolute;
     right: 12px;
@@ -310,16 +188,13 @@
     width: 18px;
     height: 18px;
     pointer-events: none;
-    /* Alle Icons einheitlich hellgrau einfärben (unabhängig von PNG/SVG-Quellfarbe) */
     filter: brightness(0) invert(0.7);
 }
-
 
 .passwordToggle.isToggle {
     pointer-events: auto;
     cursor: pointer;
 }
-
 
 .loginButtons {
     margin-top: 32px;
@@ -329,7 +204,6 @@
     gap: 35px;
     justify-content: center;
 }
-
 
 .logInBtn {
     background-color: rgb(42, 54, 71);
@@ -343,13 +217,17 @@
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-
 .logInBtn:hover {
     background-color: rgb(41, 171, 226);
     color: white;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 
+.logInBtn:disabled {
+    background-color: rgb(168, 168, 168);
+    cursor: not-allowed;
+    box-shadow: none;
+}
 
 .guestBtn {
     position: relative;
@@ -362,7 +240,6 @@
     font-size: 21px;
     font-weight: 700;
 }
-
 
 .guestBtn::after {
     content: "";
@@ -377,18 +254,15 @@
     pointer-events: none;
 }
 
-
 .guestBtn:hover {
     border-color: rgb(41, 171, 226);
     color: rgb(41, 171, 226);
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 
-
 .guestBtn:hover::after {
     border-color: rgb(41, 171, 226);
 }
-
 
 .logInFooter {
     display: flex;
@@ -396,7 +270,6 @@
     align-items: center;
     min-height: 120px;
 }
-
 
 .logInFooter a {
     color: rgb(168, 168, 168);
@@ -408,13 +281,11 @@
     text-decoration: none;
 }
 
-
 .logInFooter a:hover {
     color: rgb(41, 171, 226);
     transform: scale(1.01);
     font-weight: bold;
 }
-
 
 .wrongDataAlert {
     visibility: hidden;
@@ -425,11 +296,6 @@
     width: 100%;
     color: rgb(255, 129, 144);
 }
-
-.wrongDataAlert.visible {
-    visibility: visible;
-}
-
 
 .inputError {
     display: block;
@@ -442,10 +308,10 @@
     margin-top: -12px;
 }
 
+.wrongDataAlert.visible,
 .inputError.visible {
     visibility: visible;
 }
-
 
 .msgBox {
     font-size: 14px;
@@ -453,7 +319,6 @@
     font-weight: 600;
     min-height: 20px;
 }
-
 
 #loginPassword {
     text-indent: 0 !important;
@@ -470,7 +335,6 @@
     height: 14px;
 }
 
-
 .signupCheckboxLabel {
     display: flex;
     align-items: center;
@@ -482,7 +346,6 @@
     text-align: left;
 }
 
-
 .signupCheckboxLabel input[type="checkbox"] {
     width: 18px;
     height: 18px;
@@ -491,31 +354,20 @@
     accent-color: rgb(42, 54, 71);
 }
 
-
 .signupCheckboxLabel a {
     color: rgb(41, 171, 226);
     font-weight: 700;
     text-decoration: none;
 }
 
-
 .signupCheckboxLabel a:hover {
     text-decoration: underline;
 }
-
 
 .signupButtons {
     margin-top: 16px;
     justify-content: center;
 }
-
-
-.logInBtn:disabled {
-    background-color: rgb(168, 168, 168);
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
 
 .signupToast {
     position: fixed;
@@ -535,22 +387,12 @@
     z-index: 999;
 }
 
-
 .signupToast.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-
 @media (max-width: 600px) {
-    .splashLogoContainer {
-        background-color: #2a3647;
-    }
-
-    .logoImage {
-        width: clamp(64px, 22vw, 90px);
-    }
-
     .loginPageWrapper {
         min-height: 100svh;
     }
@@ -635,7 +477,6 @@
         white-space: normal;
     }
 }
-
 
 @media (max-width: 360px) {
     .signupContainer {
