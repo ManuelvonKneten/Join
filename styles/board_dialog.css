@@ -379,7 +379,7 @@ label,
 
 @media (max-width: 1023px) {
     .add_task_layout_popup {
-        height: 95vh;
+        /* height: 95vh; */
         overflow-y: hidden;
         display: flex;
         flex-direction: column;

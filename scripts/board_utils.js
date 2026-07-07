@@ -370,18 +370,6 @@ function getProgress(subtasks = []) {
 }
 
 
-/**
- * Erstellt die HTML-Ausgabe für die Fortschrittsanzeige.
- *
- * @param {Array<Object>} [subtasks=[]] - Liste der Subtasks.
- * @returns {string} HTML-String.
- */
-function getProgressTemplate(subtasks = []) {
-    const progress = getProgress(subtasks);
-    return progressHTML(progress);
-}
-
-
  /**
  * Erstellt das HTML für die Fortschrittsanzeige der Subtasks.
  * Zeigt nichts an, wenn keine Subtasks vorhanden sind (0/0).
