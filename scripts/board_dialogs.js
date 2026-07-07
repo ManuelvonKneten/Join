@@ -2,7 +2,7 @@
 let showAllTaskPopupAvatars = false;
 
 /**
- * Schließt das Task-Detail-Modal beim Klick außerhalb des Inhalts.
+ * Closes the task detail modal on a click outside the content.
  *
  * @param {MouseEvent} event
  * @returns {void}
@@ -16,7 +16,7 @@ function handleDialogClick(event) {
 
 
 /**
- * Schließt das Add-Task Modal beim Klick auf Hintergrund.
+ * Closes the add-task modal on a click on the background.
  *
  * @param {MouseEvent} event
  * @returns {void}
@@ -31,7 +31,7 @@ dialog_add_task_board.addEventListener('click', handleDialogAddTaskBoard);
 
 
 /**
- * Referenz auf das Task-Detail-Dialogelement.
+ * Reference to the task detail dialog element.
  *
  * @type {HTMLDialogElement}
  */
@@ -40,9 +40,9 @@ dialogTask.addEventListener('click', handleDialogClick);
 
 
 /**
- * Öffnet das Detail-Popup eines Tasks.
+ * Opens the detail popup of a task.
  *
- * @param {string} taskId - ID des Tasks
+ * @param {string} taskId - ID of the task
  * @returns {void}
  */
 function openTaskPopUp(taskId) {
@@ -62,10 +62,10 @@ function openTaskPopUp(taskId) {
 
 
 /**
- * Zeigt alle zugewiesenen Avatare im Task-Detail-Popup an
- * und rendert das Popup anschließend neu.
+ * Shows all assigned avatars in the task detail popup
+ * and then re-renders the popup.
  *
- * @param {string} taskId - ID des Tasks.
+ * @param {string} taskId - ID of the task.
  * @returns {void}
  */
 function showAllAssignedAvatarsTask(taskId) {
@@ -74,10 +74,10 @@ function showAllAssignedAvatarsTask(taskId) {
 }
 
 /**
- * Öffnet das Edit-Task Popup und lädt die Task-Daten in das Formular.
+ * Opens the edit task popup and loads the task data into the form.
  *
  * @async
- * @param {string} taskId - ID des Tasks
+ * @param {string} taskId - ID of the task
  * @returns {Promise<void>}
  */
 async function openEditTaskPopup(taskId) {
@@ -101,10 +101,10 @@ async function openEditTaskPopup(taskId) {
 
 
 /**
- * Initialisiert das Datumfeld im Edit-Task-Popup.
- * Befüllt den Text-Input mit DD/MM/YYYY und verdrahtet Picker + Validierung.
+ * Initializes the date field in the edit task popup.
+ * Fills the text input with DD/MM/YYYY and wires up the picker + validation.
  *
- * @param {string} isoDate - Datum im Format YYYY-MM-DD
+ * @param {string} isoDate - Date in YYYY-MM-DD format
  * @returns {void}
  */
 function setupEditDueDateInput(isoDate) {
@@ -130,10 +130,10 @@ function setupEditDueDateInput(isoDate) {
 
 
 /**
- * Validiert das Datumfeld im Edit-Task-Popup.
+ * Validates the date field in the edit task popup.
  *
- * @param {HTMLInputElement} input - Text-Input DD/MM/YYYY
- * @param {HTMLElement} error - Fehlermeldungs-Element
+ * @param {HTMLInputElement} input - Text input DD/MM/YYYY
+ * @param {HTMLElement} error - Error message element
  * @returns {void}
  */
 function validateEditDueDate(input, error) {
@@ -147,7 +147,7 @@ function validateEditDueDate(input, error) {
 
 
 /**
- * Öffnet den nativen Datepicker im Edit-Task-Popup.
+ * Opens the native date picker in the edit task popup.
  *
  * @returns {void}
  */
@@ -162,11 +162,11 @@ function openEditDueDatePicker() {
 
 
 /**
- * Öffnet das "Add Task" Popup im Board.
- * Lädt dazu das HTML dynamisch und initialisiert das Formular.
+ * Opens the "Add Task" popup on the board.
+ * Loads the HTML dynamically and initializes the form.
  *
  * @async
- * @param {string} [status='todo'] - Standard-Status für den neuen Task
+ * @param {string} [status='todo'] - Default status for the new task
  * @returns {Promise<void>}
  */
 async function openAddTaskPopUp(status = 'todo') {
@@ -193,9 +193,9 @@ async function openAddTaskPopUp(status = 'todo') {
 
 
 /**
- * Öffnet das Delete-Confirm-Popup und speichert die Task-ID.
+ * Opens the delete confirm popup and stores the task ID.
  *
- * @param {string} taskId - ID des zu löschenden Tasks
+ * @param {string} taskId - ID of the task to delete
  * @returns {void}
  */
 function openDeletePopup(taskId) {
@@ -205,7 +205,7 @@ function openDeletePopup(taskId) {
 
 
 /**
- * Schließt das Task-Detail-Popup.
+ * Closes the task detail popup.
  *
  * @returns {void}
  */
@@ -215,7 +215,7 @@ function closeTaskPopUp() {
 
 
 /**
- * Schließt das "Add Task" Popup.
+ * Closes the "Add Task" popup.
  *
  * @returns {void}
  */
@@ -225,7 +225,7 @@ function closeAddTaskPopUp() {
 
 
 /**
- * Schließt das Delete-Confirm-Popup.
+ * Closes the delete confirm popup.
  *
  * @returns {void}
  */
@@ -235,10 +235,10 @@ function closeDeleteTask() {
 
 
 /**
- * Ändert den Status eines Subtasks und speichert die Änderung.
+ * Changes the status of a subtask and saves the change.
  *
- * @param {string} taskId - ID des Tasks.
- * @param {number} subtaskIndex - Index des Subtasks.
+ * @param {string} taskId - ID of the task.
+ * @param {number} subtaskIndex - Index of the subtask.
  * @returns {void}
  */
 function toggleSubtask(taskId, subtaskIndex) {
@@ -267,7 +267,7 @@ function toggleSubtask(taskId, subtaskIndex) {
 
 
 /**
- * Löscht einen Task aus Firebase und aus dem lokalen State.
+ * Deletes a task from Firebase and from the local state.
  *
  * @async
  * @returns {Promise<void>}

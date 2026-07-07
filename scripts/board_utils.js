@@ -1,8 +1,8 @@
                                        /* --- Utils --- *//**
 /**
- * Startet den Drag-Effekt (fügt CSS Klasse hinzu).
+ * Starts the drag effect (adds a CSS class).
  *
- * @param {DragEvent} event - Dragstart Event
+ * @param {DragEvent} event - Dragstart event
  * @returns {void}
  */
 function startDragEffect(event) {
@@ -11,9 +11,9 @@ function startDragEffect(event) {
 
 
 /**
- * Beendet den Drag-Effekt (entfernt CSS Klasse).
+ * Ends the drag effect (removes the CSS class).
  *
- * @param {DragEvent} event - Dragend Event
+ * @param {DragEvent} event - Dragend event
  * @returns {void}
  */
 function endDragEffect(event) {
@@ -25,7 +25,7 @@ let moveToMenuInitialized = false;
 
 
 /**
- * Initialisiert das Schliessen offener Move-To-Menues bei Aussenklick.
+ * Initializes closing open move-to menus on an outside click.
  *
  * @returns {void}
  */
@@ -38,9 +38,9 @@ function initMoveToMenu() {
 
 
 /**
- * Oeffnet oder schliesst das Move-To-Menue einer Task Card.
+ * Opens or closes the move-to menu of a task card.
  *
- * @param {MouseEvent} event - Click-Event des Move-Buttons.
+ * @param {MouseEvent} event - Click event of the move button.
  * @returns {void}
  */
 function toggleMoveMenu(event) {
@@ -59,11 +59,11 @@ function toggleMoveMenu(event) {
 
 
 /**
- * Verschiebt eine Task ueber das mobile Move-To-Menue.
+ * Moves a task via the mobile move-to menu.
  *
- * @param {MouseEvent} event - Click-Event eines Menue-Buttons.
- * @param {string} taskId - Firebase-ID des Tasks.
- * @param {string} newStatus - Zielstatus.
+ * @param {MouseEvent} event - Click event of a menu button.
+ * @param {string} taskId - Firebase ID of the task.
+ * @param {string} newStatus - Target status.
  * @returns {Promise<void>}
  */
 async function moveTaskFromMenu(event, taskId, newStatus) {
@@ -76,7 +76,7 @@ async function moveTaskFromMenu(event, taskId, newStatus) {
 
 
 /**
- * Schliesst alle offenen Move-To-Menues.
+ * Closes all open move-to menus.
  *
  * @returns {void}
  */
@@ -88,10 +88,10 @@ function closeMoveMenus() {
 
 
 /**
- * Formatiert die Kategorie für die Anzeige im UI.
+ * Formats the category for display in the UI.
  *
- * @param {string} category - Die Kategorie des Tasks.
- * @returns {string} Formatierter Kategoriename.
+ * @param {string} category - The category of the task.
+ * @returns {string} Formatted category name.
  */
 function formatCategory(category) {
 
@@ -107,9 +107,9 @@ function formatCategory(category) {
 
 
 /**
- * Berechnet den Fortschritt der Subtasks.
+ * Calculates the progress of the subtasks.
  *
- * @param {Array<Object>} [subtasks=[]] - Liste der Subtasks.
+ * @param {Array<Object>} [subtasks=[]] - List of subtasks.
  * @returns {{
  *   total:number,
  *   completed:number,
@@ -135,14 +135,14 @@ function getProgress(subtasks = []) {
 
 
  /**
- * Erstellt das HTML für die Fortschrittsanzeige der Subtasks.
- * Zeigt nichts an, wenn keine Subtasks vorhanden sind (0/0).
+ * Builds the HTML for the subtask progress bar.
+ * Shows nothing when there are no subtasks (0/0).
  *
- * @param {Array<Object>} [subtasks=[]] - Liste der Subtasks.
- * Jeder Subtask kann ein Objekt sein, z. B. { completed: true }.
+ * @param {Array<Object>} [subtasks=[]] - List of subtasks.
+ * Each subtask can be an object, e.g. { completed: true }.
  *
- * @returns {string} HTML-String für den Progress-Balken oder
- * ein leerer String, wenn keine Subtasks existieren.
+ * @returns {string} HTML string for the progress bar or
+ * an empty string when no subtasks exist.
  */
 function getProgressTemplate(subtasks = []) {
     const progress = getProgress(subtasks);
@@ -155,9 +155,9 @@ function getProgressTemplate(subtasks = []) {
 
                                     /* --- Event Handlers --- */
 /**
- * Event-Handler für die Task-Suche.
- * Liest den Suchbegriff aus dem Inputfeld,
- * filtert allTasks und rendert das Board neu.
+ * Event handler for the task search.
+ * Reads the search term from the input field,
+ * filters allTasks and re-renders the board.
  *
  * @returns {void}
  */
@@ -172,11 +172,11 @@ function searchTask() {
 
 
 /**
- * Öffnet einen Task per Tastatur und aktiviert
- * den Keyboard-DnD-Modus.
+ * Opens a task via keyboard and activates
+ * the keyboard drag-and-drop mode.
  *
- * @param {KeyboardEvent} event - Tastaturereignis.
- * @param {string} taskId - ID des Tasks.
+ * @param {KeyboardEvent} event - Keyboard event.
+ * @param {string} taskId - ID of the task.
  * @returns {void}
  */
 function handleTaskKey(event, taskId){
@@ -197,7 +197,7 @@ function handleTaskKey(event, taskId){
 
 
 /**
- * Zuordnung von Pfeiltasten zu Board-Statuswerten.
+ * Mapping of arrow keys to board status values.
  *
  * @type {Object<string,string>}
  */
@@ -210,11 +210,11 @@ const KEY_MOVES = {
 
 
 /**
- * Verarbeitet Tastatursteuerung für das Board.
- * Unterstützt Escape zum Abbrechen und
- * Pfeiltasten zum Verschieben von Tasks.
+ * Handles keyboard control for the board.
+ * Supports Escape to cancel and
+ * arrow keys to move tasks.
  *
- * @param {KeyboardEvent} event - Tastaturereignis.
+ * @param {KeyboardEvent} event - Keyboard event.
  * @returns {void}
  */
 function handleKeyboardBoard(event){
@@ -247,9 +247,9 @@ document.addEventListener("keydown", handleKeyboardBoard);
 
 
 /**
- * Speichert die ID des aktuell gezogenen Tasks.
+ * Stores the ID of the task currently being dragged.
  *
- * @param {string} id - Firebase-ID des Tasks.
+ * @param {string} id - Firebase ID of the task.
  * @returns {void}
  */
 function startDragging(id){
@@ -258,9 +258,9 @@ function startDragging(id){
 
 
 /**
- * Erlaubt das Ablegen eines Elements auf einer Drop-Zone.
+ * Allows dropping an element onto a drop zone.
  *
- * @param {DragEvent} ev - Das Drag-Over-Event.
+ * @param {DragEvent} ev - The dragover event.
  * @returns {void}
  */
 function allowDrop(ev) {
@@ -269,10 +269,10 @@ function allowDrop(ev) {
 
 
 /**
- * Zeigt oder versteckt eine "No Results"-Meldung,
- * abhängig davon ob Tasks gefunden wurden.
+ * Shows or hides a "No Results" message,
+ * depending on whether tasks were found.
  *
- * @param {Array<Object>} tasks - Gefilterte Task-Liste
+ * @param {Array<Object>} tasks - Filtered task list
  * @returns {void}
  */
 function showNoResultsAlert(tasks) {
@@ -287,10 +287,10 @@ function showNoResultsAlert(tasks) {
 
 
 /**
- * Fügt einer Task-Spalte die Hervorhebungs-Klasse hinzu,
- * wenn ein Task darüber gezogen wird.
+ * Adds the highlight class to a task column
+ * when a task is dragged over it.
  *
- * @param {string} id - Die ID der Zielspalte.
+ * @param {string} id - The ID of the target column.
  * @returns {void}
  */
 function highlight(id) {
@@ -299,9 +299,9 @@ function highlight(id) {
  
 
 /**
- * Entfernt die Hervorhebungs-Klasse von einer Task-Spalte.
+ * Removes the highlight class from a task column.
  *
- * @param {string} id - Die ID der Zielspalte.
+ * @param {string} id - The ID of the target column.
  * @returns {void}
  */
 function removeHighlight(id) {
@@ -310,15 +310,15 @@ function removeHighlight(id) {
 
 
 /**
- * Kürzt einen Text auf eine maximale Länge, ohne Wörter zu zerschneiden.
+ * Shortens a text to a maximum length without cutting words apart.
  *
- * Falls der Text länger als `maxLength` ist, werden nur vollständige
- * Wörter bis zur maximalen Länge übernommen und anschließend
- * "..." angehängt.
+ * If the text is longer than `maxLength`, only complete
+ * words up to the maximum length are kept and then
+ * "..." is appended.
  *
- * @param {string} text - Der zu kürzende Text.
- * @param {number} [maxLength=30] - Maximale Zeichenanzahl der Kurzversion.
- * @returns {string} Der gekürzte Text oder der Originaltext, wenn er kurz genug ist.
+ * @param {string} text - The text to shorten.
+ * @param {number} [maxLength=30] - Maximum character count of the short version.
+ * @returns {string} The shortened text or the original text if it is short enough.
  */
 function shortenText(text, maxLength = 30) {
     if (!text || text.length <= maxLength) return text;
@@ -335,14 +335,14 @@ function shortenText(text, maxLength = 30) {
 
 
 /**
- * Wechselt per Klick zwischen der gekürzten und der vollständigen
- * Anzeige eines Titels.
+ * Switches on click between the shortened and the full
+ * display of a title.
  *
- * Der aktuelle Anzeigestatus wird über das `data-full`-Attribut
- * des HTML-Elements gespeichert.
+ * The current display state is stored via the `data-full` attribute
+ * of the HTML element.
  *
- * @param {HTMLElement} el - Das angeklickte HTML-Element (z. B. ein <h2>).
- * @param {string} fullText - Der vollständige Titel.
+ * @param {HTMLElement} el - The clicked HTML element (e.g. an <h2>).
+ * @param {string} fullText - The full title.
  * @returns {void}
  */
 function toggleFullTitle(el, fullText) {

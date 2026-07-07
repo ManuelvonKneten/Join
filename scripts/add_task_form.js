@@ -65,9 +65,9 @@ function isDueDateInvalid(dueDateError) {
 
 
 /**
- * Zeigt bei den Pflichtfeldern Title und Due Date den Hinweis
- * "This field is required" an, sobald das Feld leer verlassen wird (onblur).
- * Beim erneuten Tippen wird der Hinweis wieder ausgeblendet.
+ * Shows the "This field is required" hint on the required fields Title and
+ * Due Date as soon as the field is left empty (onblur).
+ * The hint is hidden again when the user starts typing.
  *
  * @returns {void}
  */
@@ -88,7 +88,7 @@ function setupRequiredFieldValidation() {
 
 
 /**
- * Blendet den Pflichtfeld-Hinweis ein oder aus und markiert das Eingabefeld.
+ * Shows or hides the required-field hint and marks the input field.
  *
  * @param {HTMLInputElement} field - Input element to mark as invalid.
  * @param {HTMLElement} message - Error message element to show or hide.
@@ -103,9 +103,9 @@ function toggleRequiredError(field, message, show) {
 
 /* ── Create Task ── */
 /**
- * Wird beim Form-Submit aufgerufen.
- * Liest alle Formularfelder aus, speichert den Task in Firebase
- * und leitet bei Erfolg zum Board weiter.
+ * Called on form submit.
+ * Reads all form fields, saves the task to Firebase
+ * and redirects to the board on success.
  *
  * @async
  * @param {Event} submitEvent
@@ -179,7 +179,7 @@ async function saveTask(taskData, submitButton) {
 
 
 /**
- * Liest alle Formularfelder aus und gibt ein Task-Objekt zurück.
+ * Reads all form fields and returns a task object.
  *
  * @returns {TaskFormData} Current form values as task payload.
  */
@@ -198,8 +198,8 @@ function getTaskFormData() {
 
 
 /**
- * Wird nach erfolgreichem Speichern aufgerufen.
- * Leitet zum Board weiter.
+ * Called after a successful save.
+ * Redirects to the board.
  *
  * @returns {void}
  */
@@ -216,7 +216,7 @@ function onTaskCreated() {
 
 /* ── Clear ── */
 /**
- * Richtet den Clear-Button ein.
+ * Sets up the clear button.
  *
  * @returns {void}
  */
@@ -227,7 +227,7 @@ function setupClearButton() {
 
 
 /**
- * Setzt alle Formularfelder, den State und die UI zurück.
+ * Resets all form fields, the state and the UI.
  *
  * @returns {void}
  */

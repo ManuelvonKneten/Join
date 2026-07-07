@@ -192,7 +192,7 @@ function getEditTaskTemplate(task) {
         <div class="inputField">
           <input type="text" id="editDueDate" placeholder="dd/mm/yyyy" maxlength="10" inputmode="numeric">
           <input id="editDueDatePicker" type="date" class="due_date_picker_hidden" tabindex="-1">
-          <button type="button" class="due_date_trigger" onclick="openEditDueDatePicker()" aria-label="Kalender öffnen">
+          <button type="button" class="due_date_trigger" onclick="openEditDueDatePicker()" aria-label="Open calendar">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <rect x="1" y="3" width="16" height="14" rx="2" stroke="#2a3647" stroke-width="1.5"/>
               <path d="M1 7h16" stroke="#2a3647" stroke-width="1.5"/>
@@ -244,7 +244,7 @@ function getEditTaskTemplate(task) {
            aria-expanded="false"
            aria-haspopup="listbox"
            aria-controls="assignedOptions"
-           aria-label="Kontakte zuweisen"
+           aria-label="Assign contacts"
            tabindex="0"
            onclick="toggleAssignedDropdown('Edit')"
            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAssignedDropdown('Edit');}">

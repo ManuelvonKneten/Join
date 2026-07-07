@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', initSplash);
 
 /**
- * Startet die Splash-Animation, sobald das Header-Logo geladen (und damit
- * messbar) ist. Das Splash-Logo fliegt exakt auf die Position des
- * Header-Logos, damit beim Ausblenden des Overlays kein Sprung entsteht.
+ * Starts the splash animation as soon as the header logo is loaded (and thus
+ * measurable). The splash logo flies exactly onto the position of the
+ * header logo so that no jump occurs when the overlay fades out.
  */
 function initSplash() {
     const headerLogo = document.querySelector('.logInLogo');
@@ -16,8 +16,8 @@ function initSplash() {
 
 
 /**
- * Animiert das Splash-Logo von der Bildschirmmitte bündig auf die
- * Position des Header-Logos und blendet danach das Overlay aus.
+ * Animates the splash logo from the center of the screen flush onto the
+ * position of the header logo and then fades out the overlay.
  *
  * @returns {void}
  */
@@ -38,9 +38,9 @@ function runSplash() {
 
 
 /**
- * Ermittelt die exakte Bildposition des Header-Logos (inkl. Innenabstand).
+ * Determines the exact image position of the header logo (including padding).
  *
- * @returns {{top: number, left: number}} Zielkoordinaten in Pixeln
+ * @returns {{top: number, left: number}} Target coordinates in pixels
  */
 function getHeaderLogoPosition() {
     const headerLogo = document.querySelector('.logInLogo');
@@ -56,9 +56,9 @@ function getHeaderLogoPosition() {
 
 
 /**
- * Blendet das Splash-Overlay aus und entfernt es nach der Transition.
+ * Fades out the splash overlay and removes it after the transition.
  *
- * @param {HTMLElement} container - das Splash-Overlay
+ * @param {HTMLElement} container - the splash overlay
  * @returns {void}
  */
 function fadeOutSplash(container) {

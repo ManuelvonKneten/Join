@@ -1,6 +1,6 @@
 /* ── Contacts ── */
 /**
- * Lädt alle Kontakte aus Firebase und rendert das Assigned-Dropdown.
+ * Loads all contacts from Firebase and renders the assigned dropdown.
  *
  * @async
  * @returns {Promise<void>}
@@ -24,9 +24,9 @@ async function loadAvailableContacts() {
 
 
 /**
- * Richtet den Outside-Click-Listener zum Schließen des Dropdowns ein.
+ * Sets up the outside-click listener that closes the dropdown.
  *
- * @param {string} [suffix=''] - ID-Zusatz, z.B. 'Edit' für das Edit-Popup.
+ * @param {string} [suffix=''] - ID suffix, e.g. 'Edit' for the edit popup.
  * @returns {void}
  */
 function setupAssignedDropdown(suffix = '') {
@@ -40,10 +40,10 @@ function setupAssignedDropdown(suffix = '') {
 }
 
 /**
- * Öffnet oder schließt ein Assigned-Dropdown.
- * Wird von Add-Task (ohne Argument) und vom Edit-Popup (suffix = 'Edit') genutzt.
+ * Opens or closes an assigned dropdown.
+ * Used by Add Task (without argument) and by the edit popup (suffix = 'Edit').
  *
- * @param {string} [suffix=''] - ID-Zusatz, z.B. 'Edit' für das Edit-Popup
+ * @param {string} [suffix=''] - ID suffix, e.g. 'Edit' for the edit popup
  * @returns {void}
  */
 function toggleAssignedDropdown(suffix = '') {
@@ -78,9 +78,9 @@ function setAssignedDropdownOpen(isOpen) {
 function openAssignedDropdown()  { setAssignedDropdownOpen(true);  }
 
 /**
- * Schließt ein Assigned-Dropdown.
+ * Closes an assigned dropdown.
  *
- * @param {string} [suffix=''] - ID-Zusatz, z.B. 'Edit' für das Edit-Popup
+ * @param {string} [suffix=''] - ID suffix, e.g. 'Edit' for the edit popup
  * @returns {void}
  */
 function closeAssignedDropdown(suffix = '') {
@@ -92,7 +92,7 @@ function closeAssignedDropdown(suffix = '') {
 }
 
 /**
- * Fügt einen Kontakt zur Auswahl hinzu oder entfernt ihn daraus.
+ * Adds a contact to the selection or removes it from it.
  *
  * @param {MouseEvent} event - Click event from the selected contact option.
  * @param {string} contactId - Contact id to toggle.
@@ -136,7 +136,7 @@ function refocusAssignedOption(contactId) {
 }
 
 /**
- * Rendert alle Kontakte als auswählbare Listeneinträge im Dropdown.
+ * Renders all contacts as selectable list entries in the dropdown.
  *
  * @returns {void}
  */
@@ -182,7 +182,7 @@ function showAllAssignedAvatarsAddTask() {
 
 /* ── Category ── */
 /**
- * Richtet den Outside-Click-Listener zum Schließen des Category-Dropdowns ein.
+ * Sets up the outside-click listener that closes the category dropdown.
  *
  * @returns {void}
  */
@@ -197,7 +197,7 @@ function setupCategoryDropdown() {
 }
 
 /**
- * Schließt das Category-Dropdown.
+ * Closes the category dropdown.
  *
  * @returns {void}
  */
@@ -208,7 +208,7 @@ function closeCategoryDropdown() {
 }
 
 /**
- * Öffnet oder schließt das Category-Dropdown.
+ * Opens or closes the category dropdown.
  *
  * @returns {void}
  */
@@ -242,8 +242,8 @@ function selectCategory(value, label, el) {
 
 /* ── Subtasks ── */
 /**
- * Richtet das Subtask-Input ein:
- * Icon-Klick und Enter-Taste fügen einen neuen Subtask hinzu.
+ * Sets up the subtask input:
+ * an icon click and the Enter key add a new subtask.
  *
  * @returns {void}
  */
@@ -305,7 +305,7 @@ function handleSubtaskEscape(input) {
 }
 
 /**
- * Liest den Subtask-Input aus, fügt den Subtask zum State hinzu und rendert die Liste.
+ * Reads the subtask input, adds the subtask to the state and renders the list.
  *
  * @returns {void}
  */
@@ -320,7 +320,7 @@ function addSubtask() {
 }
 
 /**
- * Entfernt einen Subtask anhand seines Index aus dem State und rendert die Liste neu.
+ * Removes a subtask from the state by its index and re-renders the list.
  *
  * @param {number} subtaskIndex
  * @returns {void}
@@ -332,10 +332,10 @@ function removeSubtask(subtaskIndex) {
 
 
 /**
- * Aktiviert den Bearbeitungsmodus
- * eines Subtasks.
+ * Activates the edit mode
+ * of a subtask.
  *
- * @param {number} index - Index des Subtasks.
+ * @param {number} index - Index of the subtask.
  * @returns {void}
  */
 function editSubtaskItem(index) {
@@ -370,7 +370,7 @@ function cancelSubtaskEdit(index) {
 }
 
 /**
- * Rendert alle Subtasks als Listeneinträge mit Löschen-Button.
+ * Renders all subtasks as list entries with a delete button.
  *
  * @returns {void}
  */

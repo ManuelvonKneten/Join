@@ -3,10 +3,10 @@
  */
 
 /**
- * Wandelt ein Datum im Format DD/MM/YYYY in das ISO-Format YYYY-MM-DD um.
+ * Converts a date in DD/MM/YYYY format into the ISO format YYYY-MM-DD.
  *
- * @param {string} dateStr - Datum im Format DD/MM/YYYY
- * @returns {string} Datum im Format YYYY-MM-DD
+ * @param {string} dateStr - Date in DD/MM/YYYY format
+ * @returns {string} Date in YYYY-MM-DD format
  */
 function ddmmyyyyToISO(dateStr) {
     const [day, month, year] = dateStr.split('/');
@@ -16,7 +16,7 @@ function ddmmyyyyToISO(dateStr) {
 
 /* ── Due Date ── */
 /**
- * Formatiert das Due-Date-Feld automatisch als DD/MM/YYYY während der Eingabe.
+ * Automatically formats the due-date field as DD/MM/YYYY while typing.
  *
  * @returns {void}
  */

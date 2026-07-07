@@ -1,10 +1,10 @@
 /**
- * Gibt das HTML einer alphabetischen Kontaktgruppe (inkl. ihrer Einträge) zurück.
+ * Returns the HTML of an alphabetical contact group (including its entries).
  *
  * @function contactGroupHTML
- * @param {string} letter - Anfangsbuchstabe der Gruppe
- * @param {Array<{ id: string, name: string, email: string, phone: string }>} contacts - Kontakte der Gruppe
- * @returns {string} HTML-String der Kontaktgruppe
+ * @param {string} letter - First letter of the group
+ * @param {Array<{ id: string, name: string, email: string, phone: string }>} contacts - Contacts of the group
+ * @returns {string} HTML string of the contact group
  */
 function contactGroupHTML(letter, contacts) {
     return `
@@ -18,11 +18,11 @@ function contactGroupHTML(letter, contacts) {
 
 
 /**
- * Gibt das HTML eines einzelnen Kontakteintrags als String zurück.
+ * Returns the HTML of a single contact entry as a string.
  *
  * @function contactItemHTML
- * @param {{ id: string, name: string, email: string, phone: string }} contact - Kontaktobjekt
- * @returns {string} HTML-String des Kontakteintrags
+ * @param {{ id: string, name: string, email: string, phone: string }} contact - Contact object
+ * @returns {string} HTML string of the contact entry
  */
 function contactItemHTML(contact) {
     return `
@@ -40,11 +40,11 @@ function contactItemHTML(contact) {
 
 
 /**
- * Gibt das HTML eines Kontakt-Eintrags im Assigned-Dropdown zurück.
+ * Returns the HTML of a contact entry in the assigned dropdown.
  *
  * @function assignedOptionHTML
- * @param {{ id: string, name: string }} contact - Kontaktobjekt
- * @returns {string} HTML-String des Dropdown-Eintrags
+ * @param {{ id: string, name: string }} contact - Contact object
+ * @returns {string} HTML string of the dropdown entry
  */
 function assignedOptionHTML(contact) {
     const isSelected = selectedContacts.some(c => c.id === contact.id);
@@ -67,12 +67,12 @@ function assignedOptionHTML(contact) {
 
 
 /**
- * Gibt das HTML eines Subtask-Listeneintrags mit Löschen-Button zurück.
+ * Returns the HTML of a subtask list entry with a delete button.
  *
  * @function subtaskItemHTML
- * @param {{ title: string, done: boolean }} subtask - Subtask-Objekt
- * @param {number} index - Index des Subtasks im State
- * @returns {string} HTML-String des Subtask-Listeneintrags
+ * @param {{ title: string, done: boolean }} subtask - Subtask object
+ * @param {number} index - Index of the subtask in the state
+ * @returns {string} HTML string of the subtask list entry
  */
 function subtaskItemHTML(subtask, index) {
     if (subtask.isEditing) {

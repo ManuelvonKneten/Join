@@ -1,13 +1,13 @@
 /**
- * @fileoverview Auth guard — schützt Seiten vor unautorisiertem Zugriff.
- * Muss als erstes Script auf jeder geschützten Seite eingebunden werden.
- * Nutzt den `currentUser`-Eintrag aus dem localStorage, der beim Login
- * (regulär oder Gast) gesetzt wird.
+ * @fileoverview Auth guard — protects pages from unauthorized access.
+ * Must be included as the first script on every protected page.
+ * Uses the `currentUser` entry from localStorage, which is set on login
+ * (regular or guest).
  */
 
 /**
- * Prüft ob ein Benutzer eingeloggt ist.
- * Leitet bei fehlendem `currentUser` sofort zur Login-Seite weiter.
+ * Checks whether a user is logged in.
+ * Redirects immediately to the login page when `currentUser` is missing.
  *
  * @returns {void}
  */

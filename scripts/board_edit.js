@@ -11,9 +11,9 @@ let selectedEditPriority = '';
 
 /* --- Edit Functions---*/
 /**
- * Aktiviert den Edit-Modus für einen Subtask.
+ * Activates the edit mode for a subtask.
  *
- * @param {number} index - Index des Subtasks
+ * @param {number} index - Index of the subtask
  * @returns {void}
  */
 function editSubtask(index) {
@@ -23,8 +23,8 @@ function editSubtask(index) {
 
 
 /**
- * Fügt einen neuen Subtask zum Edit-Task hinzu.
- * Liest den Wert aus dem Inputfeld.
+ * Adds a new subtask to the edit task.
+ * Reads the value from the input field.
  *
  * @returns {void}
  */
@@ -44,9 +44,9 @@ function addEditSubtask() {
 
 
 /**
- * Löscht einen Subtask aus der Edit-Liste.
+ * Deletes a subtask from the edit list.
  *
- * @param {number} index - Index des Subtasks
+ * @param {number} index - Index of the subtask
  * @returns {void}
  */
 function deleteSubtask(index){
@@ -56,9 +56,9 @@ function deleteSubtask(index){
 
 
 /**
- * Speichert die Bearbeitung eines Subtasks.
+ * Saves the edit of a subtask.
  *
- * @param {number} index - Index des Subtasks
+ * @param {number} index - Index of the subtask
  * @returns {void}
  */
 function saveSubtask(index){
@@ -72,11 +72,11 @@ function saveSubtask(index){
 
 
 /**
- * Initialisiert die Kontakt-Zuweisung im Edit Task Popup.
- * Lädt Kontakte und setzt bereits ausgewählte Kontakte.
+ * Initializes the contact assignment in the edit task popup.
+ * Loads contacts and sets already selected contacts.
  *
  * @async
- * @param {Object} task - Task Objekt
+ * @param {Object} task - Task object
  * @returns {Promise<void>}
  */
 async function initEditAssigned(task) {
@@ -96,9 +96,9 @@ async function initEditAssigned(task) {
 
 
 /**
- * Fügt einen Kontakt hinzu oder entfernt ihn aus der Auswahl.
+ * Adds a contact to the selection or removes it.
  *
- * @param {string} id - Kontakt-ID
+ * @param {string} id - Contact ID
  * @returns {void}
  */
 function toggleEditContact(id) {
@@ -119,7 +119,7 @@ function toggleEditContact(id) {
 
 
 /**
- * Fügt einen Subtask hinzu, wenn Enter gedrückt wird.
+ * Adds a subtask when Enter is pressed.
  *
  * @param {KeyboardEvent} event
  * @returns {void}
@@ -133,9 +133,9 @@ function handleEditSubtaskEnter(event) {
 
 
 /**
- * Setzt die Priorität im UI und markiert den aktiven Button.
+ * Sets the priority in the UI and marks the active button.
  *
- * @param {string} priority - z.B. "low", "medium", "urgent"
+ * @param {string} priority - e.g. "low", "medium", "urgent"
  * @returns {void}
  */
 function setPriority(priority) {
@@ -151,8 +151,8 @@ function setPriority(priority) {
 
 
 /**
- * Aktualisiert das Priority-Icon im Edit-Task Popup
- * basierend auf dem aktuell ausgewählten Priority-Wert.
+ * Updates the priority icon in the edit task popup
+ * based on the currently selected priority value.
  *
  * @returns {void}
  */
