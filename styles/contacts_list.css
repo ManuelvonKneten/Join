@@ -2,8 +2,22 @@
 .contact_list {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 4px;
     overflow-y: auto;
+}
+
+.contact_list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.contact_list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.contact_list::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border-radius: 4px;
 }
 
 .no_contacts {

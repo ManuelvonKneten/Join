@@ -2,13 +2,12 @@
 .contacts_layout {
     display: flex;
     height: calc(100vh - 140px);
-    padding: 8px 56px 24px;
     max-width: 1440px;
 }
 
 
 .contacts_left {
-    width: 35%;
+    width: 44%;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -18,36 +17,19 @@
 }
 
 
-.contact_list {
-    flex: 1;
-    overflow-y: auto;
-}
-
-.contact_list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.contact_list::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.contact_list::-webkit-scrollbar-thumb {
-    background-color: #c0c0c0;
-    border-radius: 4px;
-}
-
-
 .contacts_right {
-    width: 65%;
-    padding-left: 48px;
+    padding-top: 56px;
+    width: 60%;
+    padding-left: clamp(16px, 1.4vw, 48px);
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: clamp(8px, 1.6vw, 32px);
 }
 
 .contacts_right_top {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 24px;
 }
 
@@ -66,7 +48,7 @@
 }
 
 .contacts_subheading {
-    font-size: 18px;
+    font-size: clamp(18px, 2vw, 21px);
     color: var(--primary-color);
 }
 
@@ -105,8 +87,8 @@
 }
 
 .crb_name {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: clamp(32px, 1.8vw, 47px);
+    font-weight: 400;
     color: var(--primary-color);
     margin: 0;
 }
@@ -323,10 +305,9 @@
     .contacts_right_top {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 4px;
         position: relative;
-        padding-right: 40px;
     }
 
     .contacts_divider_vertical {
