@@ -19,11 +19,13 @@
     display: flex;
     flex-direction: column;
 }
+
 .form_footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .add_task_columns {
     display: flex;
     flex: 1;
@@ -314,9 +316,9 @@
     }
 
 
-    .required_note {
+    /* .required_note {
         display: none;
-    }
+    } */
 
     .add_task_heading {
         font-size: 46px;
@@ -363,12 +365,16 @@
     }
 
     .form_footer {
-        justify-content: flex-end;
-    }
+        flex-direction: column;
+        align-items: stretch;
+        gap: 48px;  
+        
+     }
 
     .add_task_actions {
-        flex-direction: row;
+        align-items: flex-end;
         gap: 21px;
+ 
     }
 
     .add_task_btn {
