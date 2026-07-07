@@ -27,7 +27,10 @@ function setupDueDateInput() {
     setDueDatePickerMinDate(picker);
     input.addEventListener('keydown', handleDueDateBackspace);
     input.addEventListener('input', formatDueDateInput);
-    picker.addEventListener('change', (e) => syncPickerDateToTextInput(e, input));
+    picker.addEventListener('change', (e) => {
+        syncPickerDateToTextInput(e, input);
+        validateDueDate(input);
+    });
     input.addEventListener('blur', () => validateDueDate(input));
 }
 
@@ -128,6 +131,7 @@ function restoreInputCursor(input, position) {
 
 /**
  * Copies the native picker value into the visible DD/MM/YYYY field.
+ * Validation is left to the caller so the correct error element is used.
  *
  * @param {Event} event - Change event from the hidden date picker.
  * @param {HTMLInputElement} input - Visible due-date text input.
@@ -137,7 +141,6 @@ function syncPickerDateToTextInput(event, input) {
     if (!event.target.value) return;
     const [year, month, day] = event.target.value.split('-');
     input.value = `${day}/${month}/${year}`;
-    validateDueDate(input);
 }
 
 
