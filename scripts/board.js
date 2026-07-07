@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', initBoard);
 
 
 /**
- * Initialisiert das Board und lädt alle Tasks.
+ * Initializes the board and loads all tasks.
  *
  * @async
  * @returns {Promise<void>}
@@ -38,7 +38,7 @@ async function initBoard() {
 
                                         /* --- Init / Event Listeners --- */
 /**
- * Registriert alle Event Listener für das Board.
+ * Registers all event listeners for the board.
  *
  * @returns {void}
  */
@@ -51,8 +51,8 @@ function initEventListeners(){
 
                                         /* ---  Data Layer (Firebase / API) --- */
 /**
- * Lädt alle Tasks aus Firebase, speichert sie im lokalen State
- * und rendert anschließend das Board.
+ * Loads all tasks from Firebase, stores them in the local state
+ * and then renders the board.
  *
  * @async
  * @returns {Promise<void>}
@@ -77,10 +77,10 @@ async function loadTasks() {
 
 
 /**
- * Speichert die bearbeiteten Task-Daten in Firebase.
+ * Saves the edited task data to Firebase.
  *
  * @async
- * @param {string} taskId - ID des Tasks
+ * @param {string} taskId - ID of the task
  * @returns {Promise<void>}
  */
 async function saveTaskEdit(taskId) {
@@ -114,12 +114,12 @@ async function saveTaskEdit(taskId) {
 
 
 /**
- * Verschiebt einen Task in eine andere Spalte,
- * aktualisiert den Status in Firebase
- * und lädt das Board anschließend neu.
+ * Moves a task to another column,
+ * updates the status in Firebase
+ * and then reloads the board.
  *
  * @async
- * @param {DragEvent} event - Das Drop-Event.
+ * @param {DragEvent} event - The drop event.
  * @returns {Promise<void>}
  */
 async function moveTo(event) {
@@ -134,12 +134,12 @@ async function moveTo(event) {
 
 
 /**
- * Verschiebt einen Task in einen neuen Board-Status
- * und verwendet die zentrale Speicherlogik für Drag & Drop.
+ * Moves a task to a new board status
+ * and uses the central save logic for drag & drop.
  *
  * @async
- * @param {string} taskId - Firebase-ID des Tasks.
- * @param {string} newStatus - Zielstatus.
+ * @param {string} taskId - Firebase ID of the task.
+ * @param {string} newStatus - Target status.
  * @returns {Promise<void>}
  */
 async function moveTaskToStatus(taskId, newStatus) {
@@ -152,11 +152,11 @@ async function moveTaskToStatus(taskId, newStatus) {
 
 
 /**
- * Verschiebt den aktuell per Tastatur ausgewählten Task
- * in einen neuen Status.
+ * Moves the task currently selected via keyboard
+ * to a new status.
  *
  * @async
- * @param {string} newStatus - Zielstatus.
+ * @param {string} newStatus - Target status.
  * @returns {Promise<void>}
  */
 async function moveKeyboardTask(newStatus) {
@@ -168,9 +168,9 @@ async function moveKeyboardTask(newStatus) {
 
                                     /* --- Render Functions --- */
 /**
- * Leert alle Board-Spalten und rendert anschließend alle Tasks neu.
+ * Clears all board columns and then re-renders all tasks.
  *
- * @param {Array<Object>} [tasks=allTasks] - Die darzustellenden Tasks.
+ * @param {Array<Object>} [tasks=allTasks] - The tasks to display.
  * @returns {void}
  */
 function renderBoard(tasks = allTasks) {
@@ -187,12 +187,12 @@ function renderBoard(tasks = allTasks) {
 
 
 /**
- * Rendert einen einzelnen Task in die passende Board-Spalte
- * anhand seines Status.
+ * Renders a single task into the matching board column
+ * based on its status.
  *
- * @param {Object} task - Das Task-Objekt.
- * @param {string} task.id - Die Firebase-ID des Tasks.
- * @param {string} task.status - Der aktuelle Status des Tasks.
+ * @param {Object} task - The task object.
+ * @param {string} task.id - The Firebase ID of the task.
+ * @param {string} task.status - The current status of the task.
  * @returns {void}
  */
 function renderTask(task) {
@@ -211,7 +211,7 @@ function renderTask(task) {
 
 
 /**
- * Zeigt für leere Board-Spalten eine Platzhalterkarte an.
+ * Shows a placeholder card for empty board columns.
  *
  * @returns {void}
  */
@@ -228,11 +228,11 @@ function renderEmptyCards() {
 
 
 /**
- * Rendert die Subtasks im Task Detail Popup.
+ * Renders the subtasks in the task detail popup.
  *
- * @param {Array<Object>} [subtasks=[]] - Liste der Subtasks.
- * @param {string} taskId - ID des Tasks.
- * @returns {string} HTML-String.
+ * @param {Array<Object>} [subtasks=[]] - List of subtasks.
+ * @param {string} taskId - ID of the task.
+ * @returns {string} HTML string.
  */
 function renderSubtasks(subtasks = [], taskId) {
     if(!subtasks.length) return "<p>No Subtasks</p>"
@@ -249,7 +249,7 @@ function renderSubtasks(subtasks = [], taskId) {
 
 
 /**
- * Rendert die auswählbaren Kontakte im Edit Task Dropdown.
+ * Renders the selectable contacts in the edit task dropdown.
  *
  * @returns {void}
  */
@@ -269,7 +269,7 @@ function renderAssignedOptionsEdit() {
 
 
 /**
- * Rendert die Avatare der ausgewählten Kontakte im Edit Popup.
+ * Renders the avatars of the selected contacts in the edit popup.
  *
  * @returns {void}
  */
@@ -291,9 +291,9 @@ function renderAssignedAvatarsEdit() {
 
 
 /**
- * Schaltet zwischen der kompakten und vollständigen Anzeige
- * der zugewiesenen Avatare im Edit-Task-Popup um und rendert
- * die Avatar-Liste anschließend neu.
+ * Toggles between the compact and full display
+ * of the assigned avatars in the edit task popup and then
+ * re-renders the avatar list.
  *
  * @returns {void}
  */
@@ -304,7 +304,7 @@ function showAllAssignedAvatarsEditTask() {
 
 
 /**
- * Rendert alle Subtasks im Edit-Task Popup.
+ * Renders all subtasks in the edit task popup.
  *
  * @returns {void}
  */

@@ -1,12 +1,12 @@
 const DB_URL = 'https://join-project-e7af3-default-rtdb.europe-west1.firebasedatabase.app';
 
 /**
- * Liest Daten aus der Firebase Realtime Database.
+ * Reads data from the Firebase Realtime Database.
  *
  * @async
- * @param {string} path - Firebase-Pfad, z.B. "contacts" oder "users"
- * @returns {Promise<Object|null>} Gelesene Daten oder null wenn leer
- * @throws {Error} Bei fehlgeschlagenem Request
+ * @param {string} path - Firebase path, e.g. "contacts" or "users"
+ * @returns {Promise<Object|null>} Read data or null when empty
+ * @throws {Error} On a failed request
  */
 async function getFromDB(path) {
     const res = await fetch(`${DB_URL}/${path}.json`);
@@ -15,14 +15,14 @@ async function getFromDB(path) {
 }
 
 /**
- * Erstellt einen neuen Eintrag in der Firebase Realtime Database.
- * Firebase generiert dabei automatisch eine eindeutige ID.
+ * Creates a new entry in the Firebase Realtime Database.
+ * Firebase automatically generates a unique ID.
  *
  * @async
- * @param {string} path - Firebase-Pfad, z.B. "contacts"
- * @param {Object} data - Zu speichernde Daten
- * @returns {Promise<{ name: string }>} Firebase-Antwortobjekt mit generierter ID unter `.name`
- * @throws {Error} Bei fehlgeschlagenem Request
+ * @param {string} path - Firebase path, e.g. "contacts"
+ * @param {Object} data - Data to store
+ * @returns {Promise<{ name: string }>} Firebase response object with the generated ID under `.name`
+ * @throws {Error} On a failed request
  */
 async function postToDB(path, data) {
     const res = await fetch(`${DB_URL}/${path}.json`, {
@@ -35,14 +35,14 @@ async function postToDB(path, data) {
 }
 
 /**
- * Aktualisiert einzelne Felder eines bestehenden Eintrags in der Firebase Realtime Database.
- * Nicht übergebene Felder bleiben unverändert.
+ * Updates individual fields of an existing entry in the Firebase Realtime Database.
+ * Fields that are not passed remain unchanged.
  *
  * @async
- * @param {string} path - Firebase-Pfad inkl. ID, z.B. "contacts/abc123"
- * @param {Object} data - Zu aktualisierende Felder
- * @returns {Promise<Object>} Aktualisierter Datensatz
- * @throws {Error} Bei fehlgeschlagenem Request
+ * @param {string} path - Firebase path including ID, e.g. "contacts/abc123"
+ * @param {Object} data - Fields to update
+ * @returns {Promise<Object>} Updated record
+ * @throws {Error} On a failed request
  */
 async function patchToDB(path, data) {
     const res = await fetch(`${DB_URL}/${path}.json`, {
@@ -55,12 +55,12 @@ async function patchToDB(path, data) {
 }
 
 /**
- * Löscht einen Eintrag aus der Firebase Realtime Database.
+ * Deletes an entry from the Firebase Realtime Database.
  *
  * @async
- * @param {string} path - Firebase-Pfad inkl. ID, z.B. "contacts/abc123"
+ * @param {string} path - Firebase path including ID, e.g. "contacts/abc123"
  * @returns {Promise<void>}
- * @throws {Error} Bei fehlgeschlagenem Request
+ * @throws {Error} On a failed request
  */
 async function deleteFromDB(path) {
     const res = await fetch(`${DB_URL}/${path}.json`, { method: 'DELETE' });

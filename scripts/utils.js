@@ -9,7 +9,7 @@ const AVATAR_COLORS = [
 ];
 
 /**
- * Gibt die Initialen eines Namens zurück (z.B. "Max Mustermann" → "MM").
+ * Returns the initials of a name (e.g. "Max Mustermann" → "MM").
  *
  * @param {string} name
  * @returns {string}
@@ -22,11 +22,11 @@ function initials(name) {
 }
 
 /**
- * Gibt eine konsistente Avatar-Farbe für einen Namen zurück.
- * Der gleiche Name liefert immer die gleiche Farbe.
+ * Returns a consistent avatar color for a name.
+ * The same name always yields the same color.
  *
  * @param {string} name
- * @returns {string} Hex-Farbwert
+ * @returns {string} Hex color value
  */
 function avatarColor(name) {
 
@@ -50,10 +50,10 @@ function clearLocalStorage() {
 
 /* ── Toast ── */
 /**
- * Zeigt eine Toast-Nachricht für 3 Sekunden an.
+ * Shows a toast message for 3 seconds.
  *
  * @param {string} message
- * @param {boolean} [isError=false] - true = roter Toast
+ * @param {boolean} [isError=false] - true = red toast
  * @returns {void}
  */
 function showTaskToast(message, isError = false) {
@@ -65,7 +65,7 @@ function showTaskToast(message, isError = false) {
 }
 
 
-function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false, max = window.innerWidth <= 1023 ? 2 : 4) {
+function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false, max = window.innerWidth <= 1024 ? 2 : 4) {
     if (!Array.isArray(contactIds)) {
         contactIds = contactIds ? [contactIds]: [];
     }
@@ -82,10 +82,3 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
     }
     return html;
 }
-
-
-function showAllAssignedAvatars() {
-    showAllAvatars = true;
-    renderSelectedAvatars();
-}
-

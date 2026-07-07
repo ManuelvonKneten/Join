@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', initAddTask);
 
 
 /**
- * Initialisiert die Add-Task-Seite:
- * lädt Kontakte und richtet alle Event Listener ein.
+ * Initializes the add-task page:
+ * loads contacts and sets up all event listeners.
  *
  * @async
  * @returns {Promise<void>}
@@ -71,6 +71,7 @@ async function initAddTask() {
     setupSubtaskInput();
     setupClearButton();
     setupAssignedDropdown();
+    setupCategoryDropdown();
     setupDueDateInput();
     setupRequiredFieldValidation();
 }
@@ -92,7 +93,7 @@ function setDefaultPriority() {
 
 /* ── Priority ── */
 /**
- * Fügt jedem Priority-Button einen Click-Listener hinzu.
+ * Adds a click listener to each priority button.
  *
  * @returns {void}
  */
@@ -104,7 +105,7 @@ function setupPriorityButtons() {
 
 
 /**
- * Setzt den aktiven Priority-Button und speichert die gewählte Priorität.
+ * Sets the active priority button and stores the selected priority.
  *
  * @param {MouseEvent} event
  * @returns {void}

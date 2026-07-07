@@ -31,7 +31,7 @@ const PASSWORD_TOGGLE_ICONS = {
  * @returns {boolean} True if the name is valid.
  */
 function isValidName(value) {
-    return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 2;
+    return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 1;
 }
 
 
@@ -77,6 +77,22 @@ function setErrorVisible(errorElement, visible) {
  */
 function validateNameOnBlur() {
     setErrorVisible(nameError, !isValidName(signupNameInput.value));
+}
+
+
+/**
+ * Validates the name field while typing.
+ *
+ * @returns {void}
+ */
+function validateNameOnInput() {
+    const value = signupNameInput.value.trim();
+
+    if (value === '') {
+        setErrorVisible(nameError, false);
+        return;
+    }
+    setErrorVisible(nameError, !isValidName(value));
 }
 
 
@@ -146,6 +162,7 @@ function validateSignupForm() {
 
 if (signupNameInput) {
     signupNameInput.addEventListener('blur', validateNameOnBlur);
+    signupNameInput.addEventListener('input', validateNameOnInput());
 }
 
 if (signupEmailInput) {
@@ -212,7 +229,7 @@ function addPasswordToggleListeners(input, toggle) {
 function updatePasswordToggleIcon(input, toggle, icons) {
     if (!input.value) {
         input.type = 'password';
-        toggle.src = icons.lock;
+                toggle.src = icons.lock;
         toggle.classList.remove('isToggle');
         return;
     }
@@ -366,3 +383,5 @@ function showRegisterError(message) {
 function hideRegisterErrorToast(signupToast) {
     signupToast.classList.remove('show', 'toast_error');
 }
+
+

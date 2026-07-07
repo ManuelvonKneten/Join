@@ -201,7 +201,7 @@ function setActiveSidebarLink() {
   });
 }
 
-// Render Function, damit nur der Content in der Mitte neu geladen wird.
+// Render function so that only the content in the center is reloaded.
 
 async function renderContent(url) {
   const response = await fetch(url);
