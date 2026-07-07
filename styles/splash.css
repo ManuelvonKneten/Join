@@ -1,0 +1,32 @@
+.splashLogoContainer {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(246, 247, 248);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: background-color 0.8s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.logoImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    z-index: 2;
+    transition: opacity 0.5s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    .splashLogoContainer {
+        background-color: #2a3647;
+    }
+
+    .logoImage {
+        width: clamp(64px, 22vw, 90px);
+    }
+}

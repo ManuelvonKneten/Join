@@ -221,10 +221,6 @@
   opacity: 1;
 }
 
-.card.touch-dragging {
-  touch-action: none;
-}
-
 .card_header {
   color: white;
   border: none;

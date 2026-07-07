@@ -65,7 +65,7 @@ function showTaskToast(message, isError = false) {
 }
 
 
-function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false, max = window.innerWidth <= 1023 ? 2 : 4) {
+function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false, max = window.innerWidth <= 1024 ? 2 : 4) {
     if (!Array.isArray(contactIds)) {
         contactIds = contactIds ? [contactIds]: [];
     }
@@ -82,10 +82,3 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
     }
     return html;
 }
-
-
-function showAllAssignedAvatars() {
-    showAllAvatars = true;
-    renderSelectedAvatars();
-}
-

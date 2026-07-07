@@ -31,6 +31,10 @@
   justify-content: space-between;
 }
 
+.edit_content .dialog_header {
+  justify-content: flex-end;
+}
+
 .dialog_header .user_story, .dialog_header .technical  {
   color: white;
   border: none;
@@ -294,7 +298,7 @@ label,
 }
 
 .description {
-  height: 64px;
+  height: 96px;
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -316,6 +320,20 @@ label,
   border: 1px solid grey;
 }
 
+.edit_content label,
+.edit_content .edit_assigned_field {
+  align-items: stretch;
+}
+
+.edit_content .inputField input {
+  width: 100%;
+}
+
+.edit_content .subtask_add input {
+  flex: 1;
+  min-width: 0;
+}
+
 .edit_subtasks_container {
   overflow-y: auto;
   min-height: 0;
@@ -325,7 +343,8 @@ label,
 .edit_subtask {
   display: flex;
   align-items: center;
-  width: fit-content;
+  justify-content: space-between;
+  width: 100%;
   gap: 24px;
   margin-bottom: 8px;
   font-size: 16px;
@@ -366,10 +385,18 @@ label,
 .delete_edit_icon {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 6px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease;
+}
+
+.edit_icon_divider {
+  width: 1px;
+  align-self: stretch;
+  background-color: var(--color-tertiary);
+  opacity: 0.4;
 }
 
 .edit_subtask:hover .delete_edit_icon {
@@ -379,14 +406,24 @@ label,
 
 @media (max-width: 1023px) {
     .add_task_layout_popup {
-        /* height: 95vh; */
-        overflow-y: hidden;
+        height: 95vh;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
     }
 
-    .add_task_layout_popup .add_task_columns {
+    .add_task_layout_popup .popup_header {
+        flex-shrink: 0;
+    }
+
+    .add_task_layout_popup .form_container {
         flex: 1;
         overflow-y: auto;
+        min-height: 0;
+    }
+
+    .delete_edit_icon {
+        opacity: 1;
+        visibility: visible;
     }
 }

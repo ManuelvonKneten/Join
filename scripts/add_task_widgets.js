@@ -182,6 +182,32 @@ function showAllAssignedAvatarsAddTask() {
 
 /* ── Category ── */
 /**
+ * Richtet den Outside-Click-Listener zum Schließen des Category-Dropdowns ein.
+ *
+ * @returns {void}
+ */
+function setupCategoryDropdown() {
+    document.addEventListener('click', (event) => {
+        const dropdown = document.getElementById('categoryDropdown');
+        if (!dropdown) return;
+        if (!dropdown.contains(event.target)) {
+            closeCategoryDropdown();
+        }
+    });
+}
+
+/**
+ * Schließt das Category-Dropdown.
+ *
+ * @returns {void}
+ */
+function closeCategoryDropdown() {
+    document.getElementById('categoryOptions')?.classList.add('hidden');
+    document.getElementById('categoryArrow')?.classList.remove('rotated');
+    document.querySelector('#categoryDropdown .assigned_trigger')?.setAttribute('aria-expanded', 'false');
+}
+
+/**
  * Öffnet oder schließt das Category-Dropdown.
  *
  * @returns {void}

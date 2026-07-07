@@ -172,7 +172,6 @@ function getEditTaskTemplate(task) {
     <div class="dialog_content edit_content">
 
       <div class="dialog_header">
-        <h2>Edit Task</h2>
         <button onclick="closeTaskPopUp()">
           x
         </button>
@@ -316,6 +315,8 @@ function getSubtasksEditTemplate(subtask, index) {
                 <button onclick="editSubtask(${index})">
                     <img src="../assets/icons/edit.png" alt="">
                 </button>
+
+                <span class="edit_icon_divider"></span>
 
                 <button onclick="deleteSubtask(${index})"><img src="../assets/icons/delete.png"></button>
             </div>
