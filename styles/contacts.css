@@ -376,7 +376,7 @@
 
     .fab_add_contact:hover,
     .fab_contact_more:hover {
-        background-color: var(--secondary-color);
+        background-color: var(--sidebar-hover-background);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
     }
 
