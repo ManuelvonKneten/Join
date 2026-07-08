@@ -151,7 +151,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
 }
 
 .modal_actions {
@@ -178,7 +178,7 @@
 
 .btn_modal_cancel:hover {
     border-color: var(--secondary-color);
-    color: var(--secondary-color);
+    color: var( --color-secondary);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -198,7 +198,7 @@
 }
 
 .btn_modal_create:hover {
-    background-color: var(--secondary-color);
+    background-color: var( --color-secondary);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -208,6 +208,21 @@
     box-shadow: none;
 }
 
+.inputFieldContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputError {
+    visibility: hidden;
+    color: #ff3d00;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.inputError.visible {
+    visibility: visible;
+}
 
 /* ── Tablet (768px – 1023px) ── */
 @media (max-width: 1023px) {
@@ -330,6 +345,8 @@
         justify-content: center;
         padding: 14px 24px;
     }
+
+    
 
     /* Edit modal: Delete and Save side by side */
     #editContactOverlay .modal_actions {

@@ -4,7 +4,14 @@ let activeContact = null;
 
 
 /* ── Init ── */
-document.addEventListener('DOMContentLoaded', loadContacts);
+document.addEventListener('DOMContentLoaded', () => {
+    loadContacts();
+    initContactValidation();
+
+}); 
+    
+
+
 document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
 
@@ -44,19 +51,48 @@ async function loadContacts() {
 
 
 /**
- * Creates a new contact, saves it in the database, and updates the UI.
+ * Creates a new contact after validating the form data.
+ *
+ * Prevents the default form submission, validates name, email, and phone input,
+ * saves the contact to the database, updates the contact list, and shows a success
+ * or error message.
  *
  * @async
  * @param {Event} event - The submit event from the add contact form.
- * @returns {Promise<void>}
+ * @returns {Promise<void>} Resolves when the contact creation process is completed.
  */
 async function createContact(event) {
     event.preventDefault();
+    
+    const name = document.getElementById('contactName');
+    const email = document.getElementById('contactEmail');
+    const phone = document.getElementById('contactPhone');
+
+    const nameOk = isValidContactName(name.value);
+    const emailOk = isValidContactEmail(email.value);
+    const phoneOk = isValidContactPhone(phone.value);
+    
+    if(!nameOk) {
+    setErrorVisible(document.getElementById('contactNameError'), true);
+    return;
+    }
+
+    if(!emailOk){
+    setErrorVisible(document.getElementById('contactEmailError'), true);
+    return;
+    }    
+   
+    if(!phoneOk) {
+    setErrorVisible(document.getElementById('contactPhoneError'), true);
+    return;
+    }    
+
     const formData = {
-        name: document.getElementById('contactName').value.trim(),
-        email: document.getElementById('contactEmail').value.trim(),
-        phone: document.getElementById('contactPhone').value.trim()
+    name: name.value.trim(),
+    email: email.value.trim(),
+    phone: phone.value.trim()
     };
+
     setCreateButtonLoading(event.target, true);
 
     try {
@@ -74,6 +110,59 @@ async function createContact(event) {
 
 
 /**
+ * Hides all contact form error messages.
+ *
+ * @returns {void}
+ */
+function hideAllContactErrors(){
+    const errors = [
+        'contactNameError',
+        'contactEmailError',
+        'contactPhoneError'
+    ];
+    
+    errors.forEach(id => {
+        setErrorVisible(document.getElementById(id), false)
+    })
+}
+
+/**
+ * Checks whether a contact name contains only letters and spaces.
+ *
+ * @param {string} value - The contact name to validate.
+ * @returns {boolean} True if the name contains only valid characters.
+ */
+function isValidContactName(value) {
+    return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 1;
+}
+
+
+/**
+ * Checks whether an email address has a valid format.
+ *
+ * @param {string} value - The email address to validate.
+ * @returns {boolean} True if the email address matches the required format.
+ */
+function isValidContactEmail(value) {
+    const emailRegex = /^[^\s@.][^\s@]*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/;
+    return emailRegex.test(value.trim());    
+}
+
+
+/**
+ * Checks whether a phone number contains only valid phone characters.
+ *
+ * Allows an optional leading plus sign, numbers, and spaces.
+ *
+ * @param {string} value - The phone number to validate.
+ * @returns {boolean} True if the phone number contains valid characters.
+ */
+function isValidContactPhone(value) {
+    return /^\+?[0-9\s]+$/.test(value.trim());
+}
+
+
+/**
  * Updates the create button while the contact is being saved.
  *
  * @param {HTMLFormElement} form - The add contact form element.
@@ -84,6 +173,43 @@ function setCreateButtonLoading(form, isLoading) {
     const btn = form.querySelector('.btn_modal_create');
     btn.disabled = isLoading;
     btn.textContent = isLoading ? 'Saving…' : 'Create contact ✓';
+}
+
+
+/**
+ * Initializes validation event listeners for the contact form fields.
+ *
+ * Adds blur event listeners to the name, email, and phone input fields.
+ * When a field loses focus, its value is validated and the corresponding
+ * error message visibility is updated.
+ *
+ * @function initContactValidation
+ * @returns {void}
+ */
+function initContactValidation() {
+    const name = document.getElementById('contactName');
+    const email = document.getElementById('contactEmail');
+    const phone = document.getElementById('contactPhone');
+
+    name.addEventListener('blur', () => {
+        setErrorVisible(document.getElementById('contactNameError'),
+        !isValidContactName(name.value)
+        );
+    });
+
+      email.addEventListener('blur', () => {
+        setErrorVisible(
+            document.getElementById('contactEmailError'),
+            !isValidContactEmail(email.value)
+        );
+    });
+
+    phone.addEventListener('blur', () => {
+        setErrorVisible(
+            document.getElementById('contactPhoneError'),
+            !isValidContactPhone(phone.value)
+        );
+    });
 }
 
 

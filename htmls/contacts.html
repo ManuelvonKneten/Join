@@ -103,18 +103,33 @@
               </div>
             </div>
 
-            <form class="modal_form_col" onsubmit="createContact(event)">
-              <div class="inputField">
-                <input id="contactName" type="text" placeholder="Name" aria-label="Name" required />
-                <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
+            <form class="modal_form_col" onsubmit="createContact(event)" novalidate>
+
+              <div class="inputFieldContainer">
+                <div class="inputField">
+                  <input id="contactName" type="text" placeholder="Name" aria-label="Name" />
+                  <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
+                </div>
+
+                <span id="contactNameError" class="inputError">Please enter a valid name.</span>
               </div>
-              <div class="inputField">
-                <input id="contactEmail" type="email" placeholder="Email" aria-label="Email" required />
-                <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
+
+              <div class="inputFieldContainer">
+                <div class="inputField">
+                  <input id="contactEmail" type="email" placeholder="Email" aria-label="Email"/>
+                  <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
+                </div>
+
+                <span id="contactEmailError" class="inputError">Please enter a valid email address.</span>
               </div>
-              <div class="inputField">
-                <input id="contactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
-                <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
+              
+              <div class="inputFieldContainer">
+                <div class="inputField">
+                  <input id="contactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
+                  <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
+                </div>
+                
+                <span id="contactPhoneError" class="inputError">Please enter numbers only.</span>
               </div>
 
               <div class="modal_actions">

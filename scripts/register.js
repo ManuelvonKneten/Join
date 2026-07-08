@@ -59,18 +59,6 @@ function isValidPassword(value) {
 
 
 /**
- * Shows or hides a validation error element.
- *
- * @param {HTMLElement|null} errorElement - The error element to update.
- * @param {boolean} visible - Whether the error should be visible.
- * @returns {void}
- */
-function setErrorVisible(errorElement, visible) {
-    if (errorElement) errorElement.classList.toggle('visible', visible);
-}
-
-
-/**
  * Validates the name field after it loses focus.
  *
  * @returns {void}
@@ -159,10 +147,9 @@ function validateSignupForm() {
     return nameOk && emailOk && passwordOk && confirmOk && acceptedOk;
 }
 
-
 if (signupNameInput) {
     signupNameInput.addEventListener('blur', validateNameOnBlur);
-    signupNameInput.addEventListener('input', validateNameOnInput());
+    signupNameInput.addEventListener('input', validateNameOnInput);
 }
 
 if (signupEmailInput) {

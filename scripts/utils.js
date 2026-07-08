@@ -65,6 +65,20 @@ function showTaskToast(message, isError = false) {
 }
 
 
+/**
+ * Builds HTML for contact avatars.
+ *
+ * Creates avatar elements from assigned contact IDs and optionally displays
+ * contact names. The number of visible avatars depends on the screen width
+ * unless a custom maximum value is provided.
+ *
+ * @param {Array|string|number} contactIds - The IDs of the contacts to display.
+ * @param {Array<Object>} availableContacts - List of available contacts with their IDs and names.
+ * @param {boolean} [showAll=false] - Whether all contacts should be displayed.
+ * @param {boolean} [showName=false] - Whether contact names should be shown next to avatars.
+ * @param {number} [max=window.innerWidth <= 1024 ? 2 : 4] - Maximum number of avatars to display when not showing all.
+ * @returns {string} HTML string containing the generated avatars.
+ */
 function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showName = false, max = window.innerWidth <= 1024 ? 2 : 4) {
     if (!Array.isArray(contactIds)) {
         contactIds = contactIds ? [contactIds]: [];
@@ -81,4 +95,18 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
         html += `<div class="more_contacts js_more_avatars">+${contactIds.length - max}</div>`;
     }
     return html;
+}
+
+
+/**
+ * Shows or hides a validation error element.
+ *
+ * @param {HTMLElement|null} errorElement - Error element.
+ * @param {boolean} visible - Whether error should be visible.
+ * @returns {void}
+ */
+function setErrorVisible(errorElement, visible) {
+    if (errorElement) {
+        errorElement.classList.toggle('visible', visible);
+    }
 }
