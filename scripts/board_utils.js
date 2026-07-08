@@ -360,11 +360,13 @@ function shortenText(text, maxLength = 30) {
  * The current display state is stored via the `data-full` attribute
  * of the HTML element.
  *
+ * The full title is read from the element's `data-title` attribute.
+ *
  * @param {HTMLElement} el - The clicked HTML element (e.g. an <h2>).
- * @param {string} fullText - The full title.
  * @returns {void}
  */
-function toggleFullTitle(el, fullText) {
+function toggleFullTitle(el) {
+    const fullText = el.dataset.title;
     if (el. dataset.full === "true") {
         el.textContent = shortenText(fullText, 30);
         el.dataset.full ="false";

@@ -28,10 +28,10 @@ function getTaskTemplate(task) {
 
       ${getMoveMenuTemplate(task)}
 
-        <h2 data-full="false" onclick="toggleFullTitle(this, '${task.title.replace(/'/g, "\\'")}')">
-        ${shortenText(task.title, 30)}</h2>
-      
-        <p>${task.description}</p>
+        <h2 data-full="false" data-title="${escapeHtml(task.title)}" onclick="toggleFullTitle(this)">
+        ${escapeHtml(shortenText(task.title, 30))}</h2>
+
+        <p>${escapeHtml(task.description)}</p>
 
         <div>${getProgressTemplate(task.subtasks || [])}</div>
         
@@ -108,9 +108,9 @@ function getTaskDetailsTemplate(task) {
             </button>
           </div>
   
-        <h2>${task.title}</h2>
-  
-        <p>${task.description}</p>
+        <h2>${escapeHtml(task.title)}</h2>
+
+        <p>${escapeHtml(task.description)}</p>
   
         <div class="dialog_row">
           <p>Due date:</p>
@@ -161,7 +161,7 @@ function getSubtasksTemplate(subtask, index, taskId) {
           ${subtask.completed ? "checked" : ""} 
           onchange="toggleSubtask('${taskId}', ${index})"
         >
-        <div>${subtask.title}</div>
+        <div>${escapeHtml(subtask.title)}</div>
       </label>
     `;
 }
@@ -179,12 +179,12 @@ function getEditTaskTemplate(task) {
 
       <label>
         <p>Title</p>
-        <input class="label_input" id="editTitle" value="${task.title}">
+        <input class="label_input" id="editTitle" value="${escapeHtml(task.title)}">
       </label>
 
       <label>
         <p>Description</p>
-        <textarea class="description" id="editDescription">${task.description}</textarea>
+        <textarea class="description" id="editDescription">${escapeHtml(task.description)}</textarea>
       </label>
 
       <label>
@@ -294,7 +294,7 @@ function getSubtasksEditTemplate(subtask, index) {
                 <input
                     id="subtaskInput${index}"
                     type="text"
-                    value="${subtask.title}"
+                    value="${escapeHtml(subtask.title)}"
                 >
 
                 <div class="delete_edit_icon">
@@ -309,7 +309,7 @@ function getSubtasksEditTemplate(subtask, index) {
 
   return `
         <div class="edit_subtask">
-            <span>• ${subtask.title}</span>
+            <span>• ${escapeHtml(subtask.title)}</span>
 
             <div class="delete_edit_icon">
                 <button onclick="editSubtask(${index})">
@@ -335,7 +335,7 @@ function getAssignedOptionsEdit(contact, checked) {
                 </div>
 
                 <span class="assigned_option_name">
-                    ${contact.name}
+                    ${escapeHtml(contact.name)}
                 </span>
 
                 <input 

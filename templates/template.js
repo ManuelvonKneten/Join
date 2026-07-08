@@ -28,11 +28,11 @@ function contactItemHTML(contact) {
     return `
         <div class="contact_item" data-id="${contact.id}" onclick="showContactDetail(${JSON.stringify(contact).replace(/"/g, '&quot;')})">
             <div class="contact_avatar" style="background-color:${avatarColor(contact.name)}">
-                ${initials(contact.name)}
+                ${escapeHtml(initials(contact.name))}
             </div>
             <div class="contact_info">
-                <span class="contact_name">${contact.name}</span>
-                <span class="contact_email">${contact.email}</span>
+                <span class="contact_name">${escapeHtml(contact.name)}</span>
+                <span class="contact_email">${escapeHtml(contact.email)}</span>
             </div>
         </div>
     `;
@@ -57,9 +57,9 @@ function assignedOptionHTML(contact) {
             onclick="toggleContactSelection(event, '${contact.id}')"
             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleContactSelection(event,'${contact.id}');}">
             <div class="assigned_option_avatar" style="background-color: ${avatarColor(contact.name)}">
-                ${initials(contact.name)}
+                ${escapeHtml(initials(contact.name))}
             </div>
-            <span class="assigned_option_name">${contact.name}</span>
+            <span class="assigned_option_name">${escapeHtml(contact.name)}</span>
             <input type="checkbox" class="assigned_option_checkbox" ${isSelected ? 'checked' : ''} tabindex="-1" aria-hidden="true">
         </li>
     `;
@@ -82,7 +82,7 @@ function subtaskItemHTML(subtask, index) {
                     id="subtaskEdit${index}"
                     class="add_task_subtask_input"
                     type="text"
-                    value="${subtask.title}"
+                    value="${escapeHtml(subtask.title)}"
                     onkeydown="if(event.key==='Enter'){event.preventDefault();saveSubtaskItem(${index});}if(event.key==='Escape'){cancelSubtaskEdit(${index});}"
                 >
                 <div class="add_task_subtask_actions">
@@ -97,7 +97,7 @@ function subtaskItemHTML(subtask, index) {
     }
     return `
         <li class="add_task_subtask_item">
-            <span>&#8226; ${subtask.title}</span>
+            <span>&#8226; ${escapeHtml(subtask.title)}</span>
             <div class="add_task_subtask_actions">
                 <button type="button" class="add_task_subtask_action_btn" onclick="editSubtaskItem(${index})" aria-label="Edit">
                     <img src="../assets/icons/edit.svg" alt="" aria-hidden="true">
@@ -117,9 +117,9 @@ function getContactsAvatar (name, showName) {
      <div class="contact_task">
                 <div class="contact_avatar assigned_selected_avatar"
                     style="background-color:${avatarColor(name)}">
-                    ${initials(name)}
+                    ${escapeHtml(initials(name))}
                 </div>
-                ${showName ? `<span>${name}</span>` : ""} 
+                ${showName ? `<span>${escapeHtml(name)}</span>` : ""}
             </div>
   `;
 }
