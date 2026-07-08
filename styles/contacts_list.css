@@ -2,8 +2,23 @@
 .contact_list {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-width: 0;
     gap: 4px;
     overflow-y: auto;
+}
+
+.contact_list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.contact_list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.contact_list::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border-radius: 4px;
 }
 
 .no_contacts {
@@ -36,11 +51,12 @@
 .contact_item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 10px 12px;
+    gap: clamp(10px, 1.2vw, 16px);
+    padding: clamp(8px, 1vw, 10px) clamp(8px, 1vw, 12px);
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    min-width: 0;
 }
 
 .contact_item:hover {
@@ -75,6 +91,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
     overflow: hidden;
 }
 

@@ -1,61 +1,62 @@
 /* ── Page layout ── */
+.contacts_content {
+    --contacts-page-padding-x: clamp(16px, 2.4vw, 48px);
+    --contacts-left-width: clamp(292px, 32vw, 420px);
+    --contacts-left-bg-width: calc(var(--contacts-page-padding-x) + var(--contacts-left-width));
+    padding: var(--content-padding-y) 0 0;
+    background: linear-gradient(to right, #ffffff 0, #ffffff var(--contacts-left-bg-width), var(--content-background) var(--contacts-left-bg-width), var(--content-background) 100%);
+}
+
 .contacts_layout {
     display: flex;
     height: calc(100vh - 140px);
-    padding: 8px 56px 24px;
+    gap: clamp(16px, 2vw, 32px);
+    padding: 8px var(--contacts-page-padding-x) 24px;
     max-width: 1440px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
-
 .contacts_left {
-    width: 35%;
+    flex: 0 0 var(--contacts-left-width);
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding-right: 40px;
+    padding-right: clamp(12px, 1.6vw, 32px);
     border-right: 1px solid #e0e0e0;
     overflow: hidden;
+    box-sizing: border-box;
+    background-color: #ffffff;
 }
-
-
-.contact_list {
-    flex: 1;
-    overflow-y: auto;
-}
-
-.contact_list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.contact_list::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.contact_list::-webkit-scrollbar-thumb {
-    background-color: #c0c0c0;
-    border-radius: 4px;
-}
-
 
 .contacts_right {
-    width: 65%;
-    padding-left: 48px;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-top: clamp(32px, 5vw, 64px);
+    padding-left: clamp(12px, 2vw, 40px);
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: clamp(16px, 2vw, 32px);
+    box-sizing: border-box;
+    background-color: var(--content-background);
 }
 
 .contacts_right_top {
     display: flex;
     align-items: center;
-    gap: 24px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    min-width: 0;
+    gap: clamp(12px, 1.5vw, 24px);
 }
 
 .contacts_heading {
-    font-size: var( --font-size-page-title);
+    font-size: clamp(36px, 4vw, 61px);
     font-weight: 700;
     color: var(--primary-color);
     margin: 0;
+    white-space: nowrap;
 }
 
 .contacts_divider_vertical {
@@ -66,8 +67,9 @@
 }
 
 .contacts_subheading {
-    font-size: 18px;
+    font-size: clamp(16px, 1.2vw, 21px);
     color: var(--primary-color);
+    white-space: nowrap;
 }
 
 .contacts_right_bottom {
@@ -80,16 +82,17 @@
 .crb_header {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: clamp(20px, 2.5vw, 32px);
+    min-width: 0;
 }
 
 .crb_avatar {
-    width: 90px;
-    height: 90px;
+    width: clamp(72px, 7vw, 120px);
+    height: clamp(72px, 7vw, 120px);
     border-radius: 50%;
     background-color: var(--primary-color);
     color: white;
-    font-size: 28px;
+    font-size: clamp(22px, 2vw, 36px);
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -102,13 +105,15 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    min-width: 0;
 }
 
 .crb_name {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: clamp(28px, 3vw, 47px);
+    font-weight: 500;
     color: var(--primary-color);
     margin: 0;
+    overflow-wrap: anywhere;
 }
 
 .crb_actions {
@@ -179,7 +184,6 @@
     color: #333;
 }
 
-
 .btn_add_contact {
     display: flex;
     align-items: center;
@@ -196,21 +200,17 @@
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-
 .btn_add_contact img {
     width: 18px;
     height: 18px;
     filter: brightness(0) invert(1);
 }
 
-
 .btn_add_contact:hover {
     background-color: var(--color-secondary);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-
-/* ── Toast ── */
 .contactToast {
     position: fixed;
     bottom: 40px;
@@ -238,15 +238,11 @@
     background-color: rgb(255, 129, 144);
 }
 
-
-/* ── FABs (hidden on desktop) ── */
 .fab_add_contact,
 .fab_contact_more {
     display: none;
 }
 
-
-/* ── Back button (hidden on desktop) ── */
 .btn_back_to_contacts {
     display: none;
     align-items: center;
@@ -263,33 +259,12 @@
     background-color: rgba(0, 0, 0, 0.06);
 }
 
-
-/* ── Tablet (768px – 1023px) ── */
+/* ── Mobile / tablet panel switching ── */
 @media (max-width: 1023px) {
-    .contacts_layout {
-        padding: 8px 24px 24px;
+    .contacts_content {
+        background: #ffffff;
     }
 
-    .contacts_left {
-        width: 42%;
-        padding-right: 24px;
-    }
-
-    .contacts_right {
-        width: 58%;
-        padding-left: 24px;
-    }
-
-    .contacts_heading {
-        font-size: clamp(28px, 4vw, 48px);
-    }
-}
-
-
-/* ── Mobile (≤ 1023px) ── */
-@media (max-width: 1023px) {
-
-    /* ── Layout: full-screen panel switching ── */
     .contacts_layout {
         flex-direction: column;
         height: auto;
@@ -299,19 +274,22 @@
 
     .contacts_left {
         width: 100%;
+        flex: 1 1 auto;
         border-right: none;
         padding-right: 0;
+        background-color: #ffffff;
     }
 
     .contacts_right {
         display: none;
         width: 100%;
+        flex: 1 1 auto;
         padding-left: 0;
+        padding-top: 0;
         flex-direction: column;
         gap: 16px;
     }
 
-    /* Detail open: hide list, show full-screen detail */
     .contacts_layout.detail_open .contacts_left {
         display: none;
     }
@@ -327,6 +305,10 @@
         gap: 4px;
         position: relative;
         padding-right: 40px;
+    }
+
+    .contacts_heading {
+        font-size: clamp(28px, 4vw, 48px);
     }
 
     .contacts_divider_vertical {
@@ -369,12 +351,10 @@
         font-size: 20px;
     }
 
-    /* Hide desktop add-button — FAB replaces it */
     .btn_add_contact {
         display: none;
     }
 
-    /* ── FAB shared styles ── */
     .fab_add_contact,
     .fab_contact_more {
         display: flex;
@@ -407,7 +387,6 @@
         filter: brightness(0) invert(1);
     }
 
-    /* more_vert FAB only visible when detail is open */
     .fab_contact_more {
         display: none;
     }
