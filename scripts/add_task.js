@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', initAddTask);
 async function initAddTask() {
     if (!document.getElementById('assignedOptions')) return;
 
-    await loadAvailableContacts();
-    renderAssignedOptions();
     setupPriorityButtons();
     setDefaultPriority();
+    await loadAvailableContacts();
+    renderAssignedOptions();
     setupSubtaskInput();
     setupClearButton();
     setupAssignedDropdown();
