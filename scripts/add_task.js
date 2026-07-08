@@ -3,52 +3,37 @@
  */
 
 
-/**
- * Represents a contact that can be assigned to a task.
- *
- * @typedef {Object} Contact
- * @property {string} id - Firebase contact id.
- * @property {string} name - Contact display name.
- * @property {string} [email] - Contact email address.
- * @property {string} [phone] - Contact phone number.
- */
-
-/**
- * Represents a subtask in the add-task form.
- *
- * @typedef {Object} Subtask
- * @property {string} title - Subtask title.
- * @property {boolean} completed - Whether the subtask is completed.
- * @property {boolean} [isEditing] - Whether the subtask is currently edited.
- */
-
-/**
- * Represents the task payload saved to Firebase.
- *
- * @typedef {Object} TaskFormData
- * @property {string} title - Task title.
- * @property {string} description - Task description.
- * @property {string} dueDate - Due date in ISO format.
- * @property {string} priority - Selected priority.
- * @property {string[]} assignedTo - Assigned contact ids.
- * @property {string} category - Selected category.
- * @property {Subtask[]} subtasks - Task subtasks.
- * @property {string} status - Board column status.
- */
-
 /* ── State ── */
-/** @type {Contact[]} */
+/**
+ * List of all available contacts.
+ *
+ * @type {Contact[]}
+ */
 let availableContacts = [];
 
-/** @type {Contact[]} */
+
+/**
+ * List of contacts assigned to the current task.
+ *
+ * @type {Contact[]}
+ */
 let selectedContacts = [];
 
-/** @type {string} */
+
+/**
+ * Currently selected task priority.
+ *
+ * @type {string}
+ */
 let selectedPriority = 'medium';
 
-/** @type {Subtask[]} */
-let taskSubtasks = [];
 
+/**
+ * List of subtasks for the current task.
+ *
+ * @type {Subtask[]}
+ */
+let taskSubtasks = [];
 
 
 /* ── Init ── */
