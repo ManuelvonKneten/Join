@@ -36,10 +36,6 @@ let selectedPriority = 'medium';
 let taskSubtasks = [];
 
 
-/* ── Init ── */
-document.addEventListener('DOMContentLoaded', initAddTask);
-
-
 /**
  * Initializes the add-task page:
  * loads contacts and sets up all event listeners.
@@ -50,10 +46,20 @@ document.addEventListener('DOMContentLoaded', initAddTask);
 async function initAddTask() {
     if (!document.getElementById('assignedOptions')) return;
 
-    setupPriorityButtons();
+    initAddTaskEventListeners();
     setDefaultPriority();
     await loadAvailableContacts();
     renderAssignedOptions();
+}
+
+
+/**
+ * Initializes all add-task event listeners.
+ *
+ * @returns {void}
+ */
+function initAddTaskEventListeners() {
+    setupPriorityButtons();
     setupSubtaskInput();
     setupClearButton();
     setupAssignedDropdown();
@@ -105,3 +111,6 @@ function onPriorityButtonClick(event) {
     event.currentTarget.setAttribute('aria-pressed', 'true');
     selectedPriority = event.currentTarget.dataset.priority;
 }
+
+
+window.addEventListener('DOMContentLoaded', initAddTask);

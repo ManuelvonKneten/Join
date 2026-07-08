@@ -1,13 +1,31 @@
-// Initialize the splash screen after the DOM has finished loading.
-document.addEventListener('DOMContentLoaded', initSplash);
-
-
 /**
  * Starts the splash animation as soon as the header logo is loaded (and thus
  * measurable). The splash logo flies exactly onto the position of the
  * header logo so that no jump occurs when the overlay fades out.
+ *
+ * @returns {void}
  */
 function initSplash() {
+    initSplashLogo();
+}
+
+
+/**
+ * Initializes the splash logo animation.
+ *
+ * @returns {void}
+ */
+function initSplashLogo() {
+    initSplashLogoEventListeners();
+}
+
+
+/**
+ * Initializes all splash logo event listeners.
+ *
+ * @returns {void}
+ */
+function initSplashLogoEventListeners() {
     const headerLogo = document.querySelector('.logInLogo');
     if (headerLogo && !headerLogo.complete) {
         headerLogo.addEventListener('load', runSplash, { once: true });
@@ -67,3 +85,6 @@ function fadeOutSplash(container) {
     container.style.opacity = '0';
     container.addEventListener('transitionend', () => container.remove(), { once: true });
 }
+
+
+window.addEventListener('DOMContentLoaded', initSplash);
