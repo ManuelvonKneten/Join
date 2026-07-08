@@ -20,19 +20,32 @@ async function loadAvailableContacts() {
 }
 
 
+/** @type {boolean} Whether the shared outside-click handler is attached. */
+let assignedDropdownHandlerAttached = false;
+
 /**
- * Sets up the outside-click listener that closes the dropdown.
+ * Registers a single outside-click handler that closes any open assigned
+ * dropdown. Idempotent: safe to call on every add-task / edit-task open
+ * without stacking duplicate listeners.
  *
- * @param {string} [suffix=''] - ID suffix, e.g. 'Edit' for the edit popup.
  * @returns {void}
  */
-function setupAssignedDropdown(suffix = '') {
-    document.addEventListener('click', (event) => {
-        const dropdown = document.getElementById('assignedDropdown' + suffix);
-        if (!dropdown) return;
-        if (!dropdown.contains(event.target)) {
-            closeAssignedDropdown(suffix);
-        }
+function setupAssignedDropdown() {
+    if (assignedDropdownHandlerAttached) return;
+    document.addEventListener('click', closeOpenAssignedDropdowns);
+    assignedDropdownHandlerAttached = true;
+}
+
+
+/**
+ * Closes every open assigned dropdown when the click happened outside of it.
+ *
+ * @param {MouseEvent} event - The document click event.
+ * @returns {void}
+ */
+function closeOpenAssignedDropdowns(event) {
+    document.querySelectorAll('.assigned_dropdown.open').forEach(dropdown => {
+        if (!dropdown.contains(event.target)) closeAssignedDropdown(dropdown);
     });
 }
 
@@ -75,15 +88,14 @@ function setAssignedDropdownOpen(isOpen) {
 function openAssignedDropdown()  { setAssignedDropdownOpen(true);  }
 
 /**
- * Closes an assigned dropdown.
+ * Closes a specific assigned dropdown.
  *
- * @param {string} [suffix=''] - ID suffix, e.g. 'Edit' for the edit popup
+ * @param {HTMLElement} dropdown - The `.assigned_dropdown` wrapper element.
  * @returns {void}
  */
-function closeAssignedDropdown(suffix = '') {
-    const dropdown = document.getElementById('assignedDropdown' + suffix);
+function closeAssignedDropdown(dropdown) {
     if (!dropdown) return;
-    document.getElementById('assignedOptions' + suffix)?.classList.add('hidden');
+    dropdown.querySelector('.assigned_options')?.classList.add('hidden');
     dropdown.classList.remove('open');
     dropdown.querySelector('.assigned_arrow')?.classList.remove('rotated');
 }

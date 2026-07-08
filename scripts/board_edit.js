@@ -80,6 +80,7 @@ function saveSubtask(index){
  * @returns {Promise<void>}
  */
 async function initEditAssigned(task) {
+    setupAssignedDropdown();
 
     await loadAvailableContacts();
 
@@ -91,7 +92,6 @@ async function initEditAssigned(task) {
 
     renderAssignedOptionsEdit();
     renderAssignedAvatarsEdit();
-    setupAssignedDropdown('Edit');  
 }
 
 

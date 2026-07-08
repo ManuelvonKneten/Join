@@ -427,12 +427,13 @@ label,
         visibility: visible;
     }
 
-    /* Edit popup: full-height flex column with a scrollable body so the
-       assigned dropdown (fixed bottom sheet) and the selected avatars stay
-       inside the viewport, just like the Add Task popup. */
-    .dialogTask:has(.edit_content) {
-        height: 95vh;
-        max-height: 95vh;
+    /* Edit popup: flex column with a scrollable body so the assigned
+       dropdown (fixed bottom sheet) and the selected avatars stay inside
+       the viewport, just like the Add Task popup. Slightly below full
+       height so there is a clear backdrop strip to tap for closing. */
+    .dialogTask[open]:has(.edit_content) {
+        height: 85vh;
+        max-height: 85vh;
         overflow: hidden;
         display: flex;
         flex-direction: column;
