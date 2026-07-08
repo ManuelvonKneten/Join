@@ -2,29 +2,42 @@
 let showAllTaskPopupAvatars = false;
 
 /**
- * Closes the task detail modal on a click outside the content.
+ * Closes the task detail/edit modal when the click lands outside the
+ * visible card. Checking the card (instead of `event.target === dialog`)
+ * also works on mobile, where the card fills almost the whole screen and
+ * the dialog element itself is never the direct click target.
+ *
+ * Clicks whose target was already removed from the DOM by a re-render
+ * (e.g. opening the edit view or updating subtasks replaces the dialog
+ * content) are ignored, so the popup does not close itself instantly.
  *
  * @param {MouseEvent} event
  * @returns {void}
  */
 function handleDialogClick(event) {
-    const dialog = document.getElementById('dialogTask');
-    if (event.target === dialog) {
+    if (!event.target.isConnected) return;
+    const dialog = event.currentTarget;
+    const card = dialog.querySelector('.dialog_content, .edit_content');
+    if (card && !card.contains(event.target)) {
         dialog.close();
-    }   
+    }
 }
 
 
 /**
- * Closes the add-task modal on a click on the background.
+ * Closes the add-task modal when the click lands outside the visible card.
+ * Clicks whose target was removed by a re-render are ignored.
  *
  * @param {MouseEvent} event
  * @returns {void}
  */
 function handleDialogAddTaskBoard (event) {
-      if (event.target === dialog_add_task_board) {
-            dialog_add_task_board.close();
-        }
+    if (!event.target.isConnected) return;
+    const dialog = event.currentTarget;
+    const card = dialog.querySelector('.add_task_layout');
+    if (card && !card.contains(event.target)) {
+        dialog.close();
+    }
 }
 
 dialog_add_task_board.addEventListener('click', handleDialogAddTaskBoard);

@@ -99,6 +99,23 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
 
 
 /**
+ * Escapes HTML-special characters so user input can be safely
+ * inserted into an innerHTML template (prevents XSS).
+ *
+ * @param {*} value - The value to escape (coerced to string).
+ * @returns {string} The escaped string.
+ */
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+
+/**
  * Shows or hides a validation error element.
  *
  * @param {HTMLElement|null} errorElement - Error element.
