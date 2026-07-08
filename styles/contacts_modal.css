@@ -103,7 +103,11 @@
 }
 
 .modal_close_btn:hover {
-    color: var(--sidebar-hover-background);
+    color: color-mix(
+        in srgb,
+        var(--color-tertiary) 70%,
+        var(--color-secondary) 30%
+    );
 }
 
 
@@ -198,7 +202,11 @@
 }
 
 .btn_modal_create:hover {
-    background-color: var(--sidebar-hover-background);
+    background-color: color-mix(
+        in srgb,
+        var(--color-tertiary) 70%,
+        var(--color-secondary) 30%
+    );
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 

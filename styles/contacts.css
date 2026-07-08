@@ -207,7 +207,11 @@
 }
 
 .btn_add_contact:hover {
-    background-color: var(--color-secondary);
+    background-color: color-mix(
+        in srgb,
+        var(--color-tertiary) 70%,
+        var(--color-secondary) 30%
+    );
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -376,7 +380,11 @@
 
     .fab_add_contact:hover,
     .fab_contact_more:hover {
-        background-color: var(--sidebar-hover-background);
+        background-color: color-mix(
+            in srgb,
+            var(--color-tertiary) 70%,
+            var(--color-secondary) 30%
+        );
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
     }
 
