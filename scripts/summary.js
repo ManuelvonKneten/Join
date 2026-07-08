@@ -2,12 +2,14 @@
  * @file Handles the summary dashboard rendering and task counters.
  */
 
+
 /**
  * Global active user.
  *
  * @type {string}
  */
 let currentUser = localStorage.getItem("currentUser") || "Guest";
+
 
 /**
  * Represents a task object used on the summary dashboard.
@@ -23,8 +25,6 @@ let currentUser = localStorage.getItem("currentUser") || "Guest";
  *
  * @returns {string}
  */
-
-
 function getGreetingText() {
   const currentHour = new Date().getHours();
   const isGuest = currentUser === "Guest";
@@ -78,7 +78,6 @@ function renderGreeting() {
 }
 
 
-// firebase-actions
 /**
  * Loads task records from the database and updates the summary dashboard.
  *
@@ -135,6 +134,7 @@ function setSummaryText(id, value) {
 function countSummaryTasksByKey(tasks, key, value) {
   return tasks.filter((task) => task[key] === value).length;
 }
+
 
 /**
  * Finds and displays the next urgent upcoming deadline.

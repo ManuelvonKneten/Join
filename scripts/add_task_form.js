@@ -2,6 +2,7 @@
  * @file Handles add-task validation, submit and clear behavior.
  */
 
+
 /**
  * Validates all required task form fields and updates visible error states.
  *

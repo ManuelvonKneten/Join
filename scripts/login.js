@@ -1,4 +1,6 @@
+// Initialize the login page after the DOM has finished loading.
 document.addEventListener('DOMContentLoaded', initLogin);
+
 
 /**
  * Sets up the login form, guest login button, password toggle, and input checks.
@@ -20,6 +22,7 @@ function initLogin() {
     initBlurCheck(emailInput, passInput, alertBox);
 }
 
+
 /**
  * Logs in without a user account and opens the summary page.
  *
@@ -29,6 +32,7 @@ function loginAsGuest() {
     localStorage.setItem('currentUser', 'Guest');
     window.location.href = './htmls/summary.html';
 }
+
 
 /**
  * Searches the stored users for matching login credentials.
@@ -42,6 +46,7 @@ async function findUser(email, password) {
     const users = data ? Object.values(data) : [];
     return users.find(u => u.email === email && u.password === password);
 }
+
 
 /**
  * Handles the login form submit event and redirects valid users.
@@ -68,6 +73,7 @@ async function handleLogin(e, emailInput, passInput, alertBox) {
     }
 }
 
+
 /**
  * Sets up input and blur checks for the login fields.
  *
@@ -91,4 +97,3 @@ function initBlurCheck(emailInput, passInput, alertBox) {
     });
 }
 
-/* Password toggle logic lives in password_toggle.js (shared with signup). */

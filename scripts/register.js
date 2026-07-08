@@ -1,20 +1,86 @@
-const acceptCheckbox       = document.getElementById('signupAccept');
-const signupBtn            = document.getElementById('signupBtn');
-const signupForm           = document.querySelector('form');
-const signupNameInput      = document.getElementById('signupName');
-const signupEmailInput     = document.getElementById('signupEmail');
-const signupPasswordInput  = document.getElementById('signupPassword');
-const signupConfirmInput   = document.getElementById('signupConfirmPassword');
-const mismatchMsg          = document.getElementById('passwordMismatch');
-const nameError            = document.getElementById('nameError');
-const emailError           = document.getElementById('emailError');
-const passwordError        = document.getElementById('passwordError');
-const acceptError          = document.getElementById('acceptError');
-const urlParams            = new URLSearchParams(window.location.search);
-const messageBox           = document.getElementById('msgBox');
+/**
+ * Checkbox for accepting the privacy policy.
+ * @type {HTMLInputElement}
+ */
+const acceptCheckbox = document.getElementById('signupAccept');
 
+/**
+ * Sign-up submit button.
+ * @type {HTMLButtonElement}
+ */
+const signupBtn = document.getElementById('signupBtn');
 
-/* Field validators live in validation.js; password toggle in password_toggle.js. */
+/**
+ * Sign-up form.
+ * @type {HTMLFormElement}
+ */
+const signupForm = document.querySelector('form');
+
+/**
+ * Name input field.
+ * @type {HTMLInputElement}
+ */
+const signupNameInput = document.getElementById('signupName');
+
+/**
+ * Email input field.
+ * @type {HTMLInputElement}
+ */
+const signupEmailInput = document.getElementById('signupEmail');
+
+/**
+ * Password input field.
+ * @type {HTMLInputElement}
+ */
+const signupPasswordInput = document.getElementById('signupPassword');
+
+/**
+ * Password confirmation input field.
+ * @type {HTMLInputElement}
+ */
+const signupConfirmInput = document.getElementById('signupConfirmPassword');
+
+/**
+ * Password mismatch message element.
+ * @type {HTMLElement}
+ */
+const mismatchMsg = document.getElementById('passwordMismatch');
+
+/**
+ * Name validation error message.
+ * @type {HTMLElement}
+ */
+const nameError = document.getElementById('nameError');
+
+/**
+ * Email validation error message.
+ * @type {HTMLElement}
+ */
+const emailError = document.getElementById('emailError');
+
+/**
+ * Password validation error message.
+ * @type {HTMLElement}
+ */
+const passwordError = document.getElementById('passwordError');
+
+/**
+ * Privacy policy validation error message.
+ * @type {HTMLElement}
+ */
+const acceptError = document.getElementById('acceptError');
+
+/**
+ * URL query parameters.
+ * @type {URLSearchParams}
+ */
+const urlParams = new URLSearchParams(window.location.search);
+
+/**
+ * Message box element.
+ * @type {HTMLElement}
+ */
+const messageBox = document.getElementById('msgBox');
 
 
 /**

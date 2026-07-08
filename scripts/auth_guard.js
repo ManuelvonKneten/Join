@@ -5,6 +5,7 @@
  * (regular or guest).
  */
 
+
 /**
  * Checks whether a user is logged in.
  * Redirects immediately to the login page when `currentUser` is missing.

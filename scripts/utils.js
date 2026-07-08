@@ -1,12 +1,33 @@
+/**
+ * Indicates whether all assigned avatars are displayed
+ * in the "Add Task" contact selection.
+ *
+ * @type {boolean}
+ */
 let showAllAvatarsAddTask = false;
+
+
+/**
+ * Indicates whether all assigned avatars are displayed
+ * in the "Edit Task" contact selection.
+ *
+ * @type {boolean}
+ */
 let showAllAvatarsEditTask = false;
 
+
+/**
+ * Available colors used for generating contact avatars.
+ *
+ * @constant {string[]}
+ */
 const AVATAR_COLORS = [
     '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF',
     '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E',
     '#FC71FF', '#FFC701', '#0038FF', '#FFE62B',
     '#FF4646', '#FFBB2B', '#C3FF2B'
 ];
+
 
 /**
  * Returns the initials of a name (e.g. "Max Mustermann" → "MM").
@@ -20,6 +41,7 @@ function initials(name) {
 
     return name.trim().split(/\s+/).map(word => word[0].toUpperCase()).join('');
 }
+
 
 /**
  * Returns a consistent avatar color for a name.
@@ -36,6 +58,7 @@ function avatarColor(name) {
     for (const character of name) hash += character.charCodeAt(0);
     return AVATAR_COLORS[hash % AVATAR_COLORS.length];
 }
+
 
 /**
  * Clears the current user session from localStorage and redirects to login.

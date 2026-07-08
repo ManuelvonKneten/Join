@@ -1,4 +1,10 @@
+/**
+ * Base URL of the Firebase Realtime Database.
+ *
+ * @constant {string}
+ */
 const DB_URL = 'https://join-project-e7af3-default-rtdb.europe-west1.firebasedatabase.app';
+
 
 /**
  * Reads data from the Firebase Realtime Database.
@@ -13,6 +19,7 @@ async function getFromDB(path) {
     if (!res.ok) throw new Error('Firebase GET failed');
     return res.json();
 }
+
 
 /**
  * Creates a new entry in the Firebase Realtime Database.
@@ -34,6 +41,7 @@ async function postToDB(path, data) {
     return res.json();
 }
 
+
 /**
  * Updates individual fields of an existing entry in the Firebase Realtime Database.
  * Fields that are not passed remain unchanged.
@@ -53,6 +61,7 @@ async function patchToDB(path, data) {
     if (!res.ok) throw new Error('Firebase PATCH failed');
     return res.json();
 }
+
 
 /**
  * Deletes an entry from the Firebase Realtime Database.

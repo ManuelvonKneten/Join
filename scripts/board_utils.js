@@ -1,4 +1,12 @@
-                                       /* --- Utils --- *//**
+                                       /* --- Utils --- */
+/**
+ * Indicates whether the "Move To" menu has already been initialized.
+ *
+ * @type {boolean}
+ */
+let moveToMenuInitialized = false;
+
+
 /**
  * Starts the drag effect (adds a CSS class).
  *
@@ -19,9 +27,6 @@ function startDragEffect(event) {
 function endDragEffect(event) {
     event.currentTarget.classList.remove('dragging');
 }
-
-
-let moveToMenuInitialized = false;
 
 
 /**
@@ -303,7 +308,6 @@ function showNoResultsAlert(tasks) {
     }
     alertRef.innerHTML = '';
 }
-
 
 /**
  * Adds the highlight class to a task column

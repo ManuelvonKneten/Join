@@ -1,4 +1,6 @@
+// Initialize the splash screen after the DOM has finished loading.
 document.addEventListener('DOMContentLoaded', initSplash);
+
 
 /**
  * Starts the splash animation as soon as the header logo is loaded (and thus

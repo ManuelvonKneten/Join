@@ -23,6 +23,7 @@ async function loadAvailableContacts() {
 /** @type {boolean} Whether the shared outside-click handler is attached. */
 let assignedDropdownHandlerAttached = false;
 
+
 /**
  * Registers a single outside-click handler that closes any open assigned
  * dropdown. Idempotent: safe to call on every add-task / edit-task open
@@ -49,6 +50,7 @@ function closeOpenAssignedDropdowns(event) {
     });
 }
 
+
 /**
  * Opens or closes an assigned dropdown.
  * Used by Add Task (without argument) and by the edit popup (suffix = 'Edit').
@@ -68,6 +70,7 @@ function toggleAssignedDropdown(suffix = '') {
     if (arrow) arrow.classList.toggle('rotated');
 }
 
+
 /**
  * Sets the add-task assigned dropdown open or closed.
  *
@@ -80,12 +83,14 @@ function setAssignedDropdownOpen(isOpen) {
     document.querySelector('#assignedDropdown .assigned_trigger').setAttribute('aria-expanded', String(isOpen));
 }
 
+
 /**
  * Opens the add-task assigned dropdown.
  *
  * @returns {void}
  */
 function openAssignedDropdown()  { setAssignedDropdownOpen(true);  }
+
 
 /**
  * Closes a specific assigned dropdown.
@@ -99,6 +104,7 @@ function closeAssignedDropdown(dropdown) {
     dropdown.classList.remove('open');
     dropdown.querySelector('.assigned_arrow')?.classList.remove('rotated');
 }
+
 
 /**
  * Adds a contact to the selection or removes it from it.
@@ -144,6 +150,7 @@ function refocusAssignedOption(contactId) {
     if (refocusItem) refocusItem.focus();
 }
 
+
 /**
  * Renders all contacts as selectable list entries in the dropdown.
  *
@@ -188,7 +195,6 @@ function showAllAssignedAvatarsAddTask() {
 }
 
 
-
 /* ── Category ── */
 /**
  * Sets up the outside-click listener that closes the category dropdown.
@@ -205,6 +211,7 @@ function setupCategoryDropdown() {
     });
 }
 
+
 /**
  * Closes the category dropdown.
  *
@@ -215,6 +222,7 @@ function closeCategoryDropdown() {
     document.getElementById('categoryArrow')?.classList.remove('rotated');
     document.querySelector('#categoryDropdown .assigned_trigger')?.setAttribute('aria-expanded', 'false');
 }
+
 
 /**
  * Opens or closes the category dropdown.
@@ -228,6 +236,7 @@ function toggleCategoryDropdown() {
     document.getElementById('categoryArrow').classList.toggle('rotated', isHidden);
     document.querySelector('#categoryDropdown .assigned_trigger').setAttribute('aria-expanded', String(isHidden));
 }
+
 
 /**
  * Selects a task category and updates the custom dropdown UI.
@@ -313,6 +322,7 @@ function handleSubtaskEscape(input) {
     input.blur();
 }
 
+
 /**
  * Reads the subtask input, adds the subtask to the state and renders the list.
  *
@@ -327,6 +337,7 @@ function addSubtask() {
     subtaskInputElement.value = '';
     renderSubtaskList();
 }
+
 
 /**
  * Removes a subtask from the state by its index and re-renders the list.
@@ -353,6 +364,7 @@ function editSubtaskItem(index) {
     document.getElementById(`subtaskEdit${index}`)?.focus();
 }
 
+
 /**
  * Saves an edited subtask title and leaves edit mode.
  *
@@ -367,6 +379,7 @@ function saveSubtaskItem(index) {
     renderSubtaskList();
 }
 
+
 /**
  * Cancels editing a subtask and restores the rendered list.
  *
@@ -377,6 +390,7 @@ function cancelSubtaskEdit(index) {
     taskSubtasks[index].isEditing = false;
     renderSubtaskList();
 }
+
 
 /**
  * Renders all subtasks as list entries with a delete button.

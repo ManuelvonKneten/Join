@@ -2,6 +2,7 @@
  * @file Handles add-task initialization, shared state and priority controls.
  */
 
+
 /**
  * Represents a contact that can be assigned to a task.
  *

@@ -1,4 +1,6 @@
 /* ── Shared field validators (used by signup and contact forms) ── */
+
+
 /**
  * Checks whether a value contains only letters (incl. umlauts) and spaces.
  *

@@ -86,6 +86,7 @@ function showAllAssignedAvatarsTask(taskId) {
     openTaskPopUp(taskId);
 }
 
+
 /**
  * Opens the edit task popup and loads the task data into the form.
  *

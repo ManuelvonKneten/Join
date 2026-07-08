@@ -2,6 +2,7 @@
  * @file Handles due-date formatting, picker sync and validation for Add Task.
  */
 
+
 /**
  * Converts a date in DD/MM/YYYY format into the ISO format YYYY-MM-DD.
  *
@@ -86,6 +87,7 @@ function countDigitsBeforeCursor(value, cursorPosition) {
     return value.slice(0, cursorPosition).replace(/\D/g, '').length;
 }
 
+
 /**
  * Formats up to eight due-date digits as DD/MM/YYYY.
  *
@@ -99,6 +101,7 @@ function formatDueDateDigits(digits) {
     if (digits.length >= 3) return `${digits.slice(0, 2)}/${digits.slice(2)}`;
     return digits;
 }
+
 
 /**
  * Finds the cursor position after keeping the same digit offset.
@@ -116,6 +119,7 @@ function getCursorPositionAfterFormatting(formattedValue, digitCountBeforeCursor
     }
     return formattedValue.length;
 }
+
 
 /**
  * Restores a collapsed cursor selection in an input.
