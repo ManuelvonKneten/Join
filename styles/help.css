@@ -5,6 +5,10 @@
   font-weight: 400;
 }
 
+.help_page > * {
+  max-width: calc(1440px - var(--sidebar-width));
+}
+
 h1 {
   font-size: 48px;
   font-weight: 700;

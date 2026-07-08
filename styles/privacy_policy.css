@@ -129,6 +129,10 @@
   background-color: rgb(246, 247, 248);
 }
 
+.publicContent > * {
+  max-width: calc(1440px - var(--sidebar-width));
+}
+
 .publicContent h1 {
   margin-bottom: 32px;
   font-size: var(--font-size-page-title);
