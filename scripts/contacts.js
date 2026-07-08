@@ -1,5 +1,17 @@
 /* ── State ── */
+/**
+ * Stores all available contacts.
+ *
+ * @type {Contact[]}
+ */
 let allContacts = [];
+
+
+/**
+ * Stores the currently active selected contact.
+ *
+ * @type {Contact|null}
+ */
 let activeContact = null;
 
 

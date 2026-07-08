@@ -12,15 +12,6 @@ let currentUser = localStorage.getItem("currentUser") || "Guest";
 
 
 /**
- * Represents a task object used on the summary dashboard.
- *
- * @typedef {Object} Task
- * @property {string} [status] - The current task status, for example "todo", "done", "inprogress" or "awaitfeedback".
- * @property {string} [priority] - The task priority, for example "urgent".
- * @property {string} [dueDate] - The task due date as a date string.
- */
-
-/**
  * Returns greeting text for the current user and time.
  *
  * @returns {string}
