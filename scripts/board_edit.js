@@ -98,10 +98,16 @@ async function initEditAssigned(task) {
 /**
  * Adds a contact to the selection or removes it.
  *
+ * Stops propagation so the outside-click handler does not close the
+ * dropdown when an option is clicked (the option is re-rendered on select).
+ *
+ * @param {MouseEvent} event - Click event from the contact option.
  * @param {string} id - Contact ID
  * @returns {void}
  */
-function toggleEditContact(id) {
+function toggleEditContact(event, id) {
+    event.stopPropagation();
+
     const contact = availableContacts.find(c => c.id === id);
     if (!contact) return;
 

@@ -328,7 +328,7 @@ function getSubtasksEditTemplate(subtask, index) {
 function getAssignedOptionsEdit(contact, checked) {
   return `
             <li class="assigned_option ${checked ? 'assigned_option_active' : ''}"
-                onclick="toggleEditContact('${contact.id}')">
+                onclick="toggleEditContact(event, '${contact.id}')">
 
                 <div class="assigned_option_avatar">
                     ${getContactsAvatar(contact.name, false)}
