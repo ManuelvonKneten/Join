@@ -3,29 +3,59 @@ let allContacts = [];
 let activeContact = null;
 
 
-/* ── Init ── */
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Initializes the contacts page.
+ *
+ * @returns {void}
+ */
+function initContacts() {
     loadContacts();
     initContactValidation();
-});
+    initContactsEventListeners();
+}
 
 
-document.addEventListener('keydown', e => {
+/**
+ * Initializes all contacts event listeners.
+ *
+ * @returns {void}
+ */
+function initContactsEventListeners() {
+    document.addEventListener('keydown', handleContactsEscapeKey);
+}
+
+
+/**
+ * Closes open contact overlays when the Escape key is pressed.
+ *
+ * @param {KeyboardEvent} e - The keydown event.
+ * @returns {void}
+ */
+function handleContactsEscapeKey(e) {
     if (e.key !== 'Escape') return;
 
-    const addOverlay = document.getElementById('addContactOverlay');
-    const editOverlay = document.getElementById('editContactOverlay');
-
-    if (addOverlay && !addOverlay.classList.contains('hidden')) {
+    if (isContactOverlayOpen('addContactOverlay')) {
         closeAddContact();
         return;
     }
 
-    if (editOverlay && !editOverlay.classList.contains('hidden')) {
+    if (isContactOverlayOpen('editContactOverlay')) {
         closeEditContact();
         return;
     }
-});
+}
+
+
+/**
+ * Checks if a contact overlay is currently visible.
+ *
+ * @param {string} overlayId - The overlay element id.
+ * @returns {boolean} True when the overlay exists and is visible.
+ */
+function isContactOverlayOpen(overlayId) {
+    const overlay = document.getElementById(overlayId);
+    return Boolean(overlay && !overlay.classList.contains('hidden'));
+}
 
 
 /* ── CRUD ── */
@@ -156,16 +186,26 @@ async function deleteContact() {
     try {
         await deleteFromDB(`contacts/${activeContact.id}`);
         allContacts = allContacts.filter(c => c.id !== activeContact.id);
-        activeContact = null;
         renderContacts();
-        document.querySelector('.contacts_right_bottom').classList.add('hidden');
-        document.querySelector('.contacts_layout').classList.remove('detail_open');
-        document.body.classList.remove('contact_detail_open');
+        resetDeletedContactUI();
         closeEditContact();
         showContactToast('Contact deleted');
     } catch {
         showContactToast('Could not delete contact.', true);
     }
+}
+
+
+/**
+ * Resets UI state after the active contact has been deleted.
+ *
+ * @returns {void}
+ */
+function resetDeletedContactUI() {
+    activeContact = null;
+    document.querySelector('.contacts_right_bottom').classList.add('hidden');
+    document.querySelector('.contacts_layout').classList.remove('detail_open');
+    document.body.classList.remove('contact_detail_open');
 }
 
 
@@ -355,3 +395,6 @@ function showContactToast(message, isError = false) {
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
 }
+
+
+window.addEventListener('DOMContentLoaded', initContacts);

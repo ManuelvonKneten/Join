@@ -2,73 +2,73 @@
  * Checkbox for accepting the privacy policy.
  * @type {HTMLInputElement}
  */
-const acceptCheckbox = document.getElementById('signupAccept');
+let acceptCheckbox;
 
 /**
  * Sign-up submit button.
  * @type {HTMLButtonElement}
  */
-const signupBtn = document.getElementById('signupBtn');
+let signupBtn;
 
 /**
  * Sign-up form.
  * @type {HTMLFormElement}
  */
-const signupForm = document.querySelector('form');
+let signupForm;
 
 /**
  * Name input field.
  * @type {HTMLInputElement}
  */
-const signupNameInput = document.getElementById('signupName');
+let signupNameInput;
 
 /**
  * Email input field.
  * @type {HTMLInputElement}
  */
-const signupEmailInput = document.getElementById('signupEmail');
+let signupEmailInput;
 
 /**
  * Password input field.
  * @type {HTMLInputElement}
  */
-const signupPasswordInput = document.getElementById('signupPassword');
+let signupPasswordInput;
 
 /**
  * Password confirmation input field.
  * @type {HTMLInputElement}
  */
-const signupConfirmInput = document.getElementById('signupConfirmPassword');
+let signupConfirmInput;
 
 /**
  * Password mismatch message element.
  * @type {HTMLElement}
  */
-const mismatchMsg = document.getElementById('passwordMismatch');
+let mismatchMsg;
 
 /**
  * Name validation error message.
  * @type {HTMLElement}
  */
-const nameError = document.getElementById('nameError');
+let nameError;
 
 /**
  * Email validation error message.
  * @type {HTMLElement}
  */
-const emailError = document.getElementById('emailError');
+let emailError;
 
 /**
  * Password validation error message.
  * @type {HTMLElement}
  */
-const passwordError = document.getElementById('passwordError');
+let passwordError;
 
 /**
  * Privacy policy validation error message.
  * @type {HTMLElement}
  */
-const acceptError = document.getElementById('acceptError');
+let acceptError;
 
 /**
  * URL query parameters.
@@ -80,7 +80,102 @@ const urlParams = new URLSearchParams(window.location.search);
  * Message box element.
  * @type {HTMLElement}
  */
-const messageBox = document.getElementById('msgBox');
+let messageBox;
+
+
+function initRegister() {
+    initRegisterElements();
+    initRegisterEventListeners();
+    initRegisterPasswordToggles();
+    showRegisterQueryMessage();
+}
+
+
+function initRegisterElements() {
+    acceptCheckbox = document.getElementById('signupAccept');
+    signupBtn = document.getElementById('signupBtn');
+    signupForm = document.querySelector('form');
+    initRegisterInputElements();
+    initRegisterErrorElements();
+    messageBox = document.getElementById('msgBox');
+}
+
+
+function initRegisterInputElements() {
+    signupNameInput = document.getElementById('signupName');
+    signupEmailInput = document.getElementById('signupEmail');
+    signupPasswordInput = document.getElementById('signupPassword');
+    signupConfirmInput = document.getElementById('signupConfirmPassword');
+}
+
+
+function initRegisterErrorElements() {
+    mismatchMsg = document.getElementById('passwordMismatch');
+    nameError = document.getElementById('nameError');
+    emailError = document.getElementById('emailError');
+    passwordError = document.getElementById('passwordError');
+    acceptError = document.getElementById('acceptError');
+}
+
+
+function initRegisterEventListeners() {
+    initRegisterNameEventListeners();
+    initRegisterEmailEventListeners();
+    initRegisterPasswordEventListeners();
+    initRegisterSubmitEventListeners();
+}
+
+
+function initRegisterNameEventListeners() {
+    if (signupNameInput) {
+        signupNameInput.addEventListener('blur', validateNameOnBlur);
+        signupNameInput.addEventListener('input', validateNameOnInput);
+    }
+}
+
+
+function initRegisterEmailEventListeners() {
+    if (signupEmailInput) {
+        signupEmailInput.addEventListener('blur', validateEmailOnBlur);
+    }
+}
+
+
+function initRegisterPasswordEventListeners() {
+    if (signupPasswordInput && signupConfirmInput) {
+        signupPasswordInput.addEventListener('blur', validatePasswordOnBlur);
+        signupConfirmInput.addEventListener('blur', validateConfirmPasswordOnBlur);
+    }
+}
+
+
+function initRegisterSubmitEventListeners() {
+    if (acceptCheckbox) {
+        acceptCheckbox.addEventListener('change', handleAcceptCheckboxChange);
+    }
+
+    if (signupForm) {
+        signupForm.addEventListener('submit', handleSignupFormSubmit);
+    }
+}
+
+
+function initRegisterPasswordToggles() {
+    if (signupPasswordInput) {
+        initPasswordToggle(signupPasswordInput, document.getElementById('signupPasswordToggle'));
+    }
+
+    if (signupConfirmInput) {
+        initPasswordToggle(signupConfirmInput, document.getElementById('signupConfirmPasswordToggle'));
+    }
+}
+
+
+function showRegisterQueryMessage() {
+    if (messageBox && urlParams.get('msg')) {
+        messageBox.textContent = urlParams.get('msg');
+    }
+}
 
 
 /**
@@ -157,30 +252,31 @@ function validateAcceptCheckbox() {
  * @returns {boolean} True if the signup form is valid.
  */
 function validateSignupForm() {
-    const nameOk     = isValidName(signupNameInput.value);
-    const emailOk    = isValidEmail(signupEmailInput.value);
+    const validation = getSignupValidationState();
+    showSignupValidationErrors(validation);
+    return Object.values(validation).every(Boolean);
+}
+
+
+function getSignupValidationState() {
     const passwordOk = isValidPassword(signupPasswordInput.value);
-    const confirmOk  = passwordOk && passwordsMatch();
-    const acceptedOk = acceptCheckbox.checked;
-
-    setErrorVisible(nameError, !nameOk);
-    setErrorVisible(emailError, !emailOk);
-    setErrorVisible(passwordError, !passwordOk);
-    setErrorVisible(mismatchMsg, !confirmOk);
-    setErrorVisible(acceptError, !acceptedOk);
-
-    return nameOk && emailOk && passwordOk && confirmOk && acceptedOk;
+    return {
+        nameOk: isValidName(signupNameInput.value),
+        emailOk: isValidEmail(signupEmailInput.value),
+        passwordOk,
+        confirmOk: passwordOk && passwordsMatch(),
+        acceptedOk: acceptCheckbox.checked
+    };
 }
 
-if (signupNameInput) {
-    signupNameInput.addEventListener('blur', validateNameOnBlur);
-    signupNameInput.addEventListener('input', validateNameOnInput);
-}
 
-if (signupEmailInput) {
-    signupEmailInput.addEventListener('blur', validateEmailOnBlur);
+function showSignupValidationErrors(validation) {
+    setErrorVisible(nameError, !validation.nameOk);
+    setErrorVisible(emailError, !validation.emailOk);
+    setErrorVisible(passwordError, !validation.passwordOk);
+    setErrorVisible(mismatchMsg, !validation.confirmOk);
+    setErrorVisible(acceptError, !validation.acceptedOk);
 }
-
 
 /**
  * Checks whether the password and confirmation password fields contain the same value.
@@ -192,22 +288,13 @@ function passwordsMatch() {
 }
 
 
-if (signupConfirmInput) {
-    signupPasswordInput.addEventListener('blur', validatePasswordOnBlur);
-    signupConfirmInput.addEventListener('blur', validateConfirmPasswordOnBlur);
-}
-
-initPasswordToggle(signupPasswordInput, document.getElementById('signupPasswordToggle'));
-initPasswordToggle(signupConfirmInput, document.getElementById('signupConfirmPasswordToggle'));
-
-
 /**
  * Updates the signup button state and validates the accept checkbox.
  *
  * @returns {void}
  */
 function handleAcceptCheckboxChange() {
-    signupBtn.disabled = !acceptCheckbox.checked;
+    if (signupBtn) signupBtn.disabled = !acceptCheckbox.checked;
     validateAcceptCheckbox();
 }
 
@@ -222,19 +309,6 @@ function handleSignupFormSubmit(e) {
     e.preventDefault();
     if (!validateSignupForm()) return;
     addUser();
-}
-
-
-if (acceptCheckbox) {
-    acceptCheckbox.addEventListener('change', handleAcceptCheckboxChange);
-}
-
-if (signupForm) {
-    signupForm.addEventListener('submit', handleSignupFormSubmit);
-}
-
-if (messageBox && urlParams.get('msg')) {
-    messageBox.textContent = urlParams.get('msg');
 }
 
 
@@ -319,3 +393,4 @@ function hideRegisterErrorToast(signupToast) {
 }
 
 
+window.addEventListener('DOMContentLoaded', initRegister);
