@@ -329,7 +329,7 @@ function renderContacts() {
         acc[letter].push(contact);
         return acc;
     }, {});
-    list.innerHTML = Object.keys(groups).sort().map(letter => contactGroupHTML(letter, groups[letter]))2.join('');
+    list.innerHTML = Object.keys(groups).sort().map(letter => contactGroupHTML(letter, groups[letter])).join('');
 }
 
 
