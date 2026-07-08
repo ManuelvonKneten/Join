@@ -168,18 +168,32 @@
               <div class="modal_avatar modal_avatar_initials" id="editContactAvatar"></div>
             </div>
 
-            <form class="modal_form_col" onsubmit="saveContact(event)">
-              <div class="inputField">
-                <input id="editContactName" type="text" placeholder="Name" aria-label="Name" required />
-                <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
+            <form class="modal_form_col" onsubmit="saveContact(event)" novalidate>
+              <div class="inputFieldContainer">
+                <div class="inputField">
+                  <input id="editContactName" type="text" placeholder="Name" aria-label="Name" />
+                  <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
+                </div>
+
+                <span id="editContactNameError" class="inputError">Please enter a valid name.</span>
               </div>
-              <div class="inputField">
-                <input id="editContactEmail" type="email" placeholder="Email" aria-label="Email" required />
-                <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
+
+              <div class="inputFieldContainer">
+                <div class="inputField">
+                  <input id="editContactEmail" type="email" placeholder="Email" aria-label="Email" />
+                  <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
+                </div>
+
+                <span id="editContactEmailError" class="inputError">Please enter a valid email address.</span>
               </div>
-              <div class="inputField">
-                <input id="editContactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
-                <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
+
+              <div class="inputFieldContainer">
+                <div class="inputField">
+                  <input id="editContactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
+                  <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
+                </div>
+
+                <span id="editContactPhoneError" class="inputError">Please enter numbers only.</span>
               </div>
 
               <div class="modal_actions">

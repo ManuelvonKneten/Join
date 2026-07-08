@@ -126,6 +126,24 @@ function hideAllContactErrors(){
     })
 }
 
+
+/**
+ * Hides all edit contact form error messages.
+ *
+ * @returns {void}
+ */
+function hideAllEditContactErrors(){
+    const errors = [
+        'editContactNameError',
+        'editContactEmailError',
+        'editContactPhoneError'
+    ];
+
+    errors.forEach(id => {
+        setErrorVisible(document.getElementById(id), false)
+    })
+}
+
 /**
  * Checks whether a contact name contains only letters and spaces.
  *
@@ -191,6 +209,8 @@ function initContactValidation() {
     const email = document.getElementById('contactEmail');
     const phone = document.getElementById('contactPhone');
 
+    if (!name || !email || !phone) return;
+
     name.addEventListener('blur', () => {
         setErrorVisible(document.getElementById('contactNameError'),
         !isValidContactName(name.value)
@@ -210,6 +230,48 @@ function initContactValidation() {
             !isValidContactPhone(phone.value)
         );
     });
+
+    initEditContactValidation();
+}
+
+
+/**
+ * Initializes validation event listeners for the edit contact form fields.
+ *
+ * Adds blur event listeners to the name, email, and phone input fields.
+ * When a field loses focus, its value is validated and the corresponding
+ * error message visibility is updated.
+ *
+ * @function initEditContactValidation
+ * @returns {void}
+ */
+function initEditContactValidation() {
+    const name = document.getElementById('editContactName');
+    const email = document.getElementById('editContactEmail');
+    const phone = document.getElementById('editContactPhone');
+
+    if (!name || !email || !phone) return;
+
+    name.addEventListener('blur', () => {
+        setErrorVisible(
+            document.getElementById('editContactNameError'),
+            !isValidContactName(name.value)
+        );
+    });
+
+    email.addEventListener('blur', () => {
+        setErrorVisible(
+            document.getElementById('editContactEmailError'),
+            !isValidContactEmail(email.value)
+        );
+    });
+
+    phone.addEventListener('blur', () => {
+        setErrorVisible(
+            document.getElementById('editContactPhoneError'),
+            !isValidContactPhone(phone.value)
+        );
+    });
 }
 
 
@@ -224,10 +286,29 @@ async function saveContact(event) {
     event.preventDefault();
     if (!activeContact) return;
 
+    const name = document.getElementById('editContactName');
+    const email = document.getElementById('editContactEmail');
+    const phone = document.getElementById('editContactPhone');
+
+    if (!isValidContactName(name.value)) {
+        setErrorVisible(document.getElementById('editContactNameError'), true);
+        return;
+    }
+
+    if (!isValidContactEmail(email.value)) {
+        setErrorVisible(document.getElementById('editContactEmailError'), true);
+        return;
+    }
+
+    if (!isValidContactPhone(phone.value)) {
+        setErrorVisible(document.getElementById('editContactPhoneError'), true);
+        return;
+    }
+
     const updated = {
-        name: document.getElementById('editContactName').value.trim(),
-        email: document.getElementById('editContactEmail').value.trim(),
-        phone: document.getElementById('editContactPhone').value.trim(),
+        name: name.value.trim(),
+        email: email.value.trim(),
+        phone: phone.value.trim(),
     };
 
     try {
@@ -388,6 +469,7 @@ function overlayClose(event) {
  * @returns {void}
  */
 function openEditContact(contact) {
+    hideAllEditContactErrors();
     document.getElementById('editContactName').value = contact.name || '';
     document.getElementById('editContactEmail').value = contact.email || '';
     document.getElementById('editContactPhone').value = contact.phone || '';
