@@ -63,38 +63,49 @@ async function loadContacts() {
  */
 async function createContact(event) {
     event.preventDefault();
-    
-    const name = document.getElementById('contactName');
-    const email = document.getElementById('contactEmail');
-    const phone = document.getElementById('contactPhone');
+    const formData = getValidContactData('contact');
+    if (!formData) return;
+    await persistNewContact(formData, event.target);
+}
 
-    const nameOk = isValidContactName(name.value);
-    const emailOk = isValidContactEmail(email.value);
-    const phoneOk = isValidContactPhone(phone.value);
-    
-    if(!nameOk) {
-    setErrorVisible(document.getElementById('contactNameError'), true);
-    return;
+
+/**
+ * Validates a contact form and toggles its error messages.
+ *
+ * Reads the name, email and phone fields for the given id prefix
+ * ('contact' for add, 'editContact' for edit) and validates each one.
+ *
+ * @param {string} prefix - The field id prefix.
+ * @returns {{name: string, email: string, phone: string}|null} Trimmed values, or null if invalid.
+ */
+function getValidContactData(prefix) {
+    const fields = [
+        ['Name', isValidContactName],
+        ['Email', isValidContactEmail],
+        ['Phone', isValidContactPhone],
+    ];
+    const result = {};
+    for (const [field, isValid] of fields) {
+        const el = document.getElementById(prefix + field);
+        const ok = isValid(el.value);
+        setErrorVisible(document.getElementById(`${prefix}${field}Error`), !ok);
+        if (!ok) return null;
+        result[field.toLowerCase()] = el.value.trim();
     }
+    return result;
+}
 
-    if(!emailOk){
-    setErrorVisible(document.getElementById('contactEmailError'), true);
-    return;
-    }    
-   
-    if(!phoneOk) {
-    setErrorVisible(document.getElementById('contactPhoneError'), true);
-    return;
-    }    
 
-    const formData = {
-    name: name.value.trim(),
-    email: email.value.trim(),
-    phone: phone.value.trim()
-    };
-
-    setCreateButtonLoading(event.target, true);
-
+/**
+ * Saves a new contact to the database and updates state and UI.
+ *
+ * @async
+ * @param {{name: string, email: string, phone: string}} formData - The validated contact data.
+ * @param {HTMLFormElement} form - The add contact form element.
+ * @returns {Promise<void>}
+ */
+async function persistNewContact(formData, form) {
+    setCreateButtonLoading(form, true);
     try {
         const response = await postToDB('contacts', formData);
         allContacts.push({ id: response.name, ...formData });
@@ -104,7 +115,7 @@ async function createContact(event) {
     } catch {
         showContactToast('Something went wrong. Please try again.', true);
     } finally {
-        setCreateButtonLoading(event.target, false);
+        setCreateButtonLoading(form, false);
     }
 }
 
@@ -285,32 +296,20 @@ function initEditContactValidation() {
 async function saveContact(event) {
     event.preventDefault();
     if (!activeContact) return;
+    const updated = getValidContactData('editContact');
+    if (!updated) return;
+    await persistContactUpdate(updated);
+}
 
-    const name = document.getElementById('editContactName');
-    const email = document.getElementById('editContactEmail');
-    const phone = document.getElementById('editContactPhone');
 
-    if (!isValidContactName(name.value)) {
-        setErrorVisible(document.getElementById('editContactNameError'), true);
-        return;
-    }
-
-    if (!isValidContactEmail(email.value)) {
-        setErrorVisible(document.getElementById('editContactEmailError'), true);
-        return;
-    }
-
-    if (!isValidContactPhone(phone.value)) {
-        setErrorVisible(document.getElementById('editContactPhoneError'), true);
-        return;
-    }
-
-    const updated = {
-        name: name.value.trim(),
-        email: email.value.trim(),
-        phone: phone.value.trim(),
-    };
-
+/**
+ * Persists changed contact data to the database and updates state and UI.
+ *
+ * @async
+ * @param {{name: string, email: string, phone: string}} updated - The validated contact data.
+ * @returns {Promise<void>}
+ */
+async function persistContactUpdate(updated) {
     try {
         await patchToDB(`contacts/${activeContact.id}`, updated);
         Object.assign(activeContact, updated);
