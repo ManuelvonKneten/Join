@@ -7,9 +7,7 @@ let activeContact = null;
 document.addEventListener('DOMContentLoaded', () => {
     loadContacts();
     initContactValidation();
-
-}); 
-    
+});
 
 
 document.addEventListener('keydown', e => {
@@ -70,33 +68,6 @@ async function createContact(event) {
 
 
 /**
- * Validates a contact form and toggles its error messages.
- *
- * Reads the name, email and phone fields for the given id prefix
- * ('contact' for add, 'editContact' for edit) and validates each one.
- *
- * @param {string} prefix - The field id prefix.
- * @returns {{name: string, email: string, phone: string}|null} Trimmed values, or null if invalid.
- */
-function getValidContactData(prefix) {
-    const fields = [
-        ['Name', isValidContactName],
-        ['Email', isValidContactEmail],
-        ['Phone', isValidContactPhone],
-    ];
-    const result = {};
-    for (const [field, isValid] of fields) {
-        const el = document.getElementById(prefix + field);
-        const ok = isValid(el.value);
-        setErrorVisible(document.getElementById(`${prefix}${field}Error`), !ok);
-        if (!ok) return null;
-        result[field.toLowerCase()] = el.value.trim();
-    }
-    return result;
-}
-
-
-/**
  * Saves a new contact to the database and updates state and UI.
  *
  * @async
@@ -121,77 +92,6 @@ async function persistNewContact(formData, form) {
 
 
 /**
- * Hides all contact form error messages.
- *
- * @returns {void}
- */
-function hideAllContactErrors(){
-    const errors = [
-        'contactNameError',
-        'contactEmailError',
-        'contactPhoneError'
-    ];
-    
-    errors.forEach(id => {
-        setErrorVisible(document.getElementById(id), false)
-    })
-}
-
-
-/**
- * Hides all edit contact form error messages.
- *
- * @returns {void}
- */
-function hideAllEditContactErrors(){
-    const errors = [
-        'editContactNameError',
-        'editContactEmailError',
-        'editContactPhoneError'
-    ];
-
-    errors.forEach(id => {
-        setErrorVisible(document.getElementById(id), false)
-    })
-}
-
-/**
- * Checks whether a contact name contains only letters and spaces.
- *
- * @param {string} value - The contact name to validate.
- * @returns {boolean} True if the name contains only valid characters.
- */
-function isValidContactName(value) {
-    return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 1;
-}
-
-
-/**
- * Checks whether an email address has a valid format.
- *
- * @param {string} value - The email address to validate.
- * @returns {boolean} True if the email address matches the required format.
- */
-function isValidContactEmail(value) {
-    const emailRegex = /^[^\s@.][^\s@]*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/;
-    return emailRegex.test(value.trim());    
-}
-
-
-/**
- * Checks whether a phone number contains only valid phone characters.
- *
- * Allows an optional leading plus sign, numbers, and spaces.
- *
- * @param {string} value - The phone number to validate.
- * @returns {boolean} True if the phone number contains valid characters.
- */
-function isValidContactPhone(value) {
-    return /^\+?[0-9\s]+$/.test(value.trim());
-}
-
-
-/**
  * Updates the create button while the contact is being saved.
  *
  * @param {HTMLFormElement} form - The add contact form element.
@@ -202,47 +102,6 @@ function setCreateButtonLoading(form, isLoading) {
     const btn = form.querySelector('.btn_modal_create');
     btn.disabled = isLoading;
     btn.textContent = isLoading ? 'Saving…' : 'Create contact ✓';
-}
-
-
-/**
- * Initializes validation event listeners for the contact form fields.
- *
- * Adds blur event listeners to the name, email, and phone input fields.
- * When a field loses focus, its value is validated and the corresponding
- * error message visibility is updated.
- *
- * @function initContactValidation
- * @returns {void}
- */
-function initContactValidation() {
-    wireContactFieldValidation('contact');
-    wireContactFieldValidation('editContact');
-}
-
-
-/**
- * Wires blur validation onto a contact form's name, email and phone fields.
- *
- * Missing fields are skipped, so the same call works on pages that only
- * contain one of the forms (or none, like board.html).
- *
- * @param {string} prefix - The field id prefix ('contact' or 'editContact').
- * @returns {void}
- */
-function wireContactFieldValidation(prefix) {
-    const validators = {
-        Name: isValidContactName,
-        Email: isValidContactEmail,
-        Phone: isValidContactPhone,
-    };
-    for (const [field, isValid] of Object.entries(validators)) {
-        const input = document.getElementById(prefix + field);
-        if (!input) continue;
-        input.addEventListener('blur', () =>
-            setErrorVisible(document.getElementById(`${prefix}${field}Error`), !isValid(input.value))
-        );
-    }
 }
 
 
@@ -321,7 +180,7 @@ function renderContacts() {
     const list = document.getElementById('contactList');
     if (!list) return;
     if (!allContacts.length) return list.innerHTML = '<p class="no_contacts">No contacts yet.</p>';
-      
+
     const sorted = [...allContacts].sort((a, b) => a.name.localeCompare(b.name));
     const groups = sorted.reduce((acc, contact) => {
         const letter = contact.name[0].toUpperCase();
