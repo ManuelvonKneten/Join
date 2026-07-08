@@ -218,29 +218,48 @@ const KEY_MOVES = {
  * @returns {void}
  */
 function handleKeyboardBoard(event){
-    if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
-        return;
-    }
+    if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") return;
 
     if (event.key === "Escape" && keyboardDraggedTaskId) {
-        const card = document.querySelector(`[data-id="${keyboardDraggedTaskId}"]`);
-
-        if(card) {
-            card.classList.remove("keyboard-selected", "dragging-keyboard");
-        }
-
-        keyboardDraggedTaskId = null;
-        keyboardModeActive = false;
+        cancelKeyboardDrag();
         return;
     }
 
-    if(!keyboardDraggedTaskId || !keyboardModeActive) return;
+    if (!keyboardDraggedTaskId || !keyboardModeActive) return;
 
-    if(KEY_MOVES[event.key]){
+    if (KEY_MOVES[event.key]) {
         event.preventDefault();
         moveKeyboardTask(KEY_MOVES[event.key]);
     }
-  
+}
+
+
+/**
+ * Cancels the current keyboard drag selection and resets the keyboard state.
+ *
+ * @returns {void}
+ */
+function cancelKeyboardDrag() {
+    const card = document.querySelector(`[data-id="${keyboardDraggedTaskId}"]`);
+    if (card) card.classList.remove("keyboard-selected", "dragging-keyboard");
+    keyboardDraggedTaskId = null;
+    keyboardModeActive = false;
+}
+
+
+/**
+ * Sends a PATCH request for a task to Firebase.
+ *
+ * @param {string} taskId - Firebase id of the task.
+ * @param {Object} data - The payload to patch.
+ * @returns {Promise<Response>}
+ */
+function patchTask(taskId, data) {
+    return fetch(`${DB_URL}/tasks/${taskId}.json`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    });
 }
 
 document.addEventListener("keydown", handleKeyboardBoard);

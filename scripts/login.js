@@ -91,6 +91,33 @@ function initBlurCheck(emailInput, passInput, alertBox) {
     });
 }
 
+/** Icon paths used by the password visibility toggle. */
+const PASSWORD_TOGGLE_ICONS = {
+    lock:   './assets/icons/lock.png',
+    hidden: './assets/icons/visibility_off.svg',
+    shown:  './assets/icons/visibility.svg',
+};
+
+
+/**
+ * Updates the password input type and toggle icon based on the current value.
+ *
+ * @param {HTMLInputElement} input - The password input element.
+ * @param {HTMLImageElement} toggle - The password toggle icon element.
+ * @returns {void}
+ */
+function updatePasswordToggle(input, toggle) {
+    if (!input.value) {
+        input.type = 'password';
+        toggle.src = PASSWORD_TOGGLE_ICONS.lock;
+        toggle.classList.remove('isToggle');
+        return;
+    }
+    toggle.classList.add('isToggle');
+    toggle.src = input.type === 'password' ? PASSWORD_TOGGLE_ICONS.hidden : PASSWORD_TOGGLE_ICONS.shown;
+}
+
+
 /**
  * Sets up the password icon and toggles password visibility when clicked.
  *
@@ -99,23 +126,7 @@ function initBlurCheck(emailInput, passInput, alertBox) {
  * @returns {void}
  */
 function initPasswordToggle(input, toggle) {
-    const icons = {
-        lock:   './assets/icons/lock.png',
-        hidden: './assets/icons/visibility_off.svg',
-        shown:  './assets/icons/visibility.svg',
-    };
-
-    const update = () => {
-        if (!input.value) {
-            input.type = 'password';
-            toggle.src = icons.lock;
-            toggle.classList.remove('isToggle');
-            return;
-        }
-        toggle.classList.add('isToggle');
-        toggle.src = input.type === 'password' ? icons.hidden : icons.shown;
-    };
-
+    const update = () => updatePasswordToggle(input, toggle);
     input.addEventListener('input', update);
     input.addEventListener('blur', () => { if (!input.value) update(); });
     toggle.addEventListener('click', () => {
@@ -124,6 +135,5 @@ function initPasswordToggle(input, toggle) {
         update();
         input.focus();
     });
-
     update();
 }

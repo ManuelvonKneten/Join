@@ -216,73 +216,33 @@ function setCreateButtonLoading(form, isLoading) {
  * @returns {void}
  */
 function initContactValidation() {
-    const name = document.getElementById('contactName');
-    const email = document.getElementById('contactEmail');
-    const phone = document.getElementById('contactPhone');
-
-    if (!name || !email || !phone) return;
-
-    name.addEventListener('blur', () => {
-        setErrorVisible(document.getElementById('contactNameError'),
-        !isValidContactName(name.value)
-        );
-    });
-
-      email.addEventListener('blur', () => {
-        setErrorVisible(
-            document.getElementById('contactEmailError'),
-            !isValidContactEmail(email.value)
-        );
-    });
-
-    phone.addEventListener('blur', () => {
-        setErrorVisible(
-            document.getElementById('contactPhoneError'),
-            !isValidContactPhone(phone.value)
-        );
-    });
-
-    initEditContactValidation();
+    wireContactFieldValidation('contact');
+    wireContactFieldValidation('editContact');
 }
 
 
 /**
- * Initializes validation event listeners for the edit contact form fields.
+ * Wires blur validation onto a contact form's name, email and phone fields.
  *
- * Adds blur event listeners to the name, email, and phone input fields.
- * When a field loses focus, its value is validated and the corresponding
- * error message visibility is updated.
+ * Missing fields are skipped, so the same call works on pages that only
+ * contain one of the forms (or none, like board.html).
  *
- * @function initEditContactValidation
+ * @param {string} prefix - The field id prefix ('contact' or 'editContact').
  * @returns {void}
  */
-function initEditContactValidation() {
-    const name = document.getElementById('editContactName');
-    const email = document.getElementById('editContactEmail');
-    const phone = document.getElementById('editContactPhone');
-
-    if (!name || !email || !phone) return;
-
-    name.addEventListener('blur', () => {
-        setErrorVisible(
-            document.getElementById('editContactNameError'),
-            !isValidContactName(name.value)
+function wireContactFieldValidation(prefix) {
+    const validators = {
+        Name: isValidContactName,
+        Email: isValidContactEmail,
+        Phone: isValidContactPhone,
+    };
+    for (const [field, isValid] of Object.entries(validators)) {
+        const input = document.getElementById(prefix + field);
+        if (!input) continue;
+        input.addEventListener('blur', () =>
+            setErrorVisible(document.getElementById(`${prefix}${field}Error`), !isValid(input.value))
         );
-    });
-
-    email.addEventListener('blur', () => {
-        setErrorVisible(
-            document.getElementById('editContactEmailError'),
-            !isValidContactEmail(email.value)
-        );
-    });
-
-    phone.addEventListener('blur', () => {
-        setErrorVisible(
-            document.getElementById('editContactPhoneError'),
-            !isValidContactPhone(phone.value)
-        );
-    });
+    }
 }
 
 
@@ -387,11 +347,35 @@ function renderContacts() {
  */
 function showContactDetail(contact) {
     activeContact = contact;
+    highlightActiveContactItem(contact.id);
+    renderContactDetailFields(contact);
 
+    document.querySelector('.contacts_right_bottom').classList.remove('hidden');
+    document.querySelector('.contacts_layout').classList.add('detail_open');
+    document.body.classList.add('contact_detail_open');
+}
+
+
+/**
+ * Highlights the contact list item matching the given id.
+ *
+ * @param {string} id - The id of the contact to highlight.
+ * @returns {void}
+ */
+function highlightActiveContactItem(id) {
     document.querySelectorAll('.contact_item').forEach(el => el.classList.remove('active'));
-    const activeEl = document.querySelector(`.contact_item[data-id="${contact.id}"]`);
+    const activeEl = document.querySelector(`.contact_item[data-id="${id}"]`);
     if (activeEl) activeEl.classList.add('active');
+}
 
+
+/**
+ * Fills the detail panel avatar, name, email and phone for a contact.
+ *
+ * @param {{ name: string, email: string, phone: string }} contact - The contact to render.
+ * @returns {void}
+ */
+function renderContactDetailFields(contact) {
     const avatar = document.querySelector('.crb_avatar');
     avatar.textContent = initials(contact.name);
     avatar.style.backgroundColor = avatarColor(contact.name);
@@ -401,10 +385,6 @@ function showContactDetail(contact) {
     emailLink.textContent = contact.email || '—';
     emailLink.href = contact.email ? `mailto:${contact.email}` : '#';
     document.getElementById('detailPhone').textContent = contact.phone || '—';
-
-    document.querySelector('.contacts_right_bottom').classList.remove('hidden');
-    document.querySelector('.contacts_layout').classList.add('detail_open');
-    document.body.classList.add('contact_detail_open');
 }
 
 

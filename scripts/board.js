@@ -93,23 +93,28 @@ async function saveTaskEdit(taskId) {
     toggleRequiredError(dueDateInput, dueDateError, dateInvalid);
     if (dateInvalid) return;
 
+    applyTaskEditValues(task, isoDate);
+    await patchTask(taskId, task);
+    closeTaskPopUp();
+    await loadTasks();
+    renderBoard();
+}
+
+
+/**
+ * Applies the edit form values to the given task object.
+ *
+ * @param {Object} task - The task to update.
+ * @param {string} isoDate - Due date in YYYY-MM-DD format.
+ * @returns {void}
+ */
+function applyTaskEditValues(task, isoDate) {
     task.title = document.getElementById("editTitle").value;
     task.description = document.getElementById("editDescription").value;
     task.dueDate = isoDate;
     task.subtasks = taskEditSubtasks;
     task.priority = document.querySelector(".add_task_prio_btn.active")?.dataset.priority;
     task.assignedTo = selectedEditContacts.map(c => c.id);
-
-    await fetch(`${DB_URL}/tasks/${taskId}.json`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(task)
-    });
-    closeTaskPopUp();
-    await loadTasks();
-    renderBoard();
 }
 
 

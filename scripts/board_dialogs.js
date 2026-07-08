@@ -113,12 +113,23 @@ function setupEditDueDateInput(isoDate) {
     const error  = document.getElementById('editDueDateError');
 
     picker.min = getLocalISODate();
-
     if (isoDate) {
         const [year, month, day] = isoDate.split('-');
         input.value = `${day}/${month}/${year}`;
     }
+    wireEditDueDateListeners(input, picker, error);
+}
 
+
+/**
+ * Wires keyboard, input, blur and picker listeners for the edit due date field.
+ *
+ * @param {HTMLInputElement} input - Text input DD/MM/YYYY
+ * @param {HTMLInputElement} picker - Native date picker input
+ * @param {HTMLElement} error - Error message element
+ * @returns {void}
+ */
+function wireEditDueDateListeners(input, picker, error) {
     input.addEventListener('keydown', handleDueDateBackspace);
     input.addEventListener('input',   formatDueDateInput);
     input.addEventListener('blur',    () => validateEditDueDate(input, error));
@@ -170,25 +181,30 @@ function openEditDueDatePicker() {
  * @returns {Promise<void>}
  */
 async function openAddTaskPopUp(status = 'todo') {
+    const dialog = document.getElementById('dialog_add_task_board');
+    dialog.innerHTML = await buildAddTaskContent();
+    dialog.querySelector('.add_task_layout')?.classList.add('add_task_layout_popup');
+
+    window.currentTaskStatus = status;
+    await initAddTask();
+    dialog.showModal();
+}
+
+
+/**
+ * Fetches the add task HTML and returns the popup layout markup.
+ *
+ * @async
+ * @returns {Promise<string>} Outer HTML of the add task layout.
+ */
+async function buildAddTaskContent() {
     const response = await fetch('./add_task.html');
     let html = await response.text();
-
     html = html.replace('<h1 class="add_task_heading">Add Task</h1>', getNewHTMLTag());
 
     const temp = document.createElement('div');
     temp.innerHTML = html;
-
-    const content = temp.querySelector('.add_task_layout');
- 
-    const dialog = document.getElementById('dialog_add_task_board');
-    dialog.innerHTML = content.outerHTML;
-    const layout = dialog.querySelector('.add_task_layout');
-
-    layout?.classList.add('add_task_layout_popup');
-    
-    window.currentTaskStatus = status;
-    await initAddTask();
-    dialog.showModal();
+    return temp.querySelector('.add_task_layout').outerHTML;
 }
 
 
@@ -242,27 +258,18 @@ function closeDeleteTask() {
  * @returns {void}
  */
 function toggleSubtask(taskId, subtaskIndex) {
-    const task = allTasks.find (t => t.id === taskId);
-
+    const task = allTasks.find(t => t.id === taskId);
     if (!task) {
-        console.error("No task found:", taskId)
+        console.error("No task found:", taskId);
         return;
     }
 
-    task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
-    
-    fetch(`${DB_URL}/tasks/${taskId}.json`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({subtasks: task.subtasks})
-    });
+    const subtask = task.subtasks[subtaskIndex];
+    subtask.completed = !subtask.completed;
+    patchTask(taskId, { subtasks: task.subtasks });
 
     const card = document.querySelector(`[data-id="${taskId}"]`);
-    if (card) {
-        card.outerHTML = getTaskTemplate(task);
-    } 
+    if (card) card.outerHTML = getTaskTemplate(task);
 }
 
 

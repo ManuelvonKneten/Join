@@ -87,33 +87,24 @@ function renderGreeting() {
 async function loadSummaryTasks() {
   const taskObject = await getFromDB("tasks");
   const tasks = Object.values(taskObject || {});
-
-  console.log("Loaded tasks:", tasks);
-  setSummaryText(
-    "summary_todo_amount",
-    countSummaryTasksByKey(tasks, "status", "todo"),
-  );
-  setSummaryText(
-    "summary_done_amount",
-    countSummaryTasksByKey(tasks, "status", "done"),
-  );
-
-  setSummaryText(
-    "summary_urgent_amount",
-    countSummaryTasksByKey(tasks, "priority", "urgent"),
-  );
-
-  setSummaryText("summary_board_amount", tasks.length);
-  setSummaryText(
-    "summary_progress_amount",
-    countSummaryTasksByKey(tasks, "status", "inprogress"),
-  );
-  setSummaryText(
-    "summary_feedback_amount",
-    countSummaryTasksByKey(tasks, "status", "awaitfeedback"),
-  );
-
+  renderSummaryCounts(tasks);
   renderUpcomingDeadline(tasks);
+}
+
+
+/**
+ * Renders all summary stat counts from the given tasks.
+ *
+ * @param {Array<Object>} tasks - The list of task records.
+ * @returns {void}
+ */
+function renderSummaryCounts(tasks) {
+  setSummaryText("summary_todo_amount", countSummaryTasksByKey(tasks, "status", "todo"));
+  setSummaryText("summary_done_amount", countSummaryTasksByKey(tasks, "status", "done"));
+  setSummaryText("summary_urgent_amount", countSummaryTasksByKey(tasks, "priority", "urgent"));
+  setSummaryText("summary_board_amount", tasks.length);
+  setSummaryText("summary_progress_amount", countSummaryTasksByKey(tasks, "status", "inprogress"));
+  setSummaryText("summary_feedback_amount", countSummaryTasksByKey(tasks, "status", "awaitfeedback"));
 }
 
 
