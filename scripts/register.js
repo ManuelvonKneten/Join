@@ -12,50 +12,9 @@ const passwordError        = document.getElementById('passwordError');
 const acceptError          = document.getElementById('acceptError');
 const urlParams            = new URLSearchParams(window.location.search);
 const messageBox           = document.getElementById('msgBox');
-/**
- * Icon paths used by the password visibility toggle.
- *
- * @type {{ lock: string, hidden: string, shown: string }}
- */
-const PASSWORD_TOGGLE_ICONS = {
-    lock: '../assets/icons/lock.png',
-    hidden: '../assets/icons/visibility_off.svg',
-    shown: '../assets/icons/visibility.svg',
-};
 
 
-/**
- * Checks whether the entered name contains valid characters and is long enough.
- *
- * @param {string} value - The name value to validate.
- * @returns {boolean} True if the name is valid.
- */
-function isValidName(value) {
-    return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 1;
-}
-
-
-/**
- * Checks whether the entered email address has a valid format.
- *
- * @param {string} value - The email value to validate.
- * @returns {boolean} True if the email address is valid.
- */
-function isValidEmail(value) {
-    const emailRegex = /^[^\s@.][^\s@]*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/;
-    return emailRegex.test(value.trim());
-}
-
-
-/**
- * Checks whether the entered password meets the minimum length requirement.
- *
- * @param {string} value - The password value to validate.
- * @returns {boolean} True if the password is valid.
- */
-function isValidPassword(value) {
-    return value.trim().length >= 4;
-}
+/* Field validators live in validation.js; password toggle in password_toggle.js. */
 
 
 /**
@@ -174,84 +133,6 @@ if (signupConfirmInput) {
 
 initPasswordToggle(signupPasswordInput, document.getElementById('signupPasswordToggle'));
 initPasswordToggle(signupConfirmInput, document.getElementById('signupConfirmPasswordToggle'));
-
-
-/**
- * Initializes the password visibility toggle for a password input.
- *
- * @param {HTMLInputElement|null} input - The password input element.
- * @param {HTMLImageElement|null} toggle - The icon element used to toggle visibility.
- * @returns {void}
- */
-function initPasswordToggle(input, toggle) {
-    if (!input || !toggle) return;
-
-    addPasswordToggleListeners(input, toggle);
-    updatePasswordToggleIcon(input, toggle, PASSWORD_TOGGLE_ICONS);
-}
-
-
-/**
- * Adds all event listeners for one password visibility toggle.
- *
- * @param {HTMLInputElement} input - The password input element.
- * @param {HTMLImageElement} toggle - The icon element used to toggle visibility.
- * @returns {void}
- */
-function addPasswordToggleListeners(input, toggle) {
-    input.addEventListener('input', () => updatePasswordToggleIcon(input, toggle, PASSWORD_TOGGLE_ICONS));
-    input.addEventListener('blur', () => resetPasswordToggleOnBlur(input, toggle, PASSWORD_TOGGLE_ICONS));
-    toggle.addEventListener('click', () => handlePasswordToggleClick(input, toggle, PASSWORD_TOGGLE_ICONS));
-}
-
-
-/**
- * Updates the password toggle icon and input type according to the input value.
- *
- * @param {HTMLInputElement} input - The password input element.
- * @param {HTMLImageElement} toggle - The icon element used to toggle visibility.
- * @param {{ lock: string, hidden: string, shown: string }} icons - The icon paths.
- * @returns {void}
- */
-function updatePasswordToggleIcon(input, toggle, icons) {
-    if (!input.value) {
-        input.type = 'password';
-                toggle.src = icons.lock;
-        toggle.classList.remove('isToggle');
-        return;
-    }
-    toggle.classList.add('isToggle');
-    toggle.src = input.type === 'password' ? icons.hidden : icons.shown;
-}
-
-
-/**
- * Resets the password toggle when the input loses focus and is empty.
- *
- * @param {HTMLInputElement} input - The password input element.
- * @param {HTMLImageElement} toggle - The icon element used to toggle visibility.
- * @param {{ lock: string, hidden: string, shown: string }} icons - The icon paths.
- * @returns {void}
- */
-function resetPasswordToggleOnBlur(input, toggle, icons) {
-    if (!input.value) updatePasswordToggleIcon(input, toggle, icons);
-}
-
-
-/**
- * Toggles the password input visibility when the icon is clicked.
- *
- * @param {HTMLInputElement} input - The password input element.
- * @param {HTMLImageElement} toggle - The icon element used to toggle visibility.
- * @param {{ lock: string, hidden: string, shown: string }} icons - The icon paths.
- * @returns {void}
- */
-function handlePasswordToggleClick(input, toggle, icons) {
-    if (!input.value) return;
-    input.type = input.type === 'password' ? 'text' : 'password';
-    updatePasswordToggleIcon(input, toggle, icons);
-    input.focus();
-}
 
 
 /**

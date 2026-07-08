@@ -22,9 +22,9 @@ function initContactValidation() {
  */
 function wireContactFieldValidation(prefix) {
     const validators = {
-        Name: isValidContactName,
-        Email: isValidContactEmail,
-        Phone: isValidContactPhone,
+        Name: isValidName,
+        Email: isValidEmail,
+        Phone: isValidPhone,
     };
     for (const [field, isValid] of Object.entries(validators)) {
         const input = document.getElementById(prefix + field);
@@ -47,9 +47,9 @@ function wireContactFieldValidation(prefix) {
  */
 function getValidContactData(prefix) {
     const fields = [
-        ['Name', isValidContactName],
-        ['Email', isValidContactEmail],
-        ['Phone', isValidContactPhone],
+        ['Name', isValidName],
+        ['Email', isValidEmail],
+        ['Phone', isValidPhone],
     ];
     const result = {};
     for (const [field, isValid] of fields) {
@@ -60,42 +60,6 @@ function getValidContactData(prefix) {
         result[field.toLowerCase()] = el.value.trim();
     }
     return result;
-}
-
-
-/**
- * Checks whether a contact name contains only letters and spaces.
- *
- * @param {string} value - The contact name to validate.
- * @returns {boolean} True if the name contains only valid characters.
- */
-function isValidContactName(value) {
-    return /^[a-zA-ZÄäÖöÜüß\s]+$/.test(value.trim()) && value.trim().length >= 1;
-}
-
-
-/**
- * Checks whether an email address has a valid format.
- *
- * @param {string} value - The email address to validate.
- * @returns {boolean} True if the email address matches the required format.
- */
-function isValidContactEmail(value) {
-    const emailRegex = /^[^\s@.][^\s@]*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/;
-    return emailRegex.test(value.trim());
-}
-
-
-/**
- * Checks whether a phone number contains only valid phone characters.
- *
- * Allows an optional leading plus sign, numbers, and spaces.
- *
- * @param {string} value - The phone number to validate.
- * @returns {boolean} True if the phone number contains valid characters.
- */
-function isValidContactPhone(value) {
-    return /^\+?[0-9\s]+$/.test(value.trim());
 }
 
 
