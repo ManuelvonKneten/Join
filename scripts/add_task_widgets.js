@@ -13,9 +13,6 @@ async function loadAvailableContacts() {
         availableContacts = rawContactData
             ? Object.entries(rawContactData).map(([id, contact]) => ({ id, ...contact }))
             : [];
-            
-        // renderAssignedOptions();
-
     } catch (error) {
         console.error('Contacts could not be loaded:', error);
         showTaskToast('Contacts could not be loaded.', true);

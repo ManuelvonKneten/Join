@@ -83,12 +83,11 @@ function showAllAssignedAvatarsTask(taskId) {
 async function openEditTaskPopup(taskId) {
     const task = allTasks.find(t => t.id === taskId);
     
-    taskEditSubtasks = Array.isArray(task.subtasks) 
-    ? [...task.subtasks] : [];
+    taskEditSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
 
     const dialogTask = document.getElementById('dialogTask');
     dialogTask.innerHTML = getEditTaskTemplate(task);
-    if (!dialogTask.open) dialogTask.showModal();
+    if(!dialogTask.open) dialogTask.showModal();
 
     setupPriorityButtons();
     setPriority(task.priority);

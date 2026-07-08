@@ -68,6 +68,7 @@ async function loadTasks() {
                 allTasks.push({id, ...task});
             }          
         }
+        
         renderBoard();
 
     } catch (error) {

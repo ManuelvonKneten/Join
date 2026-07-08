@@ -320,11 +320,8 @@ async function deleteContact() {
 function renderContacts() {
     const list = document.getElementById('contactList');
     if (!list) return;
-    if (!allContacts.length) {
-        list.innerHTML = '<p class="no_contacts">No contacts yet.</p>';
-        return;
-    }
-
+    if (!allContacts.length) return list.innerHTML = '<p class="no_contacts">No contacts yet.</p>';
+      
     const sorted = [...allContacts].sort((a, b) => a.name.localeCompare(b.name));
     const groups = sorted.reduce((acc, contact) => {
         const letter = contact.name[0].toUpperCase();
@@ -332,9 +329,7 @@ function renderContacts() {
         acc[letter].push(contact);
         return acc;
     }, {});
-    list.innerHTML = Object.keys(groups).sort()
-        .map(letter => contactGroupHTML(letter, groups[letter]))
-        .join('');
+    list.innerHTML = Object.keys(groups).sort().map(letter => contactGroupHTML(letter, groups[letter]))2.join('');
 }
 
 

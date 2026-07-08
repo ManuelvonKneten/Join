@@ -107,12 +107,8 @@ function toggleEditContact(id) {
 
     const index = selectedEditContacts.findIndex(c => c.id === id);
 
-    if (index === -1) {
-        selectedEditContacts.push(contact);
-    } else {
-        selectedEditContacts.splice(index, 1);
-    }
-
+    index === -1 ? selectedEditContacts.push(contact) : selectedEditContacts.splice(index, 1);
+    
     renderAssignedOptionsEdit();
     renderAssignedAvatarsEdit();
 }

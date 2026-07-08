@@ -156,7 +156,6 @@ function renderUpcomingDeadline(tasks) {
     setSummaryText("summary_deadline", "No deadline");
     return;
   }
-
   setSummaryText("summary_deadline", formatSummeryDate(nextTask.dueDate));
 }
 
