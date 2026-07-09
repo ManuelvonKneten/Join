@@ -223,7 +223,7 @@
     min-height: 16px;
     margin-top: -4px;
     font-size: 16px;
-    color: #FF8190;
+    color: #E60026;
     visibility: hidden;
 }
 
@@ -233,7 +233,7 @@
 
 .add_task_left .inputField input.input_invalid,
 .assigned_trigger.input_invalid {
-    border-color: #FF8190;
+    border-color: #E60026;
 }
 
 .add_task_actions {
