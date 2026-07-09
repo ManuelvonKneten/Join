@@ -51,7 +51,7 @@ function runSplash() {
     const anim = logo.animate([
         { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(2)' },
         { top: `${target.top}px`, left: `${target.left}px`, transform: 'translate(0, 0) scale(1)' }
-    ], { duration: 255, easing: 'ease-in-out', fill: 'forwards' });
+    ], { duration: 700, easing: 'ease-in-out', fill: 'forwards' });
 
     anim.onfinish = () => fadeOutSplash(container);
 }
