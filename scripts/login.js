@@ -83,6 +83,7 @@ async function handleLogin(e, emailInput, passInput, alertBox) {
  * @returns {void}
  */
 function initBlurCheck(emailInput, passInput, alertBox) {
+    /** Hides the wrong-login alert box. @returns {void} */
     const hideAlert = () => { alertBox.classList.remove('visible'); };
     emailInput.addEventListener('input', hideAlert);
     passInput.addEventListener('input', hideAlert);

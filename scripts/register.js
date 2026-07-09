@@ -83,6 +83,11 @@ const urlParams = new URLSearchParams(window.location.search);
 let messageBox;
 
 
+/**
+ * Initializes the register page: elements, listeners, toggles and query message.
+ *
+ * @returns {void}
+ */
 function initRegister() {
     initRegisterElements();
     initRegisterEventListeners();
@@ -91,6 +96,11 @@ function initRegister() {
 }
 
 
+/**
+ * Caches the main register DOM elements (checkbox, button, form, inputs, errors).
+ *
+ * @returns {void}
+ */
 function initRegisterElements() {
     acceptCheckbox = document.getElementById('signupAccept');
     signupBtn = document.getElementById('signupBtn');
@@ -101,6 +111,11 @@ function initRegisterElements() {
 }
 
 
+/**
+ * Caches the signup input elements (name, email, password, confirm).
+ *
+ * @returns {void}
+ */
 function initRegisterInputElements() {
     signupNameInput = document.getElementById('signupName');
     signupEmailInput = document.getElementById('signupEmail');
@@ -109,6 +124,11 @@ function initRegisterInputElements() {
 }
 
 
+/**
+ * Caches the signup error message elements.
+ *
+ * @returns {void}
+ */
 function initRegisterErrorElements() {
     mismatchMsg = document.getElementById('passwordMismatch');
     nameError = document.getElementById('nameError');
@@ -118,6 +138,11 @@ function initRegisterErrorElements() {
 }
 
 
+/**
+ * Registers all signup field and submit event listeners.
+ *
+ * @returns {void}
+ */
 function initRegisterEventListeners() {
     initRegisterNameEventListeners();
     initRegisterEmailEventListeners();
@@ -126,6 +151,11 @@ function initRegisterEventListeners() {
 }
 
 
+/**
+ * Adds blur and input validation listeners to the name field.
+ *
+ * @returns {void}
+ */
 function initRegisterNameEventListeners() {
     if (signupNameInput) {
         signupNameInput.addEventListener('blur', validateNameOnBlur);
@@ -134,6 +164,11 @@ function initRegisterNameEventListeners() {
 }
 
 
+/**
+ * Adds a blur validation listener to the email field.
+ *
+ * @returns {void}
+ */
 function initRegisterEmailEventListeners() {
     if (signupEmailInput) {
         signupEmailInput.addEventListener('blur', validateEmailOnBlur);
@@ -141,6 +176,11 @@ function initRegisterEmailEventListeners() {
 }
 
 
+/**
+ * Adds blur validation listeners to the password and confirm fields.
+ *
+ * @returns {void}
+ */
 function initRegisterPasswordEventListeners() {
     if (signupPasswordInput && signupConfirmInput) {
         signupPasswordInput.addEventListener('blur', validatePasswordOnBlur);
@@ -149,6 +189,11 @@ function initRegisterPasswordEventListeners() {
 }
 
 
+/**
+ * Adds change and submit listeners for the accept checkbox and signup form.
+ *
+ * @returns {void}
+ */
 function initRegisterSubmitEventListeners() {
     if (acceptCheckbox) {
         acceptCheckbox.addEventListener('change', handleAcceptCheckboxChange);
@@ -160,6 +205,11 @@ function initRegisterSubmitEventListeners() {
 }
 
 
+/**
+ * Wires up the show/hide toggles for the password and confirm fields.
+ *
+ * @returns {void}
+ */
 function initRegisterPasswordToggles() {
     if (signupPasswordInput) {
         initPasswordToggle(signupPasswordInput, document.getElementById('signupPasswordToggle'));
@@ -171,6 +221,11 @@ function initRegisterPasswordToggles() {
 }
 
 
+/**
+ * Displays a message from the URL "msg" query parameter, if present.
+ *
+ * @returns {void}
+ */
 function showRegisterQueryMessage() {
     if (messageBox && urlParams.get('msg')) {
         messageBox.textContent = urlParams.get('msg');
@@ -258,6 +313,11 @@ function validateSignupForm() {
 }
 
 
+/**
+ * Computes the validation state of all signup fields.
+ *
+ * @returns {{nameOk: boolean, emailOk: boolean, passwordOk: boolean, confirmOk: boolean, acceptedOk: boolean}} Validation flags per field.
+ */
 function getSignupValidationState() {
     const passwordOk = isValidPassword(signupPasswordInput.value);
     return {
@@ -270,6 +330,12 @@ function getSignupValidationState() {
 }
 
 
+/**
+ * Toggles the visibility of all signup error messages based on the validation state.
+ *
+ * @param {{nameOk: boolean, emailOk: boolean, passwordOk: boolean, confirmOk: boolean, acceptedOk: boolean}} validation - Validation flags per field.
+ * @returns {void}
+ */
 function showSignupValidationErrors(validation) {
     setErrorVisible(nameError, !validation.nameOk);
     setErrorVisible(emailError, !validation.emailOk);
