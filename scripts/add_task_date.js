@@ -27,7 +27,10 @@ function setupDueDateInput() {
 
     setDueDatePickerMinDate(picker);
     input.addEventListener('keydown', handleDueDateBackspace);
-    input.addEventListener('input', formatDueDateInput);
+    input.addEventListener('input', (event) => {
+        formatDueDateInput(event);
+        toggleRequiredError(input, document.getElementById('taskDueDateError'), false);
+    });
     picker.addEventListener('change', (e) => {
         syncPickerDateToTextInput(e, input);
         validateDueDate(input);
@@ -158,16 +161,60 @@ function syncPickerDateToTextInput(event, input) {
  */
 function validateDueDate(input) {
     const error = document.getElementById('taskDueDateError');
-    if (!input.value.trim()) {
-        showDueDateError(input, error, 'This field is required');
-        return;
-    }
+
+    if (!validateDueDateInputValue(input, error)) return false;
+
     const selected = new Date(`${ddmmyyyyToISO(input.value)}T00:00:00`);
+
     if (isPastDate(selected)) {
         showDueDateError(input, error, 'Please select today or a future date');
-        return;
+        return false;
     }
+
     toggleRequiredError(input, error, false);
+    return true;
+}
+
+
+/**
+ * Validates whether the due-date input contains a non-empty valid date value.
+ *
+ * @param {HTMLInputElement} input - Visible due-date text input.
+ * @param {HTMLElement} error - Due-date error message element.
+ * @returns {boolean} Whether the input contains a valid date value.
+ */
+function validateDueDateInputValue(input, error) {
+    if (!input.value.trim()) {
+        showDueDateError(input, error, 'This field is required');
+        return false;
+    }
+
+    if (!isValidDueDateValue(input.value)) {
+        showDueDateError(input, error, 'Please enter a valid date');
+        return false;
+    }
+
+    return true;
+}
+
+
+/**
+ * Checks whether a due-date value is a real date in DD/MM/YYYY format.
+ *
+ * @param {string} value - Due-date value to validate.
+ * @returns {boolean} Whether the value is a valid calendar date.
+ */
+function isValidDueDateValue(value) {
+    if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) return false;
+
+    const [day, month, year] = value.split('/').map(Number);
+    const date = new Date(year, month - 1, day);
+
+    return (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day
+    );
 }
 
 

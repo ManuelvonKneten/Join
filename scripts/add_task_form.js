@@ -12,12 +12,10 @@ function validateTaskForm() {
     const title    = document.getElementById('taskTitle');
     const dueDate  = document.getElementById('taskDueDate');
     const category = document.getElementById('taskCategory');
-    const dueDateError  = document.getElementById('taskDueDateError');
     const categoryError = document.getElementById('taskCategoryError');
 
     const titleValid = validateTitleField(title);
-    validateDueDate(dueDate);
-    const dueDateValid = !isDueDateInvalid(dueDateError);
+    const dueDateValid = validateDueDate(dueDate);
     const categoryValid = validateTaskCategory(category, categoryError);
 
     return titleValid && dueDateValid && categoryValid;
