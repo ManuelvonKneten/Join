@@ -185,10 +185,15 @@
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     pointer-events: none;
     filter: brightness(0) invert(0.7);
+}
+
+.inputIcon[src$="mail.png"] {
+    width: 16px;
+    height: 16px;
 }
 
 .passwordToggle.isToggle {
@@ -328,11 +333,6 @@
     border: 1px solid #ccc;
     border-top: 2px solid rgb(41, 171, 226);
     outline: none;
-}
-
-.inputField:has(#loginEmail) .inputIcon {
-    width: 14px;
-    height: 14px;
 }
 
 .signupCheckboxLabel {
