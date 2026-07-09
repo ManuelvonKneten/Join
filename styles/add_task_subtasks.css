@@ -91,7 +91,7 @@
 
 .subtask_sep {
     color: #ccc;
-    font-size: 13px;
+    font-size: 16px;
     user-select: none;
 }
 
@@ -106,7 +106,7 @@
     background: none;
     border: none;
     color: var(--hover-color);
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
     padding: 0 3px;
     line-height: 1;
@@ -132,7 +132,7 @@
 
 .add_task_subtask_divider {
     color: #ccc;
-    font-size: 12px;
+    font-size: 16px;
     user-select: none;
     padding: 0 1px;
 }

@@ -216,13 +216,13 @@
 }
 
 .required_note {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .field_error {
     min-height: 16px;
     margin-top: -4px;
-    font-size: 12px;
+    font-size: 16px;
     color: #FF8190;
     visibility: hidden;
 }
@@ -348,7 +348,7 @@
     }
 
     .add_task_label {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .add_task_textarea,

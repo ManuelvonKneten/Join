@@ -127,7 +127,7 @@
     gap: 6px;
     background: none;
     border: none;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--primary-color);
     cursor: pointer;
@@ -164,13 +164,13 @@
 }
 
 .crb_info_label {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--primary-color);
 }
 
 .crb_info_email {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--secondary-color);
     text-decoration: none;
 }
@@ -180,7 +180,7 @@
 }
 
 .crb_info_value {
-    font-size: 15px;
+    font-size: 16px;
     color: #333;
 }
 

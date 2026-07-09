@@ -289,7 +289,7 @@
 
 .wrongDataAlert {
     visibility: hidden;
-    font-size: 14px;
+    font-size: 16px;
     min-height: 18px;
     white-space: nowrap;
     overflow: hidden;
@@ -300,7 +300,7 @@
 .inputError {
     display: block;
     visibility: hidden;
-    font-size: 12px;
+    font-size: 16px;
     line-height: 1;
     height: 14px;
     color: rgb(255, 129, 144);
@@ -314,7 +314,7 @@
 }
 
 .msgBox {
-    font-size: 14px;
+    font-size: 16px;
     color: rgb(41, 171, 226);
     font-weight: 600;
     min-height: 20px;
