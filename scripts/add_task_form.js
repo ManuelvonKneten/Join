@@ -53,17 +53,6 @@ function validateTaskCategory(category, categoryError) {
 
 
 /**
- * Checks whether the due-date error is currently visible.
- *
- * @param {HTMLElement} dueDateError - Due-date error message element.
- * @returns {boolean} Whether the due date is invalid.
- */
-function isDueDateInvalid(dueDateError) {
-    return dueDateError.classList.contains('visible');
-}
-
-
-/**
  * Shows the "This field is required" hint on the required fields Title and
  * Due Date as soon as the field is left empty (onblur).
  * The hint is hidden again when the user starts typing.
