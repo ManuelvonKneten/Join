@@ -19,7 +19,16 @@ let focusedTaskId = null;
 
 
                                         /* --- Init --- */
-document.addEventListener('DOMContentLoaded', initBoard);
+/**
+ * Registers the DOMContentLoaded listener that starts the board page.
+ *
+ * @returns {void}
+ */
+function initBoardOnLoad() {
+    document.addEventListener('DOMContentLoaded', initBoard);
+}
+
+initBoardOnLoad();
 
 
 /**

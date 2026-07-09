@@ -113,4 +113,13 @@ function onPriorityButtonClick(event) {
 }
 
 
-window.addEventListener('DOMContentLoaded', initAddTask);
+/**
+ * Registers the DOMContentLoaded listener that starts the add task page.
+ *
+ * @returns {void}
+ */
+function initAddTaskOnLoad() {
+    window.addEventListener('DOMContentLoaded', initAddTask);
+}
+
+initAddTaskOnLoad();

@@ -87,4 +87,13 @@ function fadeOutSplash(container) {
 }
 
 
-window.addEventListener('DOMContentLoaded', initSplash);
+/**
+ * Registers the DOMContentLoaded listener that starts the splash animation.
+ *
+ * @returns {void}
+ */
+function initSplashOnLoad() {
+    window.addEventListener('DOMContentLoaded', initSplash);
+}
+
+initSplashOnLoad();

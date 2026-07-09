@@ -459,4 +459,13 @@ function hideRegisterErrorToast(signupToast) {
 }
 
 
-window.addEventListener('DOMContentLoaded', initRegister);
+/**
+ * Registers the DOMContentLoaded listener that starts the register page.
+ *
+ * @returns {void}
+ */
+function initRegisterOnLoad() {
+    window.addEventListener('DOMContentLoaded', initRegister);
+}
+
+initRegisterOnLoad();

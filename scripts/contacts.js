@@ -409,4 +409,13 @@ function showContactToast(message, isError = false) {
 }
 
 
-window.addEventListener('DOMContentLoaded', initContacts);
+/**
+ * Registers the DOMContentLoaded listener that starts the contacts page.
+ *
+ * @returns {void}
+ */
+function initContactsOnLoad() {
+    window.addEventListener('DOMContentLoaded', initContacts);
+}
+
+initContactsOnLoad();

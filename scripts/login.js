@@ -1,5 +1,13 @@
-// Initialize the login page after the DOM has finished loading.
-document.addEventListener('DOMContentLoaded', initLogin);
+/**
+ * Registers the DOMContentLoaded listener that starts the login page.
+ *
+ * @returns {void}
+ */
+function initLoginOnLoad() {
+    document.addEventListener('DOMContentLoaded', initLogin);
+}
+
+initLoginOnLoad();
 
 
 /**
