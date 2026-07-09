@@ -12,8 +12,12 @@
  *
  * @returns {void}
  */
-(function guardRoute() {
-    if (!localStorage.getItem('currentUser')) {
+function guardRoute() {
+    const currentUser = localStorage.getItem('currentUser');
+
+    if (!currentUser) {
         window.location.replace('../index.html');
     }
-})();
+}
+
+guardRoute();
