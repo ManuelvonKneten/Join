@@ -46,6 +46,7 @@ function setDueDatePickerMinDate(picker) {
     picker.min = getLocalISODate();
 }
 
+
 /**
  * Removes a trailing slash before the browser deletes another character.
  *
@@ -75,6 +76,7 @@ function formatDueDateInput(event) {
     input.value = formatted;
     restoreInputCursor(input, newCursorPosition);
 }
+
 
 /**
  * Counts numeric characters before the current cursor position.

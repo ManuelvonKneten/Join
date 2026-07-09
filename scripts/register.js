@@ -344,6 +344,7 @@ function showSignupValidationErrors(validation) {
     setErrorVisible(acceptError, !validation.acceptedOk);
 }
 
+
 /**
  * Checks whether the password and confirmation password fields contain the same value.
  *

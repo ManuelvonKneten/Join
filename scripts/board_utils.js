@@ -309,6 +309,7 @@ function showNoResultsAlert(tasks) {
     alertRef.innerHTML = '';
 }
 
+
 /**
  * Adds the highlight class to a task column
  * when a task is dragged over it.
