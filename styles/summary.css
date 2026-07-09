@@ -297,3 +297,24 @@
     font-size: 16px;
   }
 }
+
+@media (max-width: 1023px) and (max-height: 700px) {
+  .summary_headline {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .summary_headline p {
+    min-height: auto;
+  }
+
+  .summary_page {
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .summary_card,
+  .summary_card_urgent {
+    min-height: 88px;
+  }
+}
