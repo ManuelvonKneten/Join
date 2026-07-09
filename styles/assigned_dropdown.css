@@ -121,7 +121,7 @@
     flex-wrap: wrap;
     gap: 4px;
     margin-top: 8px;
-    min-height: 0;
+    min-height: 58px;
 }
 
 .assigned_selected_avatar {
