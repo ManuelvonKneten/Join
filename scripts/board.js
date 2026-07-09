@@ -52,8 +52,8 @@ async function initBoard() {
  * @returns {void}
  */
 function initEventListeners(){
-    document.getElementById('search').addEventListener('input', searchTask)
-    document.getElementById('search_icon').addEventListener('click', searchTask)
+    document.getElementById('search').addEventListener('input', searchTask);
+    document.getElementById('search_icon').addEventListener('click', searchTask);
     initMoveToMenu();
 }
 
@@ -75,9 +75,9 @@ async function loadTasks() {
         if (rawTasks) {
             for (const [id, task] of Object.entries(rawTasks)){
                 allTasks.push({id, ...task});
-            }          
+            }
         }
-        
+
         renderBoard();
 
     } catch (error) {
@@ -160,9 +160,8 @@ async function moveTo(event) {
 async function moveTaskToStatus(taskId, newStatus) {
     if (!taskId || !newStatus) return;
 
-    await patchToDB(`tasks/${taskId}`, { status: newStatus
-    });
-    await loadTasks(); 
+    await patchToDB(`tasks/${taskId}`, { status: newStatus });
+    await loadTasks();
 }
 
 
@@ -257,7 +256,7 @@ function renderSubtasks(subtasks = [], taskId) {
 
     for (const subtask of subtasks) {
         html += getSubtasksTemplate(subtask, index, taskId);
-        index++; 
+        index++;
     }
     return html;
 }
@@ -269,7 +268,7 @@ function renderSubtasks(subtasks = [], taskId) {
  * @returns {void}
  */
 function renderAssignedOptionsEdit() {
-    
+
     const container = document.getElementById('assignedOptionsEdit');
 
     if(!container) return;
@@ -331,4 +330,4 @@ function renderSubtasksEdit() {
         container.innerHTML += getSubtasksEditTemplate(subtask, index)
     });
 }
-  
+
