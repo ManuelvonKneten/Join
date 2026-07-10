@@ -171,4 +171,9 @@
     .add_task_subtask_list {
         padding-left: 0;
     }
+
+    .add_task_subtask_item--editing,
+.add_task_subtask_item--editing:hover {
+    margin-left: 0;
+}
 }
