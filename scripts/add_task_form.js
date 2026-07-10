@@ -235,7 +235,7 @@ function clearTaskForm() {
  * @returns {void}
  */
 function resetTaskFormElement() {
-    document.querySelector('.add_task_columns').reset();
+    document.getElementById("addTaskForm").reset();
 }
 
 
