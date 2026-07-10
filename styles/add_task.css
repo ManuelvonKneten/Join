@@ -303,6 +303,7 @@
     .add_task_columns {
         flex-direction: column;
         overflow: visible;
+        gap: clamp(20px, 3vw, 24px);
     }
 
     .add_task_left,

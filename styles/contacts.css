@@ -272,7 +272,7 @@
     .contacts_layout {
         flex-direction: column;
         height: auto;
-        padding: 16px 16px 24px;
+        padding: 16px var(--content-padding-x) 24px;
         gap: 0;
     }
 
@@ -346,13 +346,13 @@
     }
 
     .crb_avatar {
-        width: 64px;
-        height: 64px;
-        font-size: 20px;
+        width: clamp(64px, 9vw, 88px);
+        height: clamp(64px, 9vw, 88px);
+        font-size: clamp(20px, 3vw, 28px);
     }
 
     .crb_name {
-        font-size: 20px;
+        font-size: clamp(20px, 3vw, 32px);
     }
 
     .btn_add_contact {
