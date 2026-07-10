@@ -264,7 +264,7 @@
 }
 
 /* ── Mobile / tablet panel switching ── */
-@media (max-width: 1023px) {
+@media (max-width: 1025px) {
     .contacts_content {
         background: #ffffff;
     }

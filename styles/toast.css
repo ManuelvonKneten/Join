@@ -58,7 +58,7 @@
     filter: brightness(0) invert(1);
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1025px) {
     .task_added_notice {
         bottom: calc(var(--bottom-nav-height, 80px) + 12px);
         right: 16px;

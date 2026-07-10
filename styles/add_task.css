@@ -294,7 +294,7 @@
     }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1025px) {
     .add_task_layout {
         height: auto;
         padding: 16px;
