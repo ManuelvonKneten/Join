@@ -194,13 +194,30 @@ function openEditDueDatePicker() {
  * @returns {Promise<void>}
  */
 async function openAddTaskPopUp(status = 'todo') {
+    const taskStatus = validateTaskStatus(status);
+
+    if (isMobileAddTaskViewport()) {
+        window.location.href = `./add_task.html?status=${taskStatus}`;
+        return;
+    }
+
     const dialog = document.getElementById('dialog_add_task_board');
     dialog.innerHTML = await buildAddTaskContent();
     dialog.querySelector('.add_task_layout')?.classList.add('add_task_layout_popup');
 
-    window.currentTaskStatus = status;
+    window.currentTaskStatus = taskStatus;
     await initAddTask();
     dialog.showModal();
+}
+
+
+/**
+ * Checks whether add task should open as a page instead of a dialog.
+ *
+ * @returns {boolean} True for board viewports up to and including 767 px.
+ */
+function isMobileAddTaskViewport() {
+    return window.innerWidth <= 767;
 }
 
 
@@ -303,4 +320,3 @@ async function deleteTask() {
     document.getElementById('delete_task').close();
     closeTaskPopUp();
 }
-
