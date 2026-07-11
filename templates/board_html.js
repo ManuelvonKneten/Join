@@ -44,12 +44,14 @@ function getTaskTemplate(task) {
     `;
 }
 
+
 const BOARD_STATUS_OPTIONS = [
   { status: "todo", label: "To do" },
   { status: "inprogress", label: "In progress" },
   { status: "awaitfeedback", label: "Await feedback" },
   { status: "done", label: "Done" },
 ];
+
 
 function getMoveMenuTemplate(task) {
   const moveButtons = BOARD_STATUS_OPTIONS.filter(
@@ -74,6 +76,7 @@ function getMoveMenuTemplate(task) {
   `;
 }
 
+
 function getNewHTMLTag() {
   return `
         <div class="popup_header">
@@ -85,6 +88,7 @@ function getNewHTMLTag() {
   `;
 }
 
+
 function getEmptyCardTemplate(fieldName) {
   return `
     <div class="empty_card">
@@ -92,6 +96,7 @@ function getEmptyCardTemplate(fieldName) {
     </div>
   `;
 }
+
 
 function getTaskDetailsTemplate(task) {
   return `
@@ -150,6 +155,7 @@ function getTaskDetailsTemplate(task) {
   `;
 }
 
+
 function getSubtasksTemplate(subtask, index, taskId) {
   return `
       <label class="subtask_checkbox">
@@ -162,6 +168,7 @@ function getSubtasksTemplate(subtask, index, taskId) {
       </label>
     `;
 }
+
 
 function getEditTaskTemplate(task) {
   return `
@@ -197,7 +204,7 @@ function getEditTaskTemplate(task) {
             </svg>
           </button>
         </div>
-        <span class="field_error" id="editDueDateError">Please select today or a future date</span>
+        <span class="field_error" id="editDueDateError">Please enter a valid date</span>
       </label>
 
       <label>
@@ -307,10 +314,6 @@ function getEditTaskTemplate(task) {
   `;
 }
 
-//  <div class="subtask_add">
-//         <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskEnter(event)">
-//         <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
-//       </div>
 
 function getSubtasksEditTemplate(subtask, index) {
   if (subtask.isEditing) {
@@ -349,6 +352,7 @@ function getSubtasksEditTemplate(subtask, index) {
     `;
 }
 
+
 function getAssignedOptionsEdit(contact, checked) {
   return `
             <li class="assigned_option ${checked ? "assigned_option_active" : ""}"
@@ -370,6 +374,7 @@ function getAssignedOptionsEdit(contact, checked) {
             </li>
         `;
 }
+
 
 function progressHTML(progress) {
   return `
