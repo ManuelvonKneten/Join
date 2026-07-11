@@ -44,27 +44,28 @@ function getTaskTemplate(task) {
     `;
 }
 
-
 const BOARD_STATUS_OPTIONS = [
-  { status: 'todo', label: 'To do' },
-  { status: 'inprogress', label: 'In progress' },
-  { status: 'awaitfeedback', label: 'Await feedback' },
-  { status: 'done', label: 'Done' }
+  { status: "todo", label: "To do" },
+  { status: "inprogress", label: "In progress" },
+  { status: "awaitfeedback", label: "Await feedback" },
+  { status: "done", label: "Done" },
 ];
 
-
 function getMoveMenuTemplate(task) {
-  const moveButtons = BOARD_STATUS_OPTIONS
-    .filter(option => option.status !== task.status)
-    .map(option => `
+  const moveButtons = BOARD_STATUS_OPTIONS.filter(
+    (option) => option.status !== task.status,
+  )
+    .map(
+      (option) => `
       <button
         type="button"
         onclick="moveTaskFromMenu(event, '${task.id}', '${option.status}')"
       >
         ${option.label}
       </button>
-    `)
-    .join('');
+    `,
+    )
+    .join("");
 
   return `
     <div class="move-menu" onclick="event.preventDefault(); event.stopPropagation()">
@@ -72,7 +73,6 @@ function getMoveMenuTemplate(task) {
     </div>
   `;
 }
-
 
 function getNewHTMLTag() {
   return `
@@ -85,7 +85,6 @@ function getNewHTMLTag() {
   `;
 }
 
-
 function getEmptyCardTemplate(fieldName) {
   return `
     <div class="empty_card">
@@ -93,7 +92,6 @@ function getEmptyCardTemplate(fieldName) {
     </div>
   `;
 }
-
 
 function getTaskDetailsTemplate(task) {
   return `
@@ -114,7 +112,7 @@ function getTaskDetailsTemplate(task) {
   
         <div class="dialog_row">
           <p>Due date:</p>
-          <span> ${task.dueDate ? task.dueDate.split('-').reverse().join('/') : ''}</span>
+          <span> ${task.dueDate ? task.dueDate.split("-").reverse().join("/") : ""}</span>
         </div>
   
         <div class="dialog_row">
@@ -150,8 +148,7 @@ function getTaskDetailsTemplate(task) {
     </div>
   
   `;
-}   
-
+}
 
 function getSubtasksTemplate(subtask, index, taskId) {
   return `
@@ -165,7 +162,6 @@ function getSubtasksTemplate(subtask, index, taskId) {
       </label>
     `;
 }
-
 
 function getEditTaskTemplate(task) {
   return `
@@ -269,11 +265,36 @@ function getEditTaskTemplate(task) {
 </div>
 
   
-      <p class="subtasks_edit_title">Subtasks</p>   
-      <div class="subtask_add">
-        <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskEnter(event)">
-        <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
-      </div>
+  <p class="subtasks_edit_title">Subtasks</p>   
+      <div class="inputField">
+                <input
+                  id="subtaskInput"
+                  type="text"
+                  placeholder="Add new subtask"
+                  onkeydown="handleEditSubtaskEnter(event)"
+                />
+                <div id="subtaskEditIcons" class="subtask_edit_icons">
+                  <button
+                    type="button"
+                    id="clearSubtaskBtn"
+                    class="subtask_icon_btn"
+                    aria-label="Clear"
+                    onclick="clearEditSubtaskInput()"
+                  >
+                    &#x2715;
+                  </button>
+                  <span class="subtask_sep">|</span>
+                  <button
+                    type="button"
+                    id="confirmSubtaskBtn"
+                    class="subtask_icon_btn"
+                    aria-label="Add subtask"
+                    onclick="addEditSubtask()"
+                  >
+                    &#x2713;
+                  </button>
+                </div>
+              </div>
         <div id="editSubtasks" class="edit_subtasks_container"></div>
         
       <div class="dialog_footer">
@@ -286,6 +307,10 @@ function getEditTaskTemplate(task) {
   `;
 }
 
+//  <div class="subtask_add">
+//         <input id="newSubtask" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskEnter(event)">
+//         <button id="editAddSubtaskIcon" onclick="addEditSubtask()">✓</button>
+//       </div>
 
 function getSubtasksEditTemplate(subtask, index) {
   if (subtask.isEditing) {
@@ -324,10 +349,9 @@ function getSubtasksEditTemplate(subtask, index) {
     `;
 }
 
-
 function getAssignedOptionsEdit(contact, checked) {
   return `
-            <li class="assigned_option ${checked ? 'assigned_option_active' : ''}"
+            <li class="assigned_option ${checked ? "assigned_option_active" : ""}"
                 onclick="toggleEditContact(event, '${contact.id}')">
 
                 <div class="assigned_option_avatar">
@@ -348,7 +372,7 @@ function getAssignedOptionsEdit(contact, checked) {
 }
 
 function progressHTML(progress) {
-    return `
+  return `
         <div class="task_progress"
              title="${progress.completed} of ${progress.total} subtasks completed">
 

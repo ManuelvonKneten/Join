@@ -29,7 +29,7 @@ function editSubtask(index) {
  * @returns {void}
  */
 function addEditSubtask() {
-    const input = document.getElementById('newSubtask')
+    const input = document.getElementById('subtaskInput')
     const value = input.value.trim();
     
     if (!value) return;
@@ -40,6 +40,20 @@ function addEditSubtask() {
     });
     renderSubtasksEdit();
     input.value = '';
+}
+
+
+/**
+ * Clears the current value of the edit subtask input field.
+ *
+ * This function resets the text input with the ID `subtaskInput`
+ * by setting its value to an empty string. It is used in the
+ * edit task dialog to remove the entered subtask text.
+ *
+ * @returns {void} Does not return a value.
+ */
+function clearEditSubtaskInput() {
+    document.getElementById('subtaskInput').value = '';
 }
 
 
