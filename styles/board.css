@@ -99,27 +99,13 @@
   cursor: pointer;
   transition:
     background-color 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out,
-    transform 0.18s ease-in-out;
+    box-shadow 0.3s ease-in-out;
 }
 
 .search button:hover,
 .search button:focus {
   background-color: var(--color-secondary);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-}
-
-.board_add_task_button:hover,
-.board_add_task_button:focus-visible,
-.header_mobile_board:hover,
-.header_mobile_board:focus-visible {
-  background-color: var(--color-secondary);
-  transform: translateY(-1px);
-}
-
-.board_add_task_button:active,
-.header_mobile_board:active {
-  transform: translateY(0) scale(0.98);
 }
 
 #no_results_alert {
@@ -414,8 +400,6 @@
     overflow-y: hidden;
     width: 100%;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
   }
 
   .task_progress {
@@ -436,16 +420,11 @@
     display: block;
     background-color: var(--color-tertiary);
     color: white;
-    border: none;
     border-radius: 10px;
-    cursor: pointer;
-    transition:
-      background-color 0.18s ease-in-out,
-      transform 0.18s ease-in-out;
   }
 
   .header_mobile_board {
-    padding: 2px 14px;
+    padding: 2px 10px;
   }
 
   .header_mobile_board img {
@@ -458,67 +437,30 @@
     display: none;
   }
 
+  .card {
+    flex: 0 0 260px;
+    width: 260px;
+    flex-shrink: 0;
+  }
+
   .move-btn {
     display: flex;
   }
 
+  .task_field {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+  }
+
   .card {
-    flex: 0 0 260px;
     min-width: 252px;
     width: 252px;
     min-height: 252px;
     height: auto;
     flex-shrink: 0;
     scroll-snap-align: start;
-  }
-}
-
-@media (min-width: 500px) and (max-width: 1025px) {
-  .header_mobile_flex .header_mobile_board {
-    display: none;
-  }
-
-  .titel_and_search {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .header_mobile_flex {
-    flex: 0 0 auto;
-  }
-
-  .search_container {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .search {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .search_field {
-    flex: 1;
-  }
-
-  .search .board_add_task_button {
-    display: flex;
-    width: auto;
-    flex: 0 0 auto;
-  }
-}
-
-@media (max-width: 499px) {
-  .header_mobile_flex .header_mobile_board {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .search_field,
-  #no_results_alert,
-  .search .board_add_task_button {
-    display: none;
   }
 }
 .move-menu.open {
