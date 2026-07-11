@@ -37,6 +37,36 @@ let taskSubtasks = [];
 
 
 /**
+ * Valid task status values used by the board columns.
+ *
+ * @type {string[]}
+ */
+const VALID_TASK_STATUSES = ['todo', 'inprogress', 'awaitfeedback', 'done'];
+
+
+/**
+ * Returns a valid task status or falls back to todo.
+ *
+ * @param {string} status - Status value to validate.
+ * @returns {string} Validated task status.
+ */
+function validateTaskStatus(status) {
+    return VALID_TASK_STATUSES.includes(status) ? status : 'todo';
+}
+
+
+/**
+ * Reads the status URL parameter and stores the validated value globally.
+ *
+ * @returns {void}
+ */
+function initCurrentTaskStatusFromUrl() {
+    const status = new URLSearchParams(window.location.search).get('status');
+    window.currentTaskStatus = validateTaskStatus(status);
+}
+
+
+/**
  * Initializes the add-task page:
  * loads contacts and sets up all event listeners.
  *
@@ -119,7 +149,10 @@ function onPriorityButtonClick(event) {
  * @returns {void}
  */
 function initAddTaskOnLoad() {
-    window.addEventListener('DOMContentLoaded', initAddTask);
+    window.addEventListener('DOMContentLoaded', () => {
+        initCurrentTaskStatusFromUrl();
+        initAddTask();
+    });
 }
 
 initAddTaskOnLoad();
