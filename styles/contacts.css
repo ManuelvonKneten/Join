@@ -267,6 +267,9 @@
 @media (max-width: 1025px) {
     .contacts_content {
         background: #ffffff;
+        padding-bottom: calc(
+            var(--bottom-nav-height) + var(--content-padding-y) + env(safe-area-inset-bottom)
+        );
     }
 
     .contacts_layout {
