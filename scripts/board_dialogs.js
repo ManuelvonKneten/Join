@@ -161,10 +161,14 @@ function wireEditDueDateListeners(input, picker, error) {
  * @returns {void}
  */
 function validateEditDueDate(input, error) {
-    if (!input.value.trim()) {
+    if (!/^\d{2}\/\d{2}\/\d{4}$/.test(input.value)) {
         toggleRequiredError(input, error, true);
         return;
     }
+    console.log("input:", input.value);
+console.log("ISO:", ddmmyyyyToISO(input.value));
+console.log("selected:", selected);
+console.log("isPastDate:", isPastDate(selected));
     const selected = new Date(`${ddmmyyyyToISO(input.value)}T00:00:00`);
     toggleRequiredError(input, error, isPastDate(selected));
 }
