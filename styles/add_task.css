@@ -294,7 +294,7 @@
     }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1025px) {
     .add_task_layout {
         height: auto;
         padding: 16px;
@@ -303,6 +303,7 @@
     .add_task_columns {
         flex-direction: column;
         overflow: visible;
+        gap: clamp(20px, 3vw, 24px);
     }
 
     .add_task_left,

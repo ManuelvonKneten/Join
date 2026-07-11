@@ -23,3 +23,10 @@ htmlcov/
 
 # Accidental absolute-path mirror
 home/
+
+# ftp
+.ftp-credentials
+deploy.sh
+
+# robot
+robots.txt

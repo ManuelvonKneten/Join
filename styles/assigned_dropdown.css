@@ -136,7 +136,7 @@
     border: 2px solid white;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1025px) {
     .assigned_dropdown {
         position: relative;
     }

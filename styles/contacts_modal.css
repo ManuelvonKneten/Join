@@ -233,8 +233,8 @@
     visibility: visible;
 }
 
-/* ── Tablet (768px – 1023px) ── */
-@media (max-width: 1023px) {
+/* ── Tablet (768px – 1025px) ── */
+@media (max-width: 1025px) {
     .add_contact_modal {
         width: 92vw;
     }

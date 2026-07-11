@@ -127,14 +127,14 @@
   display: none;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1025px) {
   .header_main {
     left: 0;
     width: 100%;
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1025px) {
   .header_main {
     display: flex;
     justify-content: space-between;
