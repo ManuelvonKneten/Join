@@ -165,10 +165,6 @@ function validateEditDueDate(input, error) {
         toggleRequiredError(input, error, true);
         return;
     }
-    console.log("input:", input.value);
-console.log("ISO:", ddmmyyyyToISO(input.value));
-console.log("selected:", selected);
-console.log("isPastDate:", isPastDate(selected));
     const selected = new Date(`${ddmmyyyyToISO(input.value)}T00:00:00`);
     toggleRequiredError(input, error, isPastDate(selected));
 }

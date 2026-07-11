@@ -84,8 +84,6 @@ function setupRequiredFieldValidation() {
  * @returns {void}
  */
 function toggleRequiredError(field, message, show) {
-     console.log("show:", show);
-    console.log("message:", message);
     message.classList.toggle('visible', show);
     field.classList.toggle('input_invalid', show);
 }
