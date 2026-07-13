@@ -23,38 +23,67 @@
 
     <main class="content contacts_content">
       <div class="contacts_layout">
-
         <div class="contacts_left">
           <button class="btn_add_contact" onclick="openAddContact()">
-            Add new contact
-            <img src="../assets/icons/person.png" alt="" aria-hidden="true" />
+            <span>Add new contact</span>
+            <div class="person_add">
+              <img
+                src="../assets/icons/person_add.svg"
+                alt=""
+                aria-hidden="true"
+              />
+            </div>
           </button>
           <div id="contactList" class="contact_list"></div>
         </div>
 
         <div class="contacts_right">
-
           <div class="contacts_right_top">
             <h2 class="contacts_heading">Contacts</h2>
             <div class="contacts_divider_vertical"></div>
             <span class="contacts_subheading">Better with a team</span>
-            <button class="btn_back_to_contacts" onclick="closeContactDetail()" aria-label="Back to contact list">
-              <img src="../assets/icons/arrow-left.svg" alt="" aria-hidden="true" />
+            <button
+              class="btn_back_to_contacts"
+              onclick="closeContactDetail()"
+              aria-label="Back to contact list"
+            >
+              <img
+                src="../assets/icons/arrow-left.svg"
+                alt=""
+                aria-hidden="true"
+              />
             </button>
           </div>
 
           <div class="contacts_right_bottom hidden">
-
             <div class="crb_header">
               <div class="crb_avatar">AB</div>
               <div class="crb_name_actions">
                 <h3 class="crb_name">Full Name</h3>
                 <div class="crb_actions">
-                  <button class="crb_btn" onclick="openEditContact(activeContact)" aria-label="Edit contact">
-                    <img src="../assets/icons/edit.png" alt="" aria-hidden="true" /> Edit
+                  <button
+                    class="crb_btn"
+                    onclick="openEditContact(activeContact)"
+                    aria-label="Edit contact"
+                  >
+                    <img
+                      src="../assets/icons/edit.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    Edit
                   </button>
-                  <button class="crb_btn" onclick="deleteContact()" aria-label="Delete contact">
-                    <img src="../assets/icons/delete.png" alt="" aria-hidden="true" /> Delete
+                  <button
+                    class="crb_btn"
+                    onclick="deleteContact()"
+                    aria-label="Delete contact"
+                  >
+                    <img
+                      src="../assets/icons/delete.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    Delete
                   </button>
                 </div>
               </div>
@@ -71,69 +100,130 @@
                 <span class="crb_info_value" id="detailPhone"></span>
               </div>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </main>
 
     <div data-include="../templates/bottom_nav.html"></div>
 
-    <div id="addContactOverlay" class="add_contact_overlay hidden" onclick="overlayClose(event)">
-      <div class="add_contact_modal" role="dialog" aria-modal="true" aria-labelledby="addContactTitle">
-
-        <button class="modal_close_btn" onclick="closeAddContact()" aria-label="Close dialog">&#x2715;</button>
+    <div
+      id="addContactOverlay"
+      class="add_contact_overlay hidden"
+      onclick="overlayClose(event)"
+    >
+      <div
+        class="add_contact_modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="addContactTitle"
+      >
+        <button
+          class="modal_close_btn"
+          onclick="closeAddContact()"
+          aria-label="Close dialog"
+        >
+          &#x2715;
+        </button>
 
         <div class="modal_left">
-          <img class="modal_logo" src="../assets/img/logo.png" alt="" aria-hidden="true" />
+          <img
+            class="modal_logo"
+            src="../assets/img/logo.png"
+            alt=""
+            aria-hidden="true"
+          />
           <h2 class="modal_heading" id="addContactTitle">Add contact</h2>
           <p class="modal_sub">Tasks are better with a team!</p>
           <div class="modal_divider"></div>
         </div>
 
         <div class="modal_right">
-
           <div class="modal_body">
-
             <div class="modal_avatar_col">
               <div class="modal_avatar">
-                <img src="../assets/icons/person.png" alt="" aria-hidden="true" />
+                <img
+                  src="../assets/icons/person.png"
+                  alt=""
+                  aria-hidden="true"
+                />
               </div>
             </div>
 
-            <form class="modal_form_col" onsubmit="createContact(event)" novalidate>
-
+            <form
+              class="modal_form_col"
+              onsubmit="createContact(event)"
+              novalidate
+            >
               <div class="inputFieldContainer">
                 <div class="inputField">
-                  <input id="contactName" type="text" placeholder="Name" aria-label="Name" />
-                  <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
+                  <input
+                    id="contactName"
+                    type="text"
+                    placeholder="Name"
+                    aria-label="Name"
+                  />
+                  <img
+                    class="inputIcon"
+                    src="../assets/icons/person.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
                 </div>
 
-                <span id="contactNameError" class="inputError">Please enter a valid name.</span>
+                <span id="contactNameError" class="inputError"
+                  >Please enter a valid name.</span
+                >
               </div>
 
               <div class="inputFieldContainer">
                 <div class="inputField">
-                  <input id="contactEmail" type="email" placeholder="Email" aria-label="Email"/>
-                  <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
+                  <input
+                    id="contactEmail"
+                    type="email"
+                    placeholder="Email"
+                    aria-label="Email"
+                  />
+                  <img
+                    class="inputIcon"
+                    src="../assets/icons/mail.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
                 </div>
 
-                <span id="contactEmailError" class="inputError">Please enter a valid email address.</span>
+                <span id="contactEmailError" class="inputError"
+                  >Please enter a valid email address.</span
+                >
               </div>
-              
+
               <div class="inputFieldContainer">
                 <div class="inputField">
-                  <input id="contactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
-                  <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
+                  <input
+                    id="contactPhone"
+                    type="tel"
+                    placeholder="Phone"
+                    aria-label="Phone"
+                  />
+                  <img
+                    class="inputIcon"
+                    src="../assets/icons/phone.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
                 </div>
-                
-                <span id="contactPhoneError" class="inputError">Please enter numbers only.</span>
+
+                <span id="contactPhoneError" class="inputError"
+                  >Please enter numbers only.</span
+                >
               </div>
 
               <div class="modal_actions">
-                <button type="button" class="btn_modal_cancel" onclick="closeAddContact()">
+                <button
+                  type="button"
+                  class="btn_modal_cancel"
+                  onclick="closeAddContact()"
+                >
                   Cancel <span>&#x2715;</span>
                 </button>
                 <button type="submit" class="btn_modal_create">
@@ -141,63 +231,125 @@
                 </button>
               </div>
             </form>
-
           </div>
         </div>
-
       </div>
     </div>
 
-    <div id="editContactOverlay" class="add_contact_overlay hidden" onclick="overlayEditClose(event)">
-      <div class="add_contact_modal" role="dialog" aria-modal="true" aria-labelledby="editContactTitle">
-
-        <button class="modal_close_btn" onclick="closeEditContact()" aria-label="Close dialog">&#x2715;</button>
+    <div
+      id="editContactOverlay"
+      class="add_contact_overlay hidden"
+      onclick="overlayEditClose(event)"
+    >
+      <div
+        class="add_contact_modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="editContactTitle"
+      >
+        <button
+          class="modal_close_btn"
+          onclick="closeEditContact()"
+          aria-label="Close dialog"
+        >
+          &#x2715;
+        </button>
 
         <div class="modal_left">
-          <img class="modal_logo" src="../assets/img/logo.png" alt="" aria-hidden="true" />
+          <img
+            class="modal_logo"
+            src="../assets/img/logo.png"
+            alt=""
+            aria-hidden="true"
+          />
           <h2 class="modal_heading" id="editContactTitle">Edit contact</h2>
           <p class="modal_sub">Tasks are better with a team!</p>
           <div class="modal_divider"></div>
         </div>
 
         <div class="modal_right">
-
           <div class="modal_body">
-
             <div class="modal_avatar_col">
-              <div class="modal_avatar modal_avatar_initials" id="editContactAvatar"></div>
+              <div
+                class="modal_avatar modal_avatar_initials"
+                id="editContactAvatar"
+              ></div>
             </div>
 
-            <form class="modal_form_col" onsubmit="saveContact(event)" novalidate>
+            <form
+              class="modal_form_col"
+              onsubmit="saveContact(event)"
+              novalidate
+            >
               <div class="inputFieldContainer">
                 <div class="inputField">
-                  <input id="editContactName" type="text" placeholder="Name" aria-label="Name" />
-                  <img class="inputIcon" src="../assets/icons/person.png" alt="" aria-hidden="true" />
+                  <input
+                    id="editContactName"
+                    type="text"
+                    placeholder="Name"
+                    aria-label="Name"
+                  />
+                  <img
+                    class="inputIcon"
+                    src="../assets/icons/person.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
                 </div>
 
-                <span id="editContactNameError" class="inputError">Please enter a valid name.</span>
+                <span id="editContactNameError" class="inputError"
+                  >Please enter a valid name.</span
+                >
               </div>
 
               <div class="inputFieldContainer">
                 <div class="inputField">
-                  <input id="editContactEmail" type="email" placeholder="Email" aria-label="Email" />
-                  <img class="inputIcon" src="../assets/icons/mail.png" alt="" aria-hidden="true" />
+                  <input
+                    id="editContactEmail"
+                    type="email"
+                    placeholder="Email"
+                    aria-label="Email"
+                  />
+                  <img
+                    class="inputIcon"
+                    src="../assets/icons/mail.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
                 </div>
 
-                <span id="editContactEmailError" class="inputError">Please enter a valid email address.</span>
+                <span id="editContactEmailError" class="inputError"
+                  >Please enter a valid email address.</span
+                >
               </div>
 
               <div class="inputFieldContainer">
                 <div class="inputField">
-                  <input id="editContactPhone" type="tel" placeholder="Phone" aria-label="Phone" />
-                  <img class="inputIcon" src="../assets/icons/phone.png" alt="" aria-hidden="true" />
+                  <input
+                    id="editContactPhone"
+                    type="tel"
+                    placeholder="Phone"
+                    aria-label="Phone"
+                  />
+                  <img
+                    class="inputIcon"
+                    src="../assets/icons/phone.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
                 </div>
 
-                <span id="editContactPhoneError" class="inputError">Please enter numbers only.</span>
+                <span id="editContactPhoneError" class="inputError"
+                  >Please enter numbers only.</span
+                >
               </div>
 
               <div class="modal_actions">
-                <button type="button" class="btn_modal_cancel" onclick="deleteContact()">
+                <button
+                  type="button"
+                  class="btn_modal_cancel"
+                  onclick="deleteContact()"
+                >
                   Delete
                 </button>
                 <button type="submit" class="btn_modal_create">
@@ -205,10 +357,8 @@
                 </button>
               </div>
             </form>
-
           </div>
         </div>
-
       </div>
     </div>
 
@@ -219,7 +369,13 @@
       <img src="../assets/icons/more_vert.png" alt="More options" />
     </button>
 
-    <div id="contactToast" class="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div
+      id="contactToast"
+      class="contactToast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
 
     <script src="../scripts/firebase.js"></script>
     <script src="../scripts/utils.js"></script>
