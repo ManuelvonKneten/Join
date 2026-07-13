@@ -172,9 +172,34 @@ function initRegisterNameEventListeners() {
 function initRegisterEmailEventListeners() {
     if (signupEmailInput) {
         signupEmailInput.addEventListener('blur', validateEmailOnBlur);
+        signupEmailInput.addEventListener('input', checkExistingEmail);
     }
 }
 
+
+/**
+ * Checks while typing if the entered email already exists.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
+async function checkExistingEmail() {
+    const email = signupEmailInput.value.trim();
+    const existsError = document.getElementById('existsEmailError');
+
+    if (email.length < 5 || !isValidEmail(email)) {
+        existsError.classList.remove('visible');
+        return;
+    }
+
+    const exists = await emailAlreadyExists(email);
+
+    if (exists) {
+        existsError.classList.add('visible');
+    } else {
+        existsError.classList.remove('visible');
+    }
+}
 
 /**
  * Adds blur validation listeners to the password and confirm fields.
@@ -380,7 +405,8 @@ function handleSignupFormSubmit(e) {
 
 
 /**
- * Reads the signup form, stores the new user, and redirects after success.
+ * Validates the signup form, checks if the email already exists,
+ * creates a new user, and redirects after successful registration.
  *
  * @async
  * @returns {Promise<void>}
@@ -389,13 +415,29 @@ async function addUser() {
     if (!validateSignupForm()) return;
 
     const formData = getRegisterFormData();
+    const exists = await emailAlreadyExists(formData.email)
 
-    try {
+    if (exists) return document.getElementById('existsEmailError').classList.add('visible');      
+  
+    try {  
         await postToDB('users', formData);
         onUserRegistered();
     } catch {
         showRegisterError('Registration failed. Please try again.');
     }
+}
+
+
+/**
+ * Checks if an email address is already registered.
+ *
+ * @async
+ * @param {string} email - The email address to check.
+ * @returns {Promise<boolean>} Returns `true` if the email already exists, otherwise `false`.
+ */
+async function emailAlreadyExists(email) {
+       const allUsers = await getFromDB('users') || {};
+       return Object.values(allUsers).some(user =>user.email === email) 
 }
 
 
