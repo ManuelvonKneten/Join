@@ -188,10 +188,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
     gap: 16px;
     width: 100%;
     background-color: var(--color-tertiary);
-    color: white;
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
@@ -202,13 +202,15 @@
 }
 
 .person_add {
-    width: 22px;
+    width: auto;
     height: 22px;
     filter: brightness(0) invert(1);
-    color: white;
+    display: flex;
+    align-items: center;
 }
 
 .person_add img {
+    display: block;
     width: 100%;
     height: auto;
 }
