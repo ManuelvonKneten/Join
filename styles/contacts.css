@@ -187,8 +187,9 @@
 .btn_add_contact {
     display: flex;
     align-items: center;
-    gap: 10px;
-    align-self: flex-start;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
     background-color: var(--color-tertiary);
     color: white;
     border: none;
@@ -200,10 +201,16 @@
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.btn_add_contact img {
-    width: 18px;
-    height: 18px;
+.person_add {
+    width: 22px;
+    height: 22px;
     filter: brightness(0) invert(1);
+    color: white;
+}
+
+.person_add img {
+    width: 100%;
+    height: auto;
 }
 
 .btn_add_contact:hover {
