@@ -393,22 +393,31 @@
 }
 
 @media (max-width: 600px) {
-    .loginPageWrapper {
+    .logIn {
         min-height: 100svh;
     }
 
+    .loginPageWrapper {
+        min-height: 100svh;
+        align-items: center;
+    }
+
     .logInHeader {
-        height: clamp(96px, 30vw, 130px);
-        min-height: auto;
-        padding: clamp(24px, 8vw, 48px) clamp(16px, 6vw, 40px) 0;
+        display: contents;
     }
 
     .logInLogo {
         width: clamp(64px, 22vw, 90px);
+        align-self: flex-start;
+        order: 1;
+        margin: clamp(24px, 8vw, 48px) 0 clamp(28px, 8vw, 40px) clamp(16px, 6vw, 40px);
     }
 
     .signupContainer {
+        order: 3;
         gap: clamp(8px, 3vw, 16px);
+        justify-content: center;
+        margin-top: clamp(24px, 7vw, 32px);
     }
 
     .signupContainer span {
@@ -421,15 +430,19 @@
     }
 
     .logInMain {
+        order: 2;
+        flex: 0 0 auto;
+        width: 100%;
         min-height: 0;
-        padding: clamp(24px, 8vw, 48px) clamp(12px, 4vw, 24px);
+        padding: 0 clamp(12px, 4vw, 16px);
         box-sizing: border-box;
     }
 
     .logInBox {
-        width: clamp(280px, 92vw, 600px);
-        padding: clamp(28px, 8vw, 47px) clamp(20px, 7vw, 48px);
-        gap: clamp(20px, 6vw, 32px);
+        width: 100%;
+        max-width: 396px;
+        padding: clamp(28px, 8vw, 40px) clamp(20px, 7vw, 32px);
+        gap: clamp(18px, 5vw, 28px);
         box-sizing: border-box;
     }
 
@@ -452,16 +465,22 @@
     .loginButtons {
         width: 100%;
         height: auto;
-        gap: clamp(12px, 4vw, 20px);
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(16px, 4vw, 20px);
+        margin-top: clamp(16px, 5vw, 24px);
     }
 
     .logInBtn,
     .guestBtn {
+        min-width: 180px;
         font-size: clamp(16px, 5vw, 21px);
         padding: clamp(8px, 3vw, 10px) clamp(14px, 5vw, 20px);
     }
 
     .logInFooter {
+        order: 4;
+        margin-top: auto;
         height: auto;
         min-height: 96px;
         flex-wrap: wrap;
@@ -475,17 +494,5 @@
         max-width: 100%;
         padding: 8px;
         white-space: normal;
-    }
-}
-
-@media (max-width: 360px) {
-    .signupContainer {
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    .loginButtons {
-        flex-direction: column;
-        align-items: stretch;
     }
 }
