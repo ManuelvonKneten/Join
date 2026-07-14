@@ -27,7 +27,7 @@
 .add_contact_modal {
     position: relative;
     display: flex;
-    width: 860px;
+    width: 900px;
     max-width: 95vw;
     min-height: 480px;
     max-height: 90vh;

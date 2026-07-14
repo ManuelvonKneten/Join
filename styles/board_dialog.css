@@ -181,11 +181,11 @@
 }
 
 .dialog_footer button:hover .edit_icon {
-    content: url("../assets/icons/edit_blue.svg");
+  content: url("../assets/icons/edit_blue.svg");
 }
 
 .dialog_footer button:hover .delete_icon {
-    content: url("../assets/icons/delete_blue.svg");
+  content: url("../assets/icons/delete_blue.svg");
 }
 
 .edit_icon {

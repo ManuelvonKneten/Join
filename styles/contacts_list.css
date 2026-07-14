@@ -60,7 +60,7 @@
 }
 
 .contact_item:hover {
-    background-color: #f0f4ff;
+    background-color:var(--sidebar-link-color);
 }
 
 .contact_item.active {
@@ -106,7 +106,7 @@
 
 .contact_email {
     font-size: 16px;
-    color: var(--secondary-color);
+    color: var( --color-secondary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
