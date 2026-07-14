@@ -195,6 +195,7 @@ async function checkExistingEmail() {
     const exists = await emailAlreadyExists(email);
 
     if (exists) {
+        emailError.classList.remove('visible');
         existsError.classList.add('visible');
     } else {
         existsError.classList.remove('visible');
@@ -417,7 +418,11 @@ async function addUser() {
     const formData = getRegisterFormData();
     const exists = await emailAlreadyExists(formData.email)
 
-    if (exists) return document.getElementById('existsEmailError').classList.add('visible');      
+    if (exists) {
+        return
+        document.getElementById('emailError').classList.remove('visible'); 
+        document.getElementById('existsEmailError').classList.add('visible');
+    }      
   
     try {  
         await postToDB('users', formData);
