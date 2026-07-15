@@ -25,7 +25,8 @@ async function addCurrentUserToContacts(contacts) {
         return;
     }
 
-    contacts.push({ id: 'currentUser', name, email, phone: user?.phone || '', isCurrentUser: true });
+    const id = 'currentUser-' + (email || name);
+    contacts.push({ id, name, email, phone: user?.phone || '', isCurrentUser: true });
 }
 
 
