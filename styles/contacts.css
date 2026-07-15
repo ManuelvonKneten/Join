@@ -4,7 +4,7 @@
     --contacts-left-width: clamp(292px, 32vw, 420px);
     --contacts-left-bg-width: calc(var(--contacts-page-padding-x) + var(--contacts-left-width));
     padding: var(--content-padding-y) 0 0;
-    background: linear-gradient(to right, #ffffff 0, #ffffff var(--contacts-left-bg-width), var(--content-background) var(--contacts-left-bg-width), var(--content-background) 100%);
+    /* background: linear-gradient(to right, #ffffff 0, #ffffff var(--contacts-left-bg-width), var(--content-background) var(--contacts-left-bg-width), var(--content-background) 100%); */
 }
 
 .contacts_layout {
@@ -28,6 +28,8 @@
     overflow: hidden;
     box-sizing: border-box;
     background-color: #ffffff;
+
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.15);
 }
 
 .contacts_right {
@@ -282,7 +284,7 @@
 /* ── Mobile / tablet panel switching ── */
 @media (max-width: 1025px) {
     .contacts_content {
-        background: #ffffff;
+        /* background: #ffffff; */
         padding-bottom: calc(
             var(--bottom-nav-height) + var(--content-padding-y) + env(safe-area-inset-bottom)
         );
