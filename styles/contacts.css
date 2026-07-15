@@ -3,6 +3,7 @@
     --contacts-page-padding-x: clamp(16px, 2.4vw, 48px);
     --contacts-left-width: clamp(292px, 32vw, 420px);
     --contacts-left-bg-width: calc(var(--contacts-page-padding-x) + var(--contacts-left-width));
+    --contacts-list-right-gap: clamp(24px, 2vw, 32px);
     padding: var(--content-padding-y) 0 0;
     /* background: linear-gradient(to right, #ffffff 0, #ffffff var(--contacts-left-bg-width), var(--content-background) var(--contacts-left-bg-width), var(--content-background) 100%); */
 }
@@ -23,13 +24,12 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding-right: clamp(12px, 1.6vw, 32px);
+    padding-right: 5px;
     border-right: 1px solid #e0e0e0;
     overflow: hidden;
     box-sizing: border-box;
     background-color: #ffffff;
-
-    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.08);
 }
 
 .contacts_right {
@@ -203,11 +203,13 @@
     justify-content: center;
     color: white;
     gap: 16px;
-    width: 100%;
+    width: calc(100% - var(--contacts-list-right-gap));
+    box-sizing: border-box;
     background-color: var(--color-tertiary);
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
+
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -303,6 +305,7 @@
         border-right: none;
         padding-right: 0;
         background-color: #ffffff;
+        box-shadow: none;
     }
 
 
