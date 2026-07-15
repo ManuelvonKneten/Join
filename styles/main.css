@@ -18,7 +18,7 @@
   /* Layout */
   --header-height: 96px;
   --bottom-nav-height: 80px;
-  --sidebar-width: clamp(220px, 16vw, 300px);
+  --sidebar-width: clamp(200px, 15vw, 300px);
   --content-padding-x: clamp(16px, 3vw, 40px);
   --content-padding-y: 20px;
 
