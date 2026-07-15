@@ -83,7 +83,7 @@ async function loadContacts() {
         allContacts = rawContactsData
             ? Object.entries(rawContactsData).map(([id, contactData]) => ({ id, ...contactData }))
             : [];
-        await addCurrentUserToContacts();
+        await addCurrentUserToContacts(allContacts);
         renderContacts();
     } catch {
         showContactToast('Could not load contacts.', true);

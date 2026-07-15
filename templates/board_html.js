@@ -363,7 +363,7 @@ function getAssignedOptionsEdit(contact, checked) {
                 </div>
 
                 <span class="assigned_option_name">
-                    ${escapeHtml(contact.name)}
+                    ${escapeHtml(contact.name)}${contact.isCurrentUser ? ' (You)' : ''}
                 </span>
 
                 <input 

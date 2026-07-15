@@ -1,15 +1,17 @@
 /**
- * Adds the currently logged-in user to the contact list.
+ * Adds the currently logged-in user to a contact list.
  *
  * The logged-in user's name is stored in localStorage on login, but the account
  * only lives in the "users" database, not in "contacts". This resolves the full
  * user record and marks it as the current user so it can be shown with a "(You)"
- * label. If the user already exists as a contact, that contact is marked instead.
+ * label. If a contact with the same email already exists, that contact is marked
+ * instead (no duplicate is added).
  *
  * @async
+ * @param {Contact[]} contacts - The contact list to add the current user to.
  * @returns {Promise<void>}
  */
-async function addCurrentUserToContacts() {
+async function addCurrentUserToContacts(contacts) {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser || currentUser === 'Guest') return;
 
@@ -17,13 +19,13 @@ async function addCurrentUserToContacts() {
     const name = user?.name || currentUser;
     const email = user?.email || '';
 
-    const existing = email && allContacts.find(contact => contact.email === email);
+    const existing = email && contacts.find(contact => contact.email === email);
     if (existing) {
         existing.isCurrentUser = true;
         return;
     }
 
-    allContacts.push({ id: 'currentUser', name, email, phone: user?.phone || '', isCurrentUser: true });
+    contacts.push({ id: 'currentUser', name, email, phone: user?.phone || '', isCurrentUser: true });
 }
 
 
