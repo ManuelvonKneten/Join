@@ -31,7 +31,7 @@ function contactItemHTML(contact) {
                 ${escapeHtml(initials(contact.name))}
             </div>
             <div class="contact_info">
-                <span class="contact_name">${escapeHtml(contact.name)}</span>
+                <span class="contact_name">${escapeHtml(contact.name)}${contact.isCurrentUser ? ' (You)' : ''}</span>
                 <span class="contact_email">${escapeHtml(contact.email)}</span>
             </div>
         </div>
