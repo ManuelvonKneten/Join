@@ -31,7 +31,7 @@ function contactItemHTML(contact) {
                 ${escapeHtml(initials(contact.name))}
             </div>
             <div class="contact_info">
-                <span class="contact_name">${escapeHtml(contact.name)}</span>
+                <span class="contact_name">${escapeHtml(contact.name)}${contact.isCurrentUser ? ' (You)' : ''}</span>
                 <span class="contact_email">${escapeHtml(contact.email)}</span>
             </div>
         </div>
@@ -48,6 +48,7 @@ function contactItemHTML(contact) {
  */
 function assignedOptionHTML(contact) {
     const isSelected = selectedContacts.some(c => c.id === contact.id);
+    const youLabel = contact.isCurrentUser ? ' (You)' : '';
     return `
         <li class="assigned_option ${isSelected ? 'assigned_option_active' : ''}"
             role="option"
@@ -59,7 +60,7 @@ function assignedOptionHTML(contact) {
             <div class="assigned_option_avatar" style="background-color: ${avatarColor(contact.name)}">
                 ${escapeHtml(initials(contact.name))}
             </div>
-            <span class="assigned_option_name">${escapeHtml(contact.name)}</span>
+            <span class="assigned_option_name">${escapeHtml(contact.name)}${youLabel}</span>
             <input type="checkbox" class="assigned_option_checkbox" ${isSelected ? 'checked' : ''} tabindex="-1" aria-hidden="true">
         </li>
     `;
