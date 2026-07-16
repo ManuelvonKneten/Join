@@ -154,6 +154,12 @@
   display: none;
 }
 
+@media (max-width: 1025px) {
+.publicContent {
+  margin-left: 0;
+ }
+ }
+ 
 @media (max-width: 767px) {
   .publicLegalSidebar {
     display: none;
