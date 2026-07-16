@@ -253,7 +253,8 @@
 .add_contact_overlay {
     align-items: center;
     padding: 12px;
-    height: 100vh;
+    height: 100dvh; /*fallback older browsers*/
+    height: 100dvh;
     z-index: 1000;
 }
 
@@ -261,7 +262,8 @@
         width: 100%;
         max-width: 396px;
         height: auto;
-        max-height: calc(100vh - 24px);
+        max-height: calc(100vh - 24px); /*older-browser-fallback*/
+        max-height: calc(100dvh - 24px);
         min-height: auto;
         overflow-y: auto;
         border-radius: 30px;
