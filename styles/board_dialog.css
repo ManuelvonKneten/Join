@@ -245,6 +245,7 @@
 .popup_header button {
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 .add_task_layout_popup {

@@ -107,7 +107,7 @@ function getTaskDetailsTemplate(task) {
             ${formatCategory(task.category)}
             </div>
             <button onclick="closeTaskPopUp()">
-              x
+              <img src="../assets/icons/close_icon.svg" alt="close icon">
             </button>
           </div>
   
@@ -176,7 +176,7 @@ function getEditTaskTemplate(task) {
 
       <div class="dialog_header">
         <button onclick="closeTaskPopUp()">
-          x
+          <img src="../assets/icons/close_icon.svg" alt="close icon">
         </button>
       </div>
 
