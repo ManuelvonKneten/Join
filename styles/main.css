@@ -109,6 +109,7 @@ body.no-scroll {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    border: 2px solid white;
 }
 
 @media (max-width: 1025px) {
