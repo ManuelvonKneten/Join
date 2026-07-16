@@ -113,14 +113,15 @@ function subtaskItemHTML(subtask, index) {
 }
 
 
-function getContactsAvatar (name, showName) {
+function getContactsAvatar (name, showName, isCurrentUser = false) {
+  const label = isCurrentUser ? ' (You)' : '';
   return `
      <div class="contact_task">
                 <div class="contact_avatar assigned_selected_avatar"
                     style="background-color:${avatarColor(name)}">
                     ${escapeHtml(initials(name))}
                 </div>
-                ${showName ? `<span>${escapeHtml(name)}</span>` : ""}
+                ${showName ? `<span>${escapeHtml(name)}${label}</span>` : ""}
             </div>
   `;
 }

@@ -106,16 +106,18 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
     if (!Array.isArray(contactIds)) {
         contactIds = contactIds ? [contactIds]: [];
     }
-    const visible = showAll ? contactIds : contactIds.slice(0, max);
+    const resolved = contactIds
+        .map(entry => availableContacts.find(c => c.id === entry))
+        .filter(Boolean);
 
-    let html = visible.map(entry => {
-        const contact = availableContacts.find(c => c.id === entry);
-        const name = contact ? contact.name : entry;
-        return getContactsAvatar(name, showName);
-    }).join('');
+    const visible = showAll ? resolved : resolved.slice(0, max);
 
-    if (!showAll && contactIds.length > max) {
-        html += `<div class="more_contacts js_more_avatars">+${contactIds.length - max}</div>`;
+    let html = visible
+        .map(contact => getContactsAvatar(contact.name, showName, contact.isCurrentUser))
+        .join('');
+
+    if (!showAll && resolved.length > max) {
+        html += `<div class="more_contacts js_more_avatars">+${resolved.length - max}</div>`;
     }
     return html;
 }
