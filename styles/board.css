@@ -463,11 +463,12 @@
     scroll-snap-align: start;
   }
 }
-.move-menu.open {
-  display: flex;
-}
 
-.empty_card {
+/* .move-menu.open {
+  display: flex;
+} */
+
+/* .empty_card {
   flex: 0 0 100%;
   width: 100%;
-}
+} */
