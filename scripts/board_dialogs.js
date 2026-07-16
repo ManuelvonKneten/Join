@@ -25,25 +25,6 @@ function handleDialogClick(event) {
 
 
 /**
- * Closes the add-task modal when the click lands outside the visible card.
- * Clicks whose target was removed by a re-render are ignored.
- *
- * @param {MouseEvent} event
- * @returns {void}
- */
-function handleDialogAddTaskBoard (event) {
-    if (!event.target.isConnected) return;
-    const dialog = event.currentTarget;
-    const card = dialog.querySelector('.add_task_layout');
-    if (card && !card.contains(event.target)) {
-        dialog.close();
-    }
-}
-
-dialog_add_task_board.addEventListener('click', handleDialogAddTaskBoard);
-
-
-/**
  * Reference to the task detail dialog element.
  *
  * @type {HTMLDialogElement}
