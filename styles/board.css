@@ -468,6 +468,21 @@
   display: flex;
 }
 
+.move-menu button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.move-menu button:hover,
+.move-menu button:focus-visible {
+  background-color: var(--sidebar-hover-background);
+  color: var(--color-secondary);
+}
 /* .empty_card {
   flex: 0 0 100%;
   width: 100%;
