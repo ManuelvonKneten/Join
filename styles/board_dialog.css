@@ -78,12 +78,12 @@
 }
 
 .assigned_avatars .more_contacts {
-  width: 24px;
-  height: 24px;
-  font-size: 16px;
+  width: 46px;
+  height: 46px;
+  font-size: 18px;
   font-weight: 600;
   padding: 6px;
-  margin-top: 22px;
+  margin-top: 15px;
   margin-left: 1px;
 }
 
@@ -245,7 +245,6 @@
 .popup_header button {
   border: none;
   background: none;
-  cursor: pointer;
 }
 
 .add_task_layout_popup {
