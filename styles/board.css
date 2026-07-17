@@ -464,9 +464,9 @@
   }
 }
 
-/* .move-menu.open {
+.move-menu.open {
   display: flex;
-} */
+}
 
 /* .empty_card {
   flex: 0 0 100%;
