@@ -107,12 +107,6 @@
     resize: vertical;
 }
 
-.add_task_textarea:focus {
-    border-color: var(--color-tertiary);
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
-}
-
 .add_task_right .add_task_field:first-child {
     margin-top: 0;
 }
