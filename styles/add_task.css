@@ -423,6 +423,8 @@
   }
 
   .content > .add_task_layout > .form_container {
+    overflow-y: auto;
     scrollbar-gutter: stable;
+    padding-inline-end: clamp(2px, 1vw, 6px);
   }
 }
