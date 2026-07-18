@@ -117,7 +117,7 @@ function buildAvatarsHTML(contactIds, availableContacts, showAll = false, showNa
         .join('');
 
     if (!showAll && resolved.length > max) {
-        html += `<div class="more_contacts js_more_avatars">+${resolved.length - max}</div>`;
+        html += `<div class="more_contacts contact_avatar assigned_selected_avatar">+${resolved.length - max}</div>`;
     }
     return html;
 }
