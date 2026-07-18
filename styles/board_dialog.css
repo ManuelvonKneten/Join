@@ -311,6 +311,7 @@ label,
   border-radius: 8px;
   font-size: clamp(16px, 2vw, 18px);
   font-weight: 400;
+  font-family:"Inter";
 }
 
 .subtask_add {
