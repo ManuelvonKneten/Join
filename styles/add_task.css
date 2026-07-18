@@ -22,11 +22,11 @@
 
 .form_footer {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  align-items: flex-end;
+  justify-content: space-between;
   position: sticky;
   bottom: 0;
-  background-color: var(--main-background);
+  /* background-color: var(--main-background); */
   padding: 16px 0;
   z-index: 5;
 }
@@ -226,7 +226,10 @@
 
 .required_note {
   font-size: 16px;
-  padding-bottom: 64px;
+}
+
+.required_note--mobile {
+  display: none;
 }
 
 .field_error {
@@ -386,6 +389,14 @@
     align-items: stretch;
     width: 100%;
     gap: 48px;
+  }
+
+  .required_note--desktop {
+    display: none;
+  }
+
+  .required_note--mobile {
+    display: block;
   }
 
   .add_task_actions {
